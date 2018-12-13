@@ -1,0 +1,6 @@
+framework module SegementSlide {
+  umbrella header "SegementSlide-umbrella.h"
+
+  export *
+  module * { export * }
+}
