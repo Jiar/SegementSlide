@@ -6,7 +6,6 @@
 //  Copyright © 2018 Jiar. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 struct Language {

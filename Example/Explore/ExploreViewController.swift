@@ -13,8 +13,8 @@ class ExploreViewController: ShadowSegementSlideViewController {
 
     init() {
         super.init(nibName: nil, bundle: nil)
-        title = "发现"
-        tabBarItem = UITabBarItem(title: "发现", image: UIImage(named: "tab_explore")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "tab_explore_sel")?.withRenderingMode(.alwaysOriginal))
+        title = "Explore"
+        tabBarItem = UITabBarItem(title: "Explore", image: UIImage(named: "tab_explore")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "tab_explore_sel")?.withRenderingMode(.alwaysOriginal))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,6 +31,7 @@ class ExploreViewController: ShadowSegementSlideViewController {
     
     override func headerView() -> UIView {
         let headerView = UIImageView()
+        headerView.isUserInteractionEnabled = true
         headerView.contentMode = .scaleAspectFill
         headerView.image = UIImage(named: "bg_languages.jpg")
         return headerView

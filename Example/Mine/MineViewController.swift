@@ -13,8 +13,8 @@ class MineViewController: TransparentTabSlideViewController {
 
     init() {
         super.init(nibName: nil, bundle: nil)
-        title = "我的"
-        tabBarItem = UITabBarItem(title: "我的", image: UIImage(named: "tab_mine")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "tab_mine_sel")?.withRenderingMode(.alwaysOriginal))
+        title = "Mine"
+        tabBarItem = UITabBarItem(title: "Mine", image: UIImage(named: "tab_mine")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "tab_mine_sel")?.withRenderingMode(.alwaysOriginal))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -22,7 +22,7 @@ class MineViewController: TransparentTabSlideViewController {
     }
     
     override var attributedTexts: DisplayEmbed<NSAttributedString?> {
-        return (display: nil, embed: NSAttributedString(string: "我的", attributes: UINavigationBar.appearance().titleTextAttributes))
+        return (display: nil, embed: NSAttributedString(string: "Mine", attributes: UINavigationBar.appearance().titleTextAttributes))
     }
     
     override var bouncesType: BouncesType {
@@ -39,6 +39,7 @@ class MineViewController: TransparentTabSlideViewController {
     
     override func headerView() -> UIView {
         let headerView = UIImageView()
+        headerView.isUserInteractionEnabled = true
         headerView.contentMode = .scaleAspectFill
         headerView.image = UIImage(named: "bg_computer.png")
         return headerView
@@ -85,8 +86,8 @@ class MineViewController: TransparentTabSlideViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
         super.scrollViewDidScroll(scrollView, isParent: isParent)
         guard isParent else { return }
-        if scrollView.contentOffset.y < 0 {
-            scrollView.contentOffset.y = 0
+        if scrollView.contentOffset.y <= -view.bounds.height/3 {
+            scrollView.contentOffset.y = -view.bounds.height/3
         }
         updateNavigationBarStyle(scrollView)
     }

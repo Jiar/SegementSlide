@@ -13,8 +13,8 @@ class HomeViewController: ShadowSegementSlideViewController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        title = "主页"
-        tabBarItem = UITabBarItem(title: "主页", image: UIImage(named: "tab_home")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "tab_home_sel")?.withRenderingMode(.alwaysOriginal))
+        title = "Home"
+        tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "tab_home")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "tab_home_sel")?.withRenderingMode(.alwaysOriginal))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,6 +31,7 @@ class HomeViewController: ShadowSegementSlideViewController {
     
     override func headerView() -> UIView {
         let headerView = UIImageView()
+        headerView.isUserInteractionEnabled = true
         headerView.contentMode = .scaleAspectFill
         headerView.image = UIImage(named: "bg_think.jpeg")
         return headerView

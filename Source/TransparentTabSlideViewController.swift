@@ -9,14 +9,13 @@
 import UIKit
 
 ///
-/// 在 viewWillAppear 中设置 navigationBar 的一般属性
-/// 在 viewDidAppear 中再一次重新设置 titleTextAttributes 属性
+/// Set the navigationBar property in viewWillAppear
 ///
-/// 为什么在 viewWillAppear 中设置一般属性，而不在 viewDidLoad 中设置？
-/// 当从一个 RecoverViewController(A) 进入另一个 RecoverViewController(B) 时，
-/// B 中的 viewDidLoad 会优先于 A 中 viewWillDisappear 调用，这样会导致无法在显示 B 前恢复状态。
+/// Why do you set properties in viewWillAppear instead of viewDidLoad?
+/// - When enter to TransparentTabSlideViewController(B) from TransparentTabSlideViewController(A),
+/// - viewDidLoad in B will take precedence over viewWillDisappear in A, so that it cannot recover state before displaying B.
 ///
-/// 修改 navigationBar 的 titleTextAttributes，不一定能立刻生效，故改用调整自定义 titleView 的 attributedText。
+/// Modifying the titleTextAttributes of navigationBar does not necessarily take effect immediately, so adjust the attributedText of the custom titleView instead.
 ///
 open class TransparentTabSlideViewController: SegementSlideViewController {
     

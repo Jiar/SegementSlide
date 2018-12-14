@@ -14,6 +14,7 @@
 		804CC4DA21C1531D007EEBF8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4D921C1531D007EEBF8 /* HomeViewController.swift */; };
 		804CC4DC21C1532F007EEBF8 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4DB21C1532F007EEBF8 /* ExploreViewController.swift */; };
 		804CC4DE21C15339007EEBF8 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4DD21C15339007EEBF8 /* MineViewController.swift */; };
+		807A36DF21C359D3004675BC /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A36DE21C359D3004675BC /* AppManager.swift */; };
 		80B6C3ED21C1FAB5007C958F /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3EC21C1FAB5007C958F /* ContentViewController.swift */; };
 		80B6C3F021C20052007C958F /* ContentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3EE21C20052007C958F /* ContentViewCell.swift */; };
 		80B6C3F121C20052007C958F /* ContentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80B6C3EF21C20052007C958F /* ContentViewCell.xib */; };
@@ -36,6 +37,7 @@
 		804CC4D921C1531D007EEBF8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		804CC4DB21C1532F007EEBF8 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		804CC4DD21C15339007EEBF8 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
+		807A36DE21C359D3004675BC /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		80B6C3EC21C1FAB5007C958F /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		80B6C3EE21C20052007C958F /* ContentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewCell.swift; sourceTree = "<group>"; };
 		80B6C3EF21C20052007C958F /* ContentViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentViewCell.xib; sourceTree = "<group>"; };
@@ -91,17 +93,24 @@
 		804CC4C621C14AC4007EEBF8 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				804CC4C721C14AC4007EEBF8 /* AppDelegate.swift */,
-				80B6C3FA21C295ED007C958F /* ShadowSegementSlideViewController.swift */,
 				80B6C3E821C1FA16007C958F /* Home */,
 				80B6C3E921C1FA1B007C958F /* Explore */,
 				80B6C3EA21C1FA27007C958F /* Mine */,
 				80B6C3F221C20D76007C958F /* ViewControllers */,
 				80B6C3FC21C29ED8007C958F /* Manager */,
+				807A36E021C35A03004675BC /* Config */,
 				80B6C3F721C29413007C958F /* Util */,
 				80B6C40121C2A458007C958F /* Resources */,
 			);
 			path = Example;
+			sourceTree = "<group>";
+		};
+		807A36E021C35A03004675BC /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				804CC4C721C14AC4007EEBF8 /* AppDelegate.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		80B6C3E821C1FA16007C958F /* Home */ = {
@@ -141,6 +150,7 @@
 		80B6C3F221C20D76007C958F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				80B6C3FA21C295ED007C958F /* ShadowSegementSlideViewController.swift */,
 				80B6C3F521C25629007C958F /* BaseTableViewController.swift */,
 				80B6C3EB21C1FA93007C958F /* Content */,
 			);
@@ -158,6 +168,7 @@
 		80B6C3FC21C29ED8007C958F /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				807A36DE21C359D3004675BC /* AppManager.swift */,
 				80B6C3FD21C29EEA007C958F /* DataManager.swift */,
 			);
 			path = Manager;
@@ -307,6 +318,7 @@
 				80B6C3F621C25629007C958F /* BaseTableViewController.swift in Sources */,
 				804CC4DA21C1531D007EEBF8 /* HomeViewController.swift in Sources */,
 				80B6C3F921C2943E007C958F /* CALayer+Sketch.swift in Sources */,
+				807A36DF21C359D3004675BC /* AppManager.swift in Sources */,
 				804CC4DC21C1532F007EEBF8 /* ExploreViewController.swift in Sources */,
 				80B6C3FB21C295ED007C958F /* ShadowSegementSlideViewController.swift in Sources */,
 				804CC4DE21C15339007EEBF8 /* MineViewController.swift in Sources */,
