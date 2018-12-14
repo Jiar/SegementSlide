@@ -85,7 +85,7 @@ internal class SegementSlideContentView: UIView {
         setSelectedIndex(index)
     }
     
-    internal func reloadContent() {
+    internal func reloadData() {
         viewControllers.removeAll()
         collectionView.reloadData()
     }
@@ -113,7 +113,6 @@ extension SegementSlideContentView: UIScrollViewDelegate {
     private func setSelectedIndex(_ index: Int) {
         guard index != selectedIndex else { return }
         selectedIndex = index
-        collectionView.reloadData()
         delegate?.segementSlideContentView(self, didSelectAtIndex: index)
     }
     

@@ -92,6 +92,16 @@ open class TransparentTabSlideViewController: SegementSlideViewController {
         edgesForExtendedLayout = .top
     }
     
+    public override func reloadData() {
+        super.reloadData()
+        reloadNavigationBarStyle()
+    }
+    
+    public override func reloadHeader() {
+        super.reloadHeader()
+        reloadNavigationBarStyle()
+    }
+    
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let titleSize: CGSize
@@ -166,6 +176,7 @@ extension TransparentTabSlideViewController {
     
     private func updateNavigationBarStyle(_ scrollView: UIScrollView) {
         guard let navigationController = navigationController else { return }
+        guard headerStickyHeight != -(statusBarHeight+navigationBarHeight) else { return }
         if scrollView.contentOffset.y >= headerStickyHeight {
             guard !hasEmbed else { return }
             hasEmbed = true

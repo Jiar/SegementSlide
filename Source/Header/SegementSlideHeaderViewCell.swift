@@ -36,8 +36,9 @@ internal class SegementSlideHeaderViewCell: UICollectionViewCell {
             return view
         }
         guard let selectedIndex = segementSlideContentView.selectedIndex,
-            let segementSlideContentScrollViewDelegate = segementSlideContentView.segementSlideContentViewController(at: selectedIndex) else {
-                return view
+            let segementSlideContentScrollViewDelegate = segementSlideContentView.segementSlideContentViewController(at: selectedIndex)
+            else {
+            return view
         }
         if view is UIControl {
             return view

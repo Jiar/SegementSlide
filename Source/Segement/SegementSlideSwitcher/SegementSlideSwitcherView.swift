@@ -92,7 +92,7 @@ internal class SegementSlideSwitcherView: UIView {
         reloadBadges()
     }
     
-    internal func reloadSwitcher() {
+    internal func reloadData() {
         for titleButton in titleButtons {
             titleButton.removeFromSuperview()
         }
@@ -206,6 +206,7 @@ extension SegementSlideSwitcherView {
     
     private func updateSelectedButton(animated: Bool) {
         guard scrollView.frame != .zero else { return }
+        guard !titleButtons.isEmpty else { return }
         let titleButton = titleButtons[selectedIndex]
         titleButton.setTitleColor(selectedTitleColor, for: .normal)
         titleButton.titleLabel?.font = selectedTitleFont

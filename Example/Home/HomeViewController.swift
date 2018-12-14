@@ -33,7 +33,7 @@ class HomeViewController: ShadowSegementSlideViewController {
         let headerView = UIImageView()
         headerView.isUserInteractionEnabled = true
         headerView.contentMode = .scaleAspectFill
-        headerView.image = UIImage(named: "bg_think.jpeg")
+        headerView.image = UIImage(named: "bg_thinking.png")
         return headerView
     }
     
@@ -65,8 +65,6 @@ class HomeViewController: ShadowSegementSlideViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        reloadHeader()
-        reloadSwitcher()
     }
 
 }

@@ -1,20 +1,29 @@
 //
-//  MineViewController.swift
+//  LanguageCenterViewController.swift
 //  Example
 //
-//  Created by Jiar on 2018/12/12.
+//  Created by Jiar on 2018/12/14.
 //  Copyright © 2018 Jiar. All rights reserved.
 //
 
 import UIKit
 import SegementSlide
+import MBProgressHUD
 
-class MineViewController: TransparentTabSlideViewController {
-
-    init() {
+class LanguageCenterViewController: TransparentTabSlideViewController {
+    
+    private let id: Int
+    private var language: Language?
+    private let centerHeaderView: LanguageCenterHeaderView
+    private var limitContentOffsetY: CGFloat {
+        return -(centerHeaderView.bgImageViewHeight-headerHeight())
+    }
+    
+    init(id: Int) {
+        self.id = id
+        centerHeaderView = UINib(nibName: "LanguageCenterHeaderView", bundle: nil).instantiate(withOwner: nil, options: nil).first as! LanguageCenterHeaderView
         super.init(nibName: nil, bundle: nil)
-        title = "Mine"
-        tabBarItem = UITabBarItem(title: "Mine", image: UIImage(named: "tab_mine")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "tab_mine_sel")?.withRenderingMode(.alwaysOriginal))
+        hidesBottomBarWhenPushed = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,19 +39,19 @@ class MineViewController: TransparentTabSlideViewController {
     }
     
     override func headerHeight() -> CGFloat {
-        if #available(iOS 11.0, *) {
-            return view.bounds.height/4+view.safeAreaInsets.top
-        } else {
-            return view.bounds.height/4+topLayoutGuide.length
+        guard let _ = language else {
+            return 0
         }
+        return centerHeaderView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
     }
     
     override func headerView() -> UIView {
-        let headerView = UIImageView()
-        headerView.isUserInteractionEnabled = true
-        headerView.contentMode = .scaleAspectFill
-        headerView.image = UIImage(named: "bg_computer.png")
-        return headerView
+        guard let _ = language else {
+            let view = UIView()
+            view.backgroundColor = .clear
+            return view
+        }
+        return centerHeaderView
     }
     
     override var switcherType: SwitcherType {
@@ -50,10 +59,16 @@ class MineViewController: TransparentTabSlideViewController {
     }
     
     override func titlesInSwitcher() -> [String] {
+        guard let _ = language else {
+            return []
+        }
         return DataManager.shared.mineLanguageTitles
     }
     
     override func showBadgeInSwitcher(at index: Int) -> BadgeType {
+        guard let _ = language else {
+            return .none
+        }
         switch index {
         case 0:
             return .count(8)
@@ -63,20 +78,49 @@ class MineViewController: TransparentTabSlideViewController {
     }
     
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
+        guard let _ = language else {
+            return nil
+        }
         return ContentViewController()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        scrollToSlide(at: 1, animated: false)
+        let hud = MBProgressHUD.showAdded(to: view, animated: true)
+        DispatchQueue.global().asyncAfter(deadline: .now()+1.2) {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                if let language = DataManager.shared.language(by: self.id) {
+                    hud.hide(animated: true)
+                    self.language = language
+                    self.centerHeaderView.config(language, viewController: self)
+                    self.reloadData()
+                    self.scrollToSlide(at: 1, animated: false)
+                } else {
+                    hud.label.text = "Language not found!"
+                    hud.hide(animated: true, afterDelay: 0.5)
+                }
+            }
+        }
+    }
+    
+    @available(iOS 11.0, *)
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        reloadHeader()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        MBProgressHUD.hide(for: view, animated: true)
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
         super.scrollViewDidScroll(scrollView, isParent: isParent)
         guard isParent else { return }
-        if scrollView.contentOffset.y <= -view.bounds.height/3 {
-            scrollView.contentOffset.y = -view.bounds.height/3
+        if scrollView.contentOffset.y <= limitContentOffsetY {
+            scrollView.contentOffset.y = limitContentOffsetY
         }
         updateNavigationBarStyle(scrollView)
     }
@@ -98,5 +142,5 @@ class MineViewController: TransparentTabSlideViewController {
         fadeTextAnimation.type = .fade
         return fadeTextAnimation
     }
-
+    
 }

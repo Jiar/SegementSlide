@@ -26,6 +26,15 @@ class ContentViewController: BaseTableViewController, SegementSlideContentScroll
         tableView.estimatedRowHeight = ContentViewCell.estimatedRowHeight()
         tableView.register(UINib(nibName: "ContentViewCell", bundle: nil), forCellReuseIdentifier: "ContentViewCell")
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if #available(iOS 11.0, *) {
+            tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: view.safeAreaInsets.bottom, right: 0)
+        } else {
+            tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: bottomLayoutGuide.length, right: 0)
+        }
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -43,6 +52,8 @@ class ContentViewController: BaseTableViewController, SegementSlideContentScroll
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let language = DataManager.shared.allLanguages[indexPath.row]
+        navigationController?.pushViewController(LanguageCenterViewController(id: language.id), animated: true)
     }
 
 }

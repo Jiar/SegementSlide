@@ -15,6 +15,12 @@
 		804CC4DC21C1532F007EEBF8 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4DB21C1532F007EEBF8 /* ExploreViewController.swift */; };
 		804CC4DE21C15339007EEBF8 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4DD21C15339007EEBF8 /* MineViewController.swift */; };
 		807A36DF21C359D3004675BC /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A36DE21C359D3004675BC /* AppManager.swift */; };
+		807A36E821C3B110004675BC /* LanguageCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A36E721C3B110004675BC /* LanguageCenterViewController.swift */; };
+		807A36EA21C3B314004675BC /* LanguageCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A36E921C3B314004675BC /* LanguageCenterHeaderView.swift */; };
+		807A36EC21C3B31E004675BC /* LanguageCenterHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 807A36EB21C3B31E004675BC /* LanguageCenterHeaderView.xib */; };
+		807A36EE21C3B6D1004675BC /* bg_working.png in Resources */ = {isa = PBXBuildFile; fileRef = 807A36ED21C3B6D0004675BC /* bg_working.png */; };
+		807A36F021C3B7E3004675BC /* bg_programming.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 807A36EF21C3B7E3004675BC /* bg_programming.jpg */; };
+		807A36F221C3B8D0004675BC /* bg_thinking.png in Resources */ = {isa = PBXBuildFile; fileRef = 807A36F121C3B8D0004675BC /* bg_thinking.png */; };
 		80B6C3ED21C1FAB5007C958F /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3EC21C1FAB5007C958F /* ContentViewController.swift */; };
 		80B6C3F021C20052007C958F /* ContentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3EE21C20052007C958F /* ContentViewCell.swift */; };
 		80B6C3F121C20052007C958F /* ContentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80B6C3EF21C20052007C958F /* ContentViewCell.xib */; };
@@ -22,8 +28,6 @@
 		80B6C3F921C2943E007C958F /* CALayer+Sketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3F821C2943E007C958F /* CALayer+Sketch.swift */; };
 		80B6C3FB21C295ED007C958F /* ShadowSegementSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3FA21C295ED007C958F /* ShadowSegementSlideViewController.swift */; };
 		80B6C3FE21C29EEA007C958F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3FD21C29EEA007C958F /* DataManager.swift */; };
-		80B6C40021C2A441007C958F /* bg_languages.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 80B6C3FF21C2A441007C958F /* bg_languages.jpg */; };
-		80B6C40321C2A5A3007C958F /* bg_think.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 80B6C40221C2A5A3007C958F /* bg_think.jpeg */; };
 		80B6C40521C2A600007C958F /* bg_computer.png in Resources */ = {isa = PBXBuildFile; fileRef = 80B6C40421C2A600007C958F /* bg_computer.png */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +42,12 @@
 		804CC4DB21C1532F007EEBF8 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		804CC4DD21C15339007EEBF8 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		807A36DE21C359D3004675BC /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
+		807A36E721C3B110004675BC /* LanguageCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCenterViewController.swift; sourceTree = "<group>"; };
+		807A36E921C3B314004675BC /* LanguageCenterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCenterHeaderView.swift; sourceTree = "<group>"; };
+		807A36EB21C3B31E004675BC /* LanguageCenterHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LanguageCenterHeaderView.xib; sourceTree = "<group>"; };
+		807A36ED21C3B6D0004675BC /* bg_working.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_working.png; sourceTree = "<group>"; };
+		807A36EF21C3B7E3004675BC /* bg_programming.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg_programming.jpg; sourceTree = "<group>"; };
+		807A36F121C3B8D0004675BC /* bg_thinking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_thinking.png; sourceTree = "<group>"; };
 		80B6C3EC21C1FAB5007C958F /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		80B6C3EE21C20052007C958F /* ContentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewCell.swift; sourceTree = "<group>"; };
 		80B6C3EF21C20052007C958F /* ContentViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentViewCell.xib; sourceTree = "<group>"; };
@@ -45,8 +55,6 @@
 		80B6C3F821C2943E007C958F /* CALayer+Sketch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Sketch.swift"; sourceTree = "<group>"; };
 		80B6C3FA21C295ED007C958F /* ShadowSegementSlideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowSegementSlideViewController.swift; sourceTree = "<group>"; };
 		80B6C3FD21C29EEA007C958F /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		80B6C3FF21C2A441007C958F /* bg_languages.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg_languages.jpg; sourceTree = "<group>"; };
-		80B6C40221C2A5A3007C958F /* bg_think.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg_think.jpeg; sourceTree = "<group>"; };
 		80B6C40421C2A600007C958F /* bg_computer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_computer.png; sourceTree = "<group>"; };
 		9BFDF05ED108B36DDF0BD851 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		DFC82FD65CC44CDF1D54158C /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -113,6 +121,16 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
+		807A36E621C3B0CF004675BC /* LanguageCenter */ = {
+			isa = PBXGroup;
+			children = (
+				807A36E721C3B110004675BC /* LanguageCenterViewController.swift */,
+				807A36E921C3B314004675BC /* LanguageCenterHeaderView.swift */,
+				807A36EB21C3B31E004675BC /* LanguageCenterHeaderView.xib */,
+			);
+			path = LanguageCenter;
+			sourceTree = "<group>";
+		};
 		80B6C3E821C1FA16007C958F /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +170,7 @@
 			children = (
 				80B6C3FA21C295ED007C958F /* ShadowSegementSlideViewController.swift */,
 				80B6C3F521C25629007C958F /* BaseTableViewController.swift */,
+				807A36E621C3B0CF004675BC /* LanguageCenter */,
 				80B6C3EB21C1FA93007C958F /* Content */,
 			);
 			path = ViewControllers;
@@ -177,9 +196,10 @@
 		80B6C40121C2A458007C958F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				80B6C40221C2A5A3007C958F /* bg_think.jpeg */,
-				80B6C3FF21C2A441007C958F /* bg_languages.jpg */,
+				807A36F121C3B8D0004675BC /* bg_thinking.png */,
+				807A36ED21C3B6D0004675BC /* bg_working.png */,
 				80B6C40421C2A600007C958F /* bg_computer.png */,
+				807A36EF21C3B7E3004675BC /* bg_programming.jpg */,
 				804CC4CE21C14AC6007EEBF8 /* Assets.xcassets */,
 				804CC4D021C14AC6007EEBF8 /* LaunchScreen.storyboard */,
 				804CC4D321C14AC6007EEBF8 /* Info.plist */,
@@ -256,12 +276,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80B6C40321C2A5A3007C958F /* bg_think.jpeg in Resources */,
 				80B6C40521C2A600007C958F /* bg_computer.png in Resources */,
+				807A36EE21C3B6D1004675BC /* bg_working.png in Resources */,
+				807A36F021C3B7E3004675BC /* bg_programming.jpg in Resources */,
+				807A36EC21C3B31E004675BC /* LanguageCenterHeaderView.xib in Resources */,
 				804CC4D221C14AC6007EEBF8 /* LaunchScreen.storyboard in Resources */,
 				80B6C3F121C20052007C958F /* ContentViewCell.xib in Resources */,
+				807A36F221C3B8D0004675BC /* bg_thinking.png in Resources */,
 				804CC4CF21C14AC6007EEBF8 /* Assets.xcassets in Resources */,
-				80B6C40021C2A441007C958F /* bg_languages.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,11 +315,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
@@ -318,6 +342,8 @@
 				804CC4C821C14AC4007EEBF8 /* AppDelegate.swift in Sources */,
 				80B6C3F021C20052007C958F /* ContentViewCell.swift in Sources */,
 				80B6C3F621C25629007C958F /* BaseTableViewController.swift in Sources */,
+				807A36E821C3B110004675BC /* LanguageCenterViewController.swift in Sources */,
+				807A36EA21C3B314004675BC /* LanguageCenterHeaderView.swift in Sources */,
 				804CC4DA21C1531D007EEBF8 /* HomeViewController.swift in Sources */,
 				80B6C3F921C2943E007C958F /* CALayer+Sketch.swift in Sources */,
 				807A36DF21C359D3004675BC /* AppManager.swift in Sources */,

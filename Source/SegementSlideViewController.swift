@@ -22,8 +22,9 @@ open class SegementSlideViewController: UIViewController {
     internal private(set) var innerHeaderView = UIView()
     private var parentKeyValueObservation: NSKeyValueObservation!
     private var childKeyValueObservation: NSKeyValueObservation?
+    private var innerBouncesType: BouncesType = .parent
     private var canParentViewScroll: Bool = true
-    private var canChildViewScroll: Bool = true
+    private var canChildViewScroll: Bool = false
     
     public var slideSwitcherView: UIView {
         return segementSlideSwitcherView
@@ -46,7 +47,7 @@ open class SegementSlideViewController: UIViewController {
     }
     
     open var bouncesType: BouncesType {
-        return .child
+        return .parent
     }
     
     open func headerHeight() -> CGFloat {
@@ -89,25 +90,6 @@ open class SegementSlideViewController: UIViewController {
         
     }
     
-    public func reloadHeader() {
-        innerHeaderHeight = headerHeight()
-        innerHeaderView = headerView()
-        collectionView.reloadData()
-    }
-    
-    public func reloadSwitcher() {
-        segementSlideSwitcherView.type = switcherType
-        segementSlideSwitcherView.reloadSwitcher()
-    }
-    
-    public func reloadBadgeInSwitcher() {
-        segementSlideSwitcherView.reloadBadges()
-    }
-    
-    public func reloadContent() {
-        segementSlideContentView.reloadContent()
-    }
-    
     public func scrollToSlide(at index: Int, animated: Bool) {
         segementSlideSwitcherView.selectSwitcher(at: index, animated: animated)
         segementSlideContentView.scrollToSlide(at: index, animated: animated)
@@ -120,7 +102,44 @@ open class SegementSlideViewController: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        reloadData()
     }
+    
+    public func reloadData() {
+        setupBounces()
+        setupHeader()
+        setupSwitcher()
+        segementSlideSwitcherView.reloadData()
+        collectionView.reloadData()
+    }
+    
+    public func reloadHeader() {
+        setupHeader()
+        collectionView.reloadData()
+    }
+    
+    public func reloadSwitcher() {
+        setupSwitcher()
+        segementSlideSwitcherView.reloadData()
+    }
+    
+    public func reloadBadgeInSwitcher() {
+        segementSlideSwitcherView.reloadBadges()
+    }
+    
+    public func reloadContent() {
+        segementSlideContentView.reloadData()
+    }
+    
+    deinit {
+        #if DEBUG
+        print("\(type(of: self)) deinit")
+        #endif
+    }
+    
+}
+
+extension SegementSlideViewController {
     
     private func setup() {
         extendedLayoutIncludesOpaqueBars = true
@@ -178,10 +197,25 @@ open class SegementSlideViewController: UIViewController {
         })
     }
     
-    deinit {
-        #if DEBUG
-        print("\(type(of: self)) deinit")
-        #endif
+    private func setupBounces() {
+        innerBouncesType = bouncesType
+        switch innerBouncesType {
+        case .parent:
+            canParentViewScroll = true
+            canChildViewScroll = false
+        case .child:
+            canParentViewScroll = false
+            canChildViewScroll = true
+        }
+    }
+    
+    private func setupHeader() {
+        innerHeaderHeight = headerHeight()
+        innerHeaderView = headerView()
+    }
+    
+    private func setupSwitcher() {
+        segementSlideSwitcherView.type = switcherType
     }
     
 }
@@ -323,7 +357,7 @@ extension SegementSlideViewController {
     private func parentScrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollViewDidScroll(scrollView, isParent: true)
         guard headerStickyHeight != 0 else { return }
-        switch bouncesType {
+        switch innerBouncesType {
         case .parent:
             if !canParentViewScroll {
                 collectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x, y: headerStickyHeight)
@@ -353,7 +387,7 @@ extension SegementSlideViewController {
     private func childScrollViewDidScroll(_ childScrollView: UIScrollView) {
         scrollViewDidScroll(childScrollView, isParent: false)
         guard headerStickyHeight != 0 else { return }
-        switch bouncesType {
+        switch innerBouncesType {
         case .parent:
             if !canChildViewScroll {
                 childScrollView.contentOffset = CGPoint(x: childScrollView.contentOffset.x, y: 0)

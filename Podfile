@@ -7,5 +7,6 @@ project './Example.xcodeproj'
 target 'Example' do
     pod 'MJRefresh'
     pod 'SnapKit'
+    pod 'MBProgressHUD'
     pod 'SegementSlide', :path => './'
 end

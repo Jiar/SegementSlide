@@ -33,7 +33,7 @@ class ExploreViewController: ShadowSegementSlideViewController {
         let headerView = UIImageView()
         headerView.isUserInteractionEnabled = true
         headerView.contentMode = .scaleAspectFill
-        headerView.image = UIImage(named: "bg_languages.jpg")
+        headerView.image = UIImage(named: "bg_working.png")
         return headerView
     }
     
@@ -69,8 +69,6 @@ class ExploreViewController: ShadowSegementSlideViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        reloadHeader()
-        reloadSwitcher()
     }
 
 }
