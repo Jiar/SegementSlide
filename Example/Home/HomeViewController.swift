@@ -46,22 +46,20 @@ class HomeViewController: ShadowSegementSlideViewController {
     }
     
     override func showBadgeInSwitcher(at index: Int) -> BadgeType {
-        return .none
+        switch index {
+        case 0:
+            return .none
+        case 1:
+            return .point
+        case 2:
+            return .count(3)
+        default:
+            return .none
+        }
     }
     
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
-        switch index {
-        case 0:
-            return ContentViewController()
-        case 1:
-            return ContentViewController()
-        case 2:
-            return ContentViewController()
-        case 3:
-            return ContentViewController()
-        default:
-            return nil
-        }
+        return ContentViewController()
     }
     
     override func viewDidLoad() {

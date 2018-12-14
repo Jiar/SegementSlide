@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 public protocol SegementSlideContentScrollViewDelegate {
     var scrollView: UIScrollView { get }
@@ -39,18 +40,13 @@ internal class SegementSlideContentView: UIView {
     }
     
     private func setup() {
-        translatesAutoresizingMaskIntoConstraints = false
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(collectionView)
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         collectionView.backgroundColor = .clear
         collectionView.register(SegementSlideContentViewChildCell.self)
         collectionView.delegate = self
@@ -67,13 +63,6 @@ internal class SegementSlideContentView: UIView {
     
     internal override func layoutSubviews() {
         super.layoutSubviews()
-        NSLayoutConstraint.deactivate(collectionView.constraints)
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
         guard let selectedIndex = selectedIndex else { return }
         collectionView.scrollToItem(at: IndexPath(row: selectedIndex, section: 0), at: .centeredHorizontally, animated: false)
     }

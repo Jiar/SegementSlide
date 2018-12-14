@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name = 'SegementSlide'
-  s.version = '1.0'
+  s.version = '0.1'
   s.summary = 'SegementSlide'
 
   s.homepage = 'https://github.com/Jiar/SegementSlide'
@@ -14,7 +14,6 @@ Pod::Spec.new do |s|
 
   s.source = { :git => "https://github.com/Jiar/SegementSlide.git", :tag => "#{s.version}" }
   s.ios.framework  = 'UIKit'
-  #s.source_files = 'Source/*.swift', 'Source/**/*.swift', 'Source/**/**/*.swift'
   s.ios.source_files = 'Source/*.swift', 'Source/**/*.swift', 'Source/**/**/*.swift'
 
   s.module_name = 'SegementSlide'
@@ -22,5 +21,7 @@ Pod::Spec.new do |s|
 
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.2' }
   s.static_framework = true
+
+  s.dependency 'SnapKit', '~> 4.2.0'
   
 end

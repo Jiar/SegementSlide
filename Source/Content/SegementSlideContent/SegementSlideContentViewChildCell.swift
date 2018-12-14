@@ -7,24 +7,28 @@
 //
 
 import UIKit
+import SnapKit
 
 internal class SegementSlideContentViewChildCell: UICollectionViewCell {
     
+    private weak var lastSubViewController: UIViewController?
+    
+    internal override func prepareForReuse() {
+        super.prepareForReuse()
+        if let lastSubViewController = lastSubViewController {
+            lastSubViewController.view.removeFromSuperview()
+            lastSubViewController.removeFromParent()
+        }
+    }
+    
     internal func config(viewController: SegementSlideViewController, childViewController: SegementSlideContentScrollViewDelegate) {
         guard let subViewController = childViewController as? UIViewController else { return }
-        subViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.deactivate(subViewController.view.constraints)
-        //subViewController.view.removeConstraints(subViewController.view.constraints)
-        subViewController.view.removeFromSuperview()
-        subViewController.removeFromParent()
-        addSubview(subViewController.view)
         viewController.addChild(subViewController)
-        NSLayoutConstraint.activate([
-            subViewController.view.topAnchor.constraint(equalTo: topAnchor),
-            subViewController.view.bottomAnchor.constraint(equalTo: bottomAnchor),
-            subViewController.view.leadingAnchor.constraint(equalTo: leadingAnchor),
-            subViewController.view.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+        addSubview(subViewController.view)
+        subViewController.view.snp.remakeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        lastSubViewController = subViewController
     }
     
 }

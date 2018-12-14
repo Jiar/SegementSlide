@@ -1,14 +1,18 @@
 PODS:
   - MJRefresh (3.1.15.7)
-  - SegementSlide (1.0)
+  - SegementSlide (0.1):
+    - SnapKit (~> 4.2.0)
+  - SnapKit (4.2.0)
 
 DEPENDENCIES:
   - MJRefresh
   - SegementSlide (from `./`)
+  - SnapKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - MJRefresh
+    - SnapKit
 
 EXTERNAL SOURCES:
   SegementSlide:
@@ -16,8 +20,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
-  SegementSlide: 8957ab242b752af1e72c13551b487ca8548ed439
+  SegementSlide: 0d0557c46a45b336875867be0b4f3373f50e8725
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 13ecfaaef591d8fab92f0055c857ea227a67b886
+PODFILE CHECKSUM: ee303ba013cd04f7a444beb2d4a7d7de5c00640d
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.2

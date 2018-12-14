@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 public enum BouncesType {
     case parent
@@ -145,14 +146,10 @@ open class SegementSlideViewController: UIViewController {
         layout.scrollDirection = .vertical
         layout.sectionHeadersPinToVisibleBounds = true
         collectionView = SegementSlideCollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         if #available(iOS 11.0, *) {
             collectionView.contentInsetAdjustmentBehavior = .never
         }else {

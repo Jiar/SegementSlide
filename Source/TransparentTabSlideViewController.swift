@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 ///
 /// Set the navigationBar property in viewWillAppear
@@ -27,8 +28,6 @@ open class TransparentTabSlideViewController: SegementSlideViewController {
     private var hasDisplay: Bool = false
     
     private let titleLabel = UILabel()
-    private var titleLabelWidthConstraint: NSLayoutConstraint?
-    private var titleLabelHeightConstraint: NSLayoutConstraint?
     
     public weak var storedNavigationController: UINavigationController? = nil
     public var storedNavigationBarIsTranslucent: Bool? = nil
@@ -78,11 +77,9 @@ open class TransparentTabSlideViewController: SegementSlideViewController {
     private func setupTitleLabel() {
         let titleSize = CGSize(width: view.bounds.width-112, height: 44)
         if #available(iOS 11, *) {
-            titleLabel.translatesAutoresizingMaskIntoConstraints = false
-            titleLabelWidthConstraint = titleLabel.widthAnchor.constraint(equalToConstant: titleSize.width)
-            titleLabelHeightConstraint = titleLabel.heightAnchor.constraint(equalToConstant: titleSize.height)
-            titleLabelWidthConstraint?.isActive = true
-            titleLabelHeightConstraint?.isActive = true
+            titleLabel.snp.makeConstraints { make in
+                make.size.equalTo(titleSize)
+            }
         } else {
             titleLabel.bounds = CGRect(origin: .zero, size: titleSize)
         }
@@ -99,17 +96,14 @@ open class TransparentTabSlideViewController: SegementSlideViewController {
         super.viewDidLayoutSubviews()
         let titleSize: CGSize
         if let navigationController = navigationController {
-            titleSize = CGSize(width: navigationController.navigationBar.bounds.size.width-112, height: navigationController.navigationBar.bounds.size.height)
+            titleSize = CGSize(width: navigationController.navigationBar.bounds.width-112, height: navigationController.navigationBar.bounds.height)
         } else {
             titleSize = CGSize(width: view.bounds.width-112, height: 44)
         }
         if #available(iOS 11, *) {
-            titleLabelWidthConstraint?.isActive = false
-            titleLabelHeightConstraint?.isActive = false
-            titleLabelWidthConstraint = titleLabel.widthAnchor.constraint(equalToConstant: titleSize.width)
-            titleLabelHeightConstraint = titleLabel.heightAnchor.constraint(equalToConstant: titleSize.height)
-            titleLabelWidthConstraint?.isActive = true
-            titleLabelHeightConstraint?.isActive = true
+            titleLabel.snp.remakeConstraints { make in
+                make.size.equalTo(titleSize)
+            }
         } else {
             titleLabel.bounds = CGRect(origin: .zero, size: titleSize)
         }

@@ -7,24 +7,27 @@
 //
 
 import UIKit
+import SnapKit
 
 internal class SegementSlideHeaderViewCell: UICollectionViewCell {
     
+    private weak var lastHeaderView: UIView?
     private weak var segementSlideContentView: SegementSlideContentView?
+    
+    internal override func prepareForReuse() {
+        super.prepareForReuse()
+        if let lastHeaderView = lastHeaderView {
+            lastHeaderView.removeFromSuperview()
+        }
+    }
     
     internal func config(_ headerView: UIView, segementSlideContentView: SegementSlideContentView) {
         self.segementSlideContentView = segementSlideContentView
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.deactivate(headerView.constraints)
-        //headerView.removeConstraints(headerView.constraints)
-        headerView.removeFromSuperview()
         addSubview(headerView)
-        NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: topAnchor),
-            headerView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            headerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+        headerView.snp.remakeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        lastHeaderView = headerView
     }
     
     internal override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {

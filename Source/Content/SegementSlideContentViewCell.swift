@@ -7,20 +7,25 @@
 //
 
 import UIKit
+import SnapKit
 
 internal class SegementSlideContentViewCell: UICollectionViewCell {
     
+    private weak var lastSegementSlideContentView: SegementSlideContentView?
+    
+    internal override func prepareForReuse() {
+        super.prepareForReuse()
+        if let lastSegementSlideContentView = lastSegementSlideContentView {
+            lastSegementSlideContentView.removeFromSuperview()
+        }
+    }
+    
     internal func config(_ segementSlideContentView: SegementSlideContentView) {
-        NSLayoutConstraint.deactivate(segementSlideContentView.constraints)
-        //segementSlideContentView.removeConstraints(segementSlideContentView.constraints)
-        segementSlideContentView.removeFromSuperview()
         addSubview(segementSlideContentView)
-        NSLayoutConstraint.activate([
-            segementSlideContentView.topAnchor.constraint(equalTo: topAnchor),
-            segementSlideContentView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            segementSlideContentView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            segementSlideContentView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+        segementSlideContentView.snp.remakeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        lastSegementSlideContentView = segementSlideContentView
     }
     
 }

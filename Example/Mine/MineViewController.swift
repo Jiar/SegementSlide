@@ -54,20 +54,16 @@ class MineViewController: TransparentTabSlideViewController {
     }
     
     override func showBadgeInSwitcher(at index: Int) -> BadgeType {
-        return .none
+        switch index {
+        case 0:
+            return .count(8)
+        default:
+            return .none
+        }
     }
     
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
-        switch index {
-        case 0:
-            return ContentViewController()
-        case 1:
-            return ContentViewController()
-        case 2:
-            return ContentViewController()
-        default:
-            return nil
-        }
+        return ContentViewController()
     }
     
     override func viewDidLoad() {

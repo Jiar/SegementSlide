@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 public enum SwitcherType {
     case tab
@@ -24,6 +25,10 @@ internal class SegementSlideSwitcherView: UIView {
     
     private let scrollView = UIScrollView()
     private let indicatorView = UIView()
+    private var indicatorViewLeadingConstraint: NSLayoutConstraint!
+    private var indicatorViewTopConstraint: NSLayoutConstraint!
+    private var indicatorViewWidthConstraint: NSLayoutConstraint!
+    private var indicatorViewHeightConstraint: NSLayoutConstraint!
     private var titleButtons: [UIButton] = []
     
     internal var type: SwitcherType = .tab {
@@ -56,34 +61,35 @@ internal class SegementSlideSwitcherView: UIView {
     }
     
     private func setup() {
-        translatesAutoresizingMaskIntoConstraints = false
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(scrollView)
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.backgroundColor = .clear
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(indicatorView)
         indicatorView.layer.masksToBounds = true
         indicatorView.layer.cornerRadius = indicatorHeight/2
+        indicatorViewLeadingConstraint = indicatorView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 0)
+        indicatorViewTopConstraint = indicatorView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0)
+        indicatorViewWidthConstraint = indicatorView.widthAnchor.constraint(equalToConstant: 0)
+        indicatorViewHeightConstraint = indicatorView.heightAnchor.constraint(equalToConstant: 0)
+        NSLayoutConstraint.activate([
+            indicatorViewLeadingConstraint,
+            indicatorViewTopConstraint,
+            indicatorViewWidthConstraint,
+            indicatorViewHeightConstraint
+        ])
         backgroundColor = .white
     }
     
     internal override func layoutSubviews() {
         super.layoutSubviews()
-        NSLayoutConstraint.deactivate(scrollView.constraints)
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
         layoutTitleButtons()
         updateSelectedButton(animated: false)
+        reloadBadges()
     }
     
     internal func reloadSwitcher() {
@@ -91,7 +97,6 @@ internal class SegementSlideSwitcherView: UIView {
             titleButton.removeFromSuperview()
         }
         titleButtons.removeAll()
-        indicatorView.removeFromSuperview()
         scrollView.isScrollEnabled = type == .segement
         let titles = delegate?.titlesInSegementSlideSwitcherView() ?? []
         guard !titles.isEmpty else { return }
@@ -109,16 +114,40 @@ internal class SegementSlideSwitcherView: UIView {
         }
         guard !titleButtons.isEmpty else { return }
         indicatorView.backgroundColor = indicatorColor
-        scrollView.addSubview(indicatorView)
-        if scrollView.frame != .zero {
-            layoutTitleButtons()
-            updateSelectedButton(animated: false)
-        }
+        layoutTitleButtons()
+        updateSelectedButton(animated: false)
+        reloadBadges()
         delegate?.segementSwitcherView(self, didSelectAtIndex: selectedIndex)
     }
     
     internal func reloadBadges() {
-        
+        for (index, titleButton) in titleButtons.enumerated() {
+            guard let titleLabel = titleButton.titleLabel, let titleLabelText = titleLabel.text else {
+                titleButton.badge.type = .none
+                continue
+            }
+            guard let type = delegate?.segementSwitcherView(self, showBadgeAtIndex: index) else {
+                titleButton.badge.type = .none
+                continue
+            }
+            titleButton.badge.type = type
+            if case .none = type {
+                continue
+            }
+            let x = titleLabelText.boundingWidth(with: titleLabel.font)
+            let y = titleLabel.font.lineHeight
+            switch type {
+            case .count(let count):
+                titleButton.badge.height = 15
+                titleButton.badge.fontSize = 10
+                titleButton.badge.offset = CGPoint(x: x/2.0 + titleButton.badge.height/2+1, y: -y/2.0 + 1)
+            case .point:
+                titleButton.badge.height = 9
+                titleButton.badge.offset = CGPoint(x: x/2.0 + titleButton.badge.height/2+1, y: -y/2.0 + 1)
+            case .none:
+                break
+            }
+        }
     }
     
     internal func selectSwitcher(at index: Int, animated: Bool) {
@@ -128,10 +157,8 @@ internal class SegementSlideSwitcherView: UIView {
         titleButton.setTitleColor(normalTitleColor, for: .normal)
         titleButton.titleLabel?.font = normalTitleFont
         selectedIndex = index
-        if scrollView.frame != .zero {
-            layoutTitleButtons()
-            updateSelectedButton(animated: animated)
-        }
+        layoutTitleButtons()
+        updateSelectedButton(animated: animated)
         delegate?.segementSwitcherView(self, didSelectAtIndex: index)
     }
     
@@ -155,7 +182,13 @@ extension SegementSlideSwitcherView {
                 let title = titleButton.title(for: .normal) ?? ""
                 buttonWidth = title.boundingWidth(with: index == selectedIndex ? selectedTitleFont : normalTitleFont)
             }
-            titleButton.frame = CGRect(x: offsetX, y: 0, width: buttonWidth, height: bounds.height)
+            titleButton.snp.remakeConstraints { make in
+                make.leading.equalTo(scrollView.snp.leading).offset(offsetX)
+                make.top.equalTo(scrollView.snp.top)
+                make.width.equalTo(buttonWidth)
+                make.height.equalTo(bounds.height)
+            }
+            scrollView.layoutIfNeeded()
             switch type {
             case .tab:
                 offsetX += buttonWidth
@@ -172,15 +205,25 @@ extension SegementSlideSwitcherView {
     }
     
     private func updateSelectedButton(animated: Bool) {
+        guard scrollView.frame != .zero else { return }
         let titleButton = titleButtons[selectedIndex]
         titleButton.setTitleColor(selectedTitleColor, for: .normal)
         titleButton.titleLabel?.font = selectedTitleFont
         if animated {
+            scrollView.layoutIfNeeded()
             UIView.animate(withDuration: 0.25) {
-                self.indicatorView.frame = CGRect(x: titleButton.frame.origin.x+(titleButton.bounds.width-self.indicatorWidth)/2, y: self.frame.height-self.indicatorHeight, width: self.indicatorWidth, height: self.indicatorHeight)
+                self.indicatorViewLeadingConstraint.constant = titleButton.frame.origin.x+(titleButton.bounds.width-self.indicatorWidth)/2
+                self.indicatorViewTopConstraint.constant = self.frame.height-self.indicatorHeight
+                self.indicatorViewWidthConstraint.constant = self.indicatorWidth
+                self.indicatorViewHeightConstraint.constant = self.indicatorHeight
+                self.scrollView.layoutIfNeeded()
             }
         } else {
-            indicatorView.frame = CGRect(x: titleButton.frame.origin.x+(titleButton.bounds.width-indicatorWidth)/2, y: frame.height-indicatorHeight, width: indicatorWidth, height: indicatorHeight)
+            indicatorViewLeadingConstraint.constant = titleButton.frame.origin.x+(titleButton.bounds.width-indicatorWidth)/2
+            indicatorViewTopConstraint.constant = frame.height-indicatorHeight
+            indicatorViewWidthConstraint.constant = indicatorWidth
+            indicatorViewHeightConstraint.constant = indicatorHeight
+            scrollView.layoutIfNeeded()
         }
         guard case .segement = type else { return }
         var offsetX = titleButton.frame.origin.x-(scrollView.bounds.width-titleButton.bounds.width)/2
