@@ -132,7 +132,7 @@ internal class SegementSlideSwitcherView: UIView {
             let x = titleLabelText.boundingWidth(with: titleLabel.font)
             let y = titleLabel.font.lineHeight
             switch type {
-            case .count(let count):
+            case .count:
                 titleButton.badge.height = 15
                 titleButton.badge.fontSize = 10
                 titleButton.badge.offset = CGPoint(x: x/2 + titleButton.badge.height/2+1, y: -y/2+1)
