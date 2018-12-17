@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		805C1D9C21C7DD3B00991D07 /* UIRectEdge+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C1D9A21C7DD3B00991D07 /* UIRectEdge+EX.swift */; };
+		805C1D9D21C7DD3B00991D07 /* CGFloat+Decimals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C1D9B21C7DD3B00991D07 /* CGFloat+Decimals.swift */; };
 		8066127F21BA91D500C05D7E /* TransparentTabSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8066127E21BA91D500C05D7E /* TransparentTabSlideViewController.swift */; };
 		8066128121BA91F300C05D7E /* SegementSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8066128021BA91F300C05D7E /* SegementSlideViewController.swift */; };
 		8066128421BA922400C05D7E /* SegementSlideHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8066128321BA922400C05D7E /* SegementSlideHeaderViewCell.swift */; };
@@ -17,7 +19,6 @@
 		8066129221BA92DE00C05D7E /* SegementSlideSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8066129121BA92DE00C05D7E /* SegementSlideSwitcherView.swift */; };
 		8066129521BAB47700C05D7E /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8066129421BAB47700C05D7E /* ReusableProtocol.swift */; };
 		8066129721BAB75400C05D7E /* String+Bounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8066129621BAB75400C05D7E /* String+Bounding.swift */; };
-		8066129921BAB7D300C05D7E /* CALayer+Sketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8066129821BAB7D300C05D7E /* CALayer+Sketch.swift */; };
 		8066129B21BABBB800C05D7E /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8066129A21BABBB800C05D7E /* BadgeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		805C1D9A21C7DD3B00991D07 /* UIRectEdge+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIRectEdge+EX.swift"; sourceTree = "<group>"; };
+		805C1D9B21C7DD3B00991D07 /* CGFloat+Decimals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Decimals.swift"; sourceTree = "<group>"; };
 		8066125A21BA910000C05D7E /* libSegementSlide.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSegementSlide.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8066127E21BA91D500C05D7E /* TransparentTabSlideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentTabSlideViewController.swift; sourceTree = "<group>"; };
 		8066128021BA91F300C05D7E /* SegementSlideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegementSlideViewController.swift; sourceTree = "<group>"; };
@@ -45,7 +48,6 @@
 		8066129121BA92DE00C05D7E /* SegementSlideSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegementSlideSwitcherView.swift; sourceTree = "<group>"; };
 		8066129421BAB47700C05D7E /* ReusableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableProtocol.swift; sourceTree = "<group>"; };
 		8066129621BAB75400C05D7E /* String+Bounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Bounding.swift"; sourceTree = "<group>"; };
-		8066129821BAB7D300C05D7E /* CALayer+Sketch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Sketch.swift"; sourceTree = "<group>"; };
 		8066129A21BABBB800C05D7E /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,8 +139,9 @@
 			children = (
 				8066129A21BABBB800C05D7E /* BadgeView.swift */,
 				8066129421BAB47700C05D7E /* ReusableProtocol.swift */,
+				805C1D9A21C7DD3B00991D07 /* UIRectEdge+EX.swift */,
+				805C1D9B21C7DD3B00991D07 /* CGFloat+Decimals.swift */,
 				8066129621BAB75400C05D7E /* String+Bounding.swift */,
-				8066129821BAB7D300C05D7E /* CALayer+Sketch.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -206,13 +209,14 @@
 				8066129221BA92DE00C05D7E /* SegementSlideSwitcherView.swift in Sources */,
 				8066128821BA925C00C05D7E /* SegementSlideSwitcherReusableView.swift in Sources */,
 				8066128B21BA928300C05D7E /* SegementSlideContentViewCell.swift in Sources */,
-				8066129921BAB7D300C05D7E /* CALayer+Sketch.swift in Sources */,
 				8066129721BAB75400C05D7E /* String+Bounding.swift in Sources */,
 				8066127F21BA91D500C05D7E /* TransparentTabSlideViewController.swift in Sources */,
 				8066129021BA92AE00C05D7E /* SegementSlideContentViewChildCell.swift in Sources */,
 				8066128E21BA929900C05D7E /* SegementSlideContentView.swift in Sources */,
 				8066128421BA922400C05D7E /* SegementSlideHeaderViewCell.swift in Sources */,
 				8066129521BAB47700C05D7E /* ReusableProtocol.swift in Sources */,
+				805C1D9D21C7DD3B00991D07 /* CGFloat+Decimals.swift in Sources */,
+				805C1D9C21C7DD3B00991D07 /* UIRectEdge+EX.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
