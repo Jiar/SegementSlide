@@ -26,6 +26,10 @@ open class SegementSlideViewController: UIViewController {
     private var canParentViewScroll: Bool = true
     private var canChildViewScroll: Bool = false
     
+    public var slideScrollView: UIScrollView {
+        return collectionView
+    }
+    
     public var slideSwitcherView: UIView {
         return segementSlideSwitcherView
     }
@@ -146,6 +150,7 @@ open class SegementSlideViewController: UIViewController {
         setupHeader()
         setupSwitcher()
         segementSlideSwitcherView.reloadData()
+        segementSlideContentView.reloadData()
         collectionView.reloadData()
     }
     
@@ -164,7 +169,7 @@ open class SegementSlideViewController: UIViewController {
     }
     
     public func reloadContent() {
-        segementSlideContentView.reloadData()
+        segementSlideContentView.reloadContents()
     }
     
     deinit {
@@ -407,8 +412,8 @@ extension SegementSlideViewController {
             if !canParentViewScroll {
                 collectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x, y: headerStickyHeight)
                 canChildViewScroll = true
-            } else if collectionView.contentOffset.y >= headerStickyHeight {
-                collectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x, y: headerStickyHeight)
+            } else if collectionView.contentOffset.y.keep3 >= headerStickyHeight.keep3 {
+                collectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x, y: headerStickyHeight.keep3)
                 canParentViewScroll = false
                 canChildViewScroll = true
             }
@@ -416,8 +421,8 @@ extension SegementSlideViewController {
             if !canParentViewScroll {
                 collectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x, y: headerStickyHeight)
                 canChildViewScroll = true
-            } else if collectionView.contentOffset.y >= headerStickyHeight {
-                collectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x, y: headerStickyHeight)
+            } else if collectionView.contentOffset.y.keep3 >= headerStickyHeight.keep3 {
+                collectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x, y: headerStickyHeight.keep3)
                 canParentViewScroll = false
                 canChildViewScroll = true
             } else if collectionView.contentOffset.y <= 0 {
@@ -449,7 +454,7 @@ extension SegementSlideViewController {
                 }
                 canParentViewScroll = true
             } else {
-                if collectionView.contentOffset.y > 0 && collectionView.contentOffset.y < headerStickyHeight {
+                if collectionView.contentOffset.y > 0 && collectionView.contentOffset.y.keep3 < headerStickyHeight.keep3 {
                     canChildViewScroll = false
                 }
             }

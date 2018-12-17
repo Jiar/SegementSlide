@@ -177,7 +177,7 @@ extension TransparentTabSlideViewController {
     private func updateNavigationBarStyle(_ scrollView: UIScrollView) {
         guard let navigationController = navigationController else { return }
         guard headerStickyHeight != -(statusBarHeight+navigationBarHeight) else { return }
-        if scrollView.contentOffset.y >= headerStickyHeight {
+        if scrollView.contentOffset.y.keep3 >= headerStickyHeight.keep3 {
             guard !hasEmbed else { return }
             hasEmbed = true
             hasDisplay = false

@@ -14,6 +14,7 @@
 		804CC4DA21C1531D007EEBF8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4D921C1531D007EEBF8 /* HomeViewController.swift */; };
 		804CC4DC21C1532F007EEBF8 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4DB21C1532F007EEBF8 /* ExploreViewController.swift */; };
 		804CC4DE21C15339007EEBF8 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4DD21C15339007EEBF8 /* MineViewController.swift */; };
+		805C1D9921C7C86A00991D07 /* ShadowTransparentTabSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C1D9821C7C86A00991D07 /* ShadowTransparentTabSlideViewController.swift */; };
 		807A36DF21C359D3004675BC /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A36DE21C359D3004675BC /* AppManager.swift */; };
 		807A36E821C3B110004675BC /* LanguageCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A36E721C3B110004675BC /* LanguageCenterViewController.swift */; };
 		807A36EA21C3B314004675BC /* LanguageCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A36E921C3B314004675BC /* LanguageCenterHeaderView.swift */; };
@@ -41,6 +42,7 @@
 		804CC4D921C1531D007EEBF8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		804CC4DB21C1532F007EEBF8 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		804CC4DD21C15339007EEBF8 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
+		805C1D9821C7C86A00991D07 /* ShadowTransparentTabSlideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowTransparentTabSlideViewController.swift; sourceTree = "<group>"; };
 		807A36DE21C359D3004675BC /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		807A36E721C3B110004675BC /* LanguageCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCenterViewController.swift; sourceTree = "<group>"; };
 		807A36E921C3B314004675BC /* LanguageCenterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCenterHeaderView.swift; sourceTree = "<group>"; };
@@ -168,8 +170,9 @@
 		80B6C3F221C20D76007C958F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				80B6C3FA21C295ED007C958F /* ShadowSegementSlideViewController.swift */,
 				80B6C3F521C25629007C958F /* BaseTableViewController.swift */,
+				80B6C3FA21C295ED007C958F /* ShadowSegementSlideViewController.swift */,
+				805C1D9821C7C86A00991D07 /* ShadowTransparentTabSlideViewController.swift */,
 				807A36E621C3B0CF004675BC /* LanguageCenter */,
 				80B6C3EB21C1FA93007C958F /* Content */,
 			);
@@ -338,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				80B6C3ED21C1FAB5007C958F /* ContentViewController.swift in Sources */,
+				805C1D9921C7C86A00991D07 /* ShadowTransparentTabSlideViewController.swift in Sources */,
 				80B6C3FE21C29EEA007C958F /* DataManager.swift in Sources */,
 				804CC4C821C14AC4007EEBF8 /* AppDelegate.swift in Sources */,
 				80B6C3F021C20052007C958F /* ContentViewCell.swift in Sources */,

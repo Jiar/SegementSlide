@@ -78,7 +78,7 @@ internal class SegementSlideContentView: UIView {
     }
     
     internal func scrollToSlide(at index: Int, animated: Bool) {
-        guard index < delegate?.segementSlideContentScrollViewCount ?? 0 else { return }
+        guard index < collectionView.numberOfItems(inSection: 0) else { return }
         if collectionView.frame != .zero {
             collectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: animated)
         }
@@ -86,6 +86,10 @@ internal class SegementSlideContentView: UIView {
     }
     
     internal func reloadData() {
+        collectionView.reloadData()
+    }
+    
+    internal func reloadContents() {
         viewControllers.removeAll()
         collectionView.reloadData()
     }

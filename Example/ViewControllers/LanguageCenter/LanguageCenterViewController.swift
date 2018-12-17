@@ -9,8 +9,9 @@
 import UIKit
 import SegementSlide
 import MBProgressHUD
+import MJRefresh
 
-class LanguageCenterViewController: TransparentTabSlideViewController {
+class LanguageCenterViewController: ShadowTransparentTabSlideViewController {
     
     private let id: Int
     private var language: Language?
@@ -39,9 +40,6 @@ class LanguageCenterViewController: TransparentTabSlideViewController {
     }
     
     override func headerHeight() -> CGFloat {
-        guard let _ = language else {
-            return 0
-        }
         return centerHeaderView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
     }
     
@@ -84,11 +82,30 @@ class LanguageCenterViewController: TransparentTabSlideViewController {
         return ContentViewController()
     }
     
+    @available(iOS 11.0, *)
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        reloadHeader()
+        slideScrollView.mj_header.ignoredScrollViewContentInsetTop = -view.safeAreaInsets.top
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(moreAction))
+        let refreshHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshAction))!
+        refreshHeader.lastUpdatedTimeLabel.isHidden = true
+        refreshHeader.arrowView.image = nil
+        refreshHeader.labelLeftInset = 0
+        refreshHeader.activityIndicatorViewStyle = .white
+        refreshHeader.setTitle("", for: .idle)
+        refreshHeader.setTitle("", for: .noMoreData)
+        refreshHeader.setTitle("", for: .pulling)
+        refreshHeader.setTitle("", for: .refreshing)
+        refreshHeader.setTitle("", for: .willRefresh)
+        slideScrollView.mj_header = refreshHeader
         let hud = MBProgressHUD.showAdded(to: view, animated: true)
-        DispatchQueue.global().asyncAfter(deadline: .now()+1.2) {
+        DispatchQueue.global().asyncAfter(deadline: .now()+Double.random(in: 0..<3)) {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 if let language = DataManager.shared.language(by: self.id) {
@@ -105,10 +122,30 @@ class LanguageCenterViewController: TransparentTabSlideViewController {
         }
     }
     
-    @available(iOS 11.0, *)
-    override func viewSafeAreaInsetsDidChange() {
-        super.viewSafeAreaInsetsDidChange()
-        reloadHeader()
+    @objc private func refreshAction() {
+        guard let contentViewController = currentSegementSlideContentViewController as? ContentViewController else {
+            slideScrollView.mj_header.endRefreshing()
+            return
+        }
+        contentViewController.refresh({ [weak self] in
+            guard let self = self else { return }
+            self.slideScrollView.mj_header.endRefreshing()
+        })
+    }
+    
+    @objc private func moreAction() {
+        let viewController: UIViewController
+        switch Int.random(in: 0..<3) {
+        case 0:
+            viewController = HomeViewController()
+        case 1:
+            viewController = ExploreViewController()
+        case 2:
+            viewController = MineViewController()
+        default:
+            viewController = HomeViewController()
+        }
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -122,25 +159,6 @@ class LanguageCenterViewController: TransparentTabSlideViewController {
         if scrollView.contentOffset.y <= limitContentOffsetY {
             scrollView.contentOffset.y = limitContentOffsetY
         }
-        updateNavigationBarStyle(scrollView)
-    }
-    
-    private func updateNavigationBarStyle(_ scrollView: UIScrollView) {
-        guard headerStickyHeight != 0 else { return }
-        if scrollView.contentOffset.y >= headerStickyHeight {
-            slideSwitcherView.layer.applySketchShadow(color: .black, alpha: 0.03, x: 0, y: 2.5, blur: 5)
-            slideSwitcherView.layer.add(generateFadeAnimation(), forKey: "reloadSwitcherView")
-        } else {
-            slideSwitcherView.layer.applySketchShadow(color: .clear, alpha: 0, x: 0, y: 0, blur: 0)
-            slideSwitcherView.layer.add(generateFadeAnimation(), forKey: "reloadSwitcherView")
-        }
-    }
-    
-    private func generateFadeAnimation() -> CATransition {
-        let fadeTextAnimation = CATransition()
-        fadeTextAnimation.duration = 0.25
-        fadeTextAnimation.type = .fade
-        return fadeTextAnimation
     }
     
 }

@@ -56,4 +56,8 @@ class DataManager {
         return languages.first(where: { $0.id == id })
     }
     
+    var randomLanguages: [Language] {
+        return Array(languages.shuffled()[0..<10])
+    }
+    
 }

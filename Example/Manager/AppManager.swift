@@ -24,7 +24,7 @@ class AppManager {
     func setup() {
         let navigationBar = UINavigationBar.appearance()
         navigationBar.isTranslucent = false
-        let backImage = UIImage(named: "top_back")
+        let backImage = UIImage(named: "back")
         navigationBar.backIndicatorImage = backImage
         navigationBar.backIndicatorTransitionMaskImage = backImage
         navigationBar.tintColor = UIColor(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1.0)
@@ -35,7 +35,7 @@ class AppManager {
         
         UITabBar.appearance().isTranslucent = false
         UITabBar.appearance().barTintColor = .white
-        let footShadowImage = UIImage(named: "foot_shadow")
+        let footShadowImage = UIImage(named: "shadow")
         UITabBar.appearance().shadowImage = footShadowImage
         UITabBar.appearance().backgroundImage = UIImage()
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(red: 151/255.0, green: 151/255.0, blue: 151/255.0, alpha: 1.0), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10)], for: .normal)
