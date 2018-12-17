@@ -77,6 +77,42 @@ open class SegementSlideViewController: UIViewController {
         return .none
     }
     
+    open var horizontalMarginInSwitcher: CGFloat {
+        return 16
+    }
+    
+    open var horizontalSpaceInSwitcher: CGFloat {
+        return 22
+    }
+    
+    open var normalTitleFontInSwitcher: UIFont {
+        return UIFont.systemFont(ofSize: 15)
+    }
+    
+    open var selectedTitleFontInSwitcher: UIFont {
+        return UIFont.systemFont(ofSize: 15, weight: .medium)
+    }
+    
+    open var normalTitleColorInSwitcher: UIColor {
+        return UIColor.gray
+    }
+    
+    open var selectedTitleColorInSwitcher: UIColor {
+        return UIColor.darkGray
+    }
+    
+    open var indicatorWidthInSwitcher: CGFloat {
+        return 30
+    }
+    
+    open var indicatorHeightInSwitcher: CGFloat {
+        return 2
+    }
+    
+    open var indicatorColorInSwitcher: UIColor {
+        return UIColor.darkGray
+    }
+    
     open func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
         assert(false, "must override this function")
         return nil
@@ -204,7 +240,7 @@ extension SegementSlideViewController {
             canParentViewScroll = true
             canChildViewScroll = false
         case .child:
-            canParentViewScroll = false
+            canParentViewScroll = true
             canChildViewScroll = true
         }
     }
@@ -216,6 +252,15 @@ extension SegementSlideViewController {
     
     private func setupSwitcher() {
         segementSlideSwitcherView.type = switcherType
+        segementSlideSwitcherView.horizontalMargin = horizontalMarginInSwitcher
+        segementSlideSwitcherView.horizontalSpace = horizontalSpaceInSwitcher
+        segementSlideSwitcherView.normalTitleFont = normalTitleFontInSwitcher
+        segementSlideSwitcherView.selectedTitleFont = selectedTitleFontInSwitcher
+        segementSlideSwitcherView.normalTitleColor = normalTitleColorInSwitcher
+        segementSlideSwitcherView.selectedTitleColor = selectedTitleColorInSwitcher
+        segementSlideSwitcherView.indicatorWidth = indicatorWidthInSwitcher
+        segementSlideSwitcherView.indicatorHeight = indicatorHeightInSwitcher
+        segementSlideSwitcherView.indicatorColor = indicatorColorInSwitcher
     }
     
 }

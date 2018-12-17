@@ -20,7 +20,6 @@ private var badgeKey: Void?
 
 internal extension UIView {
     
-    /// 为当前视图添加 Badge
     internal var badge: Badge {
         get {
             let badge: Badge
@@ -38,9 +37,6 @@ internal extension UIView {
 
 internal final class Badge {
     
-    //MARK: public api
-    
-    /// Badge 支持的类型
     internal var type: BadgeType = .none {
         didSet {
             if case .count(let count) = type {
@@ -57,16 +53,15 @@ internal final class Badge {
         }
     }
     
-    /// 以『Badge的中心位置』相对于『父视图的中心位置』位移
-    /// x为正数表示向右边移动
-    /// y为正数表示向下边移动
+    /// Badge's center position relative to the parent view's center position displacement
+    /// A positive x means moving to the right
+    /// A positive y means moving to the bottom
     internal var offset: CGPoint = .zero {
         didSet {
             remakeConstraints()
         }
     }
     
-    /// 只有 type 为 .count 时生效，该值为显示区域的 fontSize
     internal var fontSize: CGFloat = 13 {
         didSet {
             if case .count = type {
@@ -75,14 +70,13 @@ internal final class Badge {
         }
     }
     
-    /// Badge 的高度，Badge 的 cornerRadius 受该值影响，为该值一半
+    /// Badge's height, Badge's cornerRadius is half of the value
     internal var height: CGFloat = 9 {
         didSet {
             updateHeight()
         }
     }
     
-    //MARK: private
     private let badgeView: BadgeView
     
     private var centerXConstraint: NSLayoutConstraint?
@@ -106,15 +100,11 @@ internal final class Badge {
         guard let _ = badgeView.superview else {
             return
         }
-        if case .none = type {
-            updateWidthConstraint()
-        } else {
-            updateCenterXConstraint()
-            updateCenterYConstraint()
-            updateHeightConstraint()
-            updateWidthConstraint()
-            updateCornerRadius()
-        }
+        updateCenterXConstraint()
+        updateCenterYConstraint()
+        updateHeightConstraint()
+        updateWidthConstraint()
+        updateCornerRadius()
     }
     
     private func updateFont() {

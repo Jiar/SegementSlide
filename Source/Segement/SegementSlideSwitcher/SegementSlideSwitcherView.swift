@@ -31,12 +31,7 @@ internal class SegementSlideSwitcherView: UIView {
     private var indicatorViewHeightConstraint: NSLayoutConstraint!
     private var titleButtons: [UIButton] = []
     
-    internal var type: SwitcherType = .tab {
-        didSet {
-            guard oldValue != type else { return }
-            layoutTitleButtons()
-        }
-    }
+    internal var type: SwitcherType = .tab
     internal var horizontalMargin: CGFloat = 16
     internal var horizontalSpace: CGFloat = 22
     internal var normalTitleFont = UIFont.systemFont(ofSize: 15)
@@ -140,10 +135,10 @@ internal class SegementSlideSwitcherView: UIView {
             case .count(let count):
                 titleButton.badge.height = 15
                 titleButton.badge.fontSize = 10
-                titleButton.badge.offset = CGPoint(x: x/2.0 + titleButton.badge.height/2+1, y: -y/2.0 + 1)
+                titleButton.badge.offset = CGPoint(x: x/2 + titleButton.badge.height/2+1, y: -y/2+1)
             case .point:
                 titleButton.badge.height = 9
-                titleButton.badge.offset = CGPoint(x: x/2.0 + titleButton.badge.height/2+1, y: -y/2.0 + 1)
+                titleButton.badge.offset = CGPoint(x: x/2 + titleButton.badge.height/2+1, y: -y/2+1)
             case .none:
                 break
             }
