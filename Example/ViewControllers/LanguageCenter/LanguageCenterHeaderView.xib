@@ -15,13 +15,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="264"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_programming.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="dkM-jV-dkE">
-                    <rect key="frame" x="0.0" y="-209" width="375" height="473"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_programming.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="dkM-jV-dkE">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="264"/>
                 </imageView>
                 <visualEffectView opaque="NO" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A6J-yA-kZE">
-                    <rect key="frame" x="0.0" y="-209" width="375" height="473"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="264"/>
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rfp-XG-CW0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="473"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="264"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
@@ -57,6 +57,7 @@
                 <constraint firstItem="A6J-yA-kZE" firstAttribute="leading" secondItem="dkM-jV-dkE" secondAttribute="leading" id="7ZZ-WH-YfX"/>
                 <constraint firstItem="8Pc-tZ-AHj" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="B3I-jv-sZW"/>
                 <constraint firstItem="A6J-yA-kZE" firstAttribute="bottom" secondItem="dkM-jV-dkE" secondAttribute="bottom" id="EkI-aq-vk6"/>
+                <constraint firstItem="dkM-jV-dkE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="GNC-kN-cB3"/>
                 <constraint firstAttribute="bottom" secondItem="FGT-VT-1Sh" secondAttribute="bottom" constant="18" id="U18-Xb-wOt"/>
                 <constraint firstItem="A6J-yA-kZE" firstAttribute="top" secondItem="dkM-jV-dkE" secondAttribute="top" id="XFX-0x-Hhd"/>
                 <constraint firstItem="FGT-VT-1Sh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="YYt-ZH-cxk"/>
@@ -70,6 +71,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="bgImageTopConstraint" destination="GNC-kN-cB3" id="FZm-zK-B3B"/>
                 <outlet property="bgImageView" destination="dkM-jV-dkE" id="xPL-lB-1hg"/>
                 <outlet property="iconImageView" destination="0Ww-Rc-xm8" id="aM9-Wa-2Ms"/>
                 <outlet property="iconTopConstraint" destination="k89-JQ-dF2" id="zOE-Up-t9Y"/>

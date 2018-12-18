@@ -16,6 +16,7 @@ class LanguageCenterHeaderView: UIView {
     @IBOutlet private weak var titleTextLabel: UILabel!
     @IBOutlet private weak var summaryTextLabel: UILabel!
     @IBOutlet private weak var iconTopConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var bgImageTopConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,6 +40,10 @@ class LanguageCenterHeaderView: UIView {
         iconImageView.image = language.icon
         titleTextLabel.text = language.title
         summaryTextLabel.text = language.summary
+    }
+    
+    func setBgImageTopConstraint(_ constant: CGFloat) {
+        bgImageTopConstraint.constant = constant
     }
 
 }

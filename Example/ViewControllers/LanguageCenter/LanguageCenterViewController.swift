@@ -162,6 +162,7 @@ class LanguageCenterViewController: ShadowTransparentTabSlideViewController {
         if scrollView.contentOffset.y <= limitContentOffsetY {
             scrollView.contentOffset.y = limitContentOffsetY
         }
+        centerHeaderView.setBgImageTopConstraint(scrollView.contentOffset.y)
     }
     
 }
