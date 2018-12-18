@@ -65,7 +65,7 @@ open class SegementSlideViewController: UIViewController {
     }
     
     open var switcherType: SwitcherType {
-        return .tab
+        return .segement
     }
     
     open var switcherHeight: CGFloat {
@@ -132,7 +132,6 @@ open class SegementSlideViewController: UIViewController {
     
     public func scrollToSlide(at index: Int, animated: Bool) {
         segementSlideSwitcherView.selectSwitcher(at: index, animated: animated)
-        segementSlideContentView.scrollToSlide(at: index, animated: animated)
     }
     
     public func contentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
@@ -149,8 +148,8 @@ open class SegementSlideViewController: UIViewController {
         setupBounces()
         setupHeader()
         setupSwitcher()
-        segementSlideSwitcherView.reloadData()
         segementSlideContentView.reloadData()
+        segementSlideSwitcherView.reloadData()
         collectionView.reloadData()
     }
     

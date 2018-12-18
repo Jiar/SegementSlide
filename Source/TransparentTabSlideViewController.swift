@@ -44,6 +44,10 @@ open class TransparentTabSlideViewController: SegementSlideViewController {
         return view.bounds.height-statusBarHeight-navigationBarHeight-switcherHeight
     }
     
+    open override var switcherType: SwitcherType {
+        return .tab
+    }
+    
     open var isTranslucents: DisplayEmbed<Bool> {
         return (display: true, embed: false)
     }
