@@ -32,7 +32,10 @@ class LanguageCenterViewController: ShadowTransparentTabSlideViewController {
     }
     
     override var attributedTexts: DisplayEmbed<NSAttributedString?> {
-        return (display: nil, embed: NSAttributedString(string: "Mine", attributes: UINavigationBar.appearance().titleTextAttributes))
+        guard let language = language else {
+            return (display: nil, embed: nil)
+        }
+        return (display: nil, embed: NSAttributedString(string: language.title, attributes: UINavigationBar.appearance().titleTextAttributes))
     }
     
     override var bouncesType: BouncesType {
