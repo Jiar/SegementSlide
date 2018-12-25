@@ -368,6 +368,14 @@ extension SegementSlideViewController: UICollectionViewDataSource {
 
 extension SegementSlideViewController: UICollectionViewDelegateFlowLayout {
     
+    public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        guard let contentViewController = currentSegementSlideContentViewController else {
+            return true
+        }
+        contentViewController.scrollView.contentOffset.y = 0
+        return true
+    }
+    
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let section = indexPath.section
         switch section {
