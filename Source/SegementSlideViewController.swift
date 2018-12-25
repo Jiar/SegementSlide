@@ -25,6 +25,7 @@ open class SegementSlideViewController: UIViewController {
     private var innerBouncesType: BouncesType = .parent
     private var canParentViewScroll: Bool = true
     private var canChildViewScroll: Bool = false
+    private var lastTranslationY: CGFloat = 0
     
     public var slideScrollView: UIScrollView {
         return collectionView
@@ -414,6 +415,10 @@ extension SegementSlideViewController {
     private func parentScrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollViewDidScroll(scrollView, isParent: true)
         guard headerStickyHeight != 0 else { return }
+        let translationY = -scrollView.panGestureRecognizer.translation(in: scrollView).y
+        defer {
+            lastTranslationY = translationY
+        }
         switch innerBouncesType {
         case .parent:
             if !canParentViewScroll {
@@ -436,7 +441,17 @@ extension SegementSlideViewController {
                 collectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x, y: 0)
                 canChildViewScroll = true
             } else {
-                canChildViewScroll = false
+                guard let childScrollView = currentSegementSlideContentViewController?.scrollView else { return }
+                if childScrollView.contentOffset.y < 0 {
+                    if translationY.keep3 > lastTranslationY.keep3 {
+                        collectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x, y: 0)
+                        canChildViewScroll = true
+                    } else {
+                        canChildViewScroll = false
+                    }
+                } else {
+                    canChildViewScroll = false
+                }
             }
         }
     }
