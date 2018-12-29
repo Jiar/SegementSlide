@@ -8,6 +8,7 @@
 
 import UIKit
 import SegementSlide
+import MBProgressHUD
 import MJRefresh
 
 class ContentViewController: BaseTableViewController, SegementSlideContentScrollViewDelegate {
@@ -43,6 +44,8 @@ class ContentViewController: BaseTableViewController, SegementSlideContentScroll
         tableView.mj_header = refreshHeader
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreAction))
         tableView.mj_footer.isHidden = true
+        let hud = MBProgressHUD.showAdded(to: view, animated: true)
+        hud.offset = CGPoint.init(x: 0, y: -view.bounds.height/5)
         refresh()
     }
     
@@ -64,6 +67,7 @@ class ContentViewController: BaseTableViewController, SegementSlideContentScroll
                 self.tableView.mj_header.endRefreshing()
                 self.tableView.reloadData()
                 self.tableView.mj_footer.isHidden = false
+                MBProgressHUD.hide(for: self.view, animated: true)
                 self.refreshHandler?()
             }
         }
