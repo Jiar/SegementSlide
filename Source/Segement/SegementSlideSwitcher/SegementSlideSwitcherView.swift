@@ -152,7 +152,6 @@ internal class SegementSlideSwitcherView: UIView {
         titleButton.setTitleColor(normalTitleColor, for: .normal)
         titleButton.titleLabel?.font = normalTitleFont
         selectedIndex = index
-        layoutTitleButtons()
         updateSelectedButton(animated: animated)
         delegate?.segementSwitcherView(self, didSelectAtIndex: index)
     }
@@ -168,14 +167,16 @@ extension SegementSlideSwitcherView {
             return
         }
         var offsetX = horizontalMargin
-        for (index, titleButton) in titleButtons.enumerated() {
+        for titleButton in titleButtons {
             let buttonWidth: CGFloat
             switch type {
             case .tab:
                 buttonWidth = (bounds.width-horizontalMargin*2)/CGFloat(titleButtons.count)
             case .segement:
                 let title = titleButton.title(for: .normal) ?? ""
-                buttonWidth = title.boundingWidth(with: index == selectedIndex ? selectedTitleFont : normalTitleFont)
+                let normalButtonWidth = title.boundingWidth(with: normalTitleFont)
+                let selectedButtonWidth = title.boundingWidth(with: selectedTitleFont)
+                buttonWidth = selectedButtonWidth > normalButtonWidth ? selectedButtonWidth : normalButtonWidth
             }
             titleButton.snp.remakeConstraints { make in
                 make.leading.equalTo(scrollView.snp.leading).offset(offsetX)
