@@ -45,8 +45,8 @@ class ContentViewController: BaseTableViewController, SegementSlideContentScroll
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreAction))
         tableView.mj_footer.isHidden = true
         let hud = MBProgressHUD.showAdded(to: view, animated: true)
-        hud.offset = CGPoint.init(x: 0, y: -view.bounds.height/5)
-        refresh()
+        hud.offset = CGPoint(x: 0, y: -view.bounds.height/5)
+        tableView.mj_header.executeRefreshingCallback()
     }
     
     private var refreshHandler: (() -> Void)? = nil
