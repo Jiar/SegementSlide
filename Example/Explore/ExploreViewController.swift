@@ -46,24 +46,16 @@ class ExploreViewController: ShadowSegementSlideViewController {
     }
     
     override func showBadgeInSwitcher(at index: Int) -> BadgeType {
-        switch index {
-        case 0:
-            return .none
-        case 1:
-            return .none
-        case 2:
-            return .none
-        case 3:
-            return .point
-        case 4:
-            return .count(6)
-        default:
-            return .none
-        }
+        return BadgeType.random
     }
     
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
-        return ContentViewController()
+        let viewController = ContentViewController()
+        viewController.refreshHandler = { [weak self] in
+            guard let self = self else { return }
+            self.reloadBadgeInSwitcher()
+        }
+        return viewController
     }
     
     override func viewDidLoad() {

@@ -70,19 +70,20 @@ class LanguageCenterViewController: ShadowTransparentTabSlideViewController {
         guard let _ = language else {
             return .none
         }
-        switch index {
-        case 0:
-            return .count(8)
-        default:
-            return .none
-        }
+        return BadgeType.random
     }
     
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
         guard let _ = language else {
             return nil
         }
-        return ContentViewController()
+        let viewController = ContentViewController()
+        viewController.refreshHandler = { [weak self] in
+            guard let self = self else { return }
+            self.slideScrollView.mj_header.endRefreshing()
+            self.reloadBadgeInSwitcher()
+        }
+        return viewController
     }
     
     @available(iOS 11.0, *)
@@ -130,10 +131,7 @@ class LanguageCenterViewController: ShadowTransparentTabSlideViewController {
             slideScrollView.mj_header.endRefreshing()
             return
         }
-        contentViewController.refresh({ [weak self] in
-            guard let self = self else { return }
-            self.slideScrollView.mj_header.endRefreshing()
-        })
+        contentViewController.refresh()
     }
     
     @objc private func moreAction() {

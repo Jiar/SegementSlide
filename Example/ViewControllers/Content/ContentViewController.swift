@@ -18,6 +18,7 @@ class ContentViewController: BaseTableViewController, SegementSlideContentScroll
     }
     
     private var languages: [Language] = []
+    internal var refreshHandler: (() -> Void)? = nil
 
     @available(iOS 11.0, *)
     override func viewSafeAreaInsetsDidChange() {
@@ -49,9 +50,7 @@ class ContentViewController: BaseTableViewController, SegementSlideContentScroll
         tableView.mj_header.executeRefreshingCallback()
     }
     
-    private var refreshHandler: (() -> Void)? = nil
-    internal func refresh(_ refreshHandler: (() -> Void)? = nil) {
-        self.refreshHandler = refreshHandler
+    internal func refresh() {
         tableView.mj_header.beginRefreshing()
     }
     
