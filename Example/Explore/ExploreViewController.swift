@@ -11,6 +11,8 @@ import SegementSlide
 
 class ExploreViewController: ShadowSegementSlideViewController {
 
+    private var badges: [Int: BadgeType] = [:]
+    
     init() {
         super.init(nibName: nil, bundle: nil)
         title = "Explore"
@@ -46,13 +48,20 @@ class ExploreViewController: ShadowSegementSlideViewController {
     }
     
     override func showBadgeInSwitcher(at index: Int) -> BadgeType {
-        return BadgeType.random
+        if let badge = badges[index] {
+            return badge
+        } else {
+            let badge = BadgeType.random
+            badges[index] = badge
+            return badge
+        }
     }
     
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
         let viewController = ContentViewController()
         viewController.refreshHandler = { [weak self] in
             guard let self = self else { return }
+            self.badges[index] = BadgeType.random
             self.reloadBadgeInSwitcher()
         }
         return viewController

@@ -11,6 +11,8 @@ import SegementSlide
 
 class MineViewController: ShadowTransparentTabSlideViewController {
 
+    private var badges: [Int: BadgeType] = [:]
+    
     init() {
         super.init(nibName: nil, bundle: nil)
         tabBarItem = UITabBarItem(title: "Mine", image: UIImage(named: "tab_mine")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "tab_mine_sel")?.withRenderingMode(.alwaysOriginal))
@@ -53,13 +55,20 @@ class MineViewController: ShadowTransparentTabSlideViewController {
     }
     
     override func showBadgeInSwitcher(at index: Int) -> BadgeType {
-        return BadgeType.random
+        if let badge = badges[index] {
+            return badge
+        } else {
+            let badge = BadgeType.random
+            badges[index] = badge
+            return badge
+        }
     }
     
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
         let viewController = ContentViewController()
         viewController.refreshHandler = { [weak self] in
             guard let self = self else { return }
+            self.badges[index] = BadgeType.random
             self.reloadBadgeInSwitcher()
         }
         return viewController

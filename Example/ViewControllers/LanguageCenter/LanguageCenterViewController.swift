@@ -14,6 +14,7 @@ import MJRefresh
 class LanguageCenterViewController: ShadowTransparentTabSlideViewController {
     
     private let id: Int
+    private var badges: [Int: BadgeType] = [:]
     private var language: Language?
     private let centerHeaderView: LanguageCenterHeaderView
     private var limitContentOffsetY: CGFloat {
@@ -67,10 +68,13 @@ class LanguageCenterViewController: ShadowTransparentTabSlideViewController {
     }
     
     override func showBadgeInSwitcher(at index: Int) -> BadgeType {
-        guard let _ = language else {
-            return .none
+        if let badge = badges[index] {
+            return badge
+        } else {
+            let badge = BadgeType.random
+            badges[index] = badge
+            return badge
         }
-        return BadgeType.random
     }
     
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
@@ -81,6 +85,7 @@ class LanguageCenterViewController: ShadowTransparentTabSlideViewController {
         viewController.refreshHandler = { [weak self] in
             guard let self = self else { return }
             self.slideScrollView.mj_header.endRefreshing()
+            self.badges[index] = BadgeType.random
             self.reloadBadgeInSwitcher()
         }
         return viewController
