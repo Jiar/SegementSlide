@@ -39,7 +39,10 @@ internal final class Badge {
     
     internal var type: BadgeType = .none {
         didSet {
-            if case .count(let count) = type {
+            switch type {
+            case .none, .point:
+                badgeView.text = nil
+            case .count(let count):
                 badgeView.isHidden = count == 0
                 let string: String
                 if count > 99 {
