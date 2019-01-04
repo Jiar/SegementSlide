@@ -70,6 +70,8 @@ class HomeViewController: ShadowSegementSlideViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        reloadData()
+        scrollToSlide(at: 0, animated: false)
     }
 
 }

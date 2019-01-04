@@ -19,12 +19,6 @@ class ContentViewController: BaseTableViewController, SegementSlideContentScroll
     
     private var languages: [Language] = []
     internal var refreshHandler: (() -> Void)? = nil
-
-    @available(iOS 11.0, *)
-    override func viewSafeAreaInsetsDidChange() {
-        super.viewSafeAreaInsetsDidChange()
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: view.safeAreaInsets.bottom, right: 0)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,8 +39,10 @@ class ContentViewController: BaseTableViewController, SegementSlideContentScroll
         tableView.mj_header = refreshHeader
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreAction))
         tableView.mj_footer.isHidden = true
-        let hud = MBProgressHUD.showAdded(to: view, animated: true)
-        hud.offset = CGPoint(x: 0, y: -view.bounds.height/5)
+        DispatchQueue.main.async {
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.offset = CGPoint(x: 0, y: -self.view.bounds.height/5)
+        }
         tableView.mj_header.executeRefreshingCallback()
     }
     

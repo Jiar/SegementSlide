@@ -91,11 +91,15 @@ class LanguageCenterViewController: ShadowTransparentTabSlideViewController {
         return viewController
     }
     
-    @available(iOS 11.0, *)
-    override func viewSafeAreaInsetsDidChange() {
-        super.viewSafeAreaInsetsDidChange()
-        reloadHeader()
-        slideScrollView.mj_header.ignoredScrollViewContentInsetTop = -view.safeAreaInsets.top
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let topLayoutLength: CGFloat
+        if #available(iOS 11.0, *) {
+            topLayoutLength = view.safeAreaInsets.top
+        } else {
+            topLayoutLength = topLayoutGuide.length
+        }
+        slideScrollView.mj_header.ignoredScrollViewContentInsetTop = -topLayoutLength
     }
     
     override func viewDidLoad() {

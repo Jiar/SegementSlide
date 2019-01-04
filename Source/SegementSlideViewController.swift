@@ -44,7 +44,7 @@ open class SegementSlideViewController: UIViewController {
         return view.bounds.height-switcherHeight
     }
     public var currentIndex: Int? {
-        return segementSlideContentView.selectedIndex
+        return segementSlideSwitcherView.selectedIndex
     }
     public var currentSegementSlideContentViewController: SegementSlideContentScrollViewDelegate? {
         guard let currentIndex = currentIndex else { return nil }
@@ -142,7 +142,6 @@ open class SegementSlideViewController: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        reloadData()
     }
     
     public func reloadData() {
@@ -166,10 +165,6 @@ open class SegementSlideViewController: UIViewController {
     
     public func reloadBadgeInSwitcher() {
         segementSlideSwitcherView.reloadBadges()
-    }
-    
-    public func reloadContent() {
-        segementSlideContentView.reloadContents()
     }
     
     deinit {
@@ -276,9 +271,10 @@ extension SegementSlideViewController: SegementSlideSwitcherViewDelegate {
         return titlesInSwitcher()
     }
     
-    internal func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideSwitcherView, didSelectAtIndex index: Int) {
-        guard segementSlideContentView.selectedIndex != index else { return }
-        segementSlideContentView.scrollToSlide(at: index, animated: true)
+    internal func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideSwitcherView, didSelectAtIndex index: Int, animated: Bool) {
+        if segementSlideContentView.selectedIndex != index {
+            segementSlideContentView.scrollToSlide(at: index, animated: animated)
+        }
     }
     
     internal func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideSwitcherView, showBadgeAtIndex index: Int) -> BadgeType {
@@ -297,9 +293,9 @@ extension SegementSlideViewController: SegementSlideContentDelegate {
         return segementSlideContentViewController(at: index)
     }
     
-    internal func segementSlideContentView(_ segementSlideContentView: SegementSlideContentView, didSelectAtIndex index: Int) {
+    internal func segementSlideContentView(_ segementSlideContentView: SegementSlideContentView, didSelectAtIndex index: Int, animated: Bool) {
         if segementSlideSwitcherView.selectedIndex != index {
-            segementSlideSwitcherView.selectSwitcher(at: index, animated: true)
+            segementSlideSwitcherView.selectSwitcher(at: index, animated: animated)
         }
         childKeyValueObservation?.invalidate()
         guard let subViewController = segementSlideContentView.segementSlideContentViewController(at: index) else { return }

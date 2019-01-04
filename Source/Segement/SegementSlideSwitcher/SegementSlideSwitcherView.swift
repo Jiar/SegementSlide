@@ -17,7 +17,7 @@ public enum SwitcherType {
 internal protocol SegementSlideSwitcherViewDelegate: class {
     func titlesInSegementSlideSwitcherView() -> [String]
     
-    func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideSwitcherView, didSelectAtIndex index: Int)
+    func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideSwitcherView, didSelectAtIndex index: Int, animated: Bool)
     func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideSwitcherView, showBadgeAtIndex index: Int) -> BadgeType
 }
 
@@ -42,7 +42,8 @@ internal class SegementSlideSwitcherView: UIView {
     internal var indicatorHeight: CGFloat = 2
     internal var indicatorColor = UIColor.darkGray
     
-    internal private(set) var selectedIndex: Int = 0
+    private var initSelectedIndex: Int?
+    internal private(set) var selectedIndex: Int?
     internal weak var delegate: SegementSlideSwitcherViewDelegate?
     
     internal override init(frame: CGRect) {
@@ -83,8 +84,11 @@ internal class SegementSlideSwitcherView: UIView {
     internal override func layoutSubviews() {
         super.layoutSubviews()
         layoutTitleButtons()
-        updateSelectedButton(animated: false)
         reloadBadges()
+        if let initSelectedIndex = initSelectedIndex {
+            self.initSelectedIndex = nil
+            updateSelectedButton(at: initSelectedIndex, animated: false)
+        }
     }
     
     internal func reloadData() {
@@ -93,7 +97,7 @@ internal class SegementSlideSwitcherView: UIView {
         }
         titleButtons.removeAll()
         scrollView.isScrollEnabled = type == .segement
-        let titles = delegate?.titlesInSegementSlideSwitcherView() ?? []
+        guard let titles = delegate?.titlesInSegementSlideSwitcherView() else { return }
         guard !titles.isEmpty else { return }
         for (index, title) in titles.enumerated() {
             let button = UIButton(type: .custom)
@@ -110,9 +114,9 @@ internal class SegementSlideSwitcherView: UIView {
         guard !titleButtons.isEmpty else { return }
         indicatorView.backgroundColor = indicatorColor
         layoutTitleButtons()
-        updateSelectedButton(animated: false)
         reloadBadges()
-        delegate?.segementSwitcherView(self, didSelectAtIndex: selectedIndex)
+        guard let selectedIndex = selectedIndex else { return }
+        updateSelectedButton(at: selectedIndex, animated: false)
     }
     
     internal func reloadBadges() {
@@ -135,10 +139,10 @@ internal class SegementSlideSwitcherView: UIView {
             case .count:
                 titleButton.badge.height = 15
                 titleButton.badge.fontSize = 10
-                titleButton.badge.offset = CGPoint(x: x/2 + titleButton.badge.height/2+1, y: -y/2+1)
+                titleButton.badge.offset = CGPoint(x: x/2+titleButton.badge.height/2+1, y: -y/2+1)
             case .point:
                 titleButton.badge.height = 9
-                titleButton.badge.offset = CGPoint(x: x/2 + titleButton.badge.height/2+1, y: -y/2+1)
+                titleButton.badge.offset = CGPoint(x: x/2+titleButton.badge.height/2+1, y: -y/2+1)
             case .none:
                 break
             }
@@ -146,14 +150,7 @@ internal class SegementSlideSwitcherView: UIView {
     }
     
     internal func selectSwitcher(at index: Int, animated: Bool) {
-        guard index < titleButtons.count else { return }
-        guard index != selectedIndex else { return }
-        let titleButton = titleButtons[selectedIndex]
-        titleButton.setTitleColor(normalTitleColor, for: .normal)
-        titleButton.titleLabel?.font = normalTitleFont
-        selectedIndex = index
-        updateSelectedButton(animated: animated)
-        delegate?.segementSwitcherView(self, didSelectAtIndex: index)
+        updateSelectedButton(at: index, animated: animated)
     }
     
 }
@@ -200,13 +197,22 @@ extension SegementSlideSwitcherView {
         }
     }
     
-    private func updateSelectedButton(animated: Bool) {
-        guard scrollView.frame != .zero else { return }
-        guard !titleButtons.isEmpty else { return }
-        let titleButton = titleButtons[selectedIndex]
+    private func updateSelectedButton(at index: Int, animated: Bool) {
+        guard scrollView.frame != .zero else {
+            initSelectedIndex = index
+            return
+        }
+        guard titleButtons.count != 0 else { return }
+        if let selectedIndex = selectedIndex, selectedIndex >= 0, selectedIndex < titleButtons.count {
+            let titleButton = titleButtons[selectedIndex]
+            titleButton.setTitleColor(normalTitleColor, for: .normal)
+            titleButton.titleLabel?.font = normalTitleFont
+        }
+        guard index >= 0, index < titleButtons.count else { return }
+        let titleButton = titleButtons[index]
         titleButton.setTitleColor(selectedTitleColor, for: .normal)
         titleButton.titleLabel?.font = selectedTitleFont
-        if animated {
+        if animated, indicatorView.frame != .zero {
             scrollView.layoutIfNeeded()
             UIView.animate(withDuration: 0.25) {
                 self.indicatorViewLeadingConstraint.constant = titleButton.frame.origin.x+(titleButton.bounds.width-self.indicatorWidth)/2
@@ -222,14 +228,18 @@ extension SegementSlideSwitcherView {
             indicatorViewHeightConstraint.constant = indicatorHeight
             scrollView.layoutIfNeeded()
         }
-        guard case .segement = type else { return }
-        var offsetX = titleButton.frame.origin.x-(scrollView.bounds.width-titleButton.bounds.width)/2
-        if offsetX < 0 {
-            offsetX = 0
-        } else if (offsetX+scrollView.bounds.width) > scrollView.contentSize.width {
-            offsetX = scrollView.contentSize.width-scrollView.bounds.width
+        if case .segement = type {
+            var offsetX = titleButton.frame.origin.x-(scrollView.bounds.width-titleButton.bounds.width)/2
+            if offsetX < 0 {
+                offsetX = 0
+            } else if (offsetX+scrollView.bounds.width) > scrollView.contentSize.width {
+                offsetX = scrollView.contentSize.width-scrollView.bounds.width
+            }
+            scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: animated)
         }
-        scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: animated)
+        guard index != selectedIndex else { return }
+        selectedIndex = index
+        delegate?.segementSwitcherView(self, didSelectAtIndex: index, animated: animated)
     }
     
     @objc private func didClickTitleButton(_ button: UIButton) {

@@ -77,6 +77,7 @@ class MineViewController: ShadowTransparentTabSlideViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        reloadData()
         scrollToSlide(at: 1, animated: false)
     }
 
