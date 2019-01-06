@@ -298,8 +298,8 @@ extension SegementSlideViewController: SegementSlideContentDelegate {
             segementSlideSwitcherView.selectSwitcher(at: index, animated: animated)
         }
         childKeyValueObservation?.invalidate()
-        guard let subViewController = segementSlideContentView.segementSlideContentViewController(at: index) else { return }
-        let keyValueObservation = subViewController.scrollView.observe(\.contentOffset, options: [.new, .old], changeHandler: { [weak self] (scrollView, change) in
+        guard let childViewController = segementSlideContentView.segementSlideContentViewController(at: index) else { return }
+        let keyValueObservation = childViewController.scrollView.observe(\.contentOffset, options: [.new, .old], changeHandler: { [weak self] (scrollView, change) in
             guard let self = self else { return }
             guard change.newValue != change.oldValue else { return }
             self.childScrollViewDidScroll(scrollView)

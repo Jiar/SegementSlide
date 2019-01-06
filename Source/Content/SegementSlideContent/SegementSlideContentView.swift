@@ -66,11 +66,11 @@ internal class SegementSlideContentView: UIView {
     }
     
     internal func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
-        if let subViewController = viewControllers[index] {
-            return subViewController
-        } else if let subViewController = delegate?.segementSlideContentScrollView(at: index) {
-            viewControllers[index] = subViewController
-            return subViewController
+        if let childViewController = viewControllers[index] {
+            return childViewController
+        } else if let childViewController = delegate?.segementSlideContentScrollView(at: index) {
+            viewControllers[index] = childViewController
+            return childViewController
         }
         return nil
     }
@@ -81,11 +81,11 @@ internal class SegementSlideContentView: UIView {
     
     internal func reloadData() {
         for (_, value) in viewControllers {
-            guard let subViewController = value as? UIViewController else {
+            guard let childViewController = value as? UIViewController else {
                 continue
             }
-            subViewController.view.removeFromSuperview()
-            subViewController.removeFromParent()
+            childViewController.view.removeFromSuperview()
+            childViewController.removeFromParent()
         }
         viewControllers.removeAll()
         guard let selectedIndex = selectedIndex else { return }
@@ -120,13 +120,13 @@ extension SegementSlideContentView: UIScrollViewDelegate {
         guard let viewController = viewController,
             let count = delegate?.segementSlideContentScrollViewCount,
             count != 0, index >= 0, index < count,
-            let subViewController = segementSlideContentViewController(at: index) as? UIViewController else {
+            let childViewController = segementSlideContentViewController(at: index) as? UIViewController else {
                 return
         }
-        viewController.addChild(subViewController)
-        scrollView.addSubview(subViewController.view)
+        viewController.addChild(childViewController)
+        scrollView.addSubview(childViewController.view)
         let offsetX = CGFloat(index)*scrollView.bounds.width
-        subViewController.view.snp.remakeConstraints { make in
+        childViewController.view.snp.remakeConstraints { make in
             make.top.equalTo(scrollView.snp.top)
             make.size.equalTo(scrollView.bounds.size)
             make.leading.equalTo(scrollView.snp.leading).offset(offsetX)
