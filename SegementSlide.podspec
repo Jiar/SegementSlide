@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name = 'SegementSlide'
-  s.version = '0.7'
+  s.version = '0.8'
   s.summary = 'SegementSlide'
 
   s.homepage = 'https://github.com/Jiar/SegementSlide'
