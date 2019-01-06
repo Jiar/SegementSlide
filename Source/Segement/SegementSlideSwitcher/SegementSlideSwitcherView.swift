@@ -25,10 +25,6 @@ internal class SegementSlideSwitcherView: UIView {
     
     private let scrollView = UIScrollView()
     private let indicatorView = UIView()
-    private var indicatorViewLeadingConstraint: NSLayoutConstraint!
-    private var indicatorViewTopConstraint: NSLayoutConstraint!
-    private var indicatorViewWidthConstraint: NSLayoutConstraint!
-    private var indicatorViewHeightConstraint: NSLayoutConstraint!
     private var titleButtons: [UIButton] = []
     
     internal var type: SwitcherType = .tab
@@ -68,16 +64,6 @@ internal class SegementSlideSwitcherView: UIView {
         scrollView.addSubview(indicatorView)
         indicatorView.layer.masksToBounds = true
         indicatorView.layer.cornerRadius = indicatorHeight/2
-        indicatorViewLeadingConstraint = indicatorView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 0)
-        indicatorViewTopConstraint = indicatorView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0)
-        indicatorViewWidthConstraint = indicatorView.widthAnchor.constraint(equalToConstant: 0)
-        indicatorViewHeightConstraint = indicatorView.heightAnchor.constraint(equalToConstant: 0)
-        NSLayoutConstraint.activate([
-            indicatorViewLeadingConstraint,
-            indicatorViewTopConstraint,
-            indicatorViewWidthConstraint,
-            indicatorViewHeightConstraint
-        ])
         backgroundColor = .white
     }
     
@@ -175,12 +161,7 @@ extension SegementSlideSwitcherView {
                 let selectedButtonWidth = title.boundingWidth(with: selectedTitleFont)
                 buttonWidth = selectedButtonWidth > normalButtonWidth ? selectedButtonWidth : normalButtonWidth
             }
-            titleButton.snp.remakeConstraints { make in
-                make.leading.equalTo(scrollView.snp.leading).offset(offsetX)
-                make.top.equalTo(scrollView.snp.top)
-                make.width.equalTo(buttonWidth)
-                make.height.equalTo(bounds.height)
-            }
+            titleButton.frame = CGRect(x: offsetX, y: 0, width: buttonWidth, height: scrollView.bounds.height)
             scrollView.layoutIfNeeded()
             switch type {
             case .tab:
@@ -213,20 +194,11 @@ extension SegementSlideSwitcherView {
         titleButton.setTitleColor(selectedTitleColor, for: .normal)
         titleButton.titleLabel?.font = selectedTitleFont
         if animated, indicatorView.frame != .zero {
-            scrollView.layoutIfNeeded()
             UIView.animate(withDuration: 0.25) {
-                self.indicatorViewLeadingConstraint.constant = titleButton.frame.origin.x+(titleButton.bounds.width-self.indicatorWidth)/2
-                self.indicatorViewTopConstraint.constant = self.frame.height-self.indicatorHeight
-                self.indicatorViewWidthConstraint.constant = self.indicatorWidth
-                self.indicatorViewHeightConstraint.constant = self.indicatorHeight
-                self.scrollView.layoutIfNeeded()
+                self.indicatorView.frame = CGRect(x: titleButton.frame.origin.x+(titleButton.bounds.width-self.indicatorWidth)/2, y: self.frame.height-self.indicatorHeight, width: self.indicatorWidth, height: self.indicatorHeight)
             }
         } else {
-            indicatorViewLeadingConstraint.constant = titleButton.frame.origin.x+(titleButton.bounds.width-indicatorWidth)/2
-            indicatorViewTopConstraint.constant = frame.height-indicatorHeight
-            indicatorViewWidthConstraint.constant = indicatorWidth
-            indicatorViewHeightConstraint.constant = indicatorHeight
-            scrollView.layoutIfNeeded()
+            indicatorView.frame = CGRect(x: titleButton.frame.origin.x+(titleButton.bounds.width-indicatorWidth)/2, y: frame.height-indicatorHeight, width: indicatorWidth, height: indicatorHeight)
         }
         if case .segement = type {
             var offsetX = titleButton.frame.origin.x-(scrollView.bounds.width-titleButton.bounds.width)/2
