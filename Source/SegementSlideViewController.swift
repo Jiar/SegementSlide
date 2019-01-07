@@ -30,7 +30,6 @@ open class SegementSlideViewController: UIViewController {
     public var slideScrollView: UIScrollView {
         return segementSlideCollectionView
     }
-    
     public var slideSwitcherView: UIView {
         return segementSlideSwitcherView
     }
@@ -215,7 +214,7 @@ extension SegementSlideViewController {
         }
         if #available(iOS 11.0, *) {
             segementSlideCollectionView.contentInsetAdjustmentBehavior = .never
-        }else {
+        } else {
             automaticallyAdjustsScrollViewInsets = false
         }
         segementSlideCollectionView.backgroundColor = .white
