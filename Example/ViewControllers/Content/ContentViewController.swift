@@ -11,7 +11,7 @@ import SegementSlide
 import MBProgressHUD
 import MJRefresh
 
-class ContentViewController: BaseTableViewController, SegementSlideContentScrollViewDelegate {
+class ContentViewController: UITableViewController, SegementSlideContentScrollViewDelegate {
     
     var scrollView: UIScrollView {
         return tableView
@@ -101,6 +101,12 @@ class ContentViewController: BaseTableViewController, SegementSlideContentScroll
         tableView.deselectRow(at: indexPath, animated: true)
         let language = languages[indexPath.row]
         navigationController?.pushViewController(LanguageCenterViewController(id: language.id), animated: true)
+    }
+    
+    deinit {
+        #if DEBUG
+        print("\(type(of: self)) deinit")
+        #endif
     }
 
 }

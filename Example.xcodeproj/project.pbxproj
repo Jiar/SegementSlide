@@ -25,7 +25,6 @@
 		80B6C3ED21C1FAB5007C958F /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3EC21C1FAB5007C958F /* ContentViewController.swift */; };
 		80B6C3F021C20052007C958F /* ContentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3EE21C20052007C958F /* ContentViewCell.swift */; };
 		80B6C3F121C20052007C958F /* ContentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80B6C3EF21C20052007C958F /* ContentViewCell.xib */; };
-		80B6C3F621C25629007C958F /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3F521C25629007C958F /* BaseTableViewController.swift */; };
 		80B6C3F921C2943E007C958F /* CALayer+Sketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3F821C2943E007C958F /* CALayer+Sketch.swift */; };
 		80B6C3FB21C295ED007C958F /* ShadowSegementSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3FA21C295ED007C958F /* ShadowSegementSlideViewController.swift */; };
 		80B6C3FE21C29EEA007C958F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3FD21C29EEA007C958F /* DataManager.swift */; };
@@ -54,7 +53,6 @@
 		80B6C3EC21C1FAB5007C958F /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		80B6C3EE21C20052007C958F /* ContentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewCell.swift; sourceTree = "<group>"; };
 		80B6C3EF21C20052007C958F /* ContentViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentViewCell.xib; sourceTree = "<group>"; };
-		80B6C3F521C25629007C958F /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		80B6C3F821C2943E007C958F /* CALayer+Sketch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Sketch.swift"; sourceTree = "<group>"; };
 		80B6C3FA21C295ED007C958F /* ShadowSegementSlideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowSegementSlideViewController.swift; sourceTree = "<group>"; };
 		80B6C3FD21C29EEA007C958F /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -172,7 +170,6 @@
 		80B6C3F221C20D76007C958F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				80B6C3F521C25629007C958F /* BaseTableViewController.swift */,
 				80B6C3FA21C295ED007C958F /* ShadowSegementSlideViewController.swift */,
 				805C1D9821C7C86A00991D07 /* ShadowTransparentTabSlideViewController.swift */,
 				807A36E621C3B0CF004675BC /* LanguageCenter */,
@@ -349,7 +346,6 @@
 				80B6C3FE21C29EEA007C958F /* DataManager.swift in Sources */,
 				804CC4C821C14AC4007EEBF8 /* AppDelegate.swift in Sources */,
 				80B6C3F021C20052007C958F /* ContentViewCell.swift in Sources */,
-				80B6C3F621C25629007C958F /* BaseTableViewController.swift in Sources */,
 				807A36E821C3B110004675BC /* LanguageCenterViewController.swift in Sources */,
 				807A36EA21C3B314004675BC /* LanguageCenterHeaderView.swift in Sources */,
 				804CC4DA21C1531D007EEBF8 /* HomeViewController.swift in Sources */,
