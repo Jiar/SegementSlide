@@ -1,11 +1,11 @@
-# SegementSlide
-
-## Snapshots
-
 <p align="center">
   <img src="https://github.com/Jiar/SegementSlide/blob/master/Snapshots/SegementSlide.png?raw=true">
 </p>
-#### Multi-tier UIScrollView nested scrolling solution.
+<p align="center">
+Multi-tier UIScrollView nested scrolling solution.
+</p>
+
+## Snapshots
 
 <p align="center">
 <div style="display:flex">
