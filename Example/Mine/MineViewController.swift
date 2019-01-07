@@ -23,7 +23,7 @@ class MineViewController: ShadowTransparentTabSlideViewController {
     }
     
     override var attributedTexts: DisplayEmbed<NSAttributedString?> {
-        return (display: nil, embed: NSAttributedString(string: "Mine", attributes: UINavigationBar.appearance().titleTextAttributes))
+        return (nil, NSAttributedString(string: "Mine", attributes: UINavigationBar.appearance().titleTextAttributes))
     }
     
     override var bouncesType: BouncesType {
@@ -48,6 +48,10 @@ class MineViewController: ShadowTransparentTabSlideViewController {
     
     override var switcherType: SwitcherType {
         return .tab
+    }
+    
+    override var extendedBottomsafeAreaInset: Bool {
+        return Bool.random()
     }
     
     override func titlesInSwitcher() -> [String] {

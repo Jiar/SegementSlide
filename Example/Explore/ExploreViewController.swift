@@ -43,6 +43,10 @@ class ExploreViewController: ShadowSegementSlideViewController {
         return .segement
     }
     
+    override var extendedBottomsafeAreaInset: Bool {
+        return Bool.random()
+    }
+    
     override func titlesInSwitcher() -> [String] {
         return DataManager.shared.exploreLanguageTitles
     }

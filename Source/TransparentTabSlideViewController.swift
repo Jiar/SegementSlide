@@ -38,10 +38,14 @@ open class TransparentTabSlideViewController: SegementSlideViewController {
     public var storedNavigationBarBackgroundImage: UIImage? = nil
     
     public override var headerStickyHeight: CGFloat {
-        return innerHeaderHeight-(statusBarHeight+navigationBarHeight)
+        return innerHeaderHeight-topLayoutLength
     }
     public override var contentViewHeight: CGFloat {
-        return view.bounds.height-statusBarHeight-navigationBarHeight-switcherHeight
+        if extendedBottomsafeAreaInset {
+            return view.bounds.height-switcherHeight-topLayoutLength
+        } else {
+            return view.bounds.height-switcherHeight-topLayoutLength-bottomLayoutLength
+        }
     }
     
     open override var switcherType: SwitcherType {
@@ -49,23 +53,23 @@ open class TransparentTabSlideViewController: SegementSlideViewController {
     }
     
     open var isTranslucents: DisplayEmbed<Bool> {
-        return (display: true, embed: false)
+        return (true, false)
     }
     
     open var attributedTexts: DisplayEmbed<NSAttributedString?> {
-        return (display: nil, embed: nil)
+        return (nil, nil)
     }
     
     open var barStyles: DisplayEmbed<UIBarStyle> {
-        return (display: .black, embed: .default)
+        return (.black, .default)
     }
     
     open var barTintColors: DisplayEmbed<UIColor?> {
-        return (display: nil, embed: .white)
+        return (nil, .white)
     }
     
     open var tintColors: DisplayEmbed<UIColor> {
-        return (display: .white, embed: .black)
+        return (.white, .black)
     }
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -180,7 +184,7 @@ extension TransparentTabSlideViewController {
     
     private func updateNavigationBarStyle(_ scrollView: UIScrollView) {
         guard let navigationController = navigationController else { return }
-        guard headerStickyHeight != -(statusBarHeight+navigationBarHeight) else { return }
+        guard headerStickyHeight != -topLayoutLength else { return }
         if scrollView.contentOffset.y.keep3 >= headerStickyHeight.keep3 {
             guard !hasEmbed else { return }
             hasEmbed = true
@@ -211,26 +215,6 @@ extension TransparentTabSlideViewController {
         fadeTextAnimation.duration = 0.25
         fadeTextAnimation.type = .fade
         return fadeTextAnimation
-    }
-    
-}
-
-extension TransparentTabSlideViewController {
-    
-    public var statusBarHeight: CGFloat {
-        if let navigationController = navigationController {
-            return navigationController.navigationBar.frame.origin.y
-        } else {
-            return 0
-        }
-    }
-    
-    public var navigationBarHeight: CGFloat {
-        if let navigationController = navigationController {
-            return navigationController.navigationBar.frame.height
-        } else {
-            return 0
-        }
     }
     
 }

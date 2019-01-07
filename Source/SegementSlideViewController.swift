@@ -15,7 +15,7 @@ public enum BouncesType {
 }
 
 open class SegementSlideViewController: UIViewController {
-    internal private(set) var collectionView: SegementSlideCollectionView!
+    internal private(set) var segementSlideCollectionView: SegementSlideCollectionView!
     internal private(set) var segementSlideSwitcherView: SegementSlideSwitcherView!
     internal private(set) var segementSlideContentView: SegementSlideContentView!
     internal private(set) var innerHeaderHeight: CGFloat = 0
@@ -28,7 +28,7 @@ open class SegementSlideViewController: UIViewController {
     private var lastTranslationY: CGFloat = 0
     
     public var slideScrollView: UIScrollView {
-        return collectionView
+        return segementSlideCollectionView
     }
     
     public var slideSwitcherView: UIView {
@@ -41,7 +41,11 @@ open class SegementSlideViewController: UIViewController {
         return innerHeaderHeight
     }
     public var contentViewHeight: CGFloat {
-        return view.bounds.height-switcherHeight
+        if extendedBottomsafeAreaInset {
+            return view.bounds.height-switcherHeight
+        } else {
+            return view.bounds.height-switcherHeight-bottomLayoutLength
+        }
     }
     public var currentIndex: Int? {
         return segementSlideSwitcherView.selectedIndex
@@ -67,6 +71,10 @@ open class SegementSlideViewController: UIViewController {
     
     open var switcherType: SwitcherType {
         return .segement
+    }
+    
+    open var extendedBottomsafeAreaInset: Bool {
+        return true
     }
     
     open var switcherHeight: CGFloat {
@@ -150,12 +158,12 @@ open class SegementSlideViewController: UIViewController {
         setupSwitcher()
         segementSlideContentView.reloadData()
         segementSlideSwitcherView.reloadData()
-        collectionView.reloadData()
+        segementSlideCollectionView.reloadData()
     }
     
     public func reloadHeader() {
         setupHeader()
-        collectionView.reloadData()
+        segementSlideCollectionView.reloadData()
     }
     
     public func reloadSwitcher() {
@@ -182,7 +190,7 @@ extension SegementSlideViewController {
         edgesForExtendedLayout = .none
         setupSegementSlideSwitcherView()
         setupSegementSlideContentView()
-        setupCollectionView()
+        setupSegementSlideCollectionView()
     }
     
     private func setupSegementSlideSwitcherView() {
@@ -196,37 +204,37 @@ extension SegementSlideViewController {
         segementSlideContentView.viewController = self
     }
     
-    private func setupCollectionView() {
+    private func setupSegementSlideCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.sectionHeadersPinToVisibleBounds = true
-        collectionView = SegementSlideCollectionView(frame: .zero, collectionViewLayout: layout)
-        view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { make in
+        segementSlideCollectionView = SegementSlideCollectionView(frame: .zero, collectionViewLayout: layout)
+        view.addSubview(segementSlideCollectionView)
+        segementSlideCollectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         if #available(iOS 11.0, *) {
-            collectionView.contentInsetAdjustmentBehavior = .never
+            segementSlideCollectionView.contentInsetAdjustmentBehavior = .never
         }else {
             automaticallyAdjustsScrollViewInsets = false
         }
-        collectionView.backgroundColor = .white
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.register(SegementSlideHeaderViewCell.self)
-        collectionView.register(SegementSlideContentViewCell.self)
-        collectionView.register(UICollectionViewCell.self)
-        collectionView.register(SegementSlideSwitcherReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
-        collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        segementSlideCollectionView.backgroundColor = .white
+        segementSlideCollectionView.showsHorizontalScrollIndicator = false
+        segementSlideCollectionView.showsVerticalScrollIndicator = false
+        segementSlideCollectionView.register(SegementSlideHeaderViewCell.self)
+        segementSlideCollectionView.register(SegementSlideContentViewCell.self)
+        segementSlideCollectionView.register(UICollectionViewCell.self)
+        segementSlideCollectionView.register(SegementSlideSwitcherReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
+        segementSlideCollectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
+        segementSlideCollectionView.delegate = self
+        segementSlideCollectionView.dataSource = self
         if #available(iOS 10.0, *) {
-            collectionView.isPrefetchingEnabled = false
+            segementSlideCollectionView.isPrefetchingEnabled = false
         }
-        collectionView.isPagingEnabled = false
-        collectionView.isScrollEnabled = true
+        segementSlideCollectionView.isPagingEnabled = false
+        segementSlideCollectionView.isScrollEnabled = true
         view.backgroundColor = .white
-        parentKeyValueObservation = collectionView.observe(\.contentOffset, options: [.initial, .new, .old], changeHandler: { [weak self] (scrollView, change) in
+        parentKeyValueObservation = segementSlideCollectionView.observe(\.contentOffset, options: [.initial, .new, .old], changeHandler: { [weak self] (scrollView, change) in
             guard let self = self else { return }
             guard change.newValue != change.oldValue else { return }
             self.parentScrollViewDidScroll(scrollView)
@@ -418,29 +426,29 @@ extension SegementSlideViewController {
         switch innerBouncesType {
         case .parent:
             if !canParentViewScroll {
-                collectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x, y: headerStickyHeight)
+                segementSlideCollectionView.contentOffset = CGPoint(x: segementSlideCollectionView.contentOffset.x, y: headerStickyHeight)
                 canChildViewScroll = true
-            } else if collectionView.contentOffset.y.keep3 >= headerStickyHeight.keep3 {
-                collectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x, y: headerStickyHeight.keep3)
+            } else if segementSlideCollectionView.contentOffset.y.keep3 >= headerStickyHeight.keep3 {
+                segementSlideCollectionView.contentOffset = CGPoint(x: segementSlideCollectionView.contentOffset.x, y: headerStickyHeight.keep3)
                 canParentViewScroll = false
                 canChildViewScroll = true
             }
         case .child:
             if !canParentViewScroll {
-                collectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x, y: headerStickyHeight)
+                segementSlideCollectionView.contentOffset = CGPoint(x: segementSlideCollectionView.contentOffset.x, y: headerStickyHeight)
                 canChildViewScroll = true
-            } else if collectionView.contentOffset.y.keep3 >= headerStickyHeight.keep3 {
-                collectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x, y: headerStickyHeight.keep3)
+            } else if segementSlideCollectionView.contentOffset.y.keep3 >= headerStickyHeight.keep3 {
+                segementSlideCollectionView.contentOffset = CGPoint(x: segementSlideCollectionView.contentOffset.x, y: headerStickyHeight.keep3)
                 canParentViewScroll = false
                 canChildViewScroll = true
-            } else if collectionView.contentOffset.y <= 0 {
-                collectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x, y: 0)
+            } else if segementSlideCollectionView.contentOffset.y <= 0 {
+                segementSlideCollectionView.contentOffset = CGPoint(x: segementSlideCollectionView.contentOffset.x, y: 0)
                 canChildViewScroll = true
             } else {
                 guard let childScrollView = currentSegementSlideContentViewController?.scrollView else { return }
                 if childScrollView.contentOffset.y < 0 {
                     if translationY.keep3 > lastTranslationY.keep3 {
-                        collectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x, y: 0)
+                        segementSlideCollectionView.contentOffset = CGPoint(x: segementSlideCollectionView.contentOffset.x, y: 0)
                         canChildViewScroll = true
                     } else {
                         canChildViewScroll = false
@@ -467,16 +475,40 @@ extension SegementSlideViewController {
             if !canChildViewScroll {
                 childScrollView.contentOffset = CGPoint(x: childScrollView.contentOffset.x, y: 0)
             } else if childScrollView.contentOffset.y <= 0 {
-                if collectionView.contentOffset.y <= 0 {
+                if segementSlideCollectionView.contentOffset.y <= 0 {
                     canChildViewScroll = true
                 }
                 canParentViewScroll = true
             } else {
-                if collectionView.contentOffset.y > 0 && collectionView.contentOffset.y.keep3 < headerStickyHeight.keep3 {
+                if segementSlideCollectionView.contentOffset.y > 0 && segementSlideCollectionView.contentOffset.y.keep3 < headerStickyHeight.keep3 {
                     canChildViewScroll = false
                 }
             }
         }
+    }
+    
+}
+
+extension SegementSlideViewController {
+    
+    internal var topLayoutLength: CGFloat {
+        let topLayoutLength: CGFloat
+        if #available(iOS 11, *) {
+            topLayoutLength = view.safeAreaInsets.top
+        } else {
+            topLayoutLength = topLayoutGuide.length
+        }
+        return topLayoutLength
+    }
+    
+    internal var bottomLayoutLength: CGFloat {
+        let bottomLayoutLength: CGFloat
+        if #available(iOS 11, *) {
+            bottomLayoutLength = view.safeAreaInsets.bottom
+        } else {
+            bottomLayoutLength = bottomLayoutGuide.length
+        }
+        return bottomLayoutLength
     }
     
 }
