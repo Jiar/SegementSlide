@@ -1,6 +1,18 @@
 <p align="center">
   <img src="https://github.com/Jiar/SegementSlide/blob/master/Snapshots/SegementSlide.png?raw=true">
 </p>
+
+<p align="center">
+<a href="https://github.com/Jiar/SegementSlide"><img src="https://img.shields.io/badge/language-swift-orange.svg"></a>
+<a href="https://travis-ci.org/Jiar/SegementSlide"><img src="http://img.shields.io/travis/Jiar/SegementSlide.svg?branch=master"></a>
+<a href="https://cocoapods.org/pods/SegementSlide"><img src="https://img.shields.io/cocoapods/v/SegementSlide.svg?style=flat"></a>
+<a href="https://cocoapods.org/pods/SegementSlide"><img src="https://img.shields.io/cocoapods/p/SegementSlide.svg?style=flat"></a>
+<a href="https://github.com/Jiar/SegementSlide/blob/master/LICENSE"><img src="https://img.shields.io/cocoapods/l/SegementSlide.svg?style=flat"></a>
+<a href="https://codebeat.co/projects/github-com-jiar-segementslide-master"><img alt="codebeat badge" src="https://codebeat.co/badges/79bddc2a-a4d8-46b3-ba59-c4efaf0e2abc" /></a>
+<a href="https://twitter.com/JiarYoo"><img src="https://img.shields.io/badge/twitter-@JiarYoo-blue.svg"></a>
+<a href="https://weibo.com/u/2268197591"><img src="https://img.shields.io/badge/weibo-@Jiar-red.svg"></a>
+</p>
+
 <p align="center">
 Multi-tier UIScrollView nested scrolling solution.
 </p>
