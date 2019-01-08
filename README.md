@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/Jiar/SegementSlide/blob/master/Snapshots/SegementSlide.png?raw=true">
+  <img src="https://github.com/Jiar/SegementSlide/blob/master/Logo/SegementSlide.png?raw=true">
 </p>
 
 <p align="center">
