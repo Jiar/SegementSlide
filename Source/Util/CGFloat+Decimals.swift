@@ -5,6 +5,8 @@
 //  Created by Jiar on 2018/12/17.
 //
 
+import UIKit
+
 extension CGFloat {
     
     var keep3: CGFloat {
