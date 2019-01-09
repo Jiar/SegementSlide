@@ -4,9 +4,17 @@ inhibit_all_warnings!
 
 project './Example.xcodeproj'
 
+def common_pods
+    pod 'SegementSlide', :path => './'
+end
+
 target 'Example' do
     pod 'MJRefresh'
     pod 'SnapKit'
     pod 'MBProgressHUD'
-    pod 'SegementSlide', :path => './'
+    common_pods
+end
+
+target 'ExampleTests' do
+    common_pods
 end

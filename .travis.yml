@@ -1,5 +1,6 @@
-language: objective-c
-osx_image: xcode10
+language: swift
+os: osx
+osx_image: xcode10.1
 env: SWIFT_SNAPSHOT=4.2
 
 cache: cocoapods
@@ -12,6 +13,7 @@ env:
     - XCODE_WORKSPACE=./Example.xcworkspace
   matrix:
     - SCHEME="Example"
+    - SCHEMETest="ExampleTests"
 
 before_install:
   - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
@@ -21,9 +23,10 @@ before_install:
 
 script:
   - set -o pipefail
-  - xcodebuild -workspace "$XCODE_WORKSPACE" -scheme "$SCHEME" -configuration Debug clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty -c
-  - xcodebuild -workspace "$XCODE_WORKSPACE" -scheme "$SCHEME" -configuration Release clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty -c
+  - xcodebuild clean test -workspace "$XCODE_WORKSPACE" -scheme "$SCHEME" -destination 'platform=iOS Simulator,name=iPhone 7,OS=12.1' -configuration Release ONLY_ACTIVE_ARCH=YES -enableCodeCoverage YES | xcpretty -c;
+  - xcodebuild clean test -workspace "$XCODE_WORKSPACE" -scheme "$SCHEMETest" -destination 'platform=iOS Simulator,name=iPhone 7,OS=12.1' -configuration Release ONLY_ACTIVE_ARCH=YES -enableCodeCoverage YES | xcpretty -c;
   - pod lib lint --allow-warnings
 
 after_success:
   - sleep 3
+  - bash <(curl -s https://codecov.io/bash)
