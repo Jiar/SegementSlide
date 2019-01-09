@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8066125921BA910000C05D7E"
-               BuildableName = "libSegementSlide.a"
-               BlueprintName = "SegementSlide"
+               BlueprintIdentifier = "80A869A121E624E800A773CB"
+               BuildableName = "SegementSlide.framework"
+               BlueprintName = "SegementSlide-Dynamic"
                ReferencedContainer = "container:SegementSlide.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8066125921BA910000C05D7E"
-            BuildableName = "libSegementSlide.a"
-            BlueprintName = "SegementSlide"
+            BlueprintIdentifier = "80A869A121E624E800A773CB"
+            BuildableName = "SegementSlide.framework"
+            BlueprintName = "SegementSlide-Dynamic"
             ReferencedContainer = "container:SegementSlide.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8066125921BA910000C05D7E"
-            BuildableName = "libSegementSlide.a"
-            BlueprintName = "SegementSlide"
+            BlueprintIdentifier = "80A869A121E624E800A773CB"
+            BuildableName = "SegementSlide.framework"
+            BlueprintName = "SegementSlide-Dynamic"
             ReferencedContainer = "container:SegementSlide.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
