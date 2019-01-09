@@ -32,7 +32,19 @@
 		80A869B421E6252800A773CB /* UIRectEdge+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698321E6242600A773CB /* UIRectEdge+EX.swift */; };
 		80A869B521E6252800A773CB /* String+Bounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698421E6242600A773CB /* String+Bounding.swift */; };
 		80A869BE21E6294E00A773CB /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A869BD21E6294E00A773CB /* SnapKit.framework */; };
+		80A869C821E6387600A773CB /* SegementSlide_Dynamic_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A869C721E6387600A773CB /* SegementSlide_Dynamic_Tests.swift */; };
+		80A869CA21E6387600A773CB /* SegementSlide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A869A221E624E800A773CB /* SegementSlide.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		80A869CB21E6387600A773CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8066125221BA910000C05D7E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 80A869A121E624E800A773CB;
+			remoteInfo = "SegementSlide-Dynamic";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		8066125821BA910000C05D7E /* CopyFiles */ = {
@@ -63,6 +75,9 @@
 		80A869A221E624E800A773CB /* SegementSlide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SegementSlide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80A869B821E627BE00A773CB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80A869BD21E6294E00A773CB /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		80A869C521E6387500A773CB /* SegementSlide-Dynamic-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SegementSlide-Dynamic-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		80A869C721E6387600A773CB /* SegementSlide_Dynamic_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegementSlide_Dynamic_Tests.swift; sourceTree = "<group>"; };
+		80A869C921E6387600A773CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +96,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		80A869C221E6387500A773CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80A869CA21E6387600A773CB /* SegementSlide.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -89,6 +112,7 @@
 			children = (
 				80A869B721E627BE00A773CB /* SegementSlide */,
 				80A8697E21E6242600A773CB /* Source */,
+				80A869C621E6387600A773CB /* SegementSlide-Dynamic-Tests */,
 				8066125B21BA910000C05D7E /* Products */,
 				80A869BC21E6294D00A773CB /* Frameworks */,
 			);
@@ -99,6 +123,7 @@
 			children = (
 				8066125A21BA910000C05D7E /* libSegementSlide.a */,
 				80A869A221E624E800A773CB /* SegementSlide.framework */,
+				80A869C521E6387500A773CB /* SegementSlide-Dynamic-Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,6 +211,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		80A869C621E6387600A773CB /* SegementSlide-Dynamic-Tests */ = {
+			isa = PBXGroup;
+			children = (
+				80A869C721E6387600A773CB /* SegementSlide_Dynamic_Tests.swift */,
+				80A869C921E6387600A773CB /* Info.plist */,
+			);
+			path = "SegementSlide-Dynamic-Tests";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -235,6 +269,24 @@
 			productReference = 80A869A221E624E800A773CB /* SegementSlide.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		80A869C421E6387500A773CB /* SegementSlide-Dynamic-Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80A869CF21E6387600A773CB /* Build configuration list for PBXNativeTarget "SegementSlide-Dynamic-Tests" */;
+			buildPhases = (
+				80A869C121E6387500A773CB /* Sources */,
+				80A869C221E6387500A773CB /* Frameworks */,
+				80A869C321E6387500A773CB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				80A869CC21E6387600A773CB /* PBXTargetDependency */,
+			);
+			name = "SegementSlide-Dynamic-Tests";
+			productName = "SegementSlide-Dynamic-Tests";
+			productReference = 80A869C521E6387500A773CB /* SegementSlide-Dynamic-Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -250,6 +302,9 @@
 						LastSwiftMigration = 1010;
 					};
 					80A869A121E624E800A773CB = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					80A869C421E6387500A773CB = {
 						CreatedOnToolsVersion = 10.1;
 					};
 				};
@@ -268,12 +323,20 @@
 			targets = (
 				8066125921BA910000C05D7E /* SegementSlide */,
 				80A869A121E624E800A773CB /* SegementSlide-Dynamic */,
+				80A869C421E6387500A773CB /* SegementSlide-Dynamic-Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		80A869A021E624E800A773CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80A869C321E6387500A773CB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -343,7 +406,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		80A869C121E6387500A773CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80A869C821E6387600A773CB /* SegementSlide_Dynamic_Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		80A869CC21E6387600A773CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 80A869A121E624E800A773CB /* SegementSlide-Dynamic */;
+			targetProxy = 80A869CB21E6387600A773CB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		8066125F21BA910000C05D7E /* Debug */ = {
@@ -563,6 +642,46 @@
 			};
 			name = Release;
 		};
+		80A869CD21E6387600A773CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "SegementSlide-Dynamic-Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "me.jiar.SegementSlide-Dynamic-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		80A869CE21E6387600A773CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "SegementSlide-Dynamic-Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "me.jiar.SegementSlide-Dynamic-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -589,6 +708,15 @@
 			buildConfigurations = (
 				80A869A821E624E800A773CB /* Debug */,
 				80A869A921E624E800A773CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		80A869CF21E6387600A773CB /* Build configuration list for PBXNativeTarget "SegementSlide-Dynamic-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80A869CD21E6387600A773CB /* Debug */,
+				80A869CE21E6387600A773CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
