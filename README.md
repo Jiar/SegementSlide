@@ -4,7 +4,8 @@
 
 <p align="center">
 <a href="https://github.com/Jiar/SegementSlide"><img src="https://img.shields.io/badge/language-swift-orange.svg"></a>
-<a href="https://travis-ci.org/Jiar/SegementSlide"><img src="http://img.shields.io/travis/Jiar/SegementSlide.svg?branch=master"></a>
+<a href="https://travis-ci.org/Jiar/SegementSlide"><img src="https://img.shields.io/travis/Jiar/SegementSlide.svg?branch=master"></a>
+<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
 <a href="https://cocoapods.org/pods/SegementSlide"><img src="https://img.shields.io/cocoapods/v/SegementSlide.svg?style=flat"></a>
 <a href="https://cocoapods.org/pods/SegementSlide"><img src="https://img.shields.io/cocoapods/p/SegementSlide.svg?style=flat"></a>
 <a href="https://github.com/Jiar/SegementSlide/blob/master/LICENSE"><img src="https://img.shields.io/cocoapods/l/SegementSlide.svg?style=flat"></a>
@@ -46,7 +47,7 @@ Multi-tier UIScrollView nested scrolling solution.
 
 ### CocoaPods
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
+[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
 
 ```bash
 $ gem install cocoapods
@@ -62,7 +63,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'SegementSlide'
+    pod 'SegementSlide', '~> 0.12'
 end
 ```
 
@@ -71,6 +72,31 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
+
+### Carthage
+
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
+
+You can install Carthage with [Homebrew](https://brew.sh/) using the following command:
+
+```bash
+$ brew update
+$ brew install carthage
+```
+
+To integrate SegementSlide into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```ogdl
+github "Jiar/SegementSlide" ~> 0.12
+```
+
+Run `carthage update` to build the framework and drag the built `SegementSlide.framework` into your Xcode project.
+
+### Manually
+
+If you prefer not to use either of the aforementioned dependency managers, you can integrate SegementSlide into your project manually.
+
+---
 
 ## Usage
 
