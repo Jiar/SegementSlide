@@ -12,8 +12,8 @@ env:
     - LC_ALL=en_US.UTF-8
     - XCODE_WORKSPACE=./Example.xcworkspace
   matrix:
-    - SCHEME="Example"
-    - SCHEMETest="ExampleTests"
+    - SCHEME=Example
+    - SCHEME=ExampleTests
 
 before_install:
   - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
@@ -22,9 +22,13 @@ before_install:
   - pod install
 
 script:
-  - set -o pipefail
-  - xcodebuild clean test -workspace "$XCODE_WORKSPACE" -scheme "$SCHEME" -destination 'platform=iOS Simulator,name=iPhone 7,OS=12.1' -configuration Release ONLY_ACTIVE_ARCH=YES -enableCodeCoverage YES | xcpretty -c;
-  - xcodebuild clean test -workspace "$XCODE_WORKSPACE" -scheme "$SCHEMETest" -destination 'platform=iOS Simulator,name=iPhone 7,OS=12.1' -configuration Release ONLY_ACTIVE_ARCH=YES -enableCodeCoverage YES | xcpretty -c;
+  - |
+    set -o pipefail;
+    if [ "$SCHEME" = Example ]; then
+      xcodebuild clean test -workspace "$XCODE_WORKSPACE" -scheme "$SCHEME" -destination 'platform=iOS Simulator,name=iPhone 7,OS=12.1' -configuration Release ONLY_ACTIVE_ARCH=YES -enableCodeCoverage YES | xcpretty -c;
+    elif [ "$SCHEME" = ExampleTests ]; then
+      xcodebuild clean test -workspace "$XCODE_WORKSPACE" -scheme "$SCHEME" -destination 'platform=iOS Simulator,name=iPhone 7,OS=12.1' -configuration Release ONLY_ACTIVE_ARCH=YES -enableCodeCoverage YES | xcpretty -c;
+    fi
   - pod lib lint --allow-warnings
 
 after_success:
