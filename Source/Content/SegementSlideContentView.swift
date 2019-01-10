@@ -42,8 +42,11 @@ internal class SegementSlideContentView: UIView {
     
     private func setup() {
         addSubview(scrollView)
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
         scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.bottom.leading.trailing.equalToSuperview()
         }
         scrollView.delegate = self
         scrollView.isScrollEnabled = true
@@ -58,7 +61,8 @@ internal class SegementSlideContentView: UIView {
         super.layoutSubviews()
         guard scrollView.frame != .zero else { return }
         guard let count = delegate?.segementSlideContentScrollViewCount else { return }
-        scrollView.contentSize = CGSize(width: CGFloat(count)*bounds.width, height: bounds.height)
+        guard scrollView.contentSize.height != scrollView.bounds.height else { return }
+        scrollView.contentSize = CGSize(width: CGFloat(count)*scrollView.bounds.width, height: scrollView.bounds.height)
         layoutViewControllers()
         recoverInitSelectedIndex()
     }

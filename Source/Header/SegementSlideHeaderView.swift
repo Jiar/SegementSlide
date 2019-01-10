@@ -22,7 +22,7 @@ internal class SegementSlideHeaderView: UIView {
         self.segementSlideContentView = segementSlideContentView
         addSubview(headerView)
         headerView.snp.remakeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.bottom.leading.trailing.equalToSuperview()
         }
         lastHeaderView = headerView
     }

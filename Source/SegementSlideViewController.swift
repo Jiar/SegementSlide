@@ -205,10 +205,10 @@ open class SegementSlideViewController: UIViewController {
         segementSlideScrollView.addSubview(segementSlideContentView)
         segementSlideScrollView.addSubview(segementSlideSwitcherView)
         segementSlideSwitcherView.snp.remakeConstraints { make in
-            if let innerHeaderView = innerHeaderView {
-                make.top.equalTo(innerHeaderView.snp.bottom).priority(999)
+            if let _ = innerHeaderView {
+                make.top.equalTo(segementSlideHeaderView.snp.bottom).priority(999)
             } else {
-                make.top.equalTo(segementSlideScrollView.snp.bottom).priority(999)
+                make.top.equalTo(segementSlideScrollView.snp.top).priority(999)
             }
             if #available(iOS 11, *) {
                 make.top.greaterThanOrEqualTo(view.safeAreaLayoutGuide.snp.top)
@@ -265,7 +265,7 @@ extension SegementSlideViewController {
         segementSlideScrollView = SegementSlideScrollView()
         view.addSubview(segementSlideScrollView)
         segementSlideScrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.bottom.leading.trailing.equalToSuperview()
         }
         if #available(iOS 11.0, *) {
             segementSlideScrollView.contentInsetAdjustmentBehavior = .never

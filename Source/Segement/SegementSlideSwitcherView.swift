@@ -54,13 +54,15 @@ internal class SegementSlideSwitcherView: UIView {
     
     private func setup() {
         addSubview(scrollView)
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
         scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.bottom.leading.trailing.equalToSuperview()
         }
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.backgroundColor = .clear
-        indicatorView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(indicatorView)
         indicatorView.layer.masksToBounds = true
         indicatorView.layer.cornerRadius = indicatorHeight/2
