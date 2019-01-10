@@ -84,13 +84,25 @@ $ brew update
 $ brew install carthage
 ```
 
-To integrate SegementSlide into your Xcode project using Carthage, specify it in your `Cartfile`:
+To integrate SegementSlide into your Xcode project using Carthage
+
+1. specify it in your `Cartfile`:
 
 ```ogdl
 github "Jiar/SegementSlide" ~> 0.12
 ```
 
-Run `carthage update` to build the framework and drag the built `SegementSlide.framework` into your Xcode project.
+Run `carthage update` to build the framework.
+
+2. Copy Carthage Frameworks:
+- open the `Build Phases` tab of the project Settings
+- add `New Run Script Phase`
+- add `/usr/local/bin/carthage copy-frameworks` to the input field
+- add `$(SRCROOT)/Carthage/Build/iOS/SegementSlide.framework` to `Input Files`
+
+3. Embedded Binaries:
+- open the `general` tab of the project Settings
+- add 'SegementSlide.framework' and 'SnapKit.framework' in `$(SRCROOT)/Carthage/Build/iOS` to the 'Embedded Binaries'
 
 ### Manually
 
@@ -125,6 +137,11 @@ class HomeViewController: SegementSlideViewController {
         return ContentViewController()
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        reloadData()
+    }
+
 }
 ```
 
@@ -137,16 +154,6 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 
     var scrollView: UIScrollView {
         return tableView
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return languages.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ContentViewCell", for: indexPath) as! ContentViewCell
-        cell.config(languages[indexPath.row])
-        return cell
     }
 
 }
