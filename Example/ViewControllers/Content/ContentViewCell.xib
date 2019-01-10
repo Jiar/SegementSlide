@@ -55,6 +55,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="iconImageView" destination="sjp-vg-h4Y" id="mAB-mW-uy0"/>
                 <outlet property="summaryTextLabel" destination="y0v-ej-r4w" id="yJS-A2-bTF"/>

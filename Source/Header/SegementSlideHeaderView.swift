@@ -1,5 +1,5 @@
 //
-//  SegementSlideHeaderViewCell.swift
+//  SegementSlideHeaderView.swift
 //  SegementSlide
 //
 //  Created by Jiar on 2018/12/7.
@@ -9,19 +9,16 @@
 import UIKit
 import SnapKit
 
-internal class SegementSlideHeaderViewCell: UICollectionViewCell {
+internal class SegementSlideHeaderView: UIView {
     
     private weak var lastHeaderView: UIView?
     private weak var segementSlideContentView: SegementSlideContentView?
     
-    internal override func prepareForReuse() {
-        super.prepareForReuse()
+    internal func config(_ headerView: UIView, segementSlideContentView: SegementSlideContentView) {
         if let lastHeaderView = lastHeaderView {
+            lastHeaderView.snp.removeConstraints()
             lastHeaderView.removeFromSuperview()
         }
-    }
-    
-    internal func config(_ headerView: UIView, segementSlideContentView: SegementSlideContentView) {
         self.segementSlideContentView = segementSlideContentView
         addSubview(headerView)
         headerView.snp.remakeConstraints { make in

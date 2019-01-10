@@ -59,10 +59,8 @@ internal class SegementSlideContentView: UIView {
         guard scrollView.frame != .zero else { return }
         guard let count = delegate?.segementSlideContentScrollViewCount else { return }
         scrollView.contentSize = CGSize(width: CGFloat(count)*bounds.width, height: bounds.height)
-        if let initSelectedIndex = initSelectedIndex {
-            self.initSelectedIndex = nil
-            updateSelectedViewController(at: initSelectedIndex, animated: false)
-        }
+        layoutViewControllers()
+        recoverInitSelectedIndex()
     }
     
     internal func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
@@ -111,6 +109,30 @@ extension SegementSlideContentView: UIScrollViewDelegate {
         let index = Int(indexFloat)
         updateSelectedViewController(at: index, animated: true)
     }
+
+}
+
+extension SegementSlideContentView {
+    
+    private func layoutViewControllers() {
+        for (index, value) in viewControllers {
+            guard let childViewController = value as? UIViewController else {
+                continue
+            }
+            let offsetX = CGFloat(index)*scrollView.bounds.width
+            childViewController.view.snp.remakeConstraints { make in
+                make.top.equalTo(scrollView.snp.top)
+                make.size.equalTo(scrollView.bounds.size)
+                make.leading.equalTo(scrollView.snp.leading).offset(offsetX)
+            }
+        }
+    }
+    
+    private func recoverInitSelectedIndex() {
+        guard let initSelectedIndex = initSelectedIndex else { return }
+        self.initSelectedIndex = nil
+        updateSelectedViewController(at: initSelectedIndex, animated: false)
+    }
     
     private func updateSelectedViewController(at index: Int, animated: Bool) {
         guard scrollView.frame != .zero else {
@@ -131,12 +153,10 @@ extension SegementSlideContentView: UIScrollViewDelegate {
             make.size.equalTo(scrollView.bounds.size)
             make.leading.equalTo(scrollView.snp.leading).offset(offsetX)
         }
-        DispatchQueue.main.async {
-            self.scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: animated)
-        }
+        scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: animated)
         guard index != selectedIndex else { return }
         selectedIndex = index
         delegate?.segementSlideContentView(self, didSelectAtIndex: index, animated: animated)
     }
-
+    
 }

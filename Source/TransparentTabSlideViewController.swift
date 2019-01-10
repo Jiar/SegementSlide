@@ -38,7 +38,7 @@ open class TransparentTabSlideViewController: SegementSlideViewController {
     public var storedNavigationBarBackgroundImage: UIImage? = nil
     
     public override var headerStickyHeight: CGFloat {
-        return innerHeaderHeight-topLayoutLength
+        return (innerHeaderHeight ?? 0)-topLayoutLength
     }
     public override var contentViewHeight: CGFloat {
         if extendedBottomsafeAreaInset {
@@ -46,6 +46,16 @@ open class TransparentTabSlideViewController: SegementSlideViewController {
         } else {
             return view.bounds.height-switcherHeight-topLayoutLength-bottomLayoutLength
         }
+    }
+    
+    open override func headerHeight() -> CGFloat {
+        assert(false, "must override this function")
+        return 0
+    }
+    
+    open override func headerView() -> UIView {
+        assert(false, "must override this function")
+        return UIView()
     }
     
     open override var switcherType: SwitcherType {

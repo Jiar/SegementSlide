@@ -71,10 +71,7 @@ internal class SegementSlideSwitcherView: UIView {
         super.layoutSubviews()
         layoutTitleButtons()
         reloadBadges()
-        if let initSelectedIndex = initSelectedIndex {
-            self.initSelectedIndex = nil
-            updateSelectedButton(at: initSelectedIndex, animated: false)
-        }
+        recoverInitSelectedIndex()
     }
     
     internal func reloadData() {
@@ -142,6 +139,12 @@ internal class SegementSlideSwitcherView: UIView {
 }
 
 extension SegementSlideSwitcherView {
+    
+    private func recoverInitSelectedIndex() {
+        guard let initSelectedIndex = initSelectedIndex else { return }
+        self.initSelectedIndex = nil
+        updateSelectedButton(at: initSelectedIndex, animated: false)
+    }
     
     private func layoutTitleButtons() {
         guard scrollView.frame != .zero else { return }

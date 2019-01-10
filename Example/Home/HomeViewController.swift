@@ -27,16 +27,14 @@ class HomeViewController: ShadowSegementSlideViewController {
         return .child
     }
     
-    override func headerHeight() -> CGFloat {
-        return view.bounds.height/4
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return UIStatusBarAnimation.slide
     }
     
-    override func headerView() -> UIView {
-        let headerView = UIImageView()
-        headerView.isUserInteractionEnabled = true
-        headerView.contentMode = .scaleAspectFill
-        headerView.image = UIImage(named: "bg_thinking.png")
-        return headerView
+    override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
+        guard !isParent else { return }
+        let translationY = -scrollView.panGestureRecognizer.translation(in: scrollView).y
+        navigationController?.setNavigationBarHidden(translationY > 0, animated: true)
     }
     
     override var switcherType: SwitcherType {

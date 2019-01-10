@@ -23,15 +23,11 @@ class ExploreViewController: ShadowSegementSlideViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override var bouncesType: BouncesType {
-        return .parent
-    }
-    
-    override func headerHeight() -> CGFloat {
+    override func headerHeight() -> CGFloat? {
         return view.bounds.height/4
     }
     
-    override func headerView() -> UIView {
+    override func headerView() -> UIView? {
         let headerView = UIImageView()
         headerView.isUserInteractionEnabled = true
         headerView.contentMode = .scaleAspectFill

@@ -15,11 +15,13 @@ public enum BouncesType {
 }
 
 open class SegementSlideViewController: UIViewController {
-    internal private(set) var segementSlideCollectionView: SegementSlideCollectionView!
+    internal private(set) var segementSlideScrollView: SegementSlideScrollView!
+    internal private(set) var segementSlideHeaderView: SegementSlideHeaderView!
     internal private(set) var segementSlideSwitcherView: SegementSlideSwitcherView!
     internal private(set) var segementSlideContentView: SegementSlideContentView!
-    internal private(set) var innerHeaderHeight: CGFloat = 0
-    internal private(set) var innerHeaderView = UIView()
+    internal private(set) var innerHeaderHeight: CGFloat?
+    internal private(set) var innerHeaderView: UIView?
+    private var contentViewHeightConstraint: Constraint?
     private var parentKeyValueObservation: NSKeyValueObservation!
     private var childKeyValueObservation: NSKeyValueObservation?
     private var innerBouncesType: BouncesType = .parent
@@ -28,7 +30,7 @@ open class SegementSlideViewController: UIViewController {
     private var lastTranslationY: CGFloat = 0
     
     public var slideScrollView: UIScrollView {
-        return segementSlideCollectionView
+        return segementSlideScrollView
     }
     public var slideSwitcherView: UIView {
         return segementSlideSwitcherView
@@ -36,7 +38,7 @@ open class SegementSlideViewController: UIViewController {
     public var slideContentView: UIView {
         return segementSlideContentView
     }
-    public var headerStickyHeight: CGFloat {
+    public var headerStickyHeight: CGFloat? {
         return innerHeaderHeight
     }
     public var contentViewHeight: CGFloat {
@@ -58,14 +60,12 @@ open class SegementSlideViewController: UIViewController {
         return .parent
     }
     
-    open func headerHeight() -> CGFloat {
-        assert(false, "must override this function")
-        return 0
+    open func headerHeight() -> CGFloat? {
+        return nil
     }
     
-    open func headerView() -> UIView {
-        assert(false, "must override this function")
-        return UIView()
+    open func headerView() -> UIView? {
+        return nil
     }
     
     open var switcherType: SwitcherType {
@@ -146,6 +146,12 @@ open class SegementSlideViewController: UIViewController {
         return segementSlideContentView.segementSlideContentViewController(at: index)
     }
     
+    open override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        contentViewHeightConstraint?.update(offset: contentViewHeight)
+        segementSlideScrollView.contentSize = CGSize(width: view.bounds.width, height: (innerHeaderHeight ?? 0)+switcherHeight+contentViewHeight)
+    }
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -157,21 +163,68 @@ open class SegementSlideViewController: UIViewController {
         setupSwitcher()
         segementSlideContentView.reloadData()
         segementSlideSwitcherView.reloadData()
-        segementSlideCollectionView.reloadData()
+        layoutSegementSlideScrollView()
     }
     
     public func reloadHeader() {
+        innerHeaderView?.snp.removeConstraints()
+        innerHeaderView?.removeFromSuperview()
         setupHeader()
-        segementSlideCollectionView.reloadData()
+        layoutSegementSlideScrollView()
     }
     
     public func reloadSwitcher() {
         setupSwitcher()
         segementSlideSwitcherView.reloadData()
+        layoutSegementSlideScrollView()
     }
     
     public func reloadBadgeInSwitcher() {
         segementSlideSwitcherView.reloadBadges()
+    }
+    
+    public func reloadContent() {
+        segementSlideContentView.reloadData()
+    }
+    
+    private func layoutSegementSlideScrollView() {
+        for subview in segementSlideScrollView.subviews {
+            subview.snp.removeConstraints()
+            subview.removeFromSuperview()
+        }
+        if let innerHeaderView = innerHeaderView, let innerHeaderHeight = innerHeaderHeight {
+            segementSlideScrollView.addSubview(segementSlideHeaderView)
+            segementSlideHeaderView.snp.remakeConstraints { make in
+                make.top.equalTo(segementSlideScrollView.snp.top)
+                make.leading.equalTo(view.snp.leading)
+                make.trailing.equalTo(view.snp.trailing)
+                make.height.equalTo(innerHeaderHeight)
+            }
+            segementSlideHeaderView.config(innerHeaderView, segementSlideContentView: segementSlideContentView)
+        }
+        segementSlideScrollView.addSubview(segementSlideContentView)
+        segementSlideScrollView.addSubview(segementSlideSwitcherView)
+        segementSlideSwitcherView.snp.remakeConstraints { make in
+            if let innerHeaderView = innerHeaderView {
+                make.top.equalTo(innerHeaderView.snp.bottom).priority(999)
+            } else {
+                make.top.equalTo(segementSlideScrollView.snp.bottom).priority(999)
+            }
+            if #available(iOS 11, *) {
+                make.top.greaterThanOrEqualTo(view.safeAreaLayoutGuide.snp.top)
+            } else {
+                make.top.greaterThanOrEqualTo(topLayoutGuide.snp.bottom)
+            }
+            make.leading.equalTo(view.snp.leading)
+            make.trailing.equalTo(view.snp.trailing)
+            make.height.equalTo(switcherHeight)
+        }
+        segementSlideContentView.snp.remakeConstraints { make in
+            make.top.equalTo(segementSlideSwitcherView.snp.bottom)
+            make.leading.equalTo(view.snp.leading)
+            make.trailing.equalTo(view.snp.trailing)
+            contentViewHeightConstraint = make.height.equalTo(contentViewHeight).constraint
+        }
     }
     
     deinit {
@@ -187,9 +240,14 @@ extension SegementSlideViewController {
     private func setup() {
         extendedLayoutIncludesOpaqueBars = true
         edgesForExtendedLayout = .none
+        setupSegementSlideHeaderView()
         setupSegementSlideSwitcherView()
         setupSegementSlideContentView()
-        setupSegementSlideCollectionView()
+        setupSegementSlideScrollView()
+    }
+    
+    private func setupSegementSlideHeaderView() {
+        segementSlideHeaderView = SegementSlideHeaderView()
     }
     
     private func setupSegementSlideSwitcherView() {
@@ -203,37 +261,24 @@ extension SegementSlideViewController {
         segementSlideContentView.viewController = self
     }
     
-    private func setupSegementSlideCollectionView() {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.sectionHeadersPinToVisibleBounds = true
-        segementSlideCollectionView = SegementSlideCollectionView(frame: .zero, collectionViewLayout: layout)
-        view.addSubview(segementSlideCollectionView)
-        segementSlideCollectionView.snp.makeConstraints { make in
+    private func setupSegementSlideScrollView() {
+        segementSlideScrollView = SegementSlideScrollView()
+        view.addSubview(segementSlideScrollView)
+        segementSlideScrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         if #available(iOS 11.0, *) {
-            segementSlideCollectionView.contentInsetAdjustmentBehavior = .never
+            segementSlideScrollView.contentInsetAdjustmentBehavior = .never
         } else {
             automaticallyAdjustsScrollViewInsets = false
         }
-        segementSlideCollectionView.backgroundColor = .white
-        segementSlideCollectionView.showsHorizontalScrollIndicator = false
-        segementSlideCollectionView.showsVerticalScrollIndicator = false
-        segementSlideCollectionView.register(SegementSlideHeaderViewCell.self)
-        segementSlideCollectionView.register(SegementSlideContentViewCell.self)
-        segementSlideCollectionView.register(UICollectionViewCell.self)
-        segementSlideCollectionView.register(SegementSlideSwitcherReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
-        segementSlideCollectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
-        segementSlideCollectionView.delegate = self
-        segementSlideCollectionView.dataSource = self
-        if #available(iOS 10.0, *) {
-            segementSlideCollectionView.isPrefetchingEnabled = false
-        }
-        segementSlideCollectionView.isPagingEnabled = false
-        segementSlideCollectionView.isScrollEnabled = true
+        segementSlideScrollView.backgroundColor = .white
+        segementSlideScrollView.showsHorizontalScrollIndicator = false
+        segementSlideScrollView.showsVerticalScrollIndicator = false
+        segementSlideScrollView.isPagingEnabled = false
+        segementSlideScrollView.isScrollEnabled = true
         view.backgroundColor = .white
-        parentKeyValueObservation = segementSlideCollectionView.observe(\.contentOffset, options: [.initial, .new, .old], changeHandler: { [weak self] (scrollView, change) in
+        parentKeyValueObservation = segementSlideScrollView.observe(\.contentOffset, options: [.initial, .new, .old], changeHandler: { [weak self] (scrollView, change) in
             guard let self = self else { return }
             guard change.newValue != change.oldValue else { return }
             self.parentScrollViewDidScroll(scrollView)
@@ -317,107 +362,11 @@ extension SegementSlideViewController: SegementSlideContentDelegate {
     
 }
 
-extension SegementSlideViewController: UICollectionViewDataSource {
-    
-    public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 1
-        case 1:
-            return 1
-        default:
-            return 0
-        }
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let section = indexPath.section
-        switch section {
-        case 0:
-            let cell: SegementSlideHeaderViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-            cell.config(innerHeaderView, segementSlideContentView: segementSlideContentView)
-            return cell
-        case 1:
-            let cell: SegementSlideContentViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-            cell.config(segementSlideContentView)
-            return cell
-        default:
-            break
-        }
-        let cell: UICollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-        return cell
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let section = indexPath.section
-        switch section {
-        case 0:
-            let reusableView: UICollectionReusableView = collectionView.dequeueSupplementaryViewOfKind(kind, forIndexPath: indexPath)
-            return reusableView
-        case 1:
-            let segementSlideSwitcherReusableView: SegementSlideSwitcherReusableView = collectionView.dequeueSupplementaryViewOfKind(kind, forIndexPath: indexPath)
-            segementSlideSwitcherReusableView.config(segementSlideSwitcherView)
-            return segementSlideSwitcherReusableView
-        default:
-            let reusableView: UICollectionReusableView = collectionView.dequeueSupplementaryViewOfKind(kind, forIndexPath: indexPath)
-            return reusableView
-        }
-    }
-    
-}
-
-extension SegementSlideViewController: UICollectionViewDelegateFlowLayout {
-    
-    public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        guard let contentViewController = currentSegementSlideContentViewController else {
-            return true
-        }
-        contentViewController.scrollView.contentOffset.y = 0
-        return true
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let section = indexPath.section
-        switch section {
-        case 0:
-            return CGSize(width: collectionView.bounds.width, height: innerHeaderHeight)
-        case 1:
-            return CGSize(width: collectionView.bounds.width, height: contentViewHeight)
-        default:
-            return CGSize(width: collectionView.bounds.width, height: 0)
-        }
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        switch section {
-        case 0:
-            return CGSize(width: collectionView.bounds.width, height: 0)
-        case 1:
-            return CGSize(width: collectionView.bounds.width, height: switcherHeight)
-        default:
-            return CGSize(width: collectionView.bounds.width, height: 0)
-        }
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 0)
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .zero
-    }
-    
-}
-
 extension SegementSlideViewController {
     
     private func parentScrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollViewDidScroll(scrollView, isParent: true)
-        guard headerStickyHeight != 0 else { return }
+        guard let headerStickyHeight = headerStickyHeight else { return }
         let translationY = -scrollView.panGestureRecognizer.translation(in: scrollView).y
         defer {
             lastTranslationY = translationY
@@ -425,29 +374,29 @@ extension SegementSlideViewController {
         switch innerBouncesType {
         case .parent:
             if !canParentViewScroll {
-                segementSlideCollectionView.contentOffset = CGPoint(x: segementSlideCollectionView.contentOffset.x, y: headerStickyHeight)
+                segementSlideScrollView.contentOffset = CGPoint(x: segementSlideScrollView.contentOffset.x, y: headerStickyHeight)
                 canChildViewScroll = true
-            } else if segementSlideCollectionView.contentOffset.y.keep3 >= headerStickyHeight.keep3 {
-                segementSlideCollectionView.contentOffset = CGPoint(x: segementSlideCollectionView.contentOffset.x, y: headerStickyHeight.keep3)
+            } else if segementSlideScrollView.contentOffset.y.keep3 >= headerStickyHeight.keep3 {
+                segementSlideScrollView.contentOffset = CGPoint(x: segementSlideScrollView.contentOffset.x, y: headerStickyHeight.keep3)
                 canParentViewScroll = false
                 canChildViewScroll = true
             }
         case .child:
             if !canParentViewScroll {
-                segementSlideCollectionView.contentOffset = CGPoint(x: segementSlideCollectionView.contentOffset.x, y: headerStickyHeight)
+                segementSlideScrollView.contentOffset = CGPoint(x: segementSlideScrollView.contentOffset.x, y: headerStickyHeight)
                 canChildViewScroll = true
-            } else if segementSlideCollectionView.contentOffset.y.keep3 >= headerStickyHeight.keep3 {
-                segementSlideCollectionView.contentOffset = CGPoint(x: segementSlideCollectionView.contentOffset.x, y: headerStickyHeight.keep3)
+            } else if segementSlideScrollView.contentOffset.y.keep3 >= headerStickyHeight.keep3 {
+                segementSlideScrollView.contentOffset = CGPoint(x: segementSlideScrollView.contentOffset.x, y: headerStickyHeight.keep3)
                 canParentViewScroll = false
                 canChildViewScroll = true
-            } else if segementSlideCollectionView.contentOffset.y <= 0 {
-                segementSlideCollectionView.contentOffset = CGPoint(x: segementSlideCollectionView.contentOffset.x, y: 0)
+            } else if segementSlideScrollView.contentOffset.y <= 0 {
+                segementSlideScrollView.contentOffset = CGPoint(x: segementSlideScrollView.contentOffset.x, y: 0)
                 canChildViewScroll = true
             } else {
                 guard let childScrollView = currentSegementSlideContentViewController?.scrollView else { return }
                 if childScrollView.contentOffset.y < 0 {
                     if translationY.keep3 > lastTranslationY.keep3 {
-                        segementSlideCollectionView.contentOffset = CGPoint(x: segementSlideCollectionView.contentOffset.x, y: 0)
+                        segementSlideScrollView.contentOffset = CGPoint(x: segementSlideScrollView.contentOffset.x, y: 0)
                         canChildViewScroll = true
                     } else {
                         canChildViewScroll = false
@@ -461,7 +410,7 @@ extension SegementSlideViewController {
     
     private func childScrollViewDidScroll(_ childScrollView: UIScrollView) {
         scrollViewDidScroll(childScrollView, isParent: false)
-        guard headerStickyHeight != 0 else { return }
+        guard let headerStickyHeight = headerStickyHeight else { return }
         switch innerBouncesType {
         case .parent:
             if !canChildViewScroll {
@@ -474,12 +423,12 @@ extension SegementSlideViewController {
             if !canChildViewScroll {
                 childScrollView.contentOffset = CGPoint(x: childScrollView.contentOffset.x, y: 0)
             } else if childScrollView.contentOffset.y <= 0 {
-                if segementSlideCollectionView.contentOffset.y <= 0 {
+                if segementSlideScrollView.contentOffset.y <= 0 {
                     canChildViewScroll = true
                 }
                 canParentViewScroll = true
             } else {
-                if segementSlideCollectionView.contentOffset.y > 0 && segementSlideCollectionView.contentOffset.y.keep3 < headerStickyHeight.keep3 {
+                if segementSlideScrollView.contentOffset.y > 0 && segementSlideScrollView.contentOffset.y.keep3 < headerStickyHeight.keep3 {
                     canChildViewScroll = false
                 }
             }
@@ -512,7 +461,7 @@ extension SegementSlideViewController {
     
 }
 
-internal class SegementSlideCollectionView: UICollectionView, UIGestureRecognizerDelegate {
+internal class SegementSlideScrollView: UIScrollView, UIGestureRecognizerDelegate {
     
     internal func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
