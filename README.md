@@ -99,10 +99,12 @@ Run `carthage update` to build the framework.
 - add `New Run Script Phase`
 - add `/usr/local/bin/carthage copy-frameworks` to the input field
 - add `$(SRCROOT)/Carthage/Build/iOS/SegementSlide.framework` to `Input Files`
+![Copy Carthage Frameworks](https://github.com/Jiar/SegementSlide/blob/master/Snapshots/Copy%20Carthage%20Frameworks.jpeg?raw=true)
 
 3. Embedded Binaries:
 - open the `general` tab of the project Settings
 - add 'SegementSlide.framework' and 'SnapKit.framework' in `$(SRCROOT)/Carthage/Build/iOS` to the 'Embedded Binaries'
+![Embed Binaries](https://github.com/Jiar/SegementSlide/blob/master/Snapshots/Embed%20Binaries.jpeg?raw=true)
 
 ### Manually
 
