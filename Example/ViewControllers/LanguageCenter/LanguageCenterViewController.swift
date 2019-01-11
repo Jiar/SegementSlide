@@ -17,9 +17,6 @@ class LanguageCenterViewController: ShadowTransparentTabSlideViewController {
     private var badges: [Int: BadgeType] = [:]
     private var language: Language?
     private let centerHeaderView: LanguageCenterHeaderView
-    private var limitContentOffsetY: CGFloat {
-        return -(centerHeaderView.bgImageViewHeight-headerHeight())
-    }
     
     init(id: Int) {
         self.id = id
@@ -166,9 +163,6 @@ class LanguageCenterViewController: ShadowTransparentTabSlideViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
         super.scrollViewDidScroll(scrollView, isParent: isParent)
         guard isParent else { return }
-        if scrollView.contentOffset.y <= limitContentOffsetY {
-            scrollView.contentOffset.y = limitContentOffsetY
-        }
         centerHeaderView.setBgImageTopConstraint(scrollView.contentOffset.y)
     }
     

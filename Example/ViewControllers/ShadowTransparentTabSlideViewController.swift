@@ -10,16 +10,6 @@ import UIKit
 import SegementSlide
 
 class ShadowTransparentTabSlideViewController: TransparentTabSlideViewController {
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        title = ""
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        title = ""
-    }
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
         super.scrollViewDidScroll(scrollView, isParent: isParent)
@@ -29,7 +19,7 @@ class ShadowTransparentTabSlideViewController: TransparentTabSlideViewController
     
     private func updateNavigationBarStyle(_ scrollView: UIScrollView) {
         guard headerStickyHeight != 0 else { return }
-        if scrollView.contentOffset.y >= headerStickyHeight {
+        if scrollView.contentOffset.y > headerStickyHeight {
             slideSwitcherView.layer.applySketchShadow(color: .black, alpha: 0.03, x: 0, y: 2.5, blur: 5)
             slideSwitcherView.layer.add(generateFadeAnimation(), forKey: "reloadSwitcherView")
         } else {
