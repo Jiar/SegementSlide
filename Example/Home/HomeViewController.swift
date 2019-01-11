@@ -28,7 +28,7 @@ class HomeViewController: ShadowSegementSlideViewController {
     }
     
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return UIStatusBarAnimation.slide
+        return .fade
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
@@ -39,10 +39,6 @@ class HomeViewController: ShadowSegementSlideViewController {
     
     override var switcherType: SwitcherType {
         return .tab
-    }
-    
-    override var extendedBottomsafeAreaInset: Bool {
-        return Bool.random()
     }
     
     override func titlesInSwitcher() -> [String] {
@@ -77,6 +73,11 @@ class HomeViewController: ShadowSegementSlideViewController {
         scrollToSlide(at: 0, animated: false)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     @objc private func moreAction() {
         let viewController: UIViewController
         switch Int.random(in: 0..<3) {
@@ -89,8 +90,11 @@ class HomeViewController: ShadowSegementSlideViewController {
         default:
             viewController = HomeViewController()
         }
-        viewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(viewController, animated: true)
+        viewController.hidesBottomBarWhenPushed = Bool.random()
+        //navigationController?.pushViewController(viewController, animated: true)
+        let temp = HomeViewController()
+        temp.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(temp, animated: true)
     }
 
 }

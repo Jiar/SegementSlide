@@ -37,17 +37,6 @@ open class TransparentTabSlideViewController: SegementSlideViewController {
     public var storedNavigationBarShadowImage: UIImage? = nil
     public var storedNavigationBarBackgroundImage: UIImage? = nil
     
-    public override var headerStickyHeight: CGFloat {
-        return (innerHeaderHeight ?? 0)-topLayoutLength
-    }
-    public override var contentViewHeight: CGFloat {
-        if extendedBottomsafeAreaInset {
-            return view.bounds.height-switcherHeight-topLayoutLength
-        } else {
-            return view.bounds.height-switcherHeight-topLayoutLength-bottomLayoutLength
-        }
-    }
-    
     open override func headerHeight() -> CGFloat {
         assert(false, "must override this function")
         return 0
@@ -194,8 +183,7 @@ extension TransparentTabSlideViewController {
     
     private func updateNavigationBarStyle(_ scrollView: UIScrollView) {
         guard let navigationController = navigationController else { return }
-        guard headerStickyHeight != -topLayoutLength else { return }
-        if scrollView.contentOffset.y.keep3 >= headerStickyHeight.keep3 {
+        if scrollView.contentOffset.y >= headerStickyHeight {
             guard !hasEmbed else { return }
             hasEmbed = true
             hasDisplay = false

@@ -57,10 +57,6 @@ class LanguageCenterViewController: ShadowTransparentTabSlideViewController {
         return .tab
     }
     
-    override var extendedBottomsafeAreaInset: Bool {
-        return Bool.random()
-    }
-    
     override func titlesInSwitcher() -> [String] {
         guard let _ = language else {
             return []
