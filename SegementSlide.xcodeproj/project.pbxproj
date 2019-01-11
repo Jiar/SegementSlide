@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		80A8699121E6242700A773CB /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698021E6242600A773CB /* BadgeView.swift */; };
 		80A8699221E6242700A773CB /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698121E6242600A773CB /* ReusableProtocol.swift */; };
-		80A8699321E6242700A773CB /* CGFloat+Decimals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698221E6242600A773CB /* CGFloat+Decimals.swift */; };
-		80A8699421E6242700A773CB /* UIRectEdge+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698321E6242600A773CB /* UIRectEdge+EX.swift */; };
 		80A8699521E6242700A773CB /* String+Bounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698421E6242600A773CB /* String+Bounding.swift */; };
 		80A8699621E6242700A773CB /* SegementSlideContentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698621E6242600A773CB /* SegementSlideContentViewCell.swift */; };
 		80A8699721E6242700A773CB /* SegementSlideContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698821E6242600A773CB /* SegementSlideContentView.swift */; };
@@ -28,8 +26,6 @@
 		80A869B021E6252800A773CB /* SegementSlideContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698821E6242600A773CB /* SegementSlideContentView.swift */; };
 		80A869B121E6252800A773CB /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698021E6242600A773CB /* BadgeView.swift */; };
 		80A869B221E6252800A773CB /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698121E6242600A773CB /* ReusableProtocol.swift */; };
-		80A869B321E6252800A773CB /* CGFloat+Decimals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698221E6242600A773CB /* CGFloat+Decimals.swift */; };
-		80A869B421E6252800A773CB /* UIRectEdge+EX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698321E6242600A773CB /* UIRectEdge+EX.swift */; };
 		80A869B521E6252800A773CB /* String+Bounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698421E6242600A773CB /* String+Bounding.swift */; };
 		80A869BE21E6294E00A773CB /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A869BD21E6294E00A773CB /* SnapKit.framework */; };
 		80A869C821E6387600A773CB /* SegementSlide_Dynamic_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A869C721E6387600A773CB /* SegementSlide_Dynamic_Tests.swift */; };
@@ -62,8 +58,6 @@
 		8066125A21BA910000C05D7E /* libSegementSlide.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSegementSlide.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		80A8698021E6242600A773CB /* BadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		80A8698121E6242600A773CB /* ReusableProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableProtocol.swift; sourceTree = "<group>"; };
-		80A8698221E6242600A773CB /* CGFloat+Decimals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Decimals.swift"; sourceTree = "<group>"; };
-		80A8698321E6242600A773CB /* UIRectEdge+EX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIRectEdge+EX.swift"; sourceTree = "<group>"; };
 		80A8698421E6242600A773CB /* String+Bounding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Bounding.swift"; sourceTree = "<group>"; };
 		80A8698621E6242600A773CB /* SegementSlideContentViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegementSlideContentViewCell.swift; sourceTree = "<group>"; };
 		80A8698821E6242600A773CB /* SegementSlideContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegementSlideContentView.swift; sourceTree = "<group>"; };
@@ -146,8 +140,6 @@
 			children = (
 				80A8698021E6242600A773CB /* BadgeView.swift */,
 				80A8698121E6242600A773CB /* ReusableProtocol.swift */,
-				80A8698221E6242600A773CB /* CGFloat+Decimals.swift */,
-				80A8698321E6242600A773CB /* UIRectEdge+EX.swift */,
 				80A8698421E6242600A773CB /* String+Bounding.swift */,
 			);
 			path = Util;
@@ -378,9 +370,7 @@
 				80A8699121E6242700A773CB /* BadgeView.swift in Sources */,
 				80A8699721E6242700A773CB /* SegementSlideContentView.swift in Sources */,
 				80A8699A21E6242700A773CB /* SegementSlideSwitcherReusableView.swift in Sources */,
-				80A8699321E6242700A773CB /* CGFloat+Decimals.swift in Sources */,
 				80A8699821E6242700A773CB /* SegementSlideViewController.swift in Sources */,
-				80A8699421E6242700A773CB /* UIRectEdge+EX.swift in Sources */,
 				80A8699621E6242700A773CB /* SegementSlideContentViewCell.swift in Sources */,
 				80A8699521E6242700A773CB /* String+Bounding.swift in Sources */,
 				80A8699C21E6242700A773CB /* SegementSlideHeaderViewCell.swift in Sources */,
@@ -392,8 +382,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				80A869B521E6252800A773CB /* String+Bounding.swift in Sources */,
-				80A869B321E6252800A773CB /* CGFloat+Decimals.swift in Sources */,
-				80A869B421E6252800A773CB /* UIRectEdge+EX.swift in Sources */,
 				80A869B121E6252800A773CB /* BadgeView.swift in Sources */,
 				80A869AB21E6252800A773CB /* SegementSlideViewController.swift in Sources */,
 				80A869AA21E6252800A773CB /* TransparentTabSlideViewController.swift in Sources */,

@@ -41,11 +41,7 @@ open class TransparentTabSlideViewController: SegementSlideViewController {
         return innerHeaderHeight-topLayoutLength
     }
     public override var contentViewHeight: CGFloat {
-        if extendedBottomsafeAreaInset {
-            return view.bounds.height-switcherHeight-topLayoutLength
-        } else {
-            return view.bounds.height-switcherHeight-topLayoutLength-bottomLayoutLength
-        }
+        return view.bounds.height-switcherHeight-topLayoutLength
     }
     
     open override var switcherType: SwitcherType {
@@ -185,7 +181,7 @@ extension TransparentTabSlideViewController {
     private func updateNavigationBarStyle(_ scrollView: UIScrollView) {
         guard let navigationController = navigationController else { return }
         guard headerStickyHeight != -topLayoutLength else { return }
-        if scrollView.contentOffset.y.keep3 >= headerStickyHeight.keep3 {
+        if scrollView.contentOffset.y >= headerStickyHeight {
             guard !hasEmbed else { return }
             hasEmbed = true
             hasDisplay = false

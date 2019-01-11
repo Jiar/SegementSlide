@@ -43,10 +43,6 @@ class HomeViewController: ShadowSegementSlideViewController {
         return .tab
     }
     
-    override var extendedBottomsafeAreaInset: Bool {
-        return Bool.random()
-    }
-    
     override func titlesInSwitcher() -> [String] {
         return DataManager.shared.homeLanguageTitles
     }
