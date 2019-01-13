@@ -63,7 +63,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'SegementSlide', '~> 1.0'
+    pod 'SegementSlide', '2.0-beta-1'
 end
 ```
 
@@ -89,7 +89,7 @@ To integrate SegementSlide into your Xcode project using Carthage
 1. specify it in your `Cartfile`:
 
 ```ogdl
-github "Jiar/SegementSlide" ~> 1.0
+github "Jiar/SegementSlide" "2.0-beta-1"
 ```
 
 Run `carthage update` to build the framework.
@@ -123,11 +123,11 @@ class HomeViewController: SegementSlideViewController {
 
     ......
 
-    override func headerHeight() -> CGFloat {
+    override func headerHeight() -> CGFloat? {
         return view.bounds.height/4
     }
     
-    override func headerView() -> UIView {
+    override func headerView() -> UIView? {
         return UIView()
     }
 
@@ -142,6 +142,7 @@ class HomeViewController: SegementSlideViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadData()
+        scrollToSlide(at: 0, animated: false)
     }
 
 }
