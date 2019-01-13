@@ -43,7 +43,7 @@ internal class SegementSlideContentView: UIView {
     private func setup() {
         addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.bottom.leading.trailing.equalToSuperview()
         }
         scrollView.delegate = self
         scrollView.isScrollEnabled = true

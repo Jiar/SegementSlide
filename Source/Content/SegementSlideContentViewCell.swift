@@ -23,7 +23,7 @@ internal class SegementSlideContentViewCell: UICollectionViewCell {
     internal func config(_ segementSlideContentView: SegementSlideContentView) {
         addSubview(segementSlideContentView)
         segementSlideContentView.snp.remakeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.bottom.leading.trailing.equalToSuperview()
         }
         lastSegementSlideContentView = segementSlideContentView
     }

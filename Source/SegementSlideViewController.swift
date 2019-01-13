@@ -177,6 +177,7 @@ open class SegementSlideViewController: UIViewController {
 extension SegementSlideViewController {
     
     private func setup() {
+        view.backgroundColor = .white
         extendedLayoutIncludesOpaqueBars = true
         edgesForExtendedLayout = []
         setupSegementSlideSwitcherView()
@@ -202,7 +203,7 @@ extension SegementSlideViewController {
         segementSlideCollectionView = SegementSlideCollectionView(frame: .zero, collectionViewLayout: layout)
         view.addSubview(segementSlideCollectionView)
         segementSlideCollectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.bottom.leading.trailing.equalToSuperview()
         }
         if #available(iOS 11.0, *) {
             segementSlideCollectionView.contentInsetAdjustmentBehavior = .never
@@ -224,7 +225,6 @@ extension SegementSlideViewController {
         }
         segementSlideCollectionView.isPagingEnabled = false
         segementSlideCollectionView.isScrollEnabled = true
-        view.backgroundColor = .white
         parentKeyValueObservation = segementSlideCollectionView.observe(\.contentOffset, options: [.initial, .new, .old], changeHandler: { [weak self] (scrollView, change) in
             guard let self = self else { return }
             guard change.newValue != change.oldValue else { return }

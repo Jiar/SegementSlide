@@ -23,7 +23,7 @@ internal class SegementSlideSwitcherReusableView: UICollectionReusableView {
     internal func config(_ segementSlideSwitcherView: SegementSlideSwitcherView) {
         addSubview(segementSlideSwitcherView)
         segementSlideSwitcherView.snp.remakeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.bottom.leading.trailing.equalToSuperview()
         }
         lastSegementSlideSwitcherView = segementSlideSwitcherView
     }
