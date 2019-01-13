@@ -15,12 +15,14 @@ public enum BouncesType {
 }
 
 open class SegementSlideViewController: UIViewController {
+    
     internal private(set) var segementSlideScrollView: SegementSlideScrollView!
     internal private(set) var segementSlideHeaderView: SegementSlideHeaderView!
-    internal private(set) var segementSlideSwitcherView: SegementSlideSwitcherView!
     internal private(set) var segementSlideContentView: SegementSlideContentView!
+    internal private(set) var segementSlideSwitcherView: SegementSlideSwitcherView!
     internal private(set) var innerHeaderHeight: CGFloat?
     internal private(set) var innerHeaderView: UIView?
+    
     private var headerViewTopConstraint: Constraint?
     private var contentViewHeightConstraint: Constraint?
     private var parentKeyValueObservation: NSKeyValueObservation!
@@ -43,10 +45,10 @@ open class SegementSlideViewController: UIViewController {
         guard let innerHeaderHeight = innerHeaderHeight else {
             return 0
         }
-        if !edgesForExtendedLayout.contains(.top) {
-            return innerHeaderHeight
-        } else {
+        if edgesForExtendedLayout.contains(.top) {
             return innerHeaderHeight-topLayoutLength
+        } else {
+            return innerHeaderHeight
         }
     }
     public var contentViewHeight: CGFloat {
@@ -65,19 +67,19 @@ open class SegementSlideViewController: UIViewController {
     }
     
     open func headerHeight() -> CGFloat? {
-        if !edgesForExtendedLayout.contains(.top) {
+        if edgesForExtendedLayout.contains(.top) {
+            assert(false, "must override this function")
             return nil
         } else {
-            assert(false, "must override this function")
             return nil
         }
     }
     
     open func headerView() -> UIView? {
-        if !edgesForExtendedLayout.contains(.top) {
+        if edgesForExtendedLayout.contains(.top) {
+            assert(false, "must override this function")
             return nil
         } else {
-            assert(false, "must override this function")
             return nil
         }
     }
@@ -158,13 +160,16 @@ open class SegementSlideViewController: UIViewController {
     
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        segementSlideHeaderView.layer.zPosition = -3
+        segementSlideContentView.layer.zPosition = -2
+        segementSlideSwitcherView.layer.zPosition = -1
         contentViewHeightConstraint?.update(offset: contentViewHeight)
-        if !edgesForExtendedLayout.contains(.top) {
-            headerViewTopConstraint?.update(offset: topLayoutLength)
-            segementSlideScrollView.contentSize = CGSize(width: view.bounds.width, height: topLayoutLength+(innerHeaderHeight ?? 0)+switcherHeight+contentViewHeight+1)
-        } else {
+        if edgesForExtendedLayout.contains(.top) {
             headerViewTopConstraint?.update(offset: 0)
             segementSlideScrollView.contentSize = CGSize(width: view.bounds.width, height: (innerHeaderHeight ?? 0)+switcherHeight+contentViewHeight+1)
+        } else {
+            headerViewTopConstraint?.update(offset: topLayoutLength)
+            segementSlideScrollView.contentSize = CGSize(width: view.bounds.width, height: topLayoutLength+(innerHeaderHeight ?? 0)+switcherHeight+contentViewHeight+1)
         }
     }
     
@@ -183,8 +188,6 @@ open class SegementSlideViewController: UIViewController {
     }
     
     public func reloadHeader() {
-        innerHeaderView?.snp.removeConstraints()
-        innerHeaderView?.removeFromSuperview()
         setupHeader()
         layoutSegementSlideScrollView()
     }
@@ -214,28 +217,32 @@ open class SegementSlideViewController: UIViewController {
 extension SegementSlideViewController {
     
     private func setup() {
+        view.backgroundColor = .white
         extendedLayoutIncludesOpaqueBars = true
         edgesForExtendedLayout = []
-        setupSegementSlideHeaderView()
-        setupSegementSlideSwitcherView()
-        setupSegementSlideContentView()
         setupSegementSlideScrollView()
+        setupSegementSlideHeaderView()
+        setupSegementSlideContentView()
+        setupSegementSlideSwitcherView()
+        observeScrollViewContentOffset()
     }
     
     private func setupSegementSlideHeaderView() {
         segementSlideHeaderView = SegementSlideHeaderView()
-        segementSlideHeaderView.backgroundColor = .clear
-    }
-    
-    private func setupSegementSlideSwitcherView() {
-        segementSlideSwitcherView = SegementSlideSwitcherView()
-        segementSlideSwitcherView.delegate = self
+        segementSlideScrollView.addSubview(segementSlideHeaderView)
     }
     
     private func setupSegementSlideContentView() {
         segementSlideContentView = SegementSlideContentView()
         segementSlideContentView.delegate = self
         segementSlideContentView.viewController = self
+        segementSlideScrollView.addSubview(segementSlideContentView)
+    }
+    
+    private func setupSegementSlideSwitcherView() {
+        segementSlideSwitcherView = SegementSlideSwitcherView()
+        segementSlideSwitcherView.delegate = self
+        segementSlideScrollView.addSubview(segementSlideSwitcherView)
     }
     
     private func setupSegementSlideScrollView() {
@@ -252,10 +259,12 @@ extension SegementSlideViewController {
         segementSlideScrollView.backgroundColor = .white
         segementSlideScrollView.showsHorizontalScrollIndicator = false
         segementSlideScrollView.showsVerticalScrollIndicator = false
-        segementSlideScrollView.delegate = self
         segementSlideScrollView.isPagingEnabled = false
         segementSlideScrollView.isScrollEnabled = true
-        view.backgroundColor = .white
+        segementSlideScrollView.delegate = self
+    }
+    
+    private func observeScrollViewContentOffset() {
         parentKeyValueObservation = segementSlideScrollView.observe(\.contentOffset, options: [.initial, .new, .old], changeHandler: { [weak self] (scrollView, change) in
             guard let self = self else { return }
             guard change.newValue != change.oldValue else { return }
@@ -294,22 +303,17 @@ extension SegementSlideViewController {
     }
     
     private func layoutSegementSlideScrollView() {
-        for subview in segementSlideScrollView.subviews {
-            subview.snp.removeConstraints()
-            subview.removeFromSuperview()
-        }
-        if let innerHeaderView = innerHeaderView, let innerHeaderHeight = innerHeaderHeight {
-            segementSlideScrollView.addSubview(segementSlideHeaderView)
-            segementSlideHeaderView.snp.remakeConstraints { make in
-                headerViewTopConstraint = make.top.equalTo(segementSlideScrollView.snp.top).constraint
-                make.leading.equalTo(view.snp.leading)
-                make.trailing.equalTo(view.snp.trailing)
+        segementSlideHeaderView.snp.remakeConstraints { make in
+            headerViewTopConstraint = make.top.equalTo(segementSlideScrollView.snp.top).constraint
+            make.leading.equalTo(view.snp.leading)
+            make.trailing.equalTo(view.snp.trailing)
+            if let _ = innerHeaderView, let innerHeaderHeight = innerHeaderHeight {
                 make.height.equalTo(innerHeaderHeight)
+            } else {
+                make.height.equalTo(0)
             }
-            segementSlideHeaderView.config(innerHeaderView, segementSlideContentView: segementSlideContentView)
         }
-        segementSlideScrollView.addSubview(segementSlideContentView)
-        segementSlideScrollView.addSubview(segementSlideSwitcherView)
+        segementSlideHeaderView.config(innerHeaderView, segementSlideContentView: segementSlideContentView)
         segementSlideSwitcherView.snp.remakeConstraints { make in
             if let _ = innerHeaderView {
                 make.top.equalTo(segementSlideHeaderView.snp.bottom).priority(999)

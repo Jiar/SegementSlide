@@ -101,7 +101,6 @@ class LanguageCenterViewController: ShadowTransparentTabSlideViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(moreAction))
         let refreshHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshAction))!
         refreshHeader.lastUpdatedTimeLabel.isHidden = true

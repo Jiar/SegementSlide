@@ -28,13 +28,21 @@ class HomeViewController: ShadowSegementSlideViewController {
     }
     
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return .fade
+        return .slide
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
         guard !isParent else { return }
+        guard let navigationController = navigationController else { return }
         let translationY = -scrollView.panGestureRecognizer.translation(in: scrollView).y
-        navigationController?.setNavigationBarHidden(translationY > 0, animated: true)
+        if translationY > 0 {
+            guard !navigationController.isNavigationBarHidden else { return }
+            navigationController.setNavigationBarHidden(true, animated: true)
+        } else {
+            guard !scrollView.isTracking else { return }
+            guard navigationController.isNavigationBarHidden else { return }
+            navigationController.setNavigationBarHidden(false, animated: true)
+        }
     }
     
     override var switcherType: SwitcherType {
@@ -91,10 +99,7 @@ class HomeViewController: ShadowSegementSlideViewController {
             viewController = HomeViewController()
         }
         viewController.hidesBottomBarWhenPushed = Bool.random()
-        //navigationController?.pushViewController(viewController, animated: true)
-        let temp = HomeViewController()
-        temp.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(temp, animated: true)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 
 }

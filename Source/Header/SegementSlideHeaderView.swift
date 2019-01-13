@@ -14,11 +14,26 @@ internal class SegementSlideHeaderView: UIView {
     private weak var lastHeaderView: UIView?
     private weak var segementSlideContentView: SegementSlideContentView?
     
-    internal func config(_ headerView: UIView, segementSlideContentView: SegementSlideContentView) {
+    internal override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    internal required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        backgroundColor = .clear
+    }
+    
+    internal func config(_ headerView: UIView?, segementSlideContentView: SegementSlideContentView) {
         if let lastHeaderView = lastHeaderView {
             lastHeaderView.snp.removeConstraints()
             lastHeaderView.removeFromSuperview()
         }
+        guard let headerView = headerView else { return }
         self.segementSlideContentView = segementSlideContentView
         addSubview(headerView)
         headerView.snp.remakeConstraints { make in

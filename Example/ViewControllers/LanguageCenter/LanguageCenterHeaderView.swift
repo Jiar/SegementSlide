@@ -44,6 +44,7 @@ class LanguageCenterHeaderView: UIView {
     
     func setBgImageTopConstraint(_ constant: CGFloat) {
         bgImageTopConstraint.constant = constant
+        layoutIfNeeded()
     }
 
 }
