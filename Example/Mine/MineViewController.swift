@@ -27,7 +27,7 @@ class MineViewController: ShadowTransparentTabSlideViewController {
     }
     
     override var bouncesType: BouncesType {
-        return .parent
+        return .child
     }
     
     override func headerHeight() -> CGFloat {
