@@ -212,7 +212,9 @@ extension SegementSlideSwitcherView {
             } else if (offsetX+scrollView.bounds.width) > scrollView.contentSize.width {
                 offsetX = scrollView.contentSize.width-scrollView.bounds.width
             }
-            scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: animated)
+            if scrollView.contentSize.width > scrollView.bounds.width {
+                scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: animated)
+            }
         }
         guard index != selectedIndex else { return }
         selectedIndex = index
