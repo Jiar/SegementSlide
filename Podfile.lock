@@ -1,7 +1,7 @@
 PODS:
   - MBProgressHUD (1.1.0)
   - MJRefresh (3.1.15.7)
-  - SegementSlide (1.0):
+  - SegementSlide (1.1):
     - SnapKit (~> 4.2.0)
   - SnapKit (4.2.0)
 
@@ -24,7 +24,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
-  SegementSlide: 932a9b887ae997e3b375572f36204162d1881f7b
+  SegementSlide: f70f67998cda2f90ed8c22f8b0d67abdce0e21db
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
 PODFILE CHECKSUM: 5f238afc943014d26abc84d7385bd9a4e9a3228c
