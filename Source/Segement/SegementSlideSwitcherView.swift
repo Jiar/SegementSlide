@@ -29,7 +29,7 @@ internal class SegementSlideSwitcherView: UIView {
     
     internal var type: SwitcherType = .tab
     internal var horizontalMargin: CGFloat = 16
-    internal var horizontalSpace: CGFloat = 22
+    internal var horizontalSpace: CGFloat = 32
     internal var normalTitleFont = UIFont.systemFont(ofSize: 15)
     internal var selectedTitleFont = UIFont.systemFont(ofSize: 15, weight: .medium)
     internal var normalTitleColor = UIColor.gray
@@ -63,9 +63,6 @@ internal class SegementSlideSwitcherView: UIView {
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.backgroundColor = .clear
-        scrollView.addSubview(indicatorView)
-        indicatorView.layer.masksToBounds = true
-        indicatorView.layer.cornerRadius = indicatorHeight/2
         backgroundColor = .white
     }
     
@@ -81,6 +78,8 @@ internal class SegementSlideSwitcherView: UIView {
             titleButton.removeFromSuperview()
         }
         titleButtons.removeAll()
+        indicatorView.frame = .zero
+        indicatorView.removeFromSuperview()
         scrollView.isScrollEnabled = type == .segement
         guard let titles = delegate?.titlesInSegementSlideSwitcherView() else { return }
         guard !titles.isEmpty else { return }
@@ -97,6 +96,9 @@ internal class SegementSlideSwitcherView: UIView {
             titleButtons.append(button)
         }
         guard !titleButtons.isEmpty else { return }
+        scrollView.addSubview(indicatorView)
+        indicatorView.layer.masksToBounds = true
+        indicatorView.layer.cornerRadius = indicatorHeight/2
         indicatorView.backgroundColor = indicatorColor
         layoutTitleButtons()
         reloadBadges()
@@ -167,7 +169,6 @@ extension SegementSlideSwitcherView {
                 buttonWidth = selectedButtonWidth > normalButtonWidth ? selectedButtonWidth : normalButtonWidth
             }
             titleButton.frame = CGRect(x: offsetX, y: 0, width: buttonWidth, height: scrollView.bounds.height)
-            scrollView.layoutIfNeeded()
             switch type {
             case .tab:
                 offsetX += buttonWidth

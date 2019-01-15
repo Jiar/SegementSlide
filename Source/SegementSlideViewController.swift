@@ -106,7 +106,7 @@ open class SegementSlideViewController: UIViewController {
     }
     
     open var horizontalSpaceInSwitcher: CGFloat {
-        return 22
+        return 32
     }
     
     open var normalTitleFontInSwitcher: UIFont {
@@ -160,6 +160,7 @@ open class SegementSlideViewController: UIViewController {
     
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        layoutSegementSlideScrollView()
         segementSlideHeaderView.layer.zPosition = -3
         segementSlideContentView.layer.zPosition = -2
         segementSlideSwitcherView.layer.zPosition = -1
