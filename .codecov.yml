@@ -6,8 +6,10 @@ coverage:
   precision: 2
   round: down
   range: "70...100"
-  fixes:
-    - "::Source/"
+  ignore:
+    - Example/*
+    - ExampleTests/*
+    - Pods/*
   status:
     project: yes
     patch: yes
