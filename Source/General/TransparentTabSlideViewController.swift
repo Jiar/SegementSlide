@@ -37,18 +37,18 @@ open class TransparentTabSlideViewController: SegementSlideViewController {
     public var storedNavigationBarShadowImage: UIImage? = nil
     public var storedNavigationBarBackgroundImage: UIImage? = nil
     
-    open override func headerHeight() -> CGFloat {
-        assert(false, "must override this function")
+    open override var headerHeight: CGFloat {
+        #if DEBUG
+        assert(false, "must override this variable")
+        #endif
         return 0
     }
     
-    open override func headerView() -> UIView {
-        assert(false, "must override this function")
+    open override var headerView: UIView {
+        #if DEBUG
+        assert(false, "must override this variable")
+        #endif
         return UIView()
-    }
-    
-    open override var switcherType: SwitcherType {
-        return .tab
     }
     
     open var isTranslucents: DisplayEmbed<Bool> {

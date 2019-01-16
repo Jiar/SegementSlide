@@ -30,7 +30,7 @@ class MineViewController: ShadowTransparentTabSlideViewController {
         return .child
     }
     
-    override func headerHeight() -> CGFloat {
+    override var headerHeight: CGFloat {
         if #available(iOS 11.0, *) {
             return view.bounds.height/4+view.safeAreaInsets.top
         } else {
@@ -38,7 +38,7 @@ class MineViewController: ShadowTransparentTabSlideViewController {
         }
     }
     
-    override func headerView() -> UIView {
+    override var headerView: UIView {
         let headerView = UIImageView()
         headerView.isUserInteractionEnabled = true
         headerView.contentMode = .scaleAspectFill
@@ -46,11 +46,11 @@ class MineViewController: ShadowTransparentTabSlideViewController {
         return headerView
     }
     
-    override var switcherType: SwitcherType {
-        return .tab
+    override var switcherConfig: SegementSlideSwitcherConfig {
+        return SegementSlideSwitcherConfig(type: .tab)
     }
     
-    override func titlesInSwitcher() -> [String] {
+    override var titlesInSwitcher: [String] {
         return DataManager.shared.mineLanguageTitles
     }
     

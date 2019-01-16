@@ -45,11 +45,11 @@ class HomeViewController: ShadowSegementSlideViewController {
         }
     }
     
-    override var switcherType: SwitcherType {
-        return .tab
+    override var switcherConfig: SegementSlideSwitcherConfig {
+        return SegementSlideSwitcherConfig(type: .tab)
     }
     
-    override func titlesInSwitcher() -> [String] {
+    override var titlesInSwitcher: [String] {
         return DataManager.shared.homeLanguageTitles
     }
     

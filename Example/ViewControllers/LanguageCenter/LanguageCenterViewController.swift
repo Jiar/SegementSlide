@@ -40,11 +40,11 @@ class LanguageCenterViewController: ShadowTransparentTabSlideViewController {
         return .parent
     }
     
-    override func headerHeight() -> CGFloat {
+    override var headerHeight: CGFloat {
         return centerHeaderView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
     }
     
-    override func headerView() -> UIView {
+    override var headerView: UIView {
         guard let _ = language else {
             let view = UIView()
             view.backgroundColor = .clear
@@ -53,11 +53,11 @@ class LanguageCenterViewController: ShadowTransparentTabSlideViewController {
         return centerHeaderView
     }
     
-    override var switcherType: SwitcherType {
-        return .tab
+    override var switcherConfig: SegementSlideSwitcherConfig {
+        return SegementSlideSwitcherConfig(type: .tab)
     }
     
-    override func titlesInSwitcher() -> [String] {
+    override var titlesInSwitcher: [String] {
         guard let _ = language else {
             return []
         }

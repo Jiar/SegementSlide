@@ -23,11 +23,11 @@ class ExploreViewController: ShadowSegementSlideViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func headerHeight() -> CGFloat? {
+    override var headerHeight: CGFloat? {
         return view.bounds.height/4
     }
     
-    override func headerView() -> UIView? {
+    override var headerView: UIView? {
         let headerView = UIImageView()
         headerView.isUserInteractionEnabled = true
         headerView.contentMode = .scaleAspectFill
@@ -35,11 +35,11 @@ class ExploreViewController: ShadowSegementSlideViewController {
         return headerView
     }
     
-    override var switcherType: SwitcherType {
-        return .segement
+    override var switcherConfig: SegementSlideSwitcherConfig {
+        return SegementSlideSwitcherConfig(type: .segement)
     }
     
-    override func titlesInSwitcher() -> [String] {
+    override var titlesInSwitcher: [String] {
         return DataManager.shared.exploreLanguageTitles
     }
     

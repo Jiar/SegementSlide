@@ -9,33 +9,35 @@
 import UIKit
 import SnapKit
 
-public protocol SegementSlideContentScrollViewDelegate {
-    var scrollView: UIScrollView { get }
+@objc public protocol SegementSlideContentScrollViewDelegate where Self: UIViewController {
+    /// must implement this variable, when use class `SegementSlideViewController` or it's subClass.
+    /// you can ignore this variable, when you use `SegementSlideContentView` alone.
+    @objc optional var scrollView: UIScrollView { get }
 }
 
-internal protocol SegementSlideContentDelegate: class {
+public protocol SegementSlideContentDelegate: class {
     var segementSlideContentScrollViewCount: Int { get }
     
     func segementSlideContentScrollView(at index: Int) -> SegementSlideContentScrollViewDelegate?
     func segementSlideContentView(_ segementSlideContentView: SegementSlideContentView, didSelectAtIndex index: Int, animated: Bool)
 }
 
-internal class SegementSlideContentView: UIView {
+public class SegementSlideContentView: UIView {
     
     private let scrollView = UIScrollView()
     private var viewControllers: [Int: SegementSlideContentScrollViewDelegate] = [:]
-    
     private var initSelectedIndex: Int?
-    internal private(set) var selectedIndex: Int?
-    internal weak var delegate: SegementSlideContentDelegate?
-    internal weak var viewController: SegementSlideViewController?
     
-    internal override init(frame: CGRect) {
+    public private(set) var selectedIndex: Int?
+    public weak var delegate: SegementSlideContentDelegate?
+    public weak var viewController: UIViewController?
+    
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
     
-    internal required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
@@ -57,7 +59,7 @@ internal class SegementSlideContentView: UIView {
         backgroundColor = .white
     }
     
-    internal override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         guard scrollView.frame != .zero else { return }
         guard let count = delegate?.segementSlideContentScrollViewCount else { return }
@@ -67,7 +69,7 @@ internal class SegementSlideContentView: UIView {
         recoverInitSelectedIndex()
     }
     
-    internal func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
+    public func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
         if let childViewController = viewControllers[index] {
             return childViewController
         } else if let childViewController = delegate?.segementSlideContentScrollView(at: index) {
@@ -77,15 +79,13 @@ internal class SegementSlideContentView: UIView {
         return nil
     }
     
-    internal func scrollToSlide(at index: Int, animated: Bool) {
+    public func scrollToSlide(at index: Int, animated: Bool) {
         updateSelectedViewController(at: index, animated: animated)
     }
     
-    internal func reloadData() {
+    public func reloadData() {
         for (_, value) in viewControllers {
-            guard let childViewController = value as? UIViewController else {
-                continue
-            }
+            let childViewController = value as! UIViewController
             childViewController.view.removeFromSuperview()
             childViewController.removeFromParent()
         }
@@ -120,9 +120,7 @@ extension SegementSlideContentView {
     
     private func layoutViewControllers() {
         for (index, value) in viewControllers {
-            guard let childViewController = value as? UIViewController else {
-                continue
-            }
+            let childViewController = value as! UIViewController
             let offsetX = CGFloat(index)*scrollView.bounds.width
             childViewController.view.snp.remakeConstraints { make in
                 make.top.equalTo(scrollView.snp.top)
@@ -145,10 +143,10 @@ extension SegementSlideContentView {
         }
         guard let viewController = viewController,
             let count = delegate?.segementSlideContentScrollViewCount,
-            count != 0, index >= 0, index < count,
-            let childViewController = segementSlideContentViewController(at: index) as? UIViewController else {
+            count != 0, index >= 0, index < count else {
                 return
         }
+        let childViewController = segementSlideContentViewController(at: index) as! UIViewController
         viewController.addChild(childViewController)
         scrollView.addSubview(childViewController.view)
         let offsetX = CGFloat(index)*scrollView.bounds.width
