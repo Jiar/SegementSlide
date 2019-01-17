@@ -33,7 +33,7 @@ public class SegementSlideSwitcherView: UIView {
     public private(set) var selectedIndex: Int?
     public weak var delegate: SegementSlideSwitcherViewDelegate?
     
-    /// you must call the reloadData method to make it work, after the assignment.
+    /// you must call `reloadData()` to make it work, after the assignment.
     public var config: SegementSlideSwitcherConfig = SegementSlideSwitcherConfig.shared
     
     public override init(frame: CGRect) {
@@ -67,6 +67,11 @@ public class SegementSlideSwitcherView: UIView {
         recoverInitSelectedIndex()
     }
     
+    /// relayout subViews
+    ///
+    /// you should call `selectSwitcher(at index: Int, animated: Bool)` after call the method.
+    /// otherwise, none of them will be selected.
+    /// However, if an item was previously selected, it will be reSelected.
     public func reloadData() {
         for titleButton in titleButtons {
             titleButton.removeFromSuperview()
@@ -101,6 +106,7 @@ public class SegementSlideSwitcherView: UIView {
         updateSelectedButton(at: selectedIndex, animated: false)
     }
     
+    /// reload all badges in `SegementSlideSwitcherView`
     public func reloadBadges() {
         for (index, titleButton) in titleButtons.enumerated() {
             guard let type = delegate?.segementSwitcherView(self, showBadgeAtIndex: index) else {
@@ -133,6 +139,7 @@ public class SegementSlideSwitcherView: UIView {
         }
     }
     
+    /// select one item by index
     public func selectSwitcher(at index: Int, animated: Bool) {
         updateSelectedButton(at: index, animated: animated)
     }
@@ -211,7 +218,7 @@ extension SegementSlideSwitcherView {
                 offsetX = scrollView.contentSize.width-scrollView.bounds.width
             }
             if scrollView.contentSize.width > scrollView.bounds.width {
-                scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: animated)
+                scrollView.setContentOffset(CGPoint(x: offsetX, y: scrollView.contentOffset.y), animated: animated)
             }
         }
         guard index != selectedIndex else { return }

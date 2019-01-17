@@ -122,14 +122,6 @@ open class SegementSlideViewController: UIViewController {
         
     }
     
-    public func scrollToSlide(at index: Int, animated: Bool) {
-        segementSlideSwitcherView.selectSwitcher(at: index, animated: animated)
-    }
-    
-    public func contentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
-        return segementSlideContentView.segementSlideContentViewController(at: index)
-    }
-    
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         layoutSegementSlideScrollView()
@@ -151,6 +143,11 @@ open class SegementSlideViewController: UIViewController {
         setup()
     }
     
+    /// reload headerView, SwitcherView and ContentView
+    ///
+    /// you should call `scrollToSlide(at index: Int, animated: Bool)` after call the method.
+    /// otherwise, none of them will be selected.
+    /// However, if an item was previously selected, it will be reSelected.
     public func reloadData() {
         setupBounces()
         setupHeader()
@@ -160,23 +157,37 @@ open class SegementSlideViewController: UIViewController {
         layoutSegementSlideScrollView()
     }
     
+    /// reload headerView
     public func reloadHeader() {
         setupHeader()
         layoutSegementSlideScrollView()
     }
     
+    /// reload SwitcherView
     public func reloadSwitcher() {
         setupSwitcher()
         segementSlideSwitcherView.reloadData()
         layoutSegementSlideScrollView()
     }
     
+    /// reload badges in SwitcherView
     public func reloadBadgeInSwitcher() {
         segementSlideSwitcherView.reloadBadges()
     }
     
+    /// reload ContentView
     public func reloadContent() {
         segementSlideContentView.reloadData()
+    }
+    
+    /// select one item by index
+    public func scrollToSlide(at index: Int, animated: Bool) {
+        segementSlideSwitcherView.selectSwitcher(at: index, animated: animated)
+    }
+    
+    /// reuse the `SegementSlideContentScrollViewDelegate`
+    public func contentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
+        return segementSlideContentView.segementSlideContentViewController(at: index)
     }
     
     deinit {

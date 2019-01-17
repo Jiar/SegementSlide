@@ -61,28 +61,15 @@ public class SegementSlideContentView: UIView {
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        guard scrollView.frame != .zero else { return }
-        guard let count = delegate?.segementSlideContentScrollViewCount else { return }
-        guard scrollView.contentSize.height != scrollView.bounds.height else { return }
-        scrollView.contentSize = CGSize(width: CGFloat(count)*scrollView.bounds.width, height: scrollView.bounds.height)
         layoutViewControllers()
         recoverInitSelectedIndex()
     }
     
-    public func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
-        if let childViewController = viewControllers[index] {
-            return childViewController
-        } else if let childViewController = delegate?.segementSlideContentScrollView(at: index) {
-            viewControllers[index] = childViewController
-            return childViewController
-        }
-        return nil
-    }
-    
-    public func scrollToSlide(at index: Int, animated: Bool) {
-        updateSelectedViewController(at: index, animated: animated)
-    }
-    
+    /// remove subViews
+    ///
+    /// you should call `scrollToSlide(at index: Int, animated: Bool)` after call the method.
+    /// otherwise, none of them will be selected.
+    /// However, if an item was previously selected, it will be reSelected.
     public func reloadData() {
         for (_, value) in viewControllers {
             let childViewController = value as! UIViewController
@@ -94,16 +81,32 @@ public class SegementSlideContentView: UIView {
         updateSelectedViewController(at: selectedIndex, animated: false)
     }
     
+    /// select one item by index
+    public func scrollToSlide(at index: Int, animated: Bool) {
+        updateSelectedViewController(at: index, animated: animated)
+    }
+    
+    /// reuse the `SegementSlideContentScrollViewDelegate`
+    public func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
+        if let childViewController = viewControllers[index] {
+            return childViewController
+        } else if let childViewController = delegate?.segementSlideContentScrollView(at: index) {
+            viewControllers[index] = childViewController
+            return childViewController
+        }
+        return nil
+    }
+    
 }
 
 extension SegementSlideContentView: UIScrollViewDelegate {
 
-    internal func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if decelerate { return }
         scrollViewDidEndScroll(scrollView)
     }
 
-    internal func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         scrollViewDidEndScroll(scrollView)
     }
 
@@ -146,16 +149,22 @@ extension SegementSlideContentView {
             count != 0, index >= 0, index < count else {
                 return
         }
+        let contentSize = CGSize(width: CGFloat(count)*scrollView.bounds.width, height: scrollView.bounds.height)
+        if scrollView.contentSize != contentSize {
+            scrollView.contentSize = contentSize
+        }
         let childViewController = segementSlideContentViewController(at: index) as! UIViewController
-        viewController.addChild(childViewController)
-        scrollView.addSubview(childViewController.view)
+        if childViewController.view.superview == nil {
+            viewController.addChild(childViewController)
+            scrollView.addSubview(childViewController.view)
+        }
         let offsetX = CGFloat(index)*scrollView.bounds.width
         childViewController.view.snp.remakeConstraints { make in
             make.top.equalTo(scrollView.snp.top)
             make.size.equalTo(scrollView.bounds.size)
             make.leading.equalTo(scrollView.snp.leading).offset(offsetX)
         }
-        scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: animated)
+        scrollView.setContentOffset(CGPoint(x: offsetX, y: scrollView.contentOffset.y), animated: animated)
         guard index != selectedIndex else { return }
         selectedIndex = index
         delegate?.segementSlideContentView(self, didSelectAtIndex: index, animated: animated)
