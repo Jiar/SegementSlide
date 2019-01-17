@@ -155,7 +155,7 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 
     ......
 
-    var scrollView: UIScrollView {
+    @objc var scrollView: UIScrollView {
         return tableView
     }
 

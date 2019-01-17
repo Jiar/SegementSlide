@@ -16,7 +16,9 @@ extension SegementSlideViewController: UIScrollViewDelegate {
         }
         guard let scrollView = contentViewController.scrollView else {
             #if DEBUG
-            assert(false, "must implement this variable `scrollView` in protocol `SegementSlideContentScrollViewDelegate`")
+            if innerHeaderView != nil, innerHeaderHeight != nil {
+                assert(false, "must implement this variable `scrollView` in protocol `SegementSlideContentScrollViewDelegate`")
+            }
             #endif
             return true
         }
@@ -62,7 +64,9 @@ extension SegementSlideViewController: SegementSlideContentDelegate {
         guard let childViewController = segementSlideContentView.segementSlideContentViewController(at: index) else { return }
         guard let scrollView = childViewController.scrollView else {
             #if DEBUG
-            assert(false, "must implement this variable `scrollView` in protocol `SegementSlideContentScrollViewDelegate`")
+            if innerHeaderView != nil, innerHeaderHeight != nil {
+                assert(false, "must implement this variable `scrollView` in protocol `SegementSlideContentScrollViewDelegate`")
+            }
             #endif
             return
         }
