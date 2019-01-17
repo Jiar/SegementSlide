@@ -1,16 +1,16 @@
 //
-//  ShadowSegementSlideViewController.swift
+//  BaseTransparentSlideViewController.swift
 //  Example
 //
-//  Created by Jiar on 2018/12/13.
+//  Created by Jiar on 2018/12/17.
 //  Copyright © 2018 Jiar. All rights reserved.
 //
 
 import UIKit
 import SegementSlide
 
-class ShadowSegementSlideViewController: SegementSlideViewController {
-    
+class BaseTransparentSlideViewController: TransparentSlideViewController {
+
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
         super.scrollViewDidScroll(scrollView, isParent: isParent)
         guard isParent else { return }
@@ -33,5 +33,5 @@ class ShadowSegementSlideViewController: SegementSlideViewController {
         fadeTextAnimation.type = .fade
         return fadeTextAnimation
     }
-    
+
 }

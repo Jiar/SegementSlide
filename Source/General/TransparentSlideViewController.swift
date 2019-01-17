@@ -1,5 +1,5 @@
 //
-//  TransparentTabSlideViewController.swift
+//  TransparentSlideViewController.swift
 //  SegementSlide
 //
 //  Created by Jiar on 2018/12/7.
@@ -13,12 +13,12 @@ import SnapKit
 /// Set the navigationBar property in viewWillAppear
 ///
 /// Why do you set properties in viewWillAppear instead of viewDidLoad?
-/// - When enter to TransparentTabSlideViewController(B) from TransparentTabSlideViewController(A),
+/// - When enter to TransparentSlideViewController(B) from TransparentSlideViewController(A),
 /// - viewDidLoad in B will take precedence over viewWillDisappear in A, so that it cannot recover state before displaying B.
 ///
 /// Modifying the titleTextAttributes of navigationBar does not necessarily take effect immediately, so adjust the attributedText of the custom titleView instead.
 ///
-open class TransparentTabSlideViewController: SegementSlideViewController {
+open class TransparentSlideViewController: SegementSlideViewController {
     
     public typealias DisplayEmbed<T> = (display: T, embed: T)
     
@@ -179,7 +179,7 @@ open class TransparentTabSlideViewController: SegementSlideViewController {
     
 }
 
-extension TransparentTabSlideViewController {
+extension TransparentSlideViewController {
     
     private func updateNavigationBarStyle(_ scrollView: UIScrollView) {
         guard let navigationController = navigationController else { return }

@@ -9,7 +9,7 @@
 import UIKit
 import SegementSlide
 
-class MineViewController: ShadowTransparentTabSlideViewController {
+class MineViewController: BaseTransparentSlideViewController {
 
     private var badges: [Int: BadgeType] = [:]
     

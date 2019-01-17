@@ -9,7 +9,7 @@
 import UIKit
 import SegementSlide
 
-class ExploreViewController: ShadowSegementSlideViewController {
+class ExploreViewController: BaseSegementSlideViewController {
 
     private var badges: [Int: BadgeType] = [:]
     

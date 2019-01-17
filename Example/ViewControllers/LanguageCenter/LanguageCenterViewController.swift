@@ -11,7 +11,7 @@ import SegementSlide
 import MBProgressHUD
 import MJRefresh
 
-class LanguageCenterViewController: ShadowTransparentTabSlideViewController {
+class LanguageCenterViewController: BaseTransparentSlideViewController {
     
     private let id: Int
     private var badges: [Int: BadgeType] = [:]
