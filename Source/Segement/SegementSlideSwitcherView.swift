@@ -36,6 +36,10 @@ public class SegementSlideSwitcherView: UIView {
     /// you must call `reloadData()` to make it work, after the assignment.
     public var config: SegementSlideSwitcherConfig = SegementSlideSwitcherConfig.shared
     
+    public override var intrinsicContentSize: CGSize {
+        return scrollView.contentSize
+    }
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
