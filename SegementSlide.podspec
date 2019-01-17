@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name = 'SegementSlide'
-  s.version = '2.0-beta-4'
+  s.version = '2.0-beta-5'
   s.summary = 'Multi-tier UIScrollView nested scrolling solution. 😋😋😋'
 
   s.homepage = 'https://github.com/Jiar/SegementSlide'
