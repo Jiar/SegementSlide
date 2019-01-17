@@ -123,15 +123,15 @@ class HomeViewController: SegementSlideViewController {
 
     ......
 
-    override func headerHeight() -> CGFloat? {
+    override var headerHeight: CGFloat? {
         return view.bounds.height/4
     }
     
-    override func headerView() -> UIView? {
+    override var headerView: UIView? {
         return UIView()
     }
 
-    override func titlesInSwitcher() -> [String] {
+    override var titlesInSwitcher: [String] {
         return ["Swift", "Ruby", "Kotlin"]
     }
 
