@@ -23,4 +23,6 @@ parsers:
       method: no
       macro: no
 
-comment: false
+comment:
+  layout: "header, diff, changes, tree"
+  behavior: default
