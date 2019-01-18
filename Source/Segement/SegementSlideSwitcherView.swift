@@ -15,7 +15,7 @@ public enum SwitcherType {
 }
 
 public protocol SegementSlideSwitcherViewDelegate: class {
-    func titlesInSegementSlideSwitcherView() -> [String]
+    var titlesInSegementSlideSwitcherView: [String] { get }
     
     func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideSwitcherView, didSelectAtIndex index: Int, animated: Bool)
     func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideSwitcherView, showBadgeAtIndex index: Int) -> BadgeType
@@ -85,7 +85,7 @@ public class SegementSlideSwitcherView: UIView {
         indicatorView.removeFromSuperview()
         scrollView.isScrollEnabled = innerConfig.type == .segement
         innerConfig = config
-        guard let titles = delegate?.titlesInSegementSlideSwitcherView() else { return }
+        guard let titles = delegate?.titlesInSegementSlideSwitcherView else { return }
         guard !titles.isEmpty else { return }
         for (index, title) in titles.enumerated() {
             let button = UIButton(type: .custom)

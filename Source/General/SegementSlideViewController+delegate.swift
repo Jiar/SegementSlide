@@ -30,7 +30,7 @@ extension SegementSlideViewController: UIScrollViewDelegate {
 
 extension SegementSlideViewController: SegementSlideSwitcherViewDelegate {
     
-    public func titlesInSegementSlideSwitcherView() -> [String] {
+    public var titlesInSegementSlideSwitcherView: [String] {
         return titlesInSwitcher
     }
     
