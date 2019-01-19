@@ -15,6 +15,8 @@
 		804CC4DC21C1532F007EEBF8 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4DB21C1532F007EEBF8 /* ExploreViewController.swift */; };
 		804CC4DE21C15339007EEBF8 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4DD21C15339007EEBF8 /* MineViewController.swift */; };
 		805C1D9921C7C86A00991D07 /* BaseTransparentSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C1D9821C7C86A00991D07 /* BaseTransparentSlideViewController.swift */; };
+		806518D221F309A00036FF5F /* ContentViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806518D121F309A00036FF5F /* ContentViewController2.swift */; };
+		806518D621F30A1D0036FF5F /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806518D521F30A1D0036FF5F /* NoticeViewController.swift */; };
 		807A36DF21C359D3004675BC /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A36DE21C359D3004675BC /* AppManager.swift */; };
 		807A36E821C3B110004675BC /* LanguageCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A36E721C3B110004675BC /* LanguageCenterViewController.swift */; };
 		807A36EA21C3B314004675BC /* LanguageCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A36E921C3B314004675BC /* LanguageCenterHeaderView.swift */; };
@@ -56,6 +58,8 @@
 		804CC4DB21C1532F007EEBF8 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		804CC4DD21C15339007EEBF8 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		805C1D9821C7C86A00991D07 /* BaseTransparentSlideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTransparentSlideViewController.swift; sourceTree = "<group>"; };
+		806518D121F309A00036FF5F /* ContentViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController2.swift; sourceTree = "<group>"; };
+		806518D521F30A1D0036FF5F /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
 		807A36DE21C359D3004675BC /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		807A36E721C3B110004675BC /* LanguageCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCenterViewController.swift; sourceTree = "<group>"; };
 		807A36E921C3B314004675BC /* LanguageCenterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCenterHeaderView.swift; sourceTree = "<group>"; };
@@ -132,16 +136,35 @@
 		804CC4C621C14AC4007EEBF8 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				80B6C3E821C1FA16007C958F /* Home */,
-				80B6C3E921C1FA1B007C958F /* Explore */,
-				80B6C3EA21C1FA27007C958F /* Mine */,
-				80B6C3F221C20D76007C958F /* ViewControllers */,
+				806518D421F309F10036FF5F /* Main */,
+				80B6C3F221C20D76007C958F /* Base */,
 				80B6C3FC21C29ED8007C958F /* Manager */,
 				807A36E021C35A03004675BC /* Config */,
 				80B6C3F721C29413007C958F /* Util */,
 				80B6C40121C2A458007C958F /* Resources */,
 			);
 			path = Example;
+			sourceTree = "<group>";
+		};
+		806518D321F309E20036FF5F /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				806518D521F30A1D0036FF5F /* NoticeViewController.swift */,
+			);
+			path = Notice;
+			sourceTree = "<group>";
+		};
+		806518D421F309F10036FF5F /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				80B6C3E821C1FA16007C958F /* Home */,
+				80B6C3E921C1FA1B007C958F /* Explore */,
+				80B6C3EA21C1FA27007C958F /* Mine */,
+				806518D321F309E20036FF5F /* Notice */,
+				807A36E621C3B0CF004675BC /* LanguageCenter */,
+				80B6C3EB21C1FA93007C958F /* Content */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		807A36E021C35A03004675BC /* Config */ = {
@@ -199,21 +222,20 @@
 			isa = PBXGroup;
 			children = (
 				80B6C3EC21C1FAB5007C958F /* ContentViewController.swift */,
+				806518D121F309A00036FF5F /* ContentViewController2.swift */,
 				80B6C3EE21C20052007C958F /* ContentViewCell.swift */,
 				80B6C3EF21C20052007C958F /* ContentViewCell.xib */,
 			);
 			path = Content;
 			sourceTree = "<group>";
 		};
-		80B6C3F221C20D76007C958F /* ViewControllers */ = {
+		80B6C3F221C20D76007C958F /* Base */ = {
 			isa = PBXGroup;
 			children = (
 				80B6C3FA21C295ED007C958F /* BaseSegementSlideViewController.swift */,
 				805C1D9821C7C86A00991D07 /* BaseTransparentSlideViewController.swift */,
-				807A36E621C3B0CF004675BC /* LanguageCenter */,
-				80B6C3EB21C1FA93007C958F /* Content */,
 			);
-			path = ViewControllers;
+			path = Base;
 			sourceTree = "<group>";
 		};
 		80B6C3F721C29413007C958F /* Util */ = {
@@ -462,12 +484,14 @@
 				80B6C3FE21C29EEA007C958F /* DataManager.swift in Sources */,
 				804CC4C821C14AC4007EEBF8 /* AppDelegate.swift in Sources */,
 				80B6C3F021C20052007C958F /* ContentViewCell.swift in Sources */,
+				806518D621F30A1D0036FF5F /* NoticeViewController.swift in Sources */,
 				807A36E821C3B110004675BC /* LanguageCenterViewController.swift in Sources */,
 				807A36EA21C3B314004675BC /* LanguageCenterHeaderView.swift in Sources */,
 				804CC4DA21C1531D007EEBF8 /* HomeViewController.swift in Sources */,
 				80B6C3F921C2943E007C958F /* CALayer+Sketch.swift in Sources */,
 				807A36DF21C359D3004675BC /* AppManager.swift in Sources */,
 				804CC4DC21C1532F007EEBF8 /* ExploreViewController.swift in Sources */,
+				806518D221F309A00036FF5F /* ContentViewController2.swift in Sources */,
 				80B6C3FB21C295ED007C958F /* BaseSegementSlideViewController.swift in Sources */,
 				804CC4DE21C15339007EEBF8 /* MineViewController.swift in Sources */,
 			);

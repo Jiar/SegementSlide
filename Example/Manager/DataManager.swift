@@ -48,6 +48,10 @@ class DataManager {
         return Array(allLanguageTitles[0..<3])
     }
     
+    var noticeLanguageTitles: [String] {
+        return Array(allLanguageTitles[0..<2])
+    }
+    
     var allLanguages: [Language] {
         return languages
     }

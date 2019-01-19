@@ -141,16 +141,19 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
     
     @objc private func moreAction() {
         let viewController: UIViewController
-        switch Int.random(in: 0..<3) {
-        case 0:
+        switch Int.random(in: 0..<8) {
+        case 0..<5:
+            viewController = NoticeViewController(selectedIndex: Int.random(in: 0..<2))
+        case 5:
             viewController = HomeViewController()
-        case 1:
+        case 6:
             viewController = ExploreViewController()
-        case 2:
+        case 7:
             viewController = MineViewController()
         default:
-            viewController = HomeViewController()
+            viewController = NoticeViewController(selectedIndex: Int.random(in: 0..<2))
         }
+        viewController.hidesBottomBarWhenPushed = Bool.random()
         navigationController?.pushViewController(viewController, animated: true)
     }
     
