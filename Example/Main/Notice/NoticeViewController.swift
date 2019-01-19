@@ -48,7 +48,7 @@ class NoticeViewController: UIViewController {
     
     private func setupSwitcherView() {
         segementSlideSwitcherView = SegementSlideSwitcherView()
-        segementSlideSwitcherView.config = SegementSlideSwitcherConfig(type: .segement, horizontalMargin: 32)
+        segementSlideSwitcherView.config = SegementSlideSwitcherConfig(type: .segement, horizontalMargin: 28)
         segementSlideSwitcherView.delegate = self
         
         let size: CGSize

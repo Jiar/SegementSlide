@@ -22,6 +22,13 @@ class AppManager {
     }
     
     func setup() {
+        setupNavigationBar()
+        setupTabBar()
+        setupTabBarItem()
+        UINavigationController.setupSwizzleForUINavigationController()
+    }
+    
+    private func setupNavigationBar() {
         let navigationBar = UINavigationBar.appearance()
         navigationBar.isTranslucent = false
         let backImage = UIImage(named: "back")
@@ -32,13 +39,19 @@ class AppManager {
         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .medium)]
         navigationBar.shadowImage = UIImage()
         navigationBar.setBackgroundImage(UIImage(), for: .default)
-        
+    }
+    
+    private func setupTabBar() {
         UITabBar.appearance().isTranslucent = false
         UITabBar.appearance().barTintColor = .white
         let footShadowImage = UIImage(named: "shadow")
         UITabBar.appearance().shadowImage = footShadowImage
         UITabBar.appearance().backgroundImage = UIImage()
+    }
+    
+    private func setupTabBarItem() {
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(red: 151/255.0, green: 151/255.0, blue: 151/255.0, alpha: 1.0), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10)], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(red: 0/255.0, green: 188/255.0, blue: 212/255.0, alpha: 1.0), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10, weight: .medium)], for: .selected)
     }
+    
 }
