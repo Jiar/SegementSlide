@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.license = { :type => 'Apache-2.0', :file => 'LICENSE' }
 
   s.author = { 'Jiar' => 'iiimjiar@gmail.com' }
-  s.social_media_url = 'https://twitter.com/JiarYoo'
+  s.social_media_url = 'https://github.com/Jiar'
 
   s.platform = :ios
   s.ios.deployment_target = '9.0'
