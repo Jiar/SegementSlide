@@ -23,8 +23,6 @@ open class SegementSlideViewController: UIViewController {
     internal var innerHeaderHeight: CGFloat?
     internal var innerHeaderView: UIView?
     
-    internal var headerViewTopConstraint: Constraint?
-    internal var contentViewHeightConstraint: Constraint?
     internal var parentKeyValueObservation: NSKeyValueObservation!
     internal var childKeyValueObservation: NSKeyValueObservation?
     internal var innerBouncesType: BouncesType = .parent
@@ -125,17 +123,6 @@ open class SegementSlideViewController: UIViewController {
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         layoutSegementSlideScrollView()
-        segementSlideHeaderView.layer.zPosition = -3
-        segementSlideContentView.layer.zPosition = -2
-        segementSlideSwitcherView.layer.zPosition = -1
-        contentViewHeightConstraint?.update(offset: contentViewHeight)
-        if edgesForExtendedLayout.contains(.top) {
-            headerViewTopConstraint?.update(offset: 0)
-            segementSlideScrollView.contentSize = CGSize(width: view.bounds.width, height: (innerHeaderHeight ?? 0)+switcherHeight+contentViewHeight+1)
-        } else {
-            headerViewTopConstraint?.update(offset: topLayoutLength)
-            segementSlideScrollView.contentSize = CGSize(width: view.bounds.width, height: topLayoutLength+(innerHeaderHeight ?? 0)+switcherHeight+contentViewHeight+1)
-        }
     }
     
     open override func viewDidLoad() {
@@ -197,4 +184,3 @@ open class SegementSlideViewController: UIViewController {
     }
     
 }
-

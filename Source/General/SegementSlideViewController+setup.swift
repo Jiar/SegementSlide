@@ -90,7 +90,11 @@ extension SegementSlideViewController {
     
     internal func layoutSegementSlideScrollView() {
         segementSlideHeaderView.snp.remakeConstraints { make in
-            headerViewTopConstraint = make.top.equalTo(segementSlideScrollView.snp.top).constraint
+            if edgesForExtendedLayout.contains(.top) {
+                make.top.equalTo(segementSlideScrollView.snp.top).offset(0)
+            } else {
+                make.top.equalTo(segementSlideScrollView.snp.top).offset(topLayoutLength)
+            }
             make.leading.equalTo(view.snp.leading)
             make.trailing.equalTo(view.snp.trailing)
             if let _ = innerHeaderView, let innerHeaderHeight = innerHeaderHeight {
@@ -104,7 +108,11 @@ extension SegementSlideViewController {
             if let _ = innerHeaderView {
                 make.top.equalTo(segementSlideHeaderView.snp.bottom).priority(999)
             } else {
-                headerViewTopConstraint = make.top.equalTo(segementSlideScrollView.snp.top).priority(999).constraint
+                if edgesForExtendedLayout.contains(.top) {
+                    make.top.equalTo(segementSlideScrollView.snp.top).offset(0).priority(999)
+                } else {
+                    make.top.equalTo(segementSlideScrollView.snp.top).offset(topLayoutLength).priority(999)
+                }
             }
             if #available(iOS 11, *) {
                 make.top.greaterThanOrEqualTo(view.safeAreaLayoutGuide.snp.top)
@@ -119,7 +127,15 @@ extension SegementSlideViewController {
             make.top.equalTo(segementSlideSwitcherView.snp.bottom)
             make.leading.equalTo(view.snp.leading)
             make.trailing.equalTo(view.snp.trailing)
-            contentViewHeightConstraint = make.height.equalTo(contentViewHeight).constraint
+            make.height.equalTo(contentViewHeight)
+        }
+        segementSlideHeaderView.layer.zPosition = -3
+        segementSlideContentView.layer.zPosition = -2
+        segementSlideSwitcherView.layer.zPosition = -1
+        if edgesForExtendedLayout.contains(.top) {
+            segementSlideScrollView.contentSize = CGSize(width: view.bounds.width, height: (innerHeaderHeight ?? 0)+switcherHeight+contentViewHeight+1)
+        } else {
+            segementSlideScrollView.contentSize = CGSize(width: view.bounds.width, height: topLayoutLength+(innerHeaderHeight ?? 0)+switcherHeight+contentViewHeight+1)
         }
     }
     

@@ -23,11 +23,10 @@ open class TransparentSlideViewController: SegementSlideViewController {
     public typealias DisplayEmbed<T> = (display: T, embed: T)
     
     private weak var parentScrollView: UIScrollView? = nil
+    private var titleLabel: UILabel!
     private var addedShadow: Bool = false
     private var hasEmbed: Bool = false
     private var hasDisplay: Bool = false
-    
-    private let titleLabel = UILabel()
     
     public weak var storedNavigationController: UINavigationController? = nil
     public var storedNavigationBarIsTranslucent: Bool? = nil
@@ -71,17 +70,14 @@ open class TransparentSlideViewController: SegementSlideViewController {
         return (.white, .black)
     }
     
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    open override func viewDidLoad() {
+        super.viewDidLoad()
         setupTitleLabel()
-    }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupTitleLabel()
+        edgesForExtendedLayout = .top
     }
     
     private func setupTitleLabel() {
+        titleLabel = UILabel()
         let titleSize = CGSize(width: view.bounds.width-112, height: 44)
         if #available(iOS 11, *) {
             titleLabel.snp.makeConstraints { make in
@@ -92,11 +88,6 @@ open class TransparentSlideViewController: SegementSlideViewController {
         }
         titleLabel.textAlignment = .center
         navigationItem.titleView = titleLabel
-    }
-    
-    open override func viewDidLoad() {
-        super.viewDidLoad()
-        edgesForExtendedLayout = .top
     }
     
     public override func reloadData() {
