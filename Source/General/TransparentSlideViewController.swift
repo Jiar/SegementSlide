@@ -24,7 +24,7 @@ open class TransparentSlideViewController: SegementSlideViewController {
     
     private weak var parentScrollView: UIScrollView? = nil
     private var titleLabel: UILabel!
-    private var addedShadow: Bool = false
+    private var hasViewWillAppeared: Bool = false
     private var hasEmbed: Bool = false
     private var hasDisplay: Bool = false
     
@@ -72,8 +72,8 @@ open class TransparentSlideViewController: SegementSlideViewController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        setupTitleLabel()
         edgesForExtendedLayout = .top
+        setupTitleLabel()
     }
     
     private func setupTitleLabel() {
@@ -119,6 +119,7 @@ open class TransparentSlideViewController: SegementSlideViewController {
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        hasViewWillAppeared = true
         storeDefaultNavigationBarStyle()
         reloadNavigationBarStyle()
     }
@@ -173,6 +174,7 @@ open class TransparentSlideViewController: SegementSlideViewController {
 extension TransparentSlideViewController {
     
     private func updateNavigationBarStyle(_ scrollView: UIScrollView) {
+        guard hasViewWillAppeared else { return }
         guard let navigationController = navigationController else { return }
         if scrollView.contentOffset.y >= headerStickyHeight {
             guard !hasEmbed else { return }
