@@ -78,15 +78,20 @@ open class TransparentSlideViewController: SegementSlideViewController {
     
     private func setupTitleLabel() {
         titleLabel = UILabel()
-        let titleSize = CGSize(width: view.bounds.width-112, height: 44)
+        titleLabel.textAlignment = .center
+        let titleSize: CGSize
+        if let navigationController = navigationController {
+            titleSize = CGSize(width: navigationController.navigationBar.bounds.width*3/5, height: navigationController.navigationBar.bounds.height)
+        } else {
+            titleSize = CGSize(width: view.bounds.width*3/5, height: 44)
+        }
         if #available(iOS 11, *) {
-            titleLabel.snp.makeConstraints { make in
+            titleLabel.snp.remakeConstraints { make in
                 make.size.equalTo(titleSize)
             }
         } else {
             titleLabel.bounds = CGRect(origin: .zero, size: titleSize)
         }
-        titleLabel.textAlignment = .center
         navigationItem.titleView = titleLabel
     }
     
@@ -98,23 +103,6 @@ open class TransparentSlideViewController: SegementSlideViewController {
     public override func reloadHeader() {
         super.reloadHeader()
         reloadNavigationBarStyle()
-    }
-    
-    open override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let titleSize: CGSize
-        if let navigationController = navigationController {
-            titleSize = CGSize(width: navigationController.navigationBar.bounds.width-112, height: navigationController.navigationBar.bounds.height)
-        } else {
-            titleSize = CGSize(width: view.bounds.width-112, height: 44)
-        }
-        if #available(iOS 11, *) {
-            titleLabel.snp.remakeConstraints { make in
-                make.size.equalTo(titleSize)
-            }
-        } else {
-            titleLabel.bounds = CGRect(origin: .zero, size: titleSize)
-        }
     }
     
     open override func viewWillAppear(_ animated: Bool) {
