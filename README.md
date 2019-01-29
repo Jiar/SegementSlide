@@ -103,7 +103,7 @@ Run `carthage update` to build the framework.
 
 3. Embedded Binaries:
 - open the `general` tab of the project Settings
-- add 'SegementSlide.framework' in `$(SRCROOT)/Carthage/Build/iOS` to the 'Embedded Binaries'
+- add `SegementSlide.framework` in `$(SRCROOT)/Carthage/Build/iOS` to the `Embedded Binaries`
 ![Embed Binaries](https://github.com/Jiar/SegementSlide/blob/master/Snapshots/Embed%20Binaries.png?raw=true)
 
 ### Manually
