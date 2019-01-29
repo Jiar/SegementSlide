@@ -6,7 +6,6 @@ env: SWIFT_SNAPSHOT=4.2
 cache:
   directories:
     - cocoapods
-    - Carthage
 podfile: ./Podfile
 
 env:
@@ -24,9 +23,6 @@ before_install:
   - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
   - pod repo update
   - pod install
-  - brew update
-  - brew outdated carthage || brew upgrade carthage
-  - carthage bootstrap --verbose --no-use-binaries --platform iOS --cache-builds
 
 script:
   - |
