@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SnapKit
 
 public enum SwitcherType {
     case tab
@@ -55,9 +54,7 @@ public class SegementSlideSwitcherView: UIView {
         if #available(iOS 11.0, *) {
             scrollView.contentInsetAdjustmentBehavior = .never
         }
-        scrollView.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalToSuperview()
-        }
+        scrollView.constraintToSuperview()
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.backgroundColor = .clear
@@ -79,10 +76,11 @@ public class SegementSlideSwitcherView: UIView {
     public func reloadData() {
         for titleButton in titleButtons {
             titleButton.removeFromSuperview()
+            titleButton.frame = .zero
         }
         titleButtons.removeAll()
-        indicatorView.frame = .zero
         indicatorView.removeFromSuperview()
+        indicatorView.frame = .zero
         scrollView.isScrollEnabled = innerConfig.type == .segement
         innerConfig = config
         guard let titles = delegate?.titlesInSegementSlideSwitcherView else { return }

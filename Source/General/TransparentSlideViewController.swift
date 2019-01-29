@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SnapKit
 
 ///
 /// Set the navigationBar property in viewWillAppear
@@ -86,9 +85,9 @@ open class TransparentSlideViewController: SegementSlideViewController {
             titleSize = CGSize(width: view.bounds.width*3/5, height: 44)
         }
         if #available(iOS 11, *) {
-            titleLabel.snp.remakeConstraints { make in
-                make.size.equalTo(titleSize)
-            }
+            titleLabel.translatesAutoresizingMaskIntoConstraints = false
+            titleLabel.widthConstraint = titleLabel.widthAnchor.constraint(equalToConstant: titleSize.width)
+            titleLabel.heightConstraint = titleLabel.heightAnchor.constraint(equalToConstant: titleSize.height)
         } else {
             titleLabel.bounds = CGRect(origin: .zero, size: titleSize)
         }

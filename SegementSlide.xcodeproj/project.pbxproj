@@ -27,7 +27,6 @@
 		80A869AB21E6252800A773CB /* SegementSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698921E6242600A773CB /* SegementSlideViewController.swift */; };
 		80A869B121E6252800A773CB /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698021E6242600A773CB /* BadgeView.swift */; };
 		80A869B521E6252800A773CB /* String+Bounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8698421E6242600A773CB /* String+Bounding.swift */; };
-		80A869BE21E6294E00A773CB /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A869BD21E6294E00A773CB /* SnapKit.framework */; };
 		80A869C821E6387600A773CB /* SegementSlide_Dynamic_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A869C721E6387600A773CB /* SegementSlide_Dynamic_Tests.swift */; };
 		80A869CA21E6387600A773CB /* SegementSlide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A869A221E624E800A773CB /* SegementSlide.framework */; };
 		80E05EF821E8DE7F00C42A35 /* SegementSlideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E05EF721E8DE7F00C42A35 /* SegementSlideHeaderView.swift */; };
@@ -36,6 +35,8 @@
 		80E05EFD21E8DEAC00C42A35 /* SegementSlideContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E05EFB21E8DE9600C42A35 /* SegementSlideContentView.swift */; };
 		80E05EFE21E8DEAE00C42A35 /* SegementSlideSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E05EF921E8DE8E00C42A35 /* SegementSlideSwitcherView.swift */; };
 		80E05EFF21E8DEB000C42A35 /* SegementSlideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E05EF721E8DE7F00C42A35 /* SegementSlideHeaderView.swift */; };
+		80FD6F2F22001CC800F42780 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FD6F2E22001CC800F42780 /* UIView+Constraint.swift */; };
+		80FD6F3022001CC800F42780 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FD6F2E22001CC800F42780 /* UIView+Constraint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		80E05EF721E8DE7F00C42A35 /* SegementSlideHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegementSlideHeaderView.swift; sourceTree = "<group>"; };
 		80E05EF921E8DE8E00C42A35 /* SegementSlideSwitcherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegementSlideSwitcherView.swift; sourceTree = "<group>"; };
 		80E05EFB21E8DE9600C42A35 /* SegementSlideContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegementSlideContentView.swift; sourceTree = "<group>"; };
+		80FD6F2E22001CC800F42780 /* UIView+Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraint.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +97,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80A869BE21E6294E00A773CB /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				80A8698421E6242600A773CB /* String+Bounding.swift */,
+				80FD6F2E22001CC800F42780 /* UIView+Constraint.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -254,7 +256,6 @@
 				80A8699E21E624E800A773CB /* Sources */,
 				80A8699F21E624E800A773CB /* Frameworks */,
 				80A869A021E624E800A773CB /* Resources */,
-				80A869B621E6266E00A773CB /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -341,34 +342,13 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		80A869B621E6266E00A773CB /* Copy Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
-			);
-			name = "Copy Carthage Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		8066125621BA910000C05D7E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				80E05EFA21E8DE8E00C42A35 /* SegementSlideSwitcherView.swift in Sources */,
+				80FD6F2F22001CC800F42780 /* UIView+Constraint.swift in Sources */,
 				80E05EF821E8DE7F00C42A35 /* SegementSlideHeaderView.swift in Sources */,
 				80A8699B21E6242700A773CB /* TransparentSlideViewController.swift in Sources */,
 				80271D4721EF5DBB003C8EE9 /* SegementSlideScrollView.swift in Sources */,
@@ -389,6 +369,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				80A869B521E6252800A773CB /* String+Bounding.swift in Sources */,
+				80FD6F3022001CC800F42780 /* UIView+Constraint.swift in Sources */,
 				80E05EFE21E8DEAE00C42A35 /* SegementSlideSwitcherView.swift in Sources */,
 				80A869B121E6252800A773CB /* BadgeView.swift in Sources */,
 				80271D4821EF5DBB003C8EE9 /* SegementSlideScrollView.swift in Sources */,

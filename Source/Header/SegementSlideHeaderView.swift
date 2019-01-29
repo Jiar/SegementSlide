@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SnapKit
 
 internal class SegementSlideHeaderView: UIView {
     
@@ -30,15 +29,13 @@ internal class SegementSlideHeaderView: UIView {
     
     internal func config(_ headerView: UIView?, segementSlideContentView: SegementSlideContentView) {
         if let lastHeaderView = lastHeaderView {
-            lastHeaderView.snp.removeConstraints()
+            lastHeaderView.removeAllConstraints()
             lastHeaderView.removeFromSuperview()
         }
         guard let headerView = headerView else { return }
         self.segementSlideContentView = segementSlideContentView
         addSubview(headerView)
-        headerView.snp.remakeConstraints { make in
-            make.top.bottom.leading.trailing.equalToSuperview()
-        }
+        headerView.constraintToSuperview()
         lastHeaderView = headerView
     }
     

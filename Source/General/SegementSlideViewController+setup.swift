@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SnapKit
 
 extension SegementSlideViewController {
     
@@ -43,9 +42,7 @@ extension SegementSlideViewController {
     internal func setupSegementSlideScrollView() {
         segementSlideScrollView = SegementSlideScrollView()
         view.addSubview(segementSlideScrollView)
-        segementSlideScrollView.snp.remakeConstraints { make in
-            make.top.bottom.leading.trailing.equalToSuperview()
-        }
+        segementSlideScrollView.constraintToSuperview()
         if #available(iOS 11.0, *) {
             segementSlideScrollView.contentInsetAdjustmentBehavior = .never
         } else {
@@ -89,46 +86,42 @@ extension SegementSlideViewController {
     }
     
     internal func layoutSegementSlideScrollView() {
-        segementSlideHeaderView.snp.remakeConstraints { make in
-            if edgesForExtendedLayout.contains(.top) {
-                make.top.equalTo(segementSlideScrollView.snp.top).offset(0)
-            } else {
-                make.top.equalTo(segementSlideScrollView.snp.top).offset(topLayoutLength)
-            }
-            make.leading.equalTo(view.snp.leading)
-            make.trailing.equalTo(view.snp.trailing)
-            if let _ = innerHeaderView, let innerHeaderHeight = innerHeaderHeight {
-                make.height.equalTo(innerHeaderHeight)
-            } else {
-                make.height.equalTo(0)
-            }
+        segementSlideHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        if edgesForExtendedLayout.contains(.top) {
+            segementSlideHeaderView.topConstraint = segementSlideHeaderView.topAnchor.constraint(equalTo: segementSlideScrollView.topAnchor)
+        } else {
+            segementSlideHeaderView.topConstraint = segementSlideHeaderView.topAnchor.constraint(equalTo: segementSlideScrollView.topAnchor, constant: topLayoutLength)
+        }
+        segementSlideHeaderView.leadingConstraint = segementSlideHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        segementSlideHeaderView.trailingConstraint = segementSlideHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        if let _ = innerHeaderView, let innerHeaderHeight = innerHeaderHeight {
+            segementSlideHeaderView.heightConstraint = segementSlideHeaderView.heightAnchor.constraint(equalToConstant: innerHeaderHeight)
+        } else {
+            segementSlideHeaderView.heightConstraint = segementSlideHeaderView.heightAnchor.constraint(equalToConstant: 0)
         }
         segementSlideHeaderView.config(innerHeaderView, segementSlideContentView: segementSlideContentView)
-        segementSlideSwitcherView.snp.remakeConstraints { make in
-            if let _ = innerHeaderView {
-                make.top.equalTo(segementSlideHeaderView.snp.bottom).priority(999)
-            } else {
-                if edgesForExtendedLayout.contains(.top) {
-                    make.top.equalTo(segementSlideScrollView.snp.top).offset(0).priority(999)
-                } else {
-                    make.top.equalTo(segementSlideScrollView.snp.top).offset(topLayoutLength).priority(999)
-                }
-            }
-            if #available(iOS 11, *) {
-                make.top.greaterThanOrEqualTo(view.safeAreaLayoutGuide.snp.top)
-            } else {
-                make.top.greaterThanOrEqualTo(topLayoutGuide.snp.bottom)
-            }
-            make.leading.equalTo(view.snp.leading)
-            make.trailing.equalTo(view.snp.trailing)
-            make.height.equalTo(switcherHeight)
+        
+        segementSlideSwitcherView.translatesAutoresizingMaskIntoConstraints = false
+        let topConstraint = segementSlideSwitcherView.topAnchor.constraint(equalTo: segementSlideHeaderView.bottomAnchor)
+        topConstraint.priority = UILayoutPriority(rawValue: 999)
+        segementSlideSwitcherView.topConstraint = topConstraint
+        safeAreaTopConstraint?.isActive = false
+        if #available(iOS 11, *) {
+            safeAreaTopConstraint = segementSlideSwitcherView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor)
+        } else {
+            safeAreaTopConstraint = segementSlideSwitcherView.topAnchor.constraint(greaterThanOrEqualTo: topLayoutGuide.bottomAnchor)
         }
-        segementSlideContentView.snp.remakeConstraints { make in
-            make.top.equalTo(segementSlideSwitcherView.snp.bottom)
-            make.leading.equalTo(view.snp.leading)
-            make.trailing.equalTo(view.snp.trailing)
-            make.height.equalTo(contentViewHeight)
-        }
+        safeAreaTopConstraint?.isActive = true
+        segementSlideSwitcherView.leadingConstraint = segementSlideSwitcherView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        segementSlideSwitcherView.trailingConstraint = segementSlideSwitcherView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        segementSlideSwitcherView.heightConstraint = segementSlideSwitcherView.heightAnchor.constraint(equalToConstant: switcherHeight)
+        
+        segementSlideContentView.translatesAutoresizingMaskIntoConstraints = false
+        segementSlideContentView.topConstraint = segementSlideContentView.topAnchor.constraint(equalTo: segementSlideSwitcherView.bottomAnchor)
+        segementSlideContentView.leadingConstraint = segementSlideContentView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        segementSlideContentView.trailingConstraint = segementSlideContentView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        segementSlideContentView.heightConstraint = segementSlideContentView.heightAnchor.constraint(equalToConstant: contentViewHeight)
+        
         segementSlideHeaderView.layer.zPosition = -3
         segementSlideContentView.layer.zPosition = -2
         segementSlideSwitcherView.layer.zPosition = -1

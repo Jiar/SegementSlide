@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SnapKit
 
 @objc public protocol SegementSlideContentScrollViewDelegate where Self: UIViewController {
     /// must implement this variable, when use class `SegementSlideViewController` or it's subClass.
@@ -47,9 +46,7 @@ public class SegementSlideContentView: UIView {
         if #available(iOS 11.0, *) {
             scrollView.contentInsetAdjustmentBehavior = .never
         }
-        scrollView.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalToSuperview()
-        }
+        scrollView.constraintToSuperview()
         scrollView.delegate = self
         scrollView.isScrollEnabled = true
         scrollView.isPagingEnabled = true
@@ -125,11 +122,9 @@ extension SegementSlideContentView {
         for (index, value) in viewControllers {
             let childViewController = value as! UIViewController
             let offsetX = CGFloat(index)*scrollView.bounds.width
-            childViewController.view.snp.remakeConstraints { make in
-                make.top.equalTo(scrollView.snp.top)
-                make.size.equalTo(scrollView.bounds.size)
-                make.leading.equalTo(scrollView.snp.leading).offset(offsetX)
-            }
+            childViewController.view.widthConstraint?.constant = scrollView.bounds.width
+            childViewController.view.heightConstraint?.constant = scrollView.bounds.height
+            childViewController.view.leadingConstraint?.constant = offsetX
         }
     }
     
@@ -159,11 +154,11 @@ extension SegementSlideContentView {
             scrollView.addSubview(childViewController.view)
         }
         let offsetX = CGFloat(index)*scrollView.bounds.width
-        childViewController.view.snp.remakeConstraints { make in
-            make.top.equalTo(scrollView.snp.top)
-            make.size.equalTo(scrollView.bounds.size)
-            make.leading.equalTo(scrollView.snp.leading).offset(offsetX)
-        }
+        childViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        childViewController.view.topConstraint = childViewController.view.topAnchor.constraint(equalTo: scrollView.topAnchor)
+        childViewController.view.widthConstraint = childViewController.view.widthAnchor.constraint(equalToConstant: scrollView.bounds.width)
+        childViewController.view.heightConstraint = childViewController.view.heightAnchor.constraint(equalToConstant: scrollView.bounds.height)
+        childViewController.view.leadingConstraint = childViewController.view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: offsetX)
         scrollView.setContentOffset(CGPoint(x: offsetX, y: scrollView.contentOffset.y), animated: animated)
         guard index != selectedIndex else { return }
         selectedIndex = index

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SnapKit
 
 public enum BouncesType {
     case parent
@@ -23,6 +22,7 @@ open class SegementSlideViewController: UIViewController {
     internal var innerHeaderHeight: CGFloat?
     internal var innerHeaderView: UIView?
     
+    internal var safeAreaTopConstraint: NSLayoutConstraint?
     internal var parentKeyValueObservation: NSKeyValueObservation!
     internal var childKeyValueObservation: NSKeyValueObservation?
     internal var innerBouncesType: BouncesType = .parent
