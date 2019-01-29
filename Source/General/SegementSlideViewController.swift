@@ -28,7 +28,7 @@ open class SegementSlideViewController: UIViewController {
     internal var innerBouncesType: BouncesType = .parent
     internal var canParentViewScroll: Bool = true
     internal var canChildViewScroll: Bool = false
-    internal var lastTranslationY: CGFloat = 0
+    internal var lastChildBouncesTranslationY: CGFloat = 0
     
     public var slideScrollView: UIScrollView {
         return segementSlideScrollView
