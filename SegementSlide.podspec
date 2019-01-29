@@ -22,7 +22,5 @@ Pod::Spec.new do |s|
 
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.2' }
   s.static_framework = true
-
-  s.dependency 'SnapKit', '~> 4.2.0'
   
 end
