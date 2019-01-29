@@ -14,6 +14,7 @@ extension SegementSlideViewController {
         view.backgroundColor = .white
         extendedLayoutIncludesOpaqueBars = true
         edgesForExtendedLayout = []
+        setupSegementSlideViews()
         setupSegementSlideScrollView()
         setupSegementSlideHeaderView()
         setupSegementSlideContentView()
@@ -21,26 +22,29 @@ extension SegementSlideViewController {
         observeScrollViewContentOffset()
     }
     
-    internal func setupSegementSlideHeaderView() {
+    internal func setupSegementSlideViews() {
         segementSlideHeaderView = SegementSlideHeaderView()
+        segementSlideSwitcherView = SegementSlideSwitcherView()
+        segementSlideContentView = SegementSlideContentView()
+        segementSlideScrollView = SegementSlideScrollView(otherGestureRecognizers: segementSlideSwitcherView.gestureRecognizersInScrollView)
+    }
+    
+    internal func setupSegementSlideHeaderView() {
         segementSlideScrollView.addSubview(segementSlideHeaderView)
     }
     
     internal func setupSegementSlideContentView() {
-        segementSlideContentView = SegementSlideContentView()
         segementSlideContentView.delegate = self
         segementSlideContentView.viewController = self
         segementSlideScrollView.addSubview(segementSlideContentView)
     }
     
     internal func setupSegementSlideSwitcherView() {
-        segementSlideSwitcherView = SegementSlideSwitcherView()
         segementSlideSwitcherView.delegate = self
         segementSlideScrollView.addSubview(segementSlideSwitcherView)
     }
     
     internal func setupSegementSlideScrollView() {
-        segementSlideScrollView = SegementSlideScrollView()
         view.addSubview(segementSlideScrollView)
         segementSlideScrollView.constraintToSuperview()
         if #available(iOS 11.0, *) {

@@ -26,8 +26,10 @@ public class SegementSlideSwitcherView: UIView {
     private let indicatorView = UIView()
     private var titleButtons: [UIButton] = []
     private var initSelectedIndex: Int?
-    
-    internal var innerConfig: SegementSlideSwitcherConfig = SegementSlideSwitcherConfig.shared
+    private var innerConfig: SegementSlideSwitcherConfig = SegementSlideSwitcherConfig.shared
+    internal var gestureRecognizersInScrollView: [UIGestureRecognizer]? {
+        return scrollView.gestureRecognizers
+    }
     
     public private(set) var selectedIndex: Int?
     public weak var delegate: SegementSlideSwitcherViewDelegate?
