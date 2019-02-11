@@ -57,11 +57,11 @@ extension SegementSlideViewController: SegementSlideContentDelegate {
     }
     
     public func segementSlideContentView(_ segementSlideContentView: SegementSlideContentView, didSelectAtIndex index: Int, animated: Bool) {
-        if cacheScrollStates {
+        if canCacheScrollState {
             if let selectedIndex = lastSelectedIndex {
-                canScrollStates[selectedIndex] = (canParentViewScroll, canChildViewScroll, segementSlideScrollView.contentOffset.y)
+                cachedScrollStates[selectedIndex] = (canParentViewScroll, canChildViewScroll, segementSlideScrollView.contentOffset.y)
             }
-            if let canScrollState = canScrollStates[index] {
+            if let canScrollState = cachedScrollStates[index] {
                 canParentViewScroll = canScrollState.0
                 canChildViewScroll = canScrollState.1
                 if animated {

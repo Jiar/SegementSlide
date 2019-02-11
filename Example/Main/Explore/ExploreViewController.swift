@@ -65,6 +65,7 @@ class ExploreViewController: BaseSegementSlideViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        canCacheScrollState = Bool.random()
         view.backgroundColor = .white
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
         reloadData()

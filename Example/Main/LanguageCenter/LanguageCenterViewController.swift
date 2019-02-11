@@ -101,6 +101,7 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        canCacheScrollState = Bool.random()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(moreAction))
         let refreshHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshAction))!
         refreshHeader.lastUpdatedTimeLabel.isHidden = true

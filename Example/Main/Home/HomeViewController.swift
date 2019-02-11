@@ -75,6 +75,7 @@ class HomeViewController: BaseSegementSlideViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        canCacheScrollState = true
         view.backgroundColor = .white
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
         reloadData()

@@ -68,6 +68,10 @@ extension SegementSlideViewController {
         })
     }
     
+    internal func clearCachedScrollStates() {
+        cachedScrollStates.removeAll()
+    }
+    
     internal func setupBounces() {
         innerBouncesType = bouncesType
         switch innerBouncesType {
