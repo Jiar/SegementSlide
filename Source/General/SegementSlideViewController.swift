@@ -30,6 +30,10 @@ open class SegementSlideViewController: UIViewController {
     internal var canChildViewScroll: Bool = false
     internal var lastChildBouncesTranslationY: CGFloat = 0
     
+    internal var lastSelectedIndex: Int? = nil
+    /// canParentViewScroll, canChildViewScroll, segementSlideScrollView.contentOffset.y
+    internal var canScrollStates: [Int: (Bool, Bool, CGFloat)] = [:]
+    
     public var slideScrollView: UIScrollView {
         return segementSlideScrollView
     }
@@ -60,10 +64,16 @@ open class SegementSlideViewController: UIViewController {
         return segementSlideContentView.segementSlideContentViewController(at: currentIndex)
     }
     
+    /// true: cache the headerView(the root scrollView) and each childViewController's scrollView's contentOffset.y.
+    /// false: when toggling childViewController, resets scrollview's contentoffset.y.
+    /// default value is false.
+    open var cacheScrollStates: Bool = false
+    
     open var bouncesType: BouncesType {
         return .parent
     }
     
+    /// the value should contains topLayoutGuide's length(safeAreaInsets.top in iOS 11), if the edgesForExtendedLayout in viewController contains `.top`
     open var headerHeight: CGFloat? {
         if edgesForExtendedLayout.contains(.top) {
             #if DEBUG

@@ -57,6 +57,27 @@ extension SegementSlideViewController: SegementSlideContentDelegate {
     }
     
     public func segementSlideContentView(_ segementSlideContentView: SegementSlideContentView, didSelectAtIndex index: Int, animated: Bool) {
+        if cacheScrollStates {
+            if let selectedIndex = lastSelectedIndex {
+                canScrollStates[selectedIndex] = (canParentViewScroll, canChildViewScroll, segementSlideScrollView.contentOffset.y)
+            }
+            if let canScrollState = canScrollStates[index] {
+                canParentViewScroll = canScrollState.0
+                canChildViewScroll = canScrollState.1
+                if animated {
+                    UIView.animate(withDuration: 0.25) {
+                        self.segementSlideScrollView.contentOffset.y = canScrollState.2
+                    }
+                } else {
+                    segementSlideScrollView.contentOffset.y = canScrollState.2
+                }
+            }
+        } else {
+            if let selectedIndex = lastSelectedIndex, let childScrollView = segementSlideContentView.segementSlideContentViewController(at: selectedIndex)?.scrollView {
+                childScrollView.contentOffset.y = 0
+            }
+        }
+        lastSelectedIndex = index
         if segementSlideSwitcherView.selectedIndex != index {
             segementSlideSwitcherView.selectSwitcher(at: index, animated: animated)
         }
