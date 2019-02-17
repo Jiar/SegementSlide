@@ -102,7 +102,6 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         canCacheScrollState = Bool.random()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(moreAction))
         let refreshHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshAction))!
         refreshHeader.lastUpdatedTimeLabel.isHidden = true
         refreshHeader.arrowView.image = nil
@@ -138,24 +137,6 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
             return
         }
         contentViewController.refresh()
-    }
-    
-    @objc private func moreAction() {
-        let viewController: UIViewController
-        switch Int.random(in: 0..<8) {
-        case 0..<5:
-            viewController = NoticeViewController(selectedIndex: Int.random(in: 0..<2))
-        case 5:
-            viewController = HomeViewController()
-        case 6:
-            viewController = ExploreViewController()
-        case 7:
-            viewController = MineViewController()
-        default:
-            viewController = NoticeViewController(selectedIndex: Int.random(in: 0..<2))
-        }
-        viewController.hidesBottomBarWhenPushed = Bool.random()
-        navigationController?.pushViewController(viewController, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

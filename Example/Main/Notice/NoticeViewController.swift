@@ -97,8 +97,10 @@ class NoticeViewController: UIViewController {
     @objc private func moreAction() {
         let viewController: UIViewController
         switch Int.random(in: 0..<8) {
-        case 0..<5:
-            viewController = NoticeViewController(selectedIndex: Int.random(in: 0..<2))
+        case 0..<4:
+            viewController = NoticeViewController(selectedIndex: Int.random(in: 0..<DataManager.shared.noticeLanguageTitles.count))
+        case 4:
+            viewController = PostViewController(selectedIndex: Int.random(in: 0..<DataManager.shared.postLanguageTitles.count))
         case 5:
             viewController = HomeViewController()
         case 6:
@@ -106,7 +108,7 @@ class NoticeViewController: UIViewController {
         case 7:
             viewController = MineViewController()
         default:
-            viewController = NoticeViewController(selectedIndex: Int.random(in: 0..<2))
+            viewController = NoticeViewController(selectedIndex: Int.random(in: 0..<DataManager.shared.noticeLanguageTitles.count))
         }
         viewController.hidesBottomBarWhenPushed = Bool.random()
         navigationController?.pushViewController(viewController, animated: true)
@@ -151,7 +153,7 @@ extension NoticeViewController: SegementSlideContentDelegate {
     }
     
     public func segementSlideContentScrollView(at index: Int) -> SegementSlideContentScrollViewDelegate? {
-        let viewController = ContentViewController2()
+        let viewController = ContentOptionalViewController()
         viewController.refreshHandler = { [weak self] in
             guard let self = self else { return }
             self.badges[index] = BadgeType.random

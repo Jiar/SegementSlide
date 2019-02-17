@@ -15,9 +15,10 @@
 		804CC4DC21C1532F007EEBF8 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4DB21C1532F007EEBF8 /* ExploreViewController.swift */; };
 		804CC4DE21C15339007EEBF8 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4DD21C15339007EEBF8 /* MineViewController.swift */; };
 		805C1D9921C7C86A00991D07 /* BaseTransparentSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C1D9821C7C86A00991D07 /* BaseTransparentSlideViewController.swift */; };
-		806518D221F309A00036FF5F /* ContentViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806518D121F309A00036FF5F /* ContentViewController2.swift */; };
+		806518D221F309A00036FF5F /* ContentOptionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806518D121F309A00036FF5F /* ContentOptionalViewController.swift */; };
 		806518D621F30A1D0036FF5F /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806518D521F30A1D0036FF5F /* NoticeViewController.swift */; };
 		806518D821F317050036FF5F /* UINavigationController+Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806518D721F317050036FF5F /* UINavigationController+Swizzle.swift */; };
+		8079920F221958C300682690 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8079920E221958C300682690 /* PostViewController.swift */; };
 		807A36DF21C359D3004675BC /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A36DE21C359D3004675BC /* AppManager.swift */; };
 		807A36E821C3B110004675BC /* LanguageCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A36E721C3B110004675BC /* LanguageCenterViewController.swift */; };
 		807A36EA21C3B314004675BC /* LanguageCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A36E921C3B314004675BC /* LanguageCenterHeaderView.swift */; };
@@ -59,9 +60,10 @@
 		804CC4DB21C1532F007EEBF8 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		804CC4DD21C15339007EEBF8 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		805C1D9821C7C86A00991D07 /* BaseTransparentSlideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTransparentSlideViewController.swift; sourceTree = "<group>"; };
-		806518D121F309A00036FF5F /* ContentViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController2.swift; sourceTree = "<group>"; };
+		806518D121F309A00036FF5F /* ContentOptionalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentOptionalViewController.swift; sourceTree = "<group>"; };
 		806518D521F30A1D0036FF5F /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
 		806518D721F317050036FF5F /* UINavigationController+Swizzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Swizzle.swift"; sourceTree = "<group>"; };
+		8079920E221958C300682690 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		807A36DE21C359D3004675BC /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		807A36E721C3B110004675BC /* LanguageCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCenterViewController.swift; sourceTree = "<group>"; };
 		807A36E921C3B314004675BC /* LanguageCenterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCenterHeaderView.swift; sourceTree = "<group>"; };
@@ -163,10 +165,19 @@
 				80B6C3E921C1FA1B007C958F /* Explore */,
 				80B6C3EA21C1FA27007C958F /* Mine */,
 				806518D321F309E20036FF5F /* Notice */,
+				8079920D221957BD00682690 /* Post */,
 				807A36E621C3B0CF004675BC /* LanguageCenter */,
 				80B6C3EB21C1FA93007C958F /* Content */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		8079920D221957BD00682690 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				8079920E221958C300682690 /* PostViewController.swift */,
+			);
+			path = Post;
 			sourceTree = "<group>";
 		};
 		807A36E021C35A03004675BC /* Config */ = {
@@ -224,7 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				80B6C3EC21C1FAB5007C958F /* ContentViewController.swift */,
-				806518D121F309A00036FF5F /* ContentViewController2.swift */,
+				806518D121F309A00036FF5F /* ContentOptionalViewController.swift */,
 				80B6C3EE21C20052007C958F /* ContentViewCell.swift */,
 				80B6C3EF21C20052007C958F /* ContentViewCell.xib */,
 			);
@@ -458,6 +469,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8079920F221958C300682690 /* PostViewController.swift in Sources */,
 				80B6C3ED21C1FAB5007C958F /* ContentViewController.swift in Sources */,
 				80F3D6B821D789D6005D649A /* BadgeType+Random.swift in Sources */,
 				805C1D9921C7C86A00991D07 /* BaseTransparentSlideViewController.swift in Sources */,
@@ -472,7 +484,7 @@
 				80B6C3F921C2943E007C958F /* CALayer+Sketch.swift in Sources */,
 				807A36DF21C359D3004675BC /* AppManager.swift in Sources */,
 				804CC4DC21C1532F007EEBF8 /* ExploreViewController.swift in Sources */,
-				806518D221F309A00036FF5F /* ContentViewController2.swift in Sources */,
+				806518D221F309A00036FF5F /* ContentOptionalViewController.swift in Sources */,
 				80B6C3FB21C295ED007C958F /* BaseSegementSlideViewController.swift in Sources */,
 				804CC4DE21C15339007EEBF8 /* MineViewController.swift in Sources */,
 			);

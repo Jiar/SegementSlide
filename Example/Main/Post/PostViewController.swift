@@ -1,46 +1,35 @@
 //
-//  ExploreViewController.swift
+//  PostViewController.swift
 //  Example
 //
-//  Created by Jiar on 2018/12/12.
-//  Copyright © 2018 Jiar. All rights reserved.
+//  Created by Jiar on 2019/2/17.
+//  Copyright © 2019 Jiar. All rights reserved.
 //
 
 import UIKit
 import SegementSlide
 
-class ExploreViewController: BaseSegementSlideViewController {
-
-    private var badges: [Int: BadgeType] = [:]
+class PostViewController: BaseSegementSlideViewController {
     
-    init() {
+    private var badges: [Int: BadgeType] = [:]
+    private let selectedIndex: Int
+    
+    init(selectedIndex: Int = 0) {
+        self.selectedIndex = selectedIndex
         super.init(nibName: nil, bundle: nil)
-        title = "Explore"
-        tabBarItem = UITabBarItem(title: "Explore", image: UIImage(named: "tab_explore")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "tab_explore_sel")?.withRenderingMode(.alwaysOriginal))
+        title = "Post"
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override var headerHeight: CGFloat? {
-        return view.bounds.height/4
-    }
-    
-    override var headerView: UIView? {
-        let headerView = UIImageView()
-        headerView.isUserInteractionEnabled = true
-        headerView.contentMode = .scaleAspectFill
-        headerView.image = UIImage(named: "bg_working.png")
-        return headerView
-    }
-    
     override var switcherConfig: SegementSlideSwitcherConfig {
-        return SegementSlideSwitcherConfig(type: .segement)
+        return SegementSlideSwitcherConfig(type: .tab)
     }
     
     override var titlesInSwitcher: [String] {
-        return DataManager.shared.exploreLanguageTitles
+        return DataManager.shared.postLanguageTitles
     }
     
     override func showBadgeInSwitcher(at index: Int) -> BadgeType {
@@ -54,7 +43,7 @@ class ExploreViewController: BaseSegementSlideViewController {
     }
     
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
-        let viewController = ContentViewController()
+        let viewController = ContentOptionalViewController()
         viewController.refreshHandler = { [weak self] in
             guard let self = self else { return }
             self.badges[index] = BadgeType.random
@@ -65,9 +54,9 @@ class ExploreViewController: BaseSegementSlideViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        canCacheScrollState = Bool.random()
+        canCacheScrollState = true
         reloadData()
-        scrollToSlide(at: 0, animated: false)
+        scrollToSlide(at: selectedIndex, animated: false)
     }
-
+    
 }
