@@ -23,17 +23,17 @@ Multi-tier UIScrollView nested scrolling solution.
 
 <p align="center">
 <div style="display:flex">
-  <img style="flex-grow:1" src="https://github.com/Jiar/SegementSlide/blob/master/Snapshots/childBouncesType.gif?raw=true" width="32%">
-  <img style="flex-grow:1" src="https://github.com/Jiar/SegementSlide/blob/master/Snapshots/transparent1.gif?raw=true" width="33%">
-  <img style="flex-grow:1" src="https://github.com/Jiar/SegementSlide/blob/master/Snapshots/inNavigationBar.gif?raw=true" width="32%">
+  <img style="flex-grow:1" src="https://github.com/Jiar/ImageHosting/blob/master/Github/Repositories/SegementSlide/v2/Snapshots/childBouncesType.gif?raw=true" width="32%">
+  <img style="flex-grow:1" src="https://github.com/Jiar/ImageHosting/blob/master/Github/Repositories/SegementSlide/v2/Snapshots/transparent1.gif?raw=true" width="33%">
+  <img style="flex-grow:1" src="https://github.com/Jiar/ImageHosting/blob/master/Github/Repositories/SegementSlide/v2/Snapshots/inNavigationBar.gif?raw=true" width="32%">
 </div>
 </p>
 
 <p align="center">
 <div style="display:flex">
-  <img style="flex-grow:1" src="https://github.com/Jiar/SegementSlide/blob/master/Snapshots/parentBouncesType.gif?raw=true" width="32%">
-  <img style="flex-grow:1" src="https://github.com/Jiar/SegementSlide/blob/master/Snapshots/transparent2.gif?raw=true" width="33%">
-  <img style="flex-grow:1" src="https://github.com/Jiar/SegementSlide/blob/master/Snapshots/parentBouncesType_segementSwitcherType.gif?raw=true" width="32%">
+  <img style="flex-grow:1" src="https://github.com/Jiar/ImageHosting/blob/master/Github/Repositories/SegementSlide/v2/Snapshots/parentBouncesType.gif?raw=true" width="32%">
+  <img style="flex-grow:1" src="https://github.com/Jiar/ImageHosting/blob/master/Github/Repositories/SegementSlide/v2/Snapshots/transparent2.gif?raw=true" width="33%">
+  <img style="flex-grow:1" src="https://github.com/Jiar/ImageHosting/blob/master/Github/Repositories/SegementSlide/v2/Snapshots/parentBouncesType_segementSwitcherType.gif?raw=true" width="32%">
 </div>
 </p>
 
@@ -99,12 +99,12 @@ Run `carthage update` to build the framework.
 - add `New Run Script Phase`
 - add `/usr/local/bin/carthage copy-frameworks` to the input field
 - add `$(SRCROOT)/Carthage/Build/iOS/SegementSlide.framework` to `Input Files`
-![Copy Carthage Frameworks](https://github.com/Jiar/SegementSlide/blob/master/Snapshots/Copy%20Carthage%20Frameworks.png?raw=true)
+![Copy Carthage Frameworks](https://github.com/Jiar/ImageHosting/blob/master/Github/Repositories/SegementSlide/v2/Snapshots/Copy%20Carthage%20Frameworks.png?raw=true)
 
 3. Embedded Binaries:
 - open the `general` tab of the project Settings
 - add `SegementSlide.framework` in `$(SRCROOT)/Carthage/Build/iOS` to the `Embedded Binaries`
-![Embed Binaries](https://github.com/Jiar/SegementSlide/blob/master/Snapshots/Embed%20Binaries.png?raw=true)
+![Embed Binaries](https://github.com/Jiar/ImageHosting/blob/master/Github/Repositories/SegementSlide/v2/Snapshots/Embed%20Binaries.png?raw=true)
 
 ### Manually
 
