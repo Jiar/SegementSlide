@@ -1,3 +1,5 @@
+##### I had rewritten commits to remove big resource folder, you need refork the project if you had forked. -- Beijing time: Feb 17, 2019 15:00 [issues 1](https://github.com/Jiar/SegementSlide/issues/1)
+
 <p align="center">
   <img src="https://github.com/Jiar/SegementSlide/blob/master/Logo/SegementSlide.png?raw=true">
 </p>
