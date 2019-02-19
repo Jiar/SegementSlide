@@ -98,7 +98,7 @@ extension SegementSlideViewController {
         if edgesForExtendedLayout.contains(.top) {
             segementSlideHeaderView.topConstraint = segementSlideHeaderView.topAnchor.constraint(equalTo: segementSlideScrollView.topAnchor)
         } else {
-            segementSlideHeaderView.topConstraint = segementSlideHeaderView.topAnchor.constraint(equalTo: segementSlideScrollView.topAnchor, constant: topLayoutLength)
+            segementSlideHeaderView.topConstraint = segementSlideHeaderView.topAnchor.constraint(equalTo: segementSlideScrollView.topAnchor, constant: self.innerHeaderTopLength ?? topLayoutLength)
         }
         segementSlideHeaderView.leadingConstraint = segementSlideHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         segementSlideHeaderView.trailingConstraint = segementSlideHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor)

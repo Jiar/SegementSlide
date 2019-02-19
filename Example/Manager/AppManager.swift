@@ -17,8 +17,12 @@ class AppManager {
         rootController = UITabBarController()
         let homeViewController = HomeViewController()
         let exploreViewController = ExploreViewController()
+        let fullExploreController = FullExploreViewController()
         let mineViewController = MineViewController()
-        rootController.viewControllers = [UINavigationController(rootViewController: homeViewController), UINavigationController(rootViewController: exploreViewController), UINavigationController(rootViewController: mineViewController)]
+        rootController.viewControllers = [UINavigationController(rootViewController: homeViewController),
+                                          UINavigationController(rootViewController: exploreViewController),
+                                          UINavigationController(rootViewController: fullExploreController),
+                                          UINavigationController(rootViewController: mineViewController)]
     }
     
     func setup() {
