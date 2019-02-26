@@ -188,10 +188,10 @@ open class SegementSlideViewController: UIViewController {
         return segementSlideContentView.segementSlideContentViewController(at: index)
     }
     
+    #if DEBUG
     deinit {
-        #if DEBUG
-        print("\(type(of: self)) deinit")
-        #endif
+        debugPrint("\(type(of: self)) deinit")
     }
+    #endif
     
 }

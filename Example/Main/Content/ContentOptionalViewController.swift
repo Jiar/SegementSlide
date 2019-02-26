@@ -12,7 +12,7 @@ import MBProgressHUD
 import MJRefresh
 
 /// not implement `scrollView` in protocol `SegementSlideContentScrollViewDelegate`
-class ContentOptionalViewController: UITableViewController, SegementSlideContentScrollViewDelegate {
+class ContentOptionalViewController: BaseTableViewController, SegementSlideContentScrollViewDelegate {
     
     private var languages: [Language] = []
     internal var refreshHandler: (() -> Void)? = nil
@@ -97,9 +97,7 @@ class ContentOptionalViewController: UITableViewController, SegementSlideContent
     }
     
     deinit {
-        #if DEBUG
-        print("\(type(of: self)) deinit")
-        #endif
+        debugPrint("\(type(of: self)) deinit")
     }
     
 }

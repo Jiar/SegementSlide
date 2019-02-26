@@ -11,7 +11,7 @@ import SegementSlide
 import MBProgressHUD
 import MJRefresh
 
-class ContentViewController: UITableViewController, SegementSlideContentScrollViewDelegate {
+class ContentViewController: BaseTableViewController, SegementSlideContentScrollViewDelegate {
     
     @objc var scrollView: UIScrollView {
         return tableView
@@ -100,9 +100,7 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
     }
     
     deinit {
-        #if DEBUG
-        print("\(type(of: self)) deinit")
-        #endif
+        debugPrint("\(type(of: self)) deinit")
     }
 
 }
