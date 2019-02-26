@@ -143,7 +143,6 @@ class HomeViewController: SegementSlideViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        canCacheScrollState = true
         reloadData()
         scrollToSlide(at: 0, animated: false)
     }
