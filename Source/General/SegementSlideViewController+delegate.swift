@@ -56,7 +56,7 @@ extension SegementSlideViewController: SegementSlideContentDelegate {
             segementSlideSwitcherView.selectSwitcher(at: index, animated: animated)
         }
         childKeyValueObservation?.invalidate()
-        guard let childViewController = segementSlideContentView.segementSlideContentViewController(at: index) else { return }
+        guard let childViewController = segementSlideContentView.dequeueReusableViewController(at: index) else { return }
         defer {
             didSelectContentViewController(at: index)
         }

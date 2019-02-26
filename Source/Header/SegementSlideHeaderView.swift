@@ -45,7 +45,7 @@ internal class SegementSlideHeaderView: UIView {
             return view
         }
         guard let selectedIndex = segementSlideContentView.selectedIndex,
-            let segementSlideContentScrollViewDelegate = segementSlideContentView.segementSlideContentViewController(at: selectedIndex)
+            let segementSlideContentScrollViewDelegate = segementSlideContentView.dequeueReusableViewController(at: selectedIndex)
             else {
             return view
         }

@@ -57,7 +57,7 @@ open class SegementSlideViewController: UIViewController {
     }
     public var currentSegementSlideContentViewController: SegementSlideContentScrollViewDelegate? {
         guard let currentIndex = currentIndex else { return nil }
-        return segementSlideContentView.segementSlideContentViewController(at: currentIndex)
+        return segementSlideContentView.dequeueReusableViewController(at: currentIndex)
     }
     
     open var bouncesType: BouncesType {
@@ -174,8 +174,8 @@ open class SegementSlideViewController: UIViewController {
     }
     
     /// reuse the `SegementSlideContentScrollViewDelegate`
-    public func contentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
-        return segementSlideContentView.segementSlideContentViewController(at: index)
+    public func dequeueReusableViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
+        return segementSlideContentView.dequeueReusableViewController(at: index)
     }
     
     #if DEBUG

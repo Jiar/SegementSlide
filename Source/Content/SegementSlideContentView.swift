@@ -81,14 +81,12 @@ public class SegementSlideContentView: UIView {
     }
     
     /// reuse the `SegementSlideContentScrollViewDelegate`
-    public func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
+    public func dequeueReusableViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
         if let childViewController = viewControllers[index] {
             return childViewController
-        } else if let childViewController = delegate?.segementSlideContentScrollView(at: index) {
-            viewControllers[index] = childViewController
-            return childViewController
+        } else {
+            return nil
         }
-        return nil
     }
     
 }
@@ -145,6 +143,16 @@ extension SegementSlideContentView {
         guard let initSelectedIndex = initSelectedIndex else { return }
         self.initSelectedIndex = nil
         updateSelectedViewController(at: initSelectedIndex, animated: false)
+    }
+    
+    private func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
+        if let childViewController = dequeueReusableViewController(at: index) {
+            return childViewController
+        } else if let childViewController = delegate?.segementSlideContentScrollView(at: index) {
+            viewControllers[index] = childViewController
+            return childViewController
+        }
+        return nil
     }
     
     private func updateSelectedViewController(at index: Int, animated: Bool) {
