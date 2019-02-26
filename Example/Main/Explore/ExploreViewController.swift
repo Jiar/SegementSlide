@@ -36,7 +36,9 @@ class ExploreViewController: BaseSegementSlideViewController {
     }
     
     override var switcherConfig: SegementSlideSwitcherConfig {
-        return SegementSlideSwitcherConfig(type: .segement)
+        var config = super.switcherConfig
+        config.type = .segement
+        return config
     }
     
     override var titlesInSwitcher: [String] {

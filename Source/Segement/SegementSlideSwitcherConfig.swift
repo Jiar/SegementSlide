@@ -8,23 +8,23 @@
 
 import UIKit
 
-public class SegementSlideSwitcherConfig {
+public struct SegementSlideSwitcherConfig {
     
     public static let shared = SegementSlideSwitcherConfig()
     
-    internal let type: SwitcherType
-    internal let horizontalMargin: CGFloat
-    internal let horizontalSpace: CGFloat
-    internal let normalTitleFont: UIFont
-    internal let selectedTitleFont: UIFont
-    internal let normalTitleColor: UIColor
-    internal let selectedTitleColor: UIColor
-    internal let indicatorWidth: CGFloat
-    internal let indicatorHeight: CGFloat
-    internal let indicatorColor: UIColor
-    internal let badgeHeightForCountType: CGFloat
-    internal let badgeHeightForPointType: CGFloat
-    internal let badgeFontSize: CGFloat
+    public var type: SwitcherType
+    public var horizontalMargin: CGFloat
+    public var horizontalSpace: CGFloat
+    public var normalTitleFont: UIFont
+    public var selectedTitleFont: UIFont
+    public var normalTitleColor: UIColor
+    public var selectedTitleColor: UIColor
+    public var indicatorWidth: CGFloat
+    public var indicatorHeight: CGFloat
+    public var indicatorColor: UIColor
+    public var badgeHeightForCountType: CGFloat
+    public var badgeHeightForPointType: CGFloat
+    public var badgeFontSize: CGFloat
     
     public init(type: SwitcherType = .segement,
                 horizontalMargin: CGFloat = 16,

@@ -25,7 +25,9 @@ class PostViewController: BaseSegementSlideViewController {
     }
     
     override var switcherConfig: SegementSlideSwitcherConfig {
-        return SegementSlideSwitcherConfig(type: .tab)
+        var config = super.switcherConfig
+        config.type = .tab
+        return config
     }
     
     override var titlesInSwitcher: [String] {
