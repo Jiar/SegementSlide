@@ -101,7 +101,6 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        canCacheScrollState = Bool.random()
         let refreshHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshAction))!
         refreshHeader.lastUpdatedTimeLabel.isHidden = true
         refreshHeader.arrowView.image = nil

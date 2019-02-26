@@ -65,7 +65,6 @@ class ExploreViewController: BaseSegementSlideViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        canCacheScrollState = Bool.random()
         reloadData()
         scrollToSlide(at: 0, animated: false)
     }

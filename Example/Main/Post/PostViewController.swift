@@ -54,7 +54,6 @@ class PostViewController: BaseSegementSlideViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        canCacheScrollState = true
         reloadData()
         scrollToSlide(at: selectedIndex, animated: false)
     }

@@ -30,10 +30,6 @@ open class SegementSlideViewController: UIViewController {
     internal var canChildViewScroll: Bool = false
     internal var lastChildBouncesTranslationY: CGFloat = 0
     
-    internal var lastSelectedIndex: Int? = nil
-    /// canParentViewScroll, canChildViewScroll, segementSlideScrollView.contentOffset.y
-    internal var cachedScrollStates: [Int: (Bool, Bool, CGFloat)] = [:]
-    
     public var slideScrollView: UIScrollView {
         return segementSlideScrollView
     }
@@ -63,11 +59,6 @@ open class SegementSlideViewController: UIViewController {
         guard let currentIndex = currentIndex else { return nil }
         return segementSlideContentView.segementSlideContentViewController(at: currentIndex)
     }
-    
-    /// true: cache the headerView(the root scrollView) and each childViewController's scrollView's contentOffset.y.
-    /// false: when toggling childViewController, resets scrollview's contentoffset.y.
-    /// default value is false.
-    open var canCacheScrollState: Bool = false
     
     open var bouncesType: BouncesType {
         return .parent
@@ -146,7 +137,6 @@ open class SegementSlideViewController: UIViewController {
     /// otherwise, none of them will be selected.
     /// However, if an item was previously selected, it will be reSelected.
     public func reloadData() {
-        clearCachedScrollStates()
         setupBounces()
         setupHeader()
         setupSwitcher()

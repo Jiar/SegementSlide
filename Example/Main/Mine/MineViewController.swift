@@ -80,7 +80,6 @@ class MineViewController: BaseTransparentSlideViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        canCacheScrollState = Bool.random()
         reloadData()
         scrollToSlide(at: 1, animated: false)
     }
