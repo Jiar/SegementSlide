@@ -29,6 +29,7 @@ open class SegementSlideViewController: UIViewController {
     internal var canParentViewScroll: Bool = true
     internal var canChildViewScroll: Bool = false
     internal var lastChildBouncesTranslationY: CGFloat = 0
+    internal var waitTobeResetContentOffsetY: Set<Int> = Set()
     
     public var slideScrollView: UIScrollView {
         return segementSlideScrollView
@@ -140,6 +141,7 @@ open class SegementSlideViewController: UIViewController {
         setupBounces()
         setupHeader()
         setupSwitcher()
+        waitTobeResetContentOffsetY.removeAll()
         segementSlideContentView.reloadData()
         segementSlideSwitcherView.reloadData()
         layoutSegementSlideScrollView()
@@ -165,6 +167,7 @@ open class SegementSlideViewController: UIViewController {
     
     /// reload ContentView
     public func reloadContent() {
+        waitTobeResetContentOffsetY.removeAll()
         segementSlideContentView.reloadData()
     }
     

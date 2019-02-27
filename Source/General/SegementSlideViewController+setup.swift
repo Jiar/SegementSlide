@@ -136,4 +136,19 @@ extension SegementSlideViewController {
         }
     }
     
+    internal func resetChildViewControllerContentOffsetY() {
+        guard segementSlideScrollView.contentOffset.y < headerStickyHeight else {
+            return
+        }
+        let collection = waitTobeResetContentOffsetY
+        for index in collection {
+            guard index != currentIndex,
+                let scrollView = dequeueReusableViewController(at: index)?.scrollView else {
+                continue
+            }
+            waitTobeResetContentOffsetY.remove(index)
+            scrollView.contentOffset.y = 0
+        }
+    }
+    
 }

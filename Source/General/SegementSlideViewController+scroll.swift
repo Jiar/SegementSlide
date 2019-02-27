@@ -18,10 +18,12 @@ extension SegementSlideViewController {
             if !canParentViewScroll {
                 segementSlideScrollView.contentOffset.y = headerStickyHeight
                 canChildViewScroll = true
+                return
             } else if parentContentOffsetY >= headerStickyHeight {
                 segementSlideScrollView.contentOffset.y = headerStickyHeight
                 canParentViewScroll = false
                 canChildViewScroll = true
+                return
             }
         case .child:
             let childBouncesTranslationY = -scrollView.panGestureRecognizer.translation(in: scrollView).y.rounded(.up)
@@ -31,10 +33,12 @@ extension SegementSlideViewController {
             if !canParentViewScroll {
                 segementSlideScrollView.contentOffset.y = headerStickyHeight
                 canChildViewScroll = true
+                return
             } else if parentContentOffsetY >= headerStickyHeight {
                 segementSlideScrollView.contentOffset.y = headerStickyHeight
                 canParentViewScroll = false
                 canChildViewScroll = true
+                return
             } else if parentContentOffsetY <= 0 {
                 segementSlideScrollView.contentOffset.y = 0
                 canChildViewScroll = true
@@ -52,6 +56,7 @@ extension SegementSlideViewController {
                 }
             }
         }
+        resetChildViewControllerContentOffsetY()
     }
     
     internal func childScrollViewDidScroll(_ childScrollView: UIScrollView) {

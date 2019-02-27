@@ -52,6 +52,7 @@ extension SegementSlideViewController: SegementSlideContentDelegate {
     }
     
     public func segementSlideContentView(_ segementSlideContentView: SegementSlideContentView, didSelectAtIndex index: Int, animated: Bool) {
+        waitTobeResetContentOffsetY.insert(index)
         if segementSlideSwitcherView.selectedIndex != index {
             segementSlideSwitcherView.selectSwitcher(at: index, animated: animated)
         }
