@@ -28,6 +28,7 @@ internal class SegementSlideHeaderView: UIView {
     }
     
     internal func config(_ headerView: UIView?, segementSlideContentView: SegementSlideContentView) {
+        guard headerView != lastHeaderView else { return }
         if let lastHeaderView = lastHeaderView {
             lastHeaderView.removeAllConstraints()
             lastHeaderView.removeFromSuperview()

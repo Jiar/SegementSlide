@@ -90,49 +90,96 @@ extension SegementSlideViewController {
     }
     
     internal func layoutSegementSlideScrollView() {
-        segementSlideHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        if edgesForExtendedLayout.contains(.top) {
-            segementSlideHeaderView.topConstraint = segementSlideHeaderView.topAnchor.constraint(equalTo: segementSlideScrollView.topAnchor)
+        let innerHeaderHeight: CGFloat
+        if let _ = innerHeaderView, let height = self.innerHeaderHeight {
+            innerHeaderHeight = height
         } else {
-            segementSlideHeaderView.topConstraint = segementSlideHeaderView.topAnchor.constraint(equalTo: segementSlideScrollView.topAnchor, constant: topLayoutLength)
+            innerHeaderHeight = 0
         }
-        segementSlideHeaderView.leadingConstraint = segementSlideHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
-        segementSlideHeaderView.trailingConstraint = segementSlideHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        if let _ = innerHeaderView, let innerHeaderHeight = innerHeaderHeight {
+        let topLayoutLength: CGFloat
+        if edgesForExtendedLayout.contains(.top) {
+            topLayoutLength = 0
+        } else {
+            topLayoutLength = self.topLayoutLength
+        }
+        
+        segementSlideHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        if segementSlideHeaderView.topConstraint == nil {
+            segementSlideHeaderView.topConstraint = segementSlideHeaderView.topAnchor.constraint(equalTo: segementSlideScrollView.topAnchor, constant: topLayoutLength)
+        } else {
+            if segementSlideHeaderView.topConstraint?.constant != topLayoutLength {
+                segementSlideHeaderView.topConstraint?.constant = topLayoutLength
+            }
+        }
+        if segementSlideHeaderView.leadingConstraint == nil {
+            segementSlideHeaderView.leadingConstraint = segementSlideHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        }
+        if segementSlideHeaderView.trailingConstraint == nil {
+            segementSlideHeaderView.trailingConstraint = segementSlideHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        }
+        if segementSlideHeaderView.heightConstraint == nil {
             segementSlideHeaderView.heightConstraint = segementSlideHeaderView.heightAnchor.constraint(equalToConstant: innerHeaderHeight)
         } else {
-            segementSlideHeaderView.heightConstraint = segementSlideHeaderView.heightAnchor.constraint(equalToConstant: 0)
+            if segementSlideHeaderView.heightConstraint?.constant != innerHeaderHeight {
+                segementSlideHeaderView.heightConstraint?.constant = innerHeaderHeight
+            }
         }
         segementSlideHeaderView.config(innerHeaderView, segementSlideContentView: segementSlideContentView)
         
         segementSlideSwitcherView.translatesAutoresizingMaskIntoConstraints = false
-        let topConstraint = segementSlideSwitcherView.topAnchor.constraint(equalTo: segementSlideHeaderView.bottomAnchor)
-        topConstraint.priority = UILayoutPriority(rawValue: 999)
-        segementSlideSwitcherView.topConstraint = topConstraint
-        safeAreaTopConstraint?.isActive = false
-        if #available(iOS 11, *) {
-            safeAreaTopConstraint = segementSlideSwitcherView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor)
-        } else {
-            safeAreaTopConstraint = segementSlideSwitcherView.topAnchor.constraint(greaterThanOrEqualTo: topLayoutGuide.bottomAnchor)
+        if segementSlideSwitcherView.topConstraint == nil {
+            let topConstraint = segementSlideSwitcherView.topAnchor.constraint(equalTo: segementSlideHeaderView.bottomAnchor)
+            topConstraint.priority = UILayoutPriority(rawValue: 999)
+            segementSlideSwitcherView.topConstraint = topConstraint
         }
-        safeAreaTopConstraint?.isActive = true
-        segementSlideSwitcherView.leadingConstraint = segementSlideSwitcherView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
-        segementSlideSwitcherView.trailingConstraint = segementSlideSwitcherView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        segementSlideSwitcherView.heightConstraint = segementSlideSwitcherView.heightAnchor.constraint(equalToConstant: switcherHeight)
+        if safeAreaTopConstraint == nil {
+            safeAreaTopConstraint?.isActive = false
+            if #available(iOS 11, *) {
+                safeAreaTopConstraint = segementSlideSwitcherView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor)
+            } else {
+                safeAreaTopConstraint = segementSlideSwitcherView.topAnchor.constraint(greaterThanOrEqualTo: topLayoutGuide.bottomAnchor)
+            }
+            safeAreaTopConstraint?.isActive = true
+        }
+        if segementSlideSwitcherView.leadingConstraint == nil {
+            segementSlideSwitcherView.leadingConstraint = segementSlideSwitcherView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        }
+        if segementSlideSwitcherView.trailingConstraint == nil {
+            segementSlideSwitcherView.trailingConstraint = segementSlideSwitcherView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        }
+        if segementSlideSwitcherView.heightConstraint == nil {
+            segementSlideSwitcherView.heightConstraint = segementSlideSwitcherView.heightAnchor.constraint(equalToConstant: switcherHeight)
+        } else {
+            if segementSlideSwitcherView.heightConstraint?.constant != switcherHeight {
+                segementSlideSwitcherView.heightConstraint?.constant = switcherHeight
+            }
+        }
         
         segementSlideContentView.translatesAutoresizingMaskIntoConstraints = false
-        segementSlideContentView.topConstraint = segementSlideContentView.topAnchor.constraint(equalTo: segementSlideSwitcherView.bottomAnchor)
-        segementSlideContentView.leadingConstraint = segementSlideContentView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
-        segementSlideContentView.trailingConstraint = segementSlideContentView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        segementSlideContentView.heightConstraint = segementSlideContentView.heightAnchor.constraint(equalToConstant: contentViewHeight)
+        if segementSlideContentView.topConstraint == nil {
+            segementSlideContentView.topConstraint = segementSlideContentView.topAnchor.constraint(equalTo: segementSlideSwitcherView.bottomAnchor)
+        }
+        if segementSlideContentView.leadingConstraint == nil {
+            segementSlideContentView.leadingConstraint = segementSlideContentView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        }
+        if segementSlideContentView.trailingConstraint == nil {
+            segementSlideContentView.trailingConstraint = segementSlideContentView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        }
+        if segementSlideContentView.heightConstraint == nil {
+            segementSlideContentView.heightConstraint = segementSlideContentView.heightAnchor.constraint(equalToConstant: contentViewHeight)
+        } else {
+            if segementSlideContentView.heightConstraint?.constant != contentViewHeight {
+                segementSlideContentView.heightConstraint?.constant = contentViewHeight
+            }
+        }
         
         segementSlideHeaderView.layer.zPosition = -3
         segementSlideContentView.layer.zPosition = -2
         segementSlideSwitcherView.layer.zPosition = -1
-        if edgesForExtendedLayout.contains(.top) {
-            segementSlideScrollView.contentSize = CGSize(width: view.bounds.width, height: (innerHeaderHeight ?? 0)+switcherHeight+contentViewHeight+1)
-        } else {
-            segementSlideScrollView.contentSize = CGSize(width: view.bounds.width, height: topLayoutLength+(innerHeaderHeight ?? 0)+switcherHeight+contentViewHeight+1)
+        
+        let contentSize = CGSize(width: view.bounds.width, height: topLayoutLength+innerHeaderHeight+switcherHeight+contentViewHeight+1)
+        if segementSlideScrollView.contentSize != contentSize {
+            segementSlideScrollView.contentSize = contentSize
         }
     }
     
