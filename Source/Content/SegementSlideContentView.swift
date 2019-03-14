@@ -61,6 +61,7 @@ public class SegementSlideContentView: UIView {
         updateScrollViewContentSize()
         layoutViewControllers()
         recoverInitSelectedIndex()
+        updateSelectedIndex()
     }
     
     /// remove subViews
@@ -71,8 +72,7 @@ public class SegementSlideContentView: UIView {
     public func reloadData() {
         removeViewControllers()
         updateScrollViewContentSize()
-        guard let selectedIndex = selectedIndex else { return }
-        updateSelectedViewController(at: selectedIndex, animated: false)
+        updateSelectedIndex()
     }
     
     /// select one item by index
@@ -145,6 +145,11 @@ extension SegementSlideContentView {
         updateSelectedViewController(at: initSelectedIndex, animated: false)
     }
     
+    private func updateSelectedIndex() {
+        guard let selectedIndex = selectedIndex else { return }
+        updateSelectedViewController(at: selectedIndex, animated: false)
+    }
+    
     private func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
         if let childViewController = dequeueReusableViewController(at: index) {
             return childViewController
@@ -160,22 +165,25 @@ extension SegementSlideContentView {
             initSelectedIndex = index
             return
         }
-        guard index != selectedIndex,
-            let viewController = viewController,
+        guard let viewController = viewController,
             let count = delegate?.segementSlideContentScrollViewCount,
             count != 0, index >= 0, index < count else {
             return
         }
-        if let lastIndex = selectedIndex, let lastChildViewController = segementSlideContentViewController(at: lastIndex) as? UIViewController {
-            lastChildViewController.beginAppearanceTransition(false, animated: animated)
+        if index != selectedIndex {
+            if let lastIndex = selectedIndex, let lastChildViewController = segementSlideContentViewController(at: lastIndex) as? UIViewController {
+                lastChildViewController.beginAppearanceTransition(false, animated: animated)
+            }
         }
         guard let childViewController = segementSlideContentViewController(at: index) as? UIViewController else { return }
         let isAdded = childViewController.view.superview != nil
-        if isAdded {
-            childViewController.beginAppearanceTransition(true, animated: animated)
-        } else {
-            viewController.addChild(childViewController)
-            scrollView.addSubview(childViewController.view)
+        if index != selectedIndex {
+            if isAdded {
+                childViewController.beginAppearanceTransition(true, animated: animated)
+            } else {
+                viewController.addChild(childViewController)
+                scrollView.addSubview(childViewController.view)
+            }
         }
         let offsetX = CGFloat(index)*scrollView.bounds.width
         childViewController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -184,12 +192,15 @@ extension SegementSlideContentView {
         childViewController.view.heightConstraint = childViewController.view.heightAnchor.constraint(equalToConstant: scrollView.bounds.height)
         childViewController.view.leadingConstraint = childViewController.view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: offsetX)
         scrollView.setContentOffset(CGPoint(x: offsetX, y: scrollView.contentOffset.y), animated: animated)
-        if let lastIndex = selectedIndex, let lastChildViewController = segementSlideContentViewController(at: lastIndex) as? UIViewController {
-            lastChildViewController.endAppearanceTransition()
+        if index != selectedIndex {
+            if let lastIndex = selectedIndex, let lastChildViewController = segementSlideContentViewController(at: lastIndex) as? UIViewController {
+                lastChildViewController.endAppearanceTransition()
+            }
+            if isAdded {
+                childViewController.endAppearanceTransition()
+            }
         }
-        if isAdded {
-            childViewController.endAppearanceTransition()
-        }
+        guard index != selectedIndex else { return }
         selectedIndex = index
         delegate?.segementSlideContentView(self, didSelectAtIndex: index, animated: animated)
     }

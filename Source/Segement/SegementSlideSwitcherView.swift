@@ -68,6 +68,7 @@ public class SegementSlideSwitcherView: UIView {
         layoutTitleButtons()
         reloadBadges()
         recoverInitSelectedIndex()
+        updateSelectedIndex()
     }
     
     /// relayout subViews
@@ -106,8 +107,7 @@ public class SegementSlideSwitcherView: UIView {
         indicatorView.backgroundColor = innerConfig.indicatorColor
         layoutTitleButtons()
         reloadBadges()
-        guard let selectedIndex = selectedIndex else { return }
-        updateSelectedButton(at: selectedIndex, animated: false)
+        updateSelectedIndex()
     }
     
     /// reload all badges in `SegementSlideSwitcherView`
@@ -156,6 +156,11 @@ extension SegementSlideSwitcherView {
         guard let initSelectedIndex = initSelectedIndex else { return }
         self.initSelectedIndex = nil
         updateSelectedButton(at: initSelectedIndex, animated: false)
+    }
+    
+    private func updateSelectedIndex() {
+        guard let selectedIndex = selectedIndex else { return }
+        updateSelectedButton(at: selectedIndex, animated: false)
     }
     
     private func layoutTitleButtons() {

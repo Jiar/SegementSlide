@@ -69,6 +69,11 @@ open class TransparentSlideViewController: SegementSlideViewController {
         return (.white, .black)
     }
     
+    open override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        layoutTitleLabel()
+    }
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
         edgesForExtendedLayout = .top
@@ -78,6 +83,11 @@ open class TransparentSlideViewController: SegementSlideViewController {
     private func setupTitleLabel() {
         titleLabel = UILabel()
         titleLabel.textAlignment = .center
+        layoutTitleLabel()
+        navigationItem.titleView = titleLabel
+    }
+    
+    private func layoutTitleLabel() {
         let titleSize: CGSize
         if let navigationController = navigationController {
             titleSize = CGSize(width: navigationController.navigationBar.bounds.width*3/5, height: navigationController.navigationBar.bounds.height)
@@ -91,7 +101,6 @@ open class TransparentSlideViewController: SegementSlideViewController {
         } else {
             titleLabel.bounds = CGRect(origin: .zero, size: titleSize)
         }
-        navigationItem.titleView = titleLabel
     }
     
     public override func reloadData() {
