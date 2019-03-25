@@ -130,15 +130,18 @@ public class SegementSlideSwitcherView: UIView {
             }
             let height = titleButton.titleLabel?.font.lineHeight ?? titleButton.bounds.height
             switch type {
-            case .count:
-                titleButton.badge.height = innerConfig.badgeHeightForCountType
-                titleButton.badge.fontSize = innerConfig.badgeFontSize
-                titleButton.badge.offset = CGPoint(x: width/2+titleButton.badge.height/2, y: -height/2)
+            case .none:
+                break
             case .point:
                 titleButton.badge.height = innerConfig.badgeHeightForPointType
                 titleButton.badge.offset = CGPoint(x: width/2+titleButton.badge.height/2, y: -height/2)
-            case .none:
-                break
+            case .count:
+                titleButton.badge.font = innerConfig.badgeFontForCountType
+                titleButton.badge.height = innerConfig.badgeHeightForCountType
+                titleButton.badge.offset = CGPoint(x: width/2+titleButton.badge.height/2, y: -height/2)
+            case .custom:
+                titleButton.badge.height = innerConfig.badgeHeightForCustomType
+                titleButton.badge.offset = CGPoint(x: width/2+titleButton.badge.height/2, y: -height/2)
             }
         }
     }

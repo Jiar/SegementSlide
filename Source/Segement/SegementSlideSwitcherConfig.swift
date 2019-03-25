@@ -22,9 +22,10 @@ public struct SegementSlideSwitcherConfig {
     public var indicatorWidth: CGFloat
     public var indicatorHeight: CGFloat
     public var indicatorColor: UIColor
-    public var badgeHeightForCountType: CGFloat
     public var badgeHeightForPointType: CGFloat
-    public var badgeFontSize: CGFloat
+    public var badgeHeightForCountType: CGFloat
+    public var badgeHeightForCustomType: CGFloat
+    public var badgeFontForCountType: UIFont
     
     public init(type: SwitcherType = .segement,
                 horizontalMargin: CGFloat = 16,
@@ -36,9 +37,10 @@ public struct SegementSlideSwitcherConfig {
                 indicatorWidth: CGFloat = 30,
                 indicatorHeight: CGFloat = 2,
                 indicatorColor: UIColor = UIColor.darkGray,
-                badgeHeightForCountType: CGFloat = 15,
                 badgeHeightForPointType: CGFloat = 9,
-                badgeFontSize: CGFloat = 10) {
+                badgeHeightForCountType: CGFloat = 15,
+                badgeHeightForCustomType: CGFloat = 14,
+                badgeFontForCountType: UIFont = UIFont.systemFont(ofSize: 10, weight: .regular)) {
         self.type = type
         self.horizontalMargin = horizontalMargin
         self.horizontalSpace = horizontalSpace
@@ -49,9 +51,10 @@ public struct SegementSlideSwitcherConfig {
         self.indicatorWidth = indicatorWidth
         self.indicatorHeight = indicatorHeight
         self.indicatorColor = indicatorColor
-        self.badgeHeightForCountType = badgeHeightForCountType
         self.badgeHeightForPointType = badgeHeightForPointType
-        self.badgeFontSize = badgeFontSize
+        self.badgeHeightForCountType = badgeHeightForCountType
+        self.badgeHeightForCustomType = badgeHeightForCustomType
+        self.badgeFontForCountType = badgeFontForCountType
     }
     
 }

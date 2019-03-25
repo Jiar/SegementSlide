@@ -12,11 +12,7 @@ import SegementSlide
 class BaseSegementSlideViewController: SegementSlideViewController {
     
     override var switcherConfig: SegementSlideSwitcherConfig {
-        var config = SegementSlideSwitcherConfig.shared
-        config.indicatorColor = UIColor.darkGray
-        config.normalTitleColor = UIColor.gray
-        config.selectedTitleColor = UIColor.darkGray
-        return config
+        return ConfigManager.shared.switcherConfig
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {

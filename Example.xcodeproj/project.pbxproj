@@ -27,6 +27,7 @@
 		807A36EE21C3B6D1004675BC /* bg_working.png in Resources */ = {isa = PBXBuildFile; fileRef = 807A36ED21C3B6D0004675BC /* bg_working.png */; };
 		807A36F021C3B7E3004675BC /* bg_programming.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 807A36EF21C3B7E3004675BC /* bg_programming.jpg */; };
 		807A36F221C3B8D0004675BC /* bg_thinking.png in Resources */ = {isa = PBXBuildFile; fileRef = 807A36F121C3B8D0004675BC /* bg_thinking.png */; };
+		8099833C2249306E00C36D4B /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8099833B2249306E00C36D4B /* ConfigManager.swift */; };
 		80A8697721E4EA5200A773CB /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A8697621E4EA5200A773CB /* ExampleTests.swift */; };
 		80B6C3ED21C1FAB5007C958F /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3EC21C1FAB5007C958F /* ContentViewController.swift */; };
 		80B6C3F021C20052007C958F /* ContentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3EE21C20052007C958F /* ContentViewCell.swift */; };
@@ -73,6 +74,7 @@
 		807A36ED21C3B6D0004675BC /* bg_working.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_working.png; sourceTree = "<group>"; };
 		807A36EF21C3B7E3004675BC /* bg_programming.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg_programming.jpg; sourceTree = "<group>"; };
 		807A36F121C3B8D0004675BC /* bg_thinking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_thinking.png; sourceTree = "<group>"; };
+		8099833B2249306E00C36D4B /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		80A8697421E4EA5100A773CB /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		80A8697621E4EA5200A773CB /* ExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleTests.swift; sourceTree = "<group>"; };
 		80A8697821E4EA5200A773CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 			children = (
 				807A36DE21C359D3004675BC /* AppManager.swift */,
 				80B6C3FD21C29EEA007C958F /* DataManager.swift */,
+				8099833B2249306E00C36D4B /* ConfigManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				8079920F221958C300682690 /* PostViewController.swift in Sources */,
 				80B6C3ED21C1FAB5007C958F /* ContentViewController.swift in Sources */,
 				80F3D6B821D789D6005D649A /* BadgeType+Random.swift in Sources */,
+				8099833C2249306E00C36D4B /* ConfigManager.swift in Sources */,
 				805C1D9921C7C86A00991D07 /* BaseTransparentSlideViewController.swift in Sources */,
 				80B6C3FE21C29EEA007C958F /* DataManager.swift in Sources */,
 				806518D821F317050036FF5F /* UINavigationController+Swizzle.swift in Sources */,

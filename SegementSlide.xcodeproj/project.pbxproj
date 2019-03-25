@@ -146,11 +146,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8099833D2249322C00C36D4B /* Badge */ = {
+			isa = PBXGroup;
+			children = (
+				80A8698021E6242600A773CB /* BadgeView.swift */,
+			);
+			path = Badge;
+			sourceTree = "<group>";
+		};
 		80A8697E21E6242600A773CB /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				80271D4921EF5E80003C8EE9 /* General */,
 				80A8698F21E6242600A773CB /* Header */,
+				8099833D2249322C00C36D4B /* Badge */,
 				80A8698A21E6242600A773CB /* Segement */,
 				80A8698521E6242600A773CB /* Content */,
 				80A8697F21E6242600A773CB /* Utility */,
@@ -180,7 +189,6 @@
 			children = (
 				80E05EF921E8DE8E00C42A35 /* SegementSlideSwitcherView.swift */,
 				80271D4A21EF610A003C8EE9 /* SegementSlideSwitcherConfig.swift */,
-				80A8698021E6242600A773CB /* BadgeView.swift */,
 			);
 			path = Segement;
 			sourceTree = "<group>";
