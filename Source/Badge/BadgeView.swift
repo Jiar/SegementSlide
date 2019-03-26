@@ -157,47 +157,66 @@ public final class Badge {
         guard let superView = badgeView.superview else {
             return
         }
-        centerXConstraint?.isActive = false
-        centerXConstraint = badgeView.centerXAnchor.constraint(equalTo: superView.centerXAnchor, constant: offset.x)
-        centerXConstraint?.isActive = true
+        if let centerXConstraint = centerXConstraint {
+            centerXConstraint.constant = offset.x
+        } else {
+            centerXConstraint = badgeView.centerXAnchor.constraint(equalTo: superView.centerXAnchor, constant: offset.x)
+            centerXConstraint?.isActive = true
+        }
     }
     
     private func updateCenterYConstraint() {
         guard let superView = badgeView.superview else {
             return
         }
-        centerYConstraint?.isActive = false
-        centerYConstraint = badgeView.centerYAnchor.constraint(equalTo: superView.centerYAnchor, constant: offset.y)
-        centerYConstraint?.isActive = true
+        if let centerYConstraint = centerYConstraint {
+            centerYConstraint.constant = offset.y
+        } else {
+            centerYConstraint = badgeView.centerYAnchor.constraint(equalTo: superView.centerYAnchor, constant: offset.y)
+            centerYConstraint?.isActive = true
+        }
     }
     
     private func updateHeightConstraint() {
-        heightConstraint?.isActive = false
-        heightConstraint = badgeView.heightAnchor.constraint(equalToConstant: height)
-        heightConstraint?.isActive = true
+        if let heightConstraint = heightConstraint {
+            heightConstraint.constant = height
+        } else {
+            heightConstraint = badgeView.heightAnchor.constraint(equalToConstant: height)
+            heightConstraint?.isActive = true
+        }
     }
     
     private func updateWidthConstraint() {
-        widthConstraint?.isActive = false
+        let width: CGFloat?
         switch type {
         case .none:
-            widthConstraint = badgeView.widthAnchor.constraint(equalToConstant: 0)
+            width = 0
         case .point:
-            widthConstraint = badgeView.widthAnchor.constraint(equalToConstant: height)
+            width = height
         case .count(let count):
             if count > 0, let string = badgeView.text {
                 if count >= 10 {
-                    widthConstraint = badgeView.widthAnchor.constraint(equalToConstant: string.boundingWidth(with: badgeView.font)+(height-"0".boundingWidth(with: badgeView.font)))
+                    width = string.boundingWidth(with: badgeView.font)+(height-"0".boundingWidth(with: badgeView.font))
                 } else {
-                    widthConstraint = badgeView.widthAnchor.constraint(equalToConstant: height)
+                    width = height
                 }
             } else {
-                widthConstraint = badgeView.widthAnchor.constraint(equalToConstant: 0)
+                width = 0
             }
-        case let .custom:
+        case .custom:
+            width = nil
+        }
+        if let width = width {
+            if let widthConstraint = widthConstraint {
+                widthConstraint.constant = width
+            } else {
+                widthConstraint = badgeView.widthAnchor.constraint(equalToConstant: width)
+                widthConstraint?.isActive = true
+            }
+        } else {
+            widthConstraint?.isActive = false
             widthConstraint = nil
         }
-        widthConstraint?.isActive = true
     }
     
     private func updateCornerRadius() {
