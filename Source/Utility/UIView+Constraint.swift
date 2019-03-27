@@ -16,7 +16,7 @@ private var heightConstraintKey: Void?
 
 internal extension UIView {
     
-    internal var topConstraint: NSLayoutConstraint? {
+    var topConstraint: NSLayoutConstraint? {
         get {
             if let value = objc_getAssociatedObject(self, &topConstraintKey) as? NSLayoutConstraint {
                 return value
@@ -33,7 +33,7 @@ internal extension UIView {
         }
     }
     
-    internal var bottomConstraint: NSLayoutConstraint? {
+    var bottomConstraint: NSLayoutConstraint? {
         get {
             if let value = objc_getAssociatedObject(self, &bottomConstraintKey) as? NSLayoutConstraint {
                 return value
@@ -50,7 +50,7 @@ internal extension UIView {
         }
     }
     
-    internal var leadingConstraint: NSLayoutConstraint? {
+    var leadingConstraint: NSLayoutConstraint? {
         get {
             if let value = objc_getAssociatedObject(self, &leadingConstraintKey) as? NSLayoutConstraint {
                 return value
@@ -67,7 +67,7 @@ internal extension UIView {
         }
     }
     
-    internal var trailingConstraint: NSLayoutConstraint? {
+    var trailingConstraint: NSLayoutConstraint? {
         get {
             if let value = objc_getAssociatedObject(self, &trailingConstraintKey) as? NSLayoutConstraint {
                 return value
@@ -84,7 +84,7 @@ internal extension UIView {
         }
     }
     
-    internal var widthConstraint: NSLayoutConstraint? {
+    var widthConstraint: NSLayoutConstraint? {
         get {
             if let value = objc_getAssociatedObject(self, &widthConstraintKey) as? NSLayoutConstraint {
                 return value
@@ -101,7 +101,7 @@ internal extension UIView {
         }
     }
     
-    internal var heightConstraint: NSLayoutConstraint? {
+    var heightConstraint: NSLayoutConstraint? {
         get {
             if let value = objc_getAssociatedObject(self, &heightConstraintKey) as? NSLayoutConstraint {
                 return value
@@ -122,7 +122,7 @@ internal extension UIView {
 
 internal extension UIView {
     
-    internal func constraintToSuperview() {
+    func constraintToSuperview() {
         guard let superview = superview else { return }
         translatesAutoresizingMaskIntoConstraints = false
         topConstraint = topAnchor.constraint(equalTo: superview.topAnchor)
@@ -131,7 +131,7 @@ internal extension UIView {
         trailingConstraint = trailingAnchor.constraint(equalTo: superview.trailingAnchor)
     }
     
-    internal func removeAllConstraints() {
+    func removeAllConstraints() {
         topConstraint = nil
         bottomConstraint = nil
         leadingConstraint = nil

@@ -38,7 +38,7 @@ private var badgeKey: Void?
 
 public extension UIView {
     
-    public var badge: Badge {
+    var badge: Badge {
         get {
             let badge: Badge
             if let value = objc_getAssociatedObject(self, &badgeKey) as? Badge {
