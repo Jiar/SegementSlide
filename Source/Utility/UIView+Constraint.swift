@@ -26,8 +26,10 @@ internal extension UIView {
         }
         set {
             topConstraint?.isActive = false
+            if let newValue = newValue {
+                newValue.isActive = true
+            }
             objc_setAssociatedObject(self, &topConstraintKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            newValue?.isActive = true
         }
     }
     
@@ -41,8 +43,10 @@ internal extension UIView {
         }
         set {
             bottomConstraint?.isActive = false
+            if let newValue = newValue {
+                newValue.isActive = true
+            }
             objc_setAssociatedObject(self, &bottomConstraintKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            newValue?.isActive = true
         }
     }
     
@@ -56,8 +60,10 @@ internal extension UIView {
         }
         set {
             leadingConstraint?.isActive = false
+            if let newValue = newValue {
+                newValue.isActive = true
+            }
             objc_setAssociatedObject(self, &leadingConstraintKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            newValue?.isActive = true
         }
     }
     
@@ -71,8 +77,10 @@ internal extension UIView {
         }
         set {
             trailingConstraint?.isActive = false
+            if let newValue = newValue {
+                newValue.isActive = true
+            }
             objc_setAssociatedObject(self, &trailingConstraintKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            newValue?.isActive = true
         }
     }
     
@@ -86,8 +94,10 @@ internal extension UIView {
         }
         set {
             widthConstraint?.isActive = false
+            if let newValue = newValue {
+                newValue.isActive = true
+            }
             objc_setAssociatedObject(self, &widthConstraintKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            newValue?.isActive = true
         }
     }
     
@@ -101,8 +111,10 @@ internal extension UIView {
         }
         set {
             heightConstraint?.isActive = false
+            if let newValue = newValue {
+                newValue.isActive = true
+            }
             objc_setAssociatedObject(self, &heightConstraintKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            newValue?.isActive = true
         }
     }
     

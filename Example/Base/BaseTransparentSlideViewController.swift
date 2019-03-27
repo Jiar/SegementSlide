@@ -62,9 +62,17 @@ class BaseTransparentSlideViewController: TransparentSlideViewController {
         super.viewDidLoad()
         debugPrint("\(type(of: self)) - \(String(format: "%p", self)) - \(#function)")
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
+        if Bool.random() {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "reload", style: .plain, target: self, action: #selector(reloadAction))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
+        }
     }
     
+    @objc private func reloadAction() {
+        reloadData()
+    }
+        
     @objc private func moreAction() {
         let viewController: UIViewController
         switch Int.random(in: 0..<8) {

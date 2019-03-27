@@ -20,31 +20,32 @@ extension SegementSlideViewController {
         setupSegementSlideContentView()
         setupSegementSlideSwitcherView()
         observeScrollViewContentOffset()
+        observeWillClearAllReusableViewControllersNotification()
     }
     
-    internal func setupSegementSlideViews() {
+    private func setupSegementSlideViews() {
         segementSlideHeaderView = SegementSlideHeaderView()
         segementSlideSwitcherView = SegementSlideSwitcherView()
         segementSlideContentView = SegementSlideContentView()
         segementSlideScrollView = SegementSlideScrollView(otherGestureRecognizers: segementSlideSwitcherView.gestureRecognizersInScrollView)
     }
     
-    internal func setupSegementSlideHeaderView() {
+    private func setupSegementSlideHeaderView() {
         segementSlideScrollView.addSubview(segementSlideHeaderView)
     }
     
-    internal func setupSegementSlideContentView() {
+    private func setupSegementSlideContentView() {
         segementSlideContentView.delegate = self
         segementSlideContentView.viewController = self
         segementSlideScrollView.addSubview(segementSlideContentView)
     }
     
-    internal func setupSegementSlideSwitcherView() {
+    private func setupSegementSlideSwitcherView() {
         segementSlideSwitcherView.delegate = self
         segementSlideScrollView.addSubview(segementSlideSwitcherView)
     }
     
-    internal func setupSegementSlideScrollView() {
+    private func setupSegementSlideScrollView() {
         view.addSubview(segementSlideScrollView)
         segementSlideScrollView.constraintToSuperview()
         if #available(iOS 11.0, *) {
@@ -60,12 +61,21 @@ extension SegementSlideViewController {
         segementSlideScrollView.delegate = self
     }
     
-    internal func observeScrollViewContentOffset() {
+    private func observeScrollViewContentOffset() {
         parentKeyValueObservation = segementSlideScrollView.observe(\.contentOffset, options: [.initial, .new, .old], changeHandler: { [weak self] (scrollView, change) in
             guard let self = self else { return }
             guard change.newValue != change.oldValue else { return }
             self.parentScrollViewDidScroll(scrollView)
         })
+    }
+    
+    private func observeWillClearAllReusableViewControllersNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(willClearAllReusableViewControllers), name: SegementSlideContentView.willClearAllReusableViewControllersNotification, object: nil)
+    }
+    
+    @objc private func willClearAllReusableViewControllers() {
+        childKeyValueObservation?.invalidate()
+        childKeyValueObservation = nil
     }
     
     internal func setupBounces() {

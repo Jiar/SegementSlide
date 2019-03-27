@@ -23,7 +23,7 @@ open class SegementSlideViewController: UIViewController {
     internal var innerHeaderView: UIView?
     
     internal var safeAreaTopConstraint: NSLayoutConstraint?
-    internal var parentKeyValueObservation: NSKeyValueObservation!
+    internal var parentKeyValueObservation: NSKeyValueObservation?
     internal var childKeyValueObservation: NSKeyValueObservation?
     internal var innerBouncesType: BouncesType = .parent
     internal var canParentViewScroll: Bool = true
@@ -181,10 +181,13 @@ open class SegementSlideViewController: UIViewController {
         return segementSlideContentView.dequeueReusableViewController(at: index)
     }
     
-    #if DEBUG
     deinit {
+        parentKeyValueObservation?.invalidate()
+        childKeyValueObservation?.invalidate()
+        NotificationCenter.default.removeObserver(self, name: SegementSlideContentView.willClearAllReusableViewControllersNotification, object: nil)
+        #if DEBUG
         debugPrint("\(type(of: self)) deinit")
+        #endif
     }
-    #endif
     
 }
