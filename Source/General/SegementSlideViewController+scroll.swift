@@ -55,6 +55,10 @@ extension SegementSlideViewController {
                     canChildViewScroll = false
                 }
             }
+        case .none:
+            segementSlideScrollView.contentOffset.y = 0
+            canChildViewScroll = false
+            canParentViewScroll = false
         }
         resetChildViewControllerContentOffsetY()
     }
@@ -84,6 +88,9 @@ extension SegementSlideViewController {
                     canChildViewScroll = false
                 }
             }
+        case .none:
+            canChildViewScroll = false
+            canParentViewScroll = false
         }
     }
     

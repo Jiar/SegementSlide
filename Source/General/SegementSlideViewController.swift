@@ -11,6 +11,7 @@ import UIKit
 public enum BouncesType {
     case parent
     case child
+    case none
 }
 
 open class SegementSlideViewController: UIViewController {
@@ -188,6 +189,18 @@ open class SegementSlideViewController: UIViewController {
         #if DEBUG
         debugPrint("\(type(of: self)) deinit")
         #endif
+    }
+    
+    open func updateChildViewControllerScrollView() {
+        childKeyValueObservation?.invalidate()
+        guard let childViewController = segementSlideContentView.dequeueReusableViewController(at: currentIndex!) else { return }
+        guard let scrollView = childViewController.scrollView else { return }
+        let keyValueObservation = scrollView.observe(\.contentOffset, options: [.new, .old], changeHandler: { [weak self] (scrollView, change) in
+            guard let self = self else { return }
+            guard change.newValue != change.oldValue else { return }
+            self.childScrollViewDidScroll(scrollView)
+        })
+        childKeyValueObservation = keyValueObservation
     }
     
 }

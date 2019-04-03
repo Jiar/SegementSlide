@@ -87,6 +87,9 @@ extension SegementSlideViewController {
         case .child:
             canParentViewScroll = true
             canChildViewScroll = true
+        case .none:
+            canChildViewScroll = false
+            canParentViewScroll = false
         }
     }
     
