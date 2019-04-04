@@ -214,12 +214,24 @@ extension SegementSlideSwitcherView {
         let titleButton = titleButtons[index]
         titleButton.setTitleColor(innerConfig.selectedTitleColor, for: .normal)
         titleButton.titleLabel?.font = innerConfig.selectedTitleFont
+        
+        let indicatorWidth = self.innerConfig.indicatorWidth ?? titleButton.frame.width
         if animated, indicatorView.frame != .zero {
             UIView.animate(withDuration: 0.25) {
-                self.indicatorView.frame = CGRect(x: titleButton.frame.origin.x+(titleButton.bounds.width-self.innerConfig.indicatorWidth)/2, y: self.frame.height-self.innerConfig.indicatorHeight, width: self.innerConfig.indicatorWidth, height: self.innerConfig.indicatorHeight)
+                self.indicatorView.frame = CGRect(
+                    x: titleButton.frame.origin.x+(titleButton.bounds.width-indicatorWidth)/2,
+                    y: self.frame.height-self.innerConfig.indicatorHeight,
+                    width: indicatorWidth,
+                    height: self.innerConfig.indicatorHeight
+                )
             }
         } else {
-            indicatorView.frame = CGRect(x: titleButton.frame.origin.x+(titleButton.bounds.width-innerConfig.indicatorWidth)/2, y: frame.height-innerConfig.indicatorHeight, width: innerConfig.indicatorWidth, height: innerConfig.indicatorHeight)
+            indicatorView.frame = CGRect(
+                x: titleButton.frame.origin.x+(titleButton.bounds.width-indicatorWidth)/2,
+                y: frame.height-innerConfig.indicatorHeight,
+                width: indicatorWidth,
+                height: innerConfig.indicatorHeight
+            )
         }
         if case .segement = innerConfig.type {
             var offsetX = titleButton.frame.origin.x-(scrollView.bounds.width-titleButton.bounds.width)/2

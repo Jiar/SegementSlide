@@ -19,7 +19,7 @@ public struct SegementSlideSwitcherConfig {
     public var selectedTitleFont: UIFont
     public var normalTitleColor: UIColor
     public var selectedTitleColor: UIColor
-    public var indicatorWidth: CGFloat
+    public var indicatorWidth: CGFloat?
     public var indicatorHeight: CGFloat
     public var indicatorColor: UIColor
     public var badgeHeightForPointType: CGFloat
@@ -35,7 +35,7 @@ public struct SegementSlideSwitcherConfig {
                 selectedTitleFont: UIFont = UIFont.systemFont(ofSize: 15, weight: .medium),
                 normalTitleColor: UIColor = UIColor.gray,
                 selectedTitleColor: UIColor = UIColor.darkGray,
-                indicatorWidth: CGFloat = 30,
+                indicatorWidth: CGFloat? = 30,
                 indicatorHeight: CGFloat = 2,
                 indicatorColor: UIColor = UIColor.darkGray,
                 badgeHeightForPointType: CGFloat = 9,
