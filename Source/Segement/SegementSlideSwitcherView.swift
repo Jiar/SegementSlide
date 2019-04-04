@@ -60,7 +60,6 @@ public class SegementSlideSwitcherView: UIView {
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.backgroundColor = .clear
-        backgroundColor = .white
     }
     
     public override func layoutSubviews() {
@@ -103,8 +102,8 @@ public class SegementSlideSwitcherView: UIView {
         guard !titleButtons.isEmpty else { return }
         scrollView.addSubview(indicatorView)
         indicatorView.layer.masksToBounds = true
-        indicatorView.layer.cornerRadius = innerConfig.indicatorHeight/2
         indicatorView.backgroundColor = innerConfig.indicatorColor
+        backgroundColor = config.backgroundColor
         layoutTitleButtons()
         reloadBadges()
         updateSelectedIndex()
