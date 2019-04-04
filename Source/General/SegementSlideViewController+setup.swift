@@ -11,7 +11,7 @@ import UIKit
 extension SegementSlideViewController {
     
     internal func setup() {
-        view.backgroundColor = .white
+        view.backgroundColor = .clear
         extendedLayoutIncludesOpaqueBars = true
         edgesForExtendedLayout = []
         setupSegementSlideViews()
@@ -53,7 +53,7 @@ extension SegementSlideViewController {
         } else {
             automaticallyAdjustsScrollViewInsets = false
         }
-        segementSlideScrollView.backgroundColor = .white
+        segementSlideScrollView.backgroundColor = .clear
         segementSlideScrollView.showsHorizontalScrollIndicator = false
         segementSlideScrollView.showsVerticalScrollIndicator = false
         segementSlideScrollView.isPagingEnabled = false
