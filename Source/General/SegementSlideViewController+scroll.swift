@@ -17,7 +17,7 @@ extension SegementSlideViewController {
         case .parent:
             if !canParentViewScroll {
                 if let childScrollView = currentSegementSlideContentViewController?.scrollView,
-                    childScrollView.contentOffset.y >= 0 {
+                    childScrollView.contentOffset.y > 0 {
                     segementSlideScrollView.contentOffset.y = headerStickyHeight
                 }
                 canChildViewScroll = true
