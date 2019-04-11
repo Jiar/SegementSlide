@@ -91,7 +91,6 @@ extension SegementSlideViewController {
     }
     
     internal func setupHeader() {
-        innerHeaderHeight = headerHeight?.rounded(.up)
         innerHeaderView = headerView
     }
     
@@ -100,12 +99,6 @@ extension SegementSlideViewController {
     }
     
     internal func layoutSegementSlideScrollView() {
-        let innerHeaderHeight: CGFloat
-        if let _ = innerHeaderView, let height = self.innerHeaderHeight {
-            innerHeaderHeight = height
-        } else {
-            innerHeaderHeight = 0
-        }
         let topLayoutLength: CGFloat
         if edgesForExtendedLayout.contains(.top) {
             topLayoutLength = 0
@@ -126,13 +119,6 @@ extension SegementSlideViewController {
         }
         if segementSlideHeaderView.trailingConstraint == nil {
             segementSlideHeaderView.trailingConstraint = segementSlideHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        }
-        if segementSlideHeaderView.heightConstraint == nil {
-            segementSlideHeaderView.heightConstraint = segementSlideHeaderView.heightAnchor.constraint(equalToConstant: innerHeaderHeight)
-        } else {
-            if segementSlideHeaderView.heightConstraint?.constant != innerHeaderHeight {
-                segementSlideHeaderView.heightConstraint?.constant = innerHeaderHeight
-            }
         }
         segementSlideHeaderView.config(innerHeaderView, segementSlideContentView: segementSlideContentView)
         
@@ -187,7 +173,11 @@ extension SegementSlideViewController {
         segementSlideContentView.layer.zPosition = -2
         segementSlideSwitcherView.layer.zPosition = -1
         
-        let contentSize = CGSize(width: view.bounds.width, height: topLayoutLength+innerHeaderHeight+switcherHeight+contentViewHeight+1)
+        let innerHeaderHeight = segementSlideHeaderView.frame.height
+        let contentSize = CGSize(
+            width: view.bounds.width,
+            height: topLayoutLength + innerHeaderHeight + switcherHeight + contentViewHeight + 1
+        )
         if segementSlideScrollView.contentSize != contentSize {
             segementSlideScrollView.contentSize = contentSize
         }
