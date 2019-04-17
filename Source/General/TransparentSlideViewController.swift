@@ -72,6 +72,7 @@ open class TransparentSlideViewController: SegementSlideViewController {
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         layoutTitleLabel()
+        reloadNavigationBarStyle()
     }
     
     open override func viewDidLoad() {

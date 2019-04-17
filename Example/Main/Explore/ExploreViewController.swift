@@ -23,15 +23,13 @@ class ExploreViewController: BaseSegementSlideViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override var headerHeight: CGFloat? {
-        return view.bounds.height/4
-    }
-    
     override var headerView: UIView? {
         let headerView = UIImageView()
         headerView.isUserInteractionEnabled = true
         headerView.contentMode = .scaleAspectFill
         headerView.image = UIImage(named: "bg_working.png")
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         return headerView
     }
     

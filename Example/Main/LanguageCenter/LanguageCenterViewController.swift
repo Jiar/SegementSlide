@@ -40,14 +40,12 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
         return .parent
     }
     
-    override var headerHeight: CGFloat {
-        return centerHeaderView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
-    }
-    
     override var headerView: UIView {
         guard let _ = language else {
             let view = UIView()
             view.backgroundColor = .clear
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.heightAnchor.constraint(equalToConstant: 400).isActive = true
             return view
         }
         return centerHeaderView
