@@ -62,18 +62,6 @@ open class SegementSlideViewController: UIViewController {
         return .parent
     }
     
-    /// the value should contains topLayoutGuide's length(safeAreaInsets.top in iOS 11), if the edgesForExtendedLayout in viewController contains `.top`
-    open var headerHeight: CGFloat? {
-        if edgesForExtendedLayout.contains(.top) {
-            #if DEBUG
-            assert(false, "must override this variable")
-            #endif
-            return nil
-        } else {
-            return nil
-        }
-    }
-    
     open var headerView: UIView? {
         if edgesForExtendedLayout.contains(.top) {
             #if DEBUG
