@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 internal class SegementSlideHeaderView: UIView {
     
