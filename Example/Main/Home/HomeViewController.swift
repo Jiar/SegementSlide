@@ -76,6 +76,8 @@ class HomeViewController: BaseSegementSlideViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         canCacheScrollState = true
+        view.backgroundColor = .white
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
         reloadData()
         scrollToSlide(at: 0, animated: false)
     }
@@ -83,6 +85,24 @@ class HomeViewController: BaseSegementSlideViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    @objc private func moreAction() {
+        let viewController: UIViewController
+        switch Int.random(in: 0..<8) {
+        case 0..<5:
+            viewController = NoticeViewController(selectedIndex: Int.random(in: 0..<2))
+        case 5:
+            viewController = HomeViewController()
+        case 6:
+            viewController = ExploreViewController()
+        case 7:
+            viewController = MineViewController()
+        default:
+            viewController = NoticeViewController(selectedIndex: Int.random(in: 0..<2))
+        }
+        viewController.hidesBottomBarWhenPushed = Bool.random()
+        navigationController?.pushViewController(viewController, animated: true)
     }
 
 }

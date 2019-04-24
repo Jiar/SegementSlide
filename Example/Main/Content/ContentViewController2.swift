@@ -1,5 +1,5 @@
 //
-//  ContentOptionalViewController.swift
+//  ContentViewController2.swift
 //  Example
 //
 //  Created by Jiar on 2019/1/19.
@@ -11,8 +11,7 @@ import SegementSlide
 import MBProgressHUD
 import MJRefresh
 
-/// not implement `scrollView` in protocol `SegementSlideContentScrollViewDelegate`
-class ContentOptionalViewController: UITableViewController, SegementSlideContentScrollViewDelegate {
+class ContentViewController2: UITableViewController, SegementSlideContentScrollViewDelegate {
     
     private var languages: [Language] = []
     internal var refreshHandler: (() -> Void)? = nil

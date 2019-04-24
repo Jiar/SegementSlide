@@ -48,9 +48,9 @@ open class SegementSlideViewController: UIViewController {
             return 0
         }
         if edgesForExtendedLayout.contains(.top) {
-            return innerHeaderHeight-topLayoutLength
+            return innerHeaderHeight - topLayoutLength
         } else {
-            return innerHeaderHeight
+            return innerHeaderHeight - (innerHeaderTopLength != nil ? topLayoutLength : 0)
         }
     }
     public var contentViewHeight: CGFloat {
@@ -95,7 +95,8 @@ open class SegementSlideViewController: UIViewController {
             return nil
         }
     }
-    
+    /// the distance between header and root scrollview
+    open var innerHeaderTopLength: CGFloat? { return nil }
     open var switcherHeight: CGFloat {
         return 44
     }

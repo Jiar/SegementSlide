@@ -34,30 +34,4 @@ class BaseSegementSlideViewController: SegementSlideViewController {
         return fadeTextAnimation
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
-    }
-    
-    @objc private func moreAction() {
-        let viewController: UIViewController
-        switch Int.random(in: 0..<8) {
-        case 0..<4:
-            viewController = NoticeViewController(selectedIndex: Int.random(in: 0..<DataManager.shared.noticeLanguageTitles.count))
-        case 4:
-            viewController = PostViewController(selectedIndex: Int.random(in: 0..<DataManager.shared.postLanguageTitles.count))
-        case 5:
-            viewController = HomeViewController()
-        case 6:
-            viewController = ExploreViewController()
-        case 7:
-            viewController = MineViewController()
-        default:
-            viewController = NoticeViewController(selectedIndex: Int.random(in: 0..<DataManager.shared.noticeLanguageTitles.count))
-        }
-        viewController.hidesBottomBarWhenPushed = Bool.random()
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
 }

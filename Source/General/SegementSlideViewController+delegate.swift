@@ -15,6 +15,11 @@ extension SegementSlideViewController: UIScrollViewDelegate {
             return true
         }
         guard let scrollView = contentViewController.scrollView else {
+            #if DEBUG
+            if innerHeaderView != nil, innerHeaderHeight != nil {
+                assert(false, "must implement this variable `scrollView` in protocol `SegementSlideContentScrollViewDelegate`")
+            }
+            #endif
             return true
         }
         scrollView.contentOffset.y = 0
@@ -78,16 +83,21 @@ extension SegementSlideViewController: SegementSlideContentDelegate {
         }
         childKeyValueObservation?.invalidate()
         guard let childViewController = segementSlideContentView.segementSlideContentViewController(at: index) else { return }
-        defer {
-            didSelectContentViewController(at: index)
+        guard let scrollView = childViewController.scrollView else {
+            #if DEBUG
+            if innerHeaderView != nil, innerHeaderHeight != nil {
+                assert(false, "must implement this variable `scrollView` in protocol `SegementSlideContentScrollViewDelegate`")
+            }
+            #endif
+            return
         }
-        guard let scrollView = childViewController.scrollView else { return }
         let keyValueObservation = scrollView.observe(\.contentOffset, options: [.new, .old], changeHandler: { [weak self] (scrollView, change) in
             guard let self = self else { return }
             guard change.newValue != change.oldValue else { return }
             self.childScrollViewDidScroll(scrollView)
         })
         childKeyValueObservation = keyValueObservation
+        didSelectContentViewController(at: index)
     }
     
 }
