@@ -52,6 +52,15 @@ internal class SegementSlideHeaderView: UIView {
         if view is UIControl {
             return view
         }
+        /// WKWebView也需要响应内部点击事件,比如视频播放
+        var _superView: UIView? = view?.superview
+        while _superView != nil {
+            if !(_superView is WKWebView) {
+                _superView = _superView?.superview
+            } else {
+                return view
+            }
+        }
         if !(view?.gestureRecognizers?.isEmpty ?? true) {
             return view
         }
