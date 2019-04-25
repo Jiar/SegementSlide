@@ -124,13 +124,12 @@ import SegementSlide
 class HomeViewController: SegementSlideViewController {
 
     ......
-
-    override var headerHeight: CGFloat? {
-        return view.bounds.height/4
-    }
     
     override var headerView: UIView? {
-        return UIView()
+        let headerView = UIView()
+        let headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.heightAnchor.constraint(equalToConstant: view.bounds.height/4).isActive = true
+        return headerView
     }
 
     override var titlesInSwitcher: [String] {
