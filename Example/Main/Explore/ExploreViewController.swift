@@ -29,7 +29,7 @@ class ExploreViewController: BaseSegementSlideViewController {
         headerView.contentMode = .scaleAspectFill
         headerView.image = UIImage(named: "bg_working.png")
         headerView.translatesAutoresizingMaskIntoConstraints = false
-        headerView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        headerView.heightAnchor.constraint(equalToConstant: view.bounds.height/4).isActive = true
         return headerView
     }
     
