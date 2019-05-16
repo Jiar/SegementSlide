@@ -14,7 +14,7 @@ private var trailingConstraintKey: Void?
 private var widthConstraintKey: Void?
 private var heightConstraintKey: Void?
 
-internal extension UIView {
+extension UIView {
     
     var topConstraint: NSLayoutConstraint? {
         get {
@@ -120,7 +120,7 @@ internal extension UIView {
     
 }
 
-internal extension UIView {
+extension UIView {
     
     func constraintToSuperview() {
         guard let superview = superview else { return }

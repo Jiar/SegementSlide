@@ -24,7 +24,7 @@ class ExploreViewController: BaseSegementSlideViewController {
     }
     
     override var headerHeight: CGFloat? {
-        return view.bounds.height/4
+        return view.bounds.height / 4
     }
     
     override var headerView: UIView? {

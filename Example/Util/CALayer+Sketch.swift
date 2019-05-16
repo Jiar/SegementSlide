@@ -8,9 +8,9 @@
 
 import UIKit
 
-internal extension CALayer {
+extension CALayer {
     
-    internal func applySketchShadow(
+    func applySketchShadow(
         color: UIColor = .black,
         alpha: Float = 0.25,
         x: CGFloat = 0,

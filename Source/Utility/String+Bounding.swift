@@ -8,7 +8,7 @@
 
 import UIKit
 
-internal extension String {
+extension String {
     
     func boundingWidth(with font: UIFont) -> CGFloat {
         let size = CGSize(width: CGFloat.greatestFiniteMagnitude, height: font.lineHeight)
