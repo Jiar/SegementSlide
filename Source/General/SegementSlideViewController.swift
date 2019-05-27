@@ -49,7 +49,11 @@ open class SegementSlideViewController: UIViewController {
         }
     }
     public var contentViewHeight: CGFloat {
-        return view.bounds.height-topLayoutLength-switcherHeight
+        if bouncesType == .none {
+            return view.bounds.height - topLayoutLength - switcherHeight - segementSlideHeaderView.frame.height
+        } else {
+            return view.bounds.height - topLayoutLength - switcherHeight
+        }
     }
     public var currentIndex: Int? {
         return segementSlideSwitcherView.selectedIndex

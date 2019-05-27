@@ -154,6 +154,11 @@ extension SegementSlideViewController {
             }
         }
         
+        // Force the header layout in order to get correctly its height
+        segementSlideHeaderView.layoutIfNeeded()
+        
+        let contentViewHeight = self.contentViewHeight
+        
         segementSlideContentView.translatesAutoresizingMaskIntoConstraints = false
         if segementSlideContentView.topConstraint == nil {
             segementSlideContentView.topConstraint = segementSlideContentView.topAnchor.constraint(equalTo: segementSlideSwitcherView.bottomAnchor)
@@ -175,8 +180,6 @@ extension SegementSlideViewController {
         segementSlideHeaderView.layer.zPosition = -3
         segementSlideContentView.layer.zPosition = -2
         segementSlideSwitcherView.layer.zPosition = -1
-        
-        segementSlideHeaderView.layoutIfNeeded()
         
         let innerHeaderHeight = segementSlideHeaderView.frame.height
         let contentSize = CGSize(
