@@ -182,8 +182,11 @@ open class SegementSlideViewController: UIViewController {
     }
     
     open func updateChildViewControllerScrollView() {
+        guard let currentIndex = currentIndex else {
+            return
+        }
         childKeyValueObservation?.invalidate()
-        guard let childViewController = segementSlideContentView.dequeueReusableViewController(at: currentIndex!) else { return }
+        guard let childViewController = segementSlideContentView.dequeueReusableViewController(at: currentIndex) else { return }
         guard let scrollView = childViewController.scrollView else { return }
         let keyValueObservation = scrollView.observe(\.contentOffset, options: [.new, .old], changeHandler: { [weak self] (scrollView, change) in
             guard let self = self else { return }
