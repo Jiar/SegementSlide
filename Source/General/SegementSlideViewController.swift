@@ -194,6 +194,10 @@ open class SegementSlideViewController: UIViewController {
             self.childScrollViewDidScroll(scrollView)
         })
         childKeyValueObservation = keyValueObservation
+        
+        if let parent = parent as? SegementSlideViewController {
+            parent.updateChildViewControllerScrollView()
+        }
     }
     
 }
