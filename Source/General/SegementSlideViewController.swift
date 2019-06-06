@@ -135,6 +135,7 @@ open class SegementSlideViewController: UIViewController {
         segementSlideContentView.reloadData()
         segementSlideSwitcherView.reloadData()
         layoutSegementSlideScrollView()
+        updateChildViewControllerScrollView()
     }
     
     /// reload headerView
