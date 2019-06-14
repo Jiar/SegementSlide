@@ -19,7 +19,6 @@ open class SegementSlideViewController: UIViewController {
     internal var segementSlideHeaderView: SegementSlideHeaderView!
     internal var segementSlideContentView: SegementSlideContentView!
     internal var segementSlideSwitcherView: SegementSlideSwitcherView!
-    internal var innerHeaderHeight: CGFloat?
     internal var innerHeaderView: UIView?
     
     internal var safeAreaTopConstraint: NSLayoutConstraint?
@@ -41,13 +40,11 @@ open class SegementSlideViewController: UIViewController {
         return segementSlideContentView
     }
     public var headerStickyHeight: CGFloat {
-        guard let innerHeaderHeight = innerHeaderHeight else {
-            return 0
-        }
+        let headerHeight = segementSlideHeaderView.frame.height.rounded(.up)
         if edgesForExtendedLayout.contains(.top) {
-            return innerHeaderHeight-topLayoutLength
+            return headerHeight - topLayoutLength
         } else {
-            return innerHeaderHeight
+            return headerHeight
         }
     }
     public var contentViewHeight: CGFloat {
@@ -63,18 +60,6 @@ open class SegementSlideViewController: UIViewController {
     
     open var bouncesType: BouncesType {
         return .parent
-    }
-    
-    /// the value should contains topLayoutGuide's length(safeAreaInsets.top in iOS 11), if the edgesForExtendedLayout in viewController contains `.top`
-    open var headerHeight: CGFloat? {
-        if edgesForExtendedLayout.contains(.top) {
-            #if DEBUG
-            assert(false, "must override this variable")
-            #endif
-            return nil
-        } else {
-            return nil
-        }
     }
     
     open var headerView: UIView? {

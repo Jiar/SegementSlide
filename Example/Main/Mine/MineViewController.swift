@@ -34,19 +34,19 @@ class MineViewController: BaseTransparentSlideViewController {
         return .child
     }
     
-    override var headerHeight: CGFloat {
-        if #available(iOS 11.0, *) {
-            return view.bounds.height/4+view.safeAreaInsets.top
-        } else {
-            return view.bounds.height/4+topLayoutGuide.length
-        }
-    }
-    
     override var headerView: UIView {
         let headerView = UIImageView()
         headerView.isUserInteractionEnabled = true
         headerView.contentMode = .scaleAspectFill
         headerView.image = UIImage(named: "bg_computer.png")
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        let headerHeight: CGFloat
+        if #available(iOS 11.0, *) {
+            headerHeight = view.bounds.height/4+view.safeAreaInsets.top
+        } else {
+            headerHeight = view.bounds.height/4+topLayoutGuide.length
+        }
+        headerView.heightAnchor.constraint(equalToConstant: headerHeight).isActive = true
         return headerView
     }
     

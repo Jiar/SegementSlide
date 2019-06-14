@@ -32,6 +32,8 @@ class ExploreViewController: BaseSegementSlideViewController {
         headerView.isUserInteractionEnabled = true
         headerView.contentMode = .scaleAspectFill
         headerView.image = UIImage(named: "bg_working.png")
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.heightAnchor.constraint(equalToConstant: view.bounds.height/4).isActive = true
         return headerView
     }
     
