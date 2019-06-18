@@ -122,7 +122,7 @@ extension SegementSlideContentView {
     }
     
     private func clearAllReusableViewControllers() {
-        NotificationCenter.default.post(name: SegementSlideContentView.willClearAllReusableViewControllersNotification, object: nil, userInfo: nil)
+        NotificationCenter.default.post(name: SegementSlideContentView.willClearAllReusableViewControllersNotification, object: viewController, userInfo: nil)
         for (_, value) in viewControllers {
             guard let childViewController = value as? UIViewController else { continue }
             childViewController.view.removeAllConstraints()

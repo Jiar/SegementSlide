@@ -70,10 +70,13 @@ extension SegementSlideViewController {
     }
     
     private func observeWillClearAllReusableViewControllersNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(willClearAllReusableViewControllers), name: SegementSlideContentView.willClearAllReusableViewControllersNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willClearAllReusableViewControllers(_:)), name: SegementSlideContentView.willClearAllReusableViewControllersNotification, object: nil)
     }
     
-    @objc private func willClearAllReusableViewControllers() {
+    @objc private func willClearAllReusableViewControllers(_ notification: Notification) {
+        guard let object = notification.object as? SegementSlideViewController, object === self else {
+            return
+        }
         childKeyValueObservation?.invalidate()
         childKeyValueObservation = nil
     }
