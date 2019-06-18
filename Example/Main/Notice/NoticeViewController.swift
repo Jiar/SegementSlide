@@ -53,9 +53,9 @@ class NoticeViewController: UIViewController {
         
         let size: CGSize
         if let navigationBar = navigationController?.navigationBar {
-            size = CGSize(width: navigationBar.bounds.width-120, height: navigationBar.bounds.height)
+            size = CGSize(width: navigationBar.bounds.width*0.6, height: navigationBar.bounds.height)
         } else {
-            size = CGSize(width: view.bounds.width-120, height: 44)
+            size = CGSize(width: view.bounds.width*0.6, height: 44)
         }
         let titleView = UIView()
         titleView.backgroundColor = .clear

@@ -17,9 +17,11 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
     private var badges: [Int: BadgeType] = [:]
     private var language: Language?
     private let centerHeaderView: LanguageCenterHeaderView
+    private let isPresented: Bool
     
-    init(id: Int) {
+    init(id: Int, isPresented: Bool) {
         self.id = id
+        self.isPresented = isPresented
         centerHeaderView = UINib(nibName: "LanguageCenterHeaderView", bundle: nil).instantiate(withOwner: nil, options: nil).first as! LanguageCenterHeaderView
         super.init(nibName: nil, bundle: nil)
         hidesBottomBarWhenPushed = true
@@ -105,8 +107,15 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
         slideScrollView.mj_header.ignoredScrollViewContentInsetTop = -topLayoutLength
     }
     
+    @objc func backAction() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        if isPresented {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "close")!, style: .plain, target: self, action: #selector(backAction))
+        }
         let refreshHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshAction))!
         refreshHeader.lastUpdatedTimeLabel.isHidden = true
         refreshHeader.arrowView.image = nil
