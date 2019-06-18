@@ -27,6 +27,9 @@ public class SegementSlideContentView: UIView {
     private let scrollView = UIScrollView()
     private var viewControllers: [Int: SegementSlideContentScrollViewDelegate] = [:]
     private var initSelectedIndex: Int?
+    internal var gestureRecognizersInScrollView: [UIGestureRecognizer]? {
+        return scrollView.gestureRecognizers
+    }
     
     public private(set) var selectedIndex: Int?
     public weak var delegate: SegementSlideContentDelegate?
