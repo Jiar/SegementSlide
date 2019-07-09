@@ -191,6 +191,7 @@ extension SegementSlideViewController {
         if segementSlideScrollView.contentSize != contentSize {
             segementSlideScrollView.contentSize = contentSize
         }
+        segementSlideContentView.layoutSubviews()
     }
     
     internal func resetChildViewControllerContentOffsetY() {

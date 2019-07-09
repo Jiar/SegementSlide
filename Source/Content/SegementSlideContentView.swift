@@ -209,7 +209,6 @@ extension SegementSlideContentView {
                 childViewController.endAppearanceTransition()
             }
         }
-        guard index != selectedIndex else { return }
         selectedIndex = index
         delegate?.segementSlideContentView(self, didSelectAtIndex: index, animated: animated)
     }
