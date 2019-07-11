@@ -22,7 +22,7 @@ extension BadgeType: CaseIterable {
         ]
     }
     
-    public static var random: BadgeType {
+    internal static var random: BadgeType {
         let index = Int(arc4random_uniform(UInt32(BadgeType.allCases.count)))
         return BadgeType.allCases[index]
     }
