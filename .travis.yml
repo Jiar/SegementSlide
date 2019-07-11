@@ -1,7 +1,7 @@
 language: swift
 os: osx
-osx_image: xcode10.1
-env: SWIFT_SNAPSHOT=4.2
+osx_image: xcode10.2
+env: SWIFT_SNAPSHOT=5.0.1
 
 cache:
   directories:
@@ -13,28 +13,27 @@ env:
     - LANG=en_US.UTF-8
     - LC_ALL=en_US.UTF-8
   matrix:
-    - SCHEME=Example
-    - SCHEME=ExampleTests
     - SCHEME=SegementSlide-Dynamic
     - SCHEME=SegementSlide-Dynamic-Tests
+    - SCHEME=Example
+    - SCHEME=ExampleTests
 
 before_install:
-  - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
-  - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
+  - gem install cocoapods -v '1.7.2'
   - pod repo update
   - pod install
 
 script:
   - |
     set -o pipefail;
-    if [ "$SCHEME" = Example ]; then
-      xcodebuild clean test -workspace Example.xcworkspace -scheme "$SCHEME" -destination 'platform=iOS Simulator,name=iPhone 7,OS=12.1' -configuration Release ONLY_ACTIVE_ARCH=YES -enableCodeCoverage YES | xcpretty -c;
-    elif [ "$SCHEME" = ExampleTests ]; then
-      xcodebuild clean test -workspace Example.xcworkspace -scheme "$SCHEME" -destination 'platform=iOS Simulator,name=iPhone 7,OS=12.1' -configuration Release ONLY_ACTIVE_ARCH=YES -enableCodeCoverage YES | xcpretty -c;
-    elif [ "$SCHEME" = SegementSlide-Dynamic ]; then
-      xcodebuild clean test -project SegementSlide.xcodeproj -scheme "$SCHEME" -destination 'platform=iOS Simulator,name=iPhone 7,OS=12.1' -configuration Release ONLY_ACTIVE_ARCH=YES -enableCodeCoverage YES | xcpretty -c;
+    if [ "$SCHEME" = SegementSlide-Dynamic ]; then
+      xcodebuild clean test -project SegementSlide.xcodeproj -scheme "$SCHEME" -destination 'platform=iOS Simulator,name=iPhone X,OS=12.2' -configuration Release ONLY_ACTIVE_ARCH=YES -enableCodeCoverage YES | xcpretty -c;
     elif [ "$SCHEME" = SegementSlide-Dynamic-Tests ]; then
-      xcodebuild clean test -project SegementSlide.xcodeproj -scheme "$SCHEME" -destination 'platform=iOS Simulator,name=iPhone 7,OS=12.1' -configuration Release ONLY_ACTIVE_ARCH=YES -enableCodeCoverage YES | xcpretty -c;
+      xcodebuild clean test -project SegementSlide.xcodeproj -scheme "$SCHEME" -destination 'platform=iOS Simulator,name=iPhone X,OS=12.2' -configuration Release ONLY_ACTIVE_ARCH=YES -enableCodeCoverage YES | xcpretty -c;
+    elif [ "$SCHEME" = Example ]; then
+      xcodebuild clean test -workspace Example.xcworkspace -scheme "$SCHEME" -destination 'platform=iOS Simulator,name=iPhone X,OS=12.2' -configuration Release ONLY_ACTIVE_ARCH=YES -enableCodeCoverage YES | xcpretty -c;
+    elif [ "$SCHEME" = ExampleTests ]; then
+      xcodebuild clean test -workspace Example.xcworkspace -scheme "$SCHEME" -destination 'platform=iOS Simulator,name=iPhone X,OS=12.2' -configuration Release ONLY_ACTIVE_ARCH=YES -enableCodeCoverage YES | xcpretty -c;
     fi
   - pod lib lint --allow-warnings
 
