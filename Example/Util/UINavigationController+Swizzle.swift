@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UINavigationController {
+internal extension UINavigationController {
     
     static func setupSwizzleForUINavigationController() {
         guard self === UINavigationController.self else {
