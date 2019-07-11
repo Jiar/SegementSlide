@@ -115,7 +115,8 @@ open class TransparentSlideViewController: SegementSlideViewController {
     
     open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        recoverStoredNavigationBarStyle()
+        hasViewWillAppeared = false
+        recoverStoredNavigationBarStyle()        
     }
     
     open override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
