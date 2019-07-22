@@ -34,6 +34,14 @@ public class SegementSlideContentView: UIView {
     public private(set) var selectedIndex: Int?
     public weak var delegate: SegementSlideContentDelegate?
     public weak var viewController: UIViewController?
+    public var isScrollEnabled: Bool {
+        get {
+            return scrollView.isScrollEnabled
+        }
+        set {
+            scrollView.isScrollEnabled = newValue
+        }
+    }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
