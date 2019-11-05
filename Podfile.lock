@@ -11,7 +11,7 @@ DEPENDENCIES:
   - SnapKit
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - MBProgressHUD
     - MJRefresh
     - SnapKit
@@ -28,4 +28,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 5f238afc943014d26abc84d7385bd9a4e9a3228c
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4
