@@ -21,6 +21,7 @@ class NoticeViewController: UIViewController {
     init(selectedIndex: Int = 0) {
         self.selectedIndex = selectedIndex
         super.init(nibName: nil, bundle: nil)
+        modalPresentationStyle = .fullScreen
     }
     
     required init?(coder aDecoder: NSCoder) {

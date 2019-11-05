@@ -97,7 +97,7 @@ class ContentViewController: BaseTableViewController, SegementSlideContentScroll
         tableView.deselectRow(at: indexPath, animated: true)
         let language = languages[indexPath.row]
         if Bool.random() {
-            present(UINavigationController(rootViewController: LanguageCenterViewController(id: language.id, isPresented: true)), animated: true, completion: nil)
+            present(BaseNavigationController(rootViewController: LanguageCenterViewController(id: language.id, isPresented: true)), animated: true, completion: nil)
         } else {
             navigationController?.pushViewController(LanguageCenterViewController(id: language.id, isPresented: false), animated: true)
         }

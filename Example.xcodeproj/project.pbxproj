@@ -19,6 +19,7 @@
 		806518D221F309A00036FF5F /* ContentOptionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806518D121F309A00036FF5F /* ContentOptionalViewController.swift */; };
 		806518D621F30A1D0036FF5F /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806518D521F30A1D0036FF5F /* NoticeViewController.swift */; };
 		806518D821F317050036FF5F /* UINavigationController+Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806518D721F317050036FF5F /* UINavigationController+Swizzle.swift */; };
+		8066CA9C236FD48D002D1E08 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8066CA9B236FD48D002D1E08 /* BaseNavigationController.swift */; };
 		8079920F221958C300682690 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8079920E221958C300682690 /* PostViewController.swift */; };
 		807A36DF21C359D3004675BC /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A36DE21C359D3004675BC /* AppManager.swift */; };
 		807A36E821C3B110004675BC /* LanguageCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A36E721C3B110004675BC /* LanguageCenterViewController.swift */; };
@@ -66,6 +67,7 @@
 		806518D121F309A00036FF5F /* ContentOptionalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentOptionalViewController.swift; sourceTree = "<group>"; };
 		806518D521F30A1D0036FF5F /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
 		806518D721F317050036FF5F /* UINavigationController+Swizzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Swizzle.swift"; sourceTree = "<group>"; };
+		8066CA9B236FD48D002D1E08 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		8079920E221958C300682690 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		807A36DE21C359D3004675BC /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		807A36E721C3B110004675BC /* LanguageCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCenterViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 		80B6C3F221C20D76007C958F /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				8066CA9B236FD48D002D1E08 /* BaseNavigationController.swift */,
 				802DF82C2225326D00533012 /* BaseTableViewController.swift */,
 				80B6C3FA21C295ED007C958F /* BaseSegementSlideViewController.swift */,
 				805C1D9821C7C86A00991D07 /* BaseTransparentSlideViewController.swift */,
@@ -478,6 +481,7 @@
 				80B6C3FE21C29EEA007C958F /* DataManager.swift in Sources */,
 				806518D821F317050036FF5F /* UINavigationController+Swizzle.swift in Sources */,
 				804CC4C821C14AC4007EEBF8 /* AppDelegate.swift in Sources */,
+				8066CA9C236FD48D002D1E08 /* BaseNavigationController.swift in Sources */,
 				80B6C3F021C20052007C958F /* ContentViewCell.swift in Sources */,
 				802DF82D2225326D00533012 /* BaseTableViewController.swift in Sources */,
 				806518D621F30A1D0036FF5F /* NoticeViewController.swift in Sources */,

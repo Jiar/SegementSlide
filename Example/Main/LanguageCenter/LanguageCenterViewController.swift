@@ -25,6 +25,7 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
         centerHeaderView = UINib(nibName: "LanguageCenterHeaderView", bundle: nil).instantiate(withOwner: nil, options: nil).first as! LanguageCenterHeaderView
         super.init(nibName: nil, bundle: nil)
         hidesBottomBarWhenPushed = true
+        modalPresentationStyle = .fullScreen
     }
     
     required init?(coder aDecoder: NSCoder) {

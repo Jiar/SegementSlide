@@ -17,6 +17,7 @@ class ExploreViewController: BaseSegementSlideViewController {
         super.init(nibName: nil, bundle: nil)
         title = "Explore"
         tabBarItem = UITabBarItem(title: "Explore", image: UIImage(named: "tab_explore")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "tab_explore_sel")?.withRenderingMode(.alwaysOriginal))
+        modalPresentationStyle = .fullScreen
     }
     
     required init?(coder aDecoder: NSCoder) {

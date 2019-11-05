@@ -18,6 +18,7 @@ class PostViewController: BaseSegementSlideViewController {
         self.selectedIndex = selectedIndex
         super.init(nibName: nil, bundle: nil)
         title = "Post"
+        modalPresentationStyle = .fullScreen
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -17,6 +17,7 @@ class HomeViewController: BaseSegementSlideViewController {
         super.init(nibName: nil, bundle: nil)
         title = "Home"
         tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "tab_home")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "tab_home_sel")?.withRenderingMode(.alwaysOriginal))
+        modalPresentationStyle = .fullScreen
     }
     
     required init?(coder aDecoder: NSCoder) {
