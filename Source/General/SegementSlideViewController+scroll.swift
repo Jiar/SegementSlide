@@ -11,7 +11,9 @@ import UIKit
 extension SegementSlideViewController {
     
     internal func parentScrollViewDidScroll(_ scrollView: UIScrollView) {
-        scrollViewDidScroll(scrollView, isParent: true)
+        defer {
+            scrollViewDidScroll(scrollView, isParent: true)
+        }
         let parentContentOffsetY = segementSlideScrollView.contentOffset.y
         switch innerBouncesType {
         case .parent:
@@ -60,7 +62,9 @@ extension SegementSlideViewController {
     }
     
     internal func childScrollViewDidScroll(_ childScrollView: UIScrollView) {
-        scrollViewDidScroll(childScrollView, isParent: false)
+        defer {
+            scrollViewDidScroll(childScrollView, isParent: false)
+        }
         let parentContentOffsetY = segementSlideScrollView.contentOffset.y
         let childContentOffsetY = childScrollView.contentOffset.y
         switch innerBouncesType {
