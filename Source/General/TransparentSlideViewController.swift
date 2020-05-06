@@ -35,7 +35,7 @@ open class TransparentSlideViewController: SegementSlideViewController {
     public var storedNavigationBarShadowImage: UIImage? = nil
     public var storedNavigationBarBackgroundImage: UIImage? = nil
     
-    open override var headerView: UIView {
+    open override func segementSlideHeaderView() -> UIView {
         #if DEBUG
         assert(false, "must override this variable")
         #endif

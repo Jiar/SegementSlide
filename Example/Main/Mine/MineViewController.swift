@@ -9,7 +9,7 @@
 import UIKit
 import SegementSlide
 
-class MineViewController: BaseTransparentSlideViewController {
+class MineViewController: BaseTransparentSlideDefaultViewController {
 
     private var badges: [Int: BadgeType] = [:]
     
@@ -35,7 +35,7 @@ class MineViewController: BaseTransparentSlideViewController {
         return .child
     }
     
-    override var headerView: UIView {
+    override func segementSlideHeaderView() -> UIView {
         let headerView = UIImageView()
         headerView.isUserInteractionEnabled = true
         headerView.contentMode = .scaleAspectFill
@@ -51,7 +51,7 @@ class MineViewController: BaseTransparentSlideViewController {
         return headerView
     }
     
-    override var switcherConfig: SegementSlideSwitcherConfig {
+    override var switcherConfig: SegementSlideDefaultSwitcherConfig {
         var config = super.switcherConfig
         config.type = .tab
         return config

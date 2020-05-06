@@ -1,17 +1,17 @@
 //
-//  BaseTransparentSlideViewController.swift
+//  BaseSegementSlideDefaultViewController.swift
 //  Example
 //
-//  Created by Jiar on 2018/12/17.
+//  Created by Jiar on 2018/12/13.
 //  Copyright © 2018 Jiar. All rights reserved.
 //
 
 import UIKit
 import SegementSlide
 
-class BaseTransparentSlideViewController: TransparentSlideViewController {
-
-    override var switcherConfig: SegementSlideSwitcherConfig {
+class BaseSegementSlideDefaultViewController: SegementSlideDefaultViewController {
+    
+    override var switcherConfig: SegementSlideDefaultSwitcherConfig {
         return ConfigManager.shared.switcherConfig
     }
     
@@ -23,11 +23,11 @@ class BaseTransparentSlideViewController: TransparentSlideViewController {
     
     private func updateNavigationBarStyle(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > headerStickyHeight {
-            slideSwitcherView.layer.applySketchShadow(color: .black, alpha: 0.03, x: 0, y: 2.5, blur: 5)
-            slideSwitcherView.layer.add(generateFadeAnimation(), forKey: "reloadSwitcherView")
+            switcherView.layer.applySketchShadow(color: .black, alpha: 0.03, x: 0, y: 2.5, blur: 5)
+            switcherView.layer.add(generateFadeAnimation(), forKey: "reloadSwitcherView")
         } else {
-            slideSwitcherView.layer.applySketchShadow(color: .clear, alpha: 0, x: 0, y: 0, blur: 0)
-            slideSwitcherView.layer.add(generateFadeAnimation(), forKey: "reloadSwitcherView")
+            switcherView.layer.applySketchShadow(color: .clear, alpha: 0, x: 0, y: 0, blur: 0)
+            switcherView.layer.add(generateFadeAnimation(), forKey: "reloadSwitcherView")
         }
     }
     
@@ -62,18 +62,11 @@ class BaseTransparentSlideViewController: TransparentSlideViewController {
         super.viewDidLoad()
         debugPrint("\(type(of: self)) - \(String(format: "%p", self)) - \(#function)")
         view.backgroundColor = .white
-        if Bool.random() {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "reload", style: .plain, target: self, action: #selector(reloadAction))
-        } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
-        }
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
     }
     
-    @objc private func reloadAction() {
-        reloadData()
-    }
-        
-    @objc private func moreAction() {
+    @objc
+    private func moreAction() {
         let viewController: UIViewController
         switch Int.random(in: 0..<8) {
         case 0..<4:
@@ -92,5 +85,5 @@ class BaseTransparentSlideViewController: TransparentSlideViewController {
         viewController.hidesBottomBarWhenPushed = Bool.random()
         navigationController?.pushViewController(viewController, animated: true)
     }
-
+    
 }

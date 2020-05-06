@@ -8,7 +8,8 @@
 
 import UIKit
 
-@objc public protocol SegementSlideContentScrollViewDelegate where Self: UIViewController {
+@objc
+public protocol SegementSlideContentScrollViewDelegate where Self: UIViewController {
     /// must implement this variable, when use class `SegementSlideViewController` or it's subClass.
     /// you can ignore this variable, when you use `SegementSlideContentView` alone.
     @objc optional var scrollView: UIScrollView { get }
@@ -24,12 +25,9 @@ public protocol SegementSlideContentDelegate: class {
 public class SegementSlideContentView: UIView {
     internal static let willClearAllReusableViewControllersNotification: NSNotification.Name = NSNotification.Name(rawValue: "willClearAllReusableViewControllersNotification")
     
-    private let scrollView = UIScrollView()
+    public private(set) var scrollView = UIScrollView()
     private var viewControllers: [Int: SegementSlideContentScrollViewDelegate] = [:]
     private var initSelectedIndex: Int?
-    internal var gestureRecognizersInScrollView: [UIGestureRecognizer]? {
-        return scrollView.gestureRecognizers
-    }
     
     public private(set) var selectedIndex: Int?
     public weak var delegate: SegementSlideContentDelegate?

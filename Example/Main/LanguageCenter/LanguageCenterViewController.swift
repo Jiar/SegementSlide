@@ -11,7 +11,7 @@ import SegementSlide
 import MBProgressHUD
 import MJRefresh
 
-class LanguageCenterViewController: BaseTransparentSlideViewController {
+class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
     
     private let id: Int
     private var badges: [Int: BadgeType] = [:]
@@ -43,7 +43,7 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
         return .parent
     }
     
-    override var headerView: UIView {
+    override func segementSlideHeaderView() -> UIView {
         guard let _ = language else {
             let view = UIView()
             view.backgroundColor = .clear
@@ -60,7 +60,7 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
         return centerHeaderView
     }
     
-    override var switcherConfig: SegementSlideSwitcherConfig {
+    override var switcherConfig: SegementSlideDefaultSwitcherConfig {
         var config = super.switcherConfig
         config.type = .tab
         return config
@@ -90,7 +90,7 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
         let viewController = ContentViewController()
         viewController.refreshHandler = { [weak self] in
             guard let self = self else { return }
-            self.slideScrollView.mj_header.endRefreshing()
+            self.scrollView.mj_header.endRefreshing()
             self.badges[index] = BadgeType.random
             self.reloadBadgeInSwitcher()
         }
@@ -105,10 +105,11 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
         } else {
             topLayoutLength = topLayoutGuide.length
         }
-        slideScrollView.mj_header.ignoredScrollViewContentInsetTop = -topLayoutLength
+        scrollView.mj_header.ignoredScrollViewContentInsetTop = -topLayoutLength
     }
     
-    @objc func backAction() {
+    @objc
+    func backAction() {
         dismiss(animated: true, completion: nil)
     }
     
@@ -127,7 +128,7 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
         refreshHeader.setTitle("", for: .pulling)
         refreshHeader.setTitle("", for: .refreshing)
         refreshHeader.setTitle("", for: .willRefresh)
-        slideScrollView.mj_header = refreshHeader
+        scrollView.mj_header = refreshHeader
         let hud = MBProgressHUD.showAdded(to: view, animated: true)
         DispatchQueue.global().asyncAfter(deadline: .now()+Double.random(in: 0..<3)) {
             DispatchQueue.main.async { [weak self] in
@@ -146,9 +147,10 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
         }
     }
     
-    @objc private func refreshAction() {
+    @objc
+    private func refreshAction() {
         guard let contentViewController = currentSegementSlideContentViewController as? ContentViewController else {
-            slideScrollView.mj_header.endRefreshing()
+            scrollView.mj_header.endRefreshing()
             return
         }
         contentViewController.refresh()

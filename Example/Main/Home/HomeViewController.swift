@@ -9,7 +9,7 @@
 import UIKit
 import SegementSlide
 
-class HomeViewController: BaseSegementSlideViewController {
+class HomeViewController: BaseSegementSlideDefaultViewController {
     
     private var badges: [Int: BadgeType] = [:]
     
@@ -46,7 +46,7 @@ class HomeViewController: BaseSegementSlideViewController {
         }
     }
     
-    override var switcherConfig: SegementSlideSwitcherConfig {
+    override var switcherConfig: SegementSlideDefaultSwitcherConfig {
         var config = super.switcherConfig
         config.type = .tab
         return config

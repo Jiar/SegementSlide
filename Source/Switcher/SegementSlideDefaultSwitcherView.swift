@@ -1,5 +1,5 @@
 //
-//  SegementSlideSwitcherView.swift
+//  SegementSlideDefaultSwitcherView.swift
 //  SegementSlide
 //
 //  Created by Jiar on 2018/12/7.
@@ -13,29 +13,26 @@ public enum SwitcherType {
     case segement
 }
 
-public protocol SegementSlideSwitcherViewDelegate: class {
+public protocol SegementSlideDefaultSwitcherViewDelegate: class {
     var titlesInSegementSlideSwitcherView: [String] { get }
     
-    func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideSwitcherView, didSelectAtIndex index: Int, animated: Bool)
-    func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideSwitcherView, showBadgeAtIndex index: Int) -> BadgeType
+    func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideDefaultSwitcherView, didSelectAtIndex index: Int, animated: Bool)
+    func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideDefaultSwitcherView, showBadgeAtIndex index: Int) -> BadgeType
 }
 
-public class SegementSlideSwitcherView: UIView {
+public class SegementSlideDefaultSwitcherView: UIView {
     
-    private let scrollView = UIScrollView()
+    public private(set) var scrollView = UIScrollView()
     private let indicatorView = UIView()
     private var titleButtons: [UIButton] = []
     private var initSelectedIndex: Int?
-    private var innerConfig: SegementSlideSwitcherConfig = SegementSlideSwitcherConfig.shared
-    internal var gestureRecognizersInScrollView: [UIGestureRecognizer]? {
-        return scrollView.gestureRecognizers
-    }
+    private var innerConfig: SegementSlideDefaultSwitcherConfig = SegementSlideDefaultSwitcherConfig.shared
     
     public private(set) var selectedIndex: Int?
-    public weak var delegate: SegementSlideSwitcherViewDelegate?
+    public weak var delegate: SegementSlideDefaultSwitcherViewDelegate?
     
     /// you must call `reloadData()` to make it work, after the assignment.
-    public var config: SegementSlideSwitcherConfig = SegementSlideSwitcherConfig.shared
+    public var config: SegementSlideDefaultSwitcherConfig = SegementSlideDefaultSwitcherConfig.shared
     
     public override var intrinsicContentSize: CGSize {
         return scrollView.contentSize
@@ -153,7 +150,7 @@ public class SegementSlideSwitcherView: UIView {
     
 }
 
-extension SegementSlideSwitcherView {
+extension SegementSlideDefaultSwitcherView {
     
     private func recoverInitSelectedIndex() {
         guard let initSelectedIndex = initSelectedIndex else { return }
@@ -238,7 +235,8 @@ extension SegementSlideSwitcherView {
         delegate?.segementSwitcherView(self, didSelectAtIndex: index, animated: animated)
     }
     
-    @objc private func didClickTitleButton(_ button: UIButton) {
+    @objc
+    private func didClickTitleButton(_ button: UIButton) {
         selectSwitcher(at: button.tag, animated: true)
     }
     

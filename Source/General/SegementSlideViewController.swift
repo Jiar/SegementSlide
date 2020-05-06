@@ -15,10 +15,10 @@ public enum BouncesType {
 
 open class SegementSlideViewController: UIViewController {
     
-    internal var segementSlideScrollView: SegementSlideScrollView!
-    internal var segementSlideHeaderView: SegementSlideHeaderView!
-    internal var segementSlideContentView: SegementSlideContentView!
-    internal var segementSlideSwitcherView: SegementSlideSwitcherView!
+    public internal(set) var scrollView: SegementSlideScrollView!
+    public internal(set) var headerView: SegementSlideHeaderView!
+    public internal(set) var contentView: SegementSlideContentView!
+    public internal(set) var switcherView: SegementSlideSwitcherDelegate!
     internal var innerHeaderView: UIView?
     
     internal var safeAreaTopConstraint: NSLayoutConstraint?
@@ -30,39 +30,33 @@ open class SegementSlideViewController: UIViewController {
     internal var lastChildBouncesTranslationY: CGFloat = 0
     internal var waitTobeResetContentOffsetY: Set<Int> = Set()
     
-    public var slideScrollView: UIScrollView {
-        return segementSlideScrollView
-    }
-    public var slideSwitcherView: UIView {
-        return segementSlideSwitcherView
-    }
-    public var slideContentView: UIView {
-        return segementSlideContentView
-    }
     public var headerStickyHeight: CGFloat {
-        let headerHeight = segementSlideHeaderView.frame.height.rounded(.up)
+        let headerHeight = headerView.frame.height.rounded(.up)
         if edgesForExtendedLayout.contains(.top) {
             return headerHeight - topLayoutLength
         } else {
             return headerHeight
         }
     }
+    public var switcherHeight: CGFloat {
+        return switcherView.dataSource?.height ?? 44
+    }
     public var contentViewHeight: CGFloat {
         return view.bounds.height-topLayoutLength-switcherHeight
     }
     public var currentIndex: Int? {
-        return segementSlideSwitcherView.selectedIndex
+        return switcherView.selectedIndex
     }
     public var currentSegementSlideContentViewController: SegementSlideContentScrollViewDelegate? {
         guard let currentIndex = currentIndex else { return nil }
-        return segementSlideContentView.dequeueReusableViewController(at: currentIndex)
+        return contentView.dequeueReusableViewController(at: currentIndex)
     }
     
     open var bouncesType: BouncesType {
         return .parent
     }
     
-    open var headerView: UIView? {
+    open func segementSlideHeaderView() -> UIView? {
         if edgesForExtendedLayout.contains(.top) {
             #if DEBUG
             assert(false, "must override this variable")
@@ -73,23 +67,11 @@ open class SegementSlideViewController: UIViewController {
         }
     }
     
-    open var switcherHeight: CGFloat {
-        return 44
-    }
-    
-    open var switcherConfig: SegementSlideSwitcherConfig {
-        return SegementSlideSwitcherConfig.shared
-    }
-    
-    open var titlesInSwitcher: [String] {
+    open func segementSlideSwitcherView() -> SegementSlideSwitcherDelegate {
         #if DEBUG
         assert(false, "must override this variable")
         #endif
-        return []
-    }
-    
-    open func showBadgeInSwitcher(at index: Int) -> BadgeType {
-        return .none
+        return SegementSlideSwitcherEmptyView()
     }
     
     open func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
@@ -127,8 +109,8 @@ open class SegementSlideViewController: UIViewController {
         setupHeader()
         setupSwitcher()
         waitTobeResetContentOffsetY.removeAll()
-        segementSlideContentView.reloadData()
-        segementSlideSwitcherView.reloadData()
+        contentView.reloadData()
+        switcherView.reloadData()
         layoutSegementSlideScrollView()
     }
     
@@ -141,29 +123,24 @@ open class SegementSlideViewController: UIViewController {
     /// reload SwitcherView
     public func reloadSwitcher() {
         setupSwitcher()
-        segementSlideSwitcherView.reloadData()
+        switcherView.reloadData()
         layoutSegementSlideScrollView()
-    }
-    
-    /// reload badges in SwitcherView
-    public func reloadBadgeInSwitcher() {
-        segementSlideSwitcherView.reloadBadges()
     }
     
     /// reload ContentView
     public func reloadContent() {
         waitTobeResetContentOffsetY.removeAll()
-        segementSlideContentView.reloadData()
+        contentView.reloadData()
     }
     
     /// select one item by index
     public func scrollToSlide(at index: Int, animated: Bool) {
-        segementSlideSwitcherView.selectSwitcher(at: index, animated: animated)
+        switcherView.selectSwitcher(at: index, animated: animated)
     }
     
     /// reuse the `SegementSlideContentScrollViewDelegate`
     public func dequeueReusableViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
-        return segementSlideContentView.dequeueReusableViewController(at: index)
+        return contentView.dequeueReusableViewController(at: index)
     }
     
     deinit {

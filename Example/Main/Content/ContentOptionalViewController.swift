@@ -47,7 +47,8 @@ class ContentOptionalViewController: BaseTableViewController, SegementSlideConte
         tableView.mj_header.beginRefreshing()
     }
     
-    @objc private func refreshAction() {
+    @objc
+    private func refreshAction() {
         if tableView.mj_footer.isRefreshing {
             tableView.mj_footer.endRefreshing()
         }
@@ -65,7 +66,8 @@ class ContentOptionalViewController: BaseTableViewController, SegementSlideConte
         }
     }
     
-    @objc private func loadMoreAction() {
+    @objc
+    private func loadMoreAction() {
         guard !tableView.mj_header.isRefreshing else {
             tableView.mj_footer.endRefreshing()
             return

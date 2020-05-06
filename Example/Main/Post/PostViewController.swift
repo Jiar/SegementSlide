@@ -9,7 +9,7 @@
 import UIKit
 import SegementSlide
 
-class PostViewController: BaseSegementSlideViewController {
+class PostViewController: BaseSegementSlideDefaultViewController {
     
     private var badges: [Int: BadgeType] = [:]
     private let selectedIndex: Int
@@ -25,7 +25,7 @@ class PostViewController: BaseSegementSlideViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override var switcherConfig: SegementSlideSwitcherConfig {
+    override var switcherConfig: SegementSlideDefaultSwitcherConfig {
         var config = super.switcherConfig
         config.type = .tab
         return config

@@ -1,16 +1,16 @@
 //
-//  ShadowSegementSlideViewController.swift
+//  BaseTransparentSlideDefaultViewController.swift
 //  Example
 //
-//  Created by Jiar on 2018/12/13.
+//  Created by Jiar on 2018/12/17.
 //  Copyright © 2018 Jiar. All rights reserved.
 //
 
 import UIKit
 import SegementSlide
 
-class BaseSegementSlideDefaultViewController: SegementSlideDefaultViewController {
-    
+class BaseTransparentSlideDefaultViewController: TransparentSlideDefaultViewController {
+
     override var switcherConfig: SegementSlideDefaultSwitcherConfig {
         return ConfigManager.shared.switcherConfig
     }
@@ -62,9 +62,18 @@ class BaseSegementSlideDefaultViewController: SegementSlideDefaultViewController
         super.viewDidLoad()
         debugPrint("\(type(of: self)) - \(String(format: "%p", self)) - \(#function)")
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
+        if Bool.random() {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "reload", style: .plain, target: self, action: #selector(reloadAction))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
+        }
     }
     
+    @objc
+    private func reloadAction() {
+        reloadData()
+    }
+        
     @objc
     private func moreAction() {
         let viewController: UIViewController
@@ -85,5 +94,5 @@ class BaseSegementSlideDefaultViewController: SegementSlideDefaultViewController
         viewController.hidesBottomBarWhenPushed = Bool.random()
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
+
 }

@@ -15,7 +15,7 @@
 		804CC4DA21C1531D007EEBF8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4D921C1531D007EEBF8 /* HomeViewController.swift */; };
 		804CC4DC21C1532F007EEBF8 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4DB21C1532F007EEBF8 /* ExploreViewController.swift */; };
 		804CC4DE21C15339007EEBF8 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4DD21C15339007EEBF8 /* MineViewController.swift */; };
-		805C1D9921C7C86A00991D07 /* BaseTransparentSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C1D9821C7C86A00991D07 /* BaseTransparentSlideViewController.swift */; };
+		805C1D9921C7C86A00991D07 /* BaseTransparentSlideDefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C1D9821C7C86A00991D07 /* BaseTransparentSlideDefaultViewController.swift */; };
 		806518D221F309A00036FF5F /* ContentOptionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806518D121F309A00036FF5F /* ContentOptionalViewController.swift */; };
 		806518D621F30A1D0036FF5F /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806518D521F30A1D0036FF5F /* NoticeViewController.swift */; };
 		806518D821F317050036FF5F /* UINavigationController+Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806518D721F317050036FF5F /* UINavigationController+Swizzle.swift */; };
@@ -34,7 +34,7 @@
 		80B6C3F021C20052007C958F /* ContentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3EE21C20052007C958F /* ContentViewCell.swift */; };
 		80B6C3F121C20052007C958F /* ContentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80B6C3EF21C20052007C958F /* ContentViewCell.xib */; };
 		80B6C3F921C2943E007C958F /* CALayer+Sketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3F821C2943E007C958F /* CALayer+Sketch.swift */; };
-		80B6C3FB21C295ED007C958F /* BaseSegementSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3FA21C295ED007C958F /* BaseSegementSlideViewController.swift */; };
+		80B6C3FB21C295ED007C958F /* BaseSegementSlideDefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3FA21C295ED007C958F /* BaseSegementSlideDefaultViewController.swift */; };
 		80B6C3FE21C29EEA007C958F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B6C3FD21C29EEA007C958F /* DataManager.swift */; };
 		80B6C40521C2A600007C958F /* bg_computer.png in Resources */ = {isa = PBXBuildFile; fileRef = 80B6C40421C2A600007C958F /* bg_computer.png */; };
 		80F3D6B821D789D6005D649A /* BadgeType+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F3D6B721D789D6005D649A /* BadgeType+Random.swift */; };
@@ -63,7 +63,7 @@
 		804CC4D921C1531D007EEBF8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		804CC4DB21C1532F007EEBF8 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		804CC4DD21C15339007EEBF8 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
-		805C1D9821C7C86A00991D07 /* BaseTransparentSlideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTransparentSlideViewController.swift; sourceTree = "<group>"; };
+		805C1D9821C7C86A00991D07 /* BaseTransparentSlideDefaultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTransparentSlideDefaultViewController.swift; sourceTree = "<group>"; };
 		806518D121F309A00036FF5F /* ContentOptionalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentOptionalViewController.swift; sourceTree = "<group>"; };
 		806518D521F30A1D0036FF5F /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
 		806518D721F317050036FF5F /* UINavigationController+Swizzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Swizzle.swift"; sourceTree = "<group>"; };
@@ -84,9 +84,10 @@
 		80B6C3EE21C20052007C958F /* ContentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewCell.swift; sourceTree = "<group>"; };
 		80B6C3EF21C20052007C958F /* ContentViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentViewCell.xib; sourceTree = "<group>"; };
 		80B6C3F821C2943E007C958F /* CALayer+Sketch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Sketch.swift"; sourceTree = "<group>"; };
-		80B6C3FA21C295ED007C958F /* BaseSegementSlideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSegementSlideViewController.swift; sourceTree = "<group>"; };
+		80B6C3FA21C295ED007C958F /* BaseSegementSlideDefaultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSegementSlideDefaultViewController.swift; sourceTree = "<group>"; };
 		80B6C3FD21C29EEA007C958F /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		80B6C40421C2A600007C958F /* bg_computer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_computer.png; sourceTree = "<group>"; };
+		80D6BC6E23949C6000B0E2F8 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		80F3D6B721D789D6005D649A /* BadgeType+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BadgeType+Random.swift"; sourceTree = "<group>"; };
 		8347D796F78F8EF653440011 /* Pods_ExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BFDF05ED108B36DDF0BD851 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -146,6 +147,7 @@
 		804CC4C621C14AC4007EEBF8 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				80D6BC6E23949C6000B0E2F8 /* Example.entitlements */,
 				806518D421F309F10036FF5F /* Main */,
 				80B6C3F221C20D76007C958F /* Base */,
 				80B6C3FC21C29ED8007C958F /* Manager */,
@@ -253,8 +255,8 @@
 			children = (
 				8066CA9B236FD48D002D1E08 /* BaseNavigationController.swift */,
 				802DF82C2225326D00533012 /* BaseTableViewController.swift */,
-				80B6C3FA21C295ED007C958F /* BaseSegementSlideViewController.swift */,
-				805C1D9821C7C86A00991D07 /* BaseTransparentSlideViewController.swift */,
+				80B6C3FA21C295ED007C958F /* BaseSegementSlideDefaultViewController.swift */,
+				805C1D9821C7C86A00991D07 /* BaseTransparentSlideDefaultViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -477,7 +479,7 @@
 				80B6C3ED21C1FAB5007C958F /* ContentViewController.swift in Sources */,
 				80F3D6B821D789D6005D649A /* BadgeType+Random.swift in Sources */,
 				8099833C2249306E00C36D4B /* ConfigManager.swift in Sources */,
-				805C1D9921C7C86A00991D07 /* BaseTransparentSlideViewController.swift in Sources */,
+				805C1D9921C7C86A00991D07 /* BaseTransparentSlideDefaultViewController.swift in Sources */,
 				80B6C3FE21C29EEA007C958F /* DataManager.swift in Sources */,
 				806518D821F317050036FF5F /* UINavigationController+Swizzle.swift in Sources */,
 				804CC4C821C14AC4007EEBF8 /* AppDelegate.swift in Sources */,
@@ -492,7 +494,7 @@
 				807A36DF21C359D3004675BC /* AppManager.swift in Sources */,
 				804CC4DC21C1532F007EEBF8 /* ExploreViewController.swift in Sources */,
 				806518D221F309A00036FF5F /* ContentOptionalViewController.swift in Sources */,
-				80B6C3FB21C295ED007C958F /* BaseSegementSlideViewController.swift in Sources */,
+				80B6C3FB21C295ED007C958F /* BaseSegementSlideDefaultViewController.swift in Sources */,
 				804CC4DE21C15339007EEBF8 /* MineViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -650,7 +652,10 @@
 			baseConfigurationReference = DFC82FD65CC44CDF1D54158C /* Pods-Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = D4MTBNMTU5;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -661,6 +666,7 @@
 				MARKETING_VERSION = 2.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = me.jiar.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -671,7 +677,10 @@
 			baseConfigurationReference = 9BFDF05ED108B36DDF0BD851 /* Pods-Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = D4MTBNMTU5;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -682,6 +691,7 @@
 				MARKETING_VERSION = 2.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = me.jiar.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

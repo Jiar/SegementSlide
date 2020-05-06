@@ -12,7 +12,7 @@ import SnapKit
 
 class NoticeViewController: UIViewController {
     
-    private var segementSlideSwitcherView: SegementSlideSwitcherView!
+    private var segementSlideSwitcherView: SegementSlideDefaultSwitcherView!
     private var segementSlideContentView: SegementSlideContentView!
     
     private var badges: [Int: BadgeType] = [:]
@@ -48,8 +48,8 @@ class NoticeViewController: UIViewController {
     }
     
     private func setupSwitcherView() {
-        segementSlideSwitcherView = SegementSlideSwitcherView()
-        segementSlideSwitcherView.config = SegementSlideSwitcherConfig(type: .segement, horizontalMargin: 28)
+        segementSlideSwitcherView = SegementSlideDefaultSwitcherView()
+        segementSlideSwitcherView.config = SegementSlideDefaultSwitcherConfig(type: .segement, horizontalMargin: 28)
         segementSlideSwitcherView.delegate = self
         
         let size: CGSize
@@ -95,7 +95,8 @@ class NoticeViewController: UIViewController {
         segementSlideSwitcherView.selectSwitcher(at: index, animated: animated)
     }
     
-    @objc private func moreAction() {
+    @objc
+    private func moreAction() {
         let viewController: UIViewController
         switch Int.random(in: 0..<8) {
         case 0..<4:
@@ -121,19 +122,19 @@ class NoticeViewController: UIViewController {
     
 }
 
-extension NoticeViewController: SegementSlideSwitcherViewDelegate {
+extension NoticeViewController: SegementSlideDefaultSwitcherViewDelegate {
     
     public var titlesInSegementSlideSwitcherView: [String] {
         return DataManager.shared.noticeLanguageTitles
     }
     
-    public func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideSwitcherView, didSelectAtIndex index: Int, animated: Bool) {
+    public func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideDefaultSwitcherView, didSelectAtIndex index: Int, animated: Bool) {
         if segementSlideContentView.selectedIndex != index {
             segementSlideContentView.scrollToSlide(at: index, animated: animated)
         }
     }
     
-    public func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideSwitcherView, showBadgeAtIndex index: Int) -> BadgeType {
+    public func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideDefaultSwitcherView, showBadgeAtIndex index: Int) -> BadgeType {
         if let badge = badges[index] {
             return badge
         } else {

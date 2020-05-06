@@ -9,7 +9,7 @@
 import UIKit
 import SegementSlide
 
-class ExploreViewController: BaseSegementSlideViewController {
+class ExploreViewController: BaseSegementSlideDefaultViewController {
 
     private var badges: [Int: BadgeType] = [:]
     
@@ -24,7 +24,7 @@ class ExploreViewController: BaseSegementSlideViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override var headerView: UIView? {
+    override func segementSlideHeaderView() -> UIView? {
         let headerView = UIImageView()
         headerView.isUserInteractionEnabled = true
         headerView.contentMode = .scaleAspectFill
@@ -34,7 +34,7 @@ class ExploreViewController: BaseSegementSlideViewController {
         return headerView
     }
     
-    override var switcherConfig: SegementSlideSwitcherConfig {
+    override var switcherConfig: SegementSlideDefaultSwitcherConfig {
         var config = super.switcherConfig
         config.type = .segement
         return config
