@@ -10,6 +10,8 @@ import UIKit
 import SegementSlide
 
 class BaseTransparentSlideViewController: TransparentSlideViewController {
+    
+    private var selectedIndex: Int? = nil
 
     override var switcherConfig: SegementSlideSwitcherConfig {
         return ConfigManager.shared.switcherConfig
@@ -70,7 +72,14 @@ class BaseTransparentSlideViewController: TransparentSlideViewController {
     }
     
     @objc private func reloadAction() {
+        selectedIndex = currentIndex
         reloadData()
+        if let selectedIndex = selectedIndex {
+            scrollToSlide(at: selectedIndex, animated: false)
+        } else {
+            scrollToSlide(at: 1, animated: false)
+        }
+        selectedIndex = nil
     }
         
     @objc private func moreAction() {
