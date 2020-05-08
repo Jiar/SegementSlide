@@ -80,9 +80,9 @@ public class SegementSlideContentView: UIView {
     /// otherwise, none of them will be selected.
     /// However, if an item was previously selected, it will be reSelected.
     public func reloadData() {
+        selectedIndex = nil
         clearAllReusableViewControllers()
         updateScrollViewContentSize()
-        updateSelectedIndex()
     }
     
     /// select one item by index

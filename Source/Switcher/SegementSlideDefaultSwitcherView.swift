@@ -74,6 +74,7 @@ public class SegementSlideDefaultSwitcherView: UIView {
     /// otherwise, none of them will be selected.
     /// However, if an item was previously selected, it will be reSelected.
     public func reloadData() {
+        selectedIndex = nil
         for titleButton in titleButtons {
             titleButton.removeFromSuperview()
             titleButton.frame = .zero
@@ -104,7 +105,6 @@ public class SegementSlideDefaultSwitcherView: UIView {
         indicatorView.backgroundColor = innerConfig.indicatorColor
         layoutTitleButtons()
         reloadBadges()
-        updateSelectedIndex()
     }
     
     /// reload all badges in `SegementSlideSwitcherView`
