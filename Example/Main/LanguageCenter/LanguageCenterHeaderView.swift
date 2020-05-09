@@ -28,7 +28,7 @@ class LanguageCenterHeaderView: UIView {
         return bgImageView.image?.size.height ?? bgImageView.bounds.height
     }
     
-    func config(_ language: Language, viewController: LanguageCenterViewController) {
+    func config(_ language: Language, viewController: UIViewController) {
         let topLayoutLength: CGFloat
         if #available(iOS 11.0, *) {
             topLayoutLength = viewController.view.safeAreaInsets.top

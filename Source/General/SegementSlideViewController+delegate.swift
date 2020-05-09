@@ -26,7 +26,7 @@ extension SegementSlideViewController: UIScrollViewDelegate {
 extension SegementSlideViewController: SegementSlideContentDelegate {
     
     public var segementSlideContentScrollViewCount: Int {
-        return switcherView.dataSource?.titles.count ?? 0
+        return switcherView.ssDataSource?.titles.count ?? 0
     }
     
     public func segementSlideContentScrollView(at index: Int) -> SegementSlideContentScrollViewDelegate? {
@@ -35,8 +35,8 @@ extension SegementSlideViewController: SegementSlideContentDelegate {
     
     public func segementSlideContentView(_ segementSlideContentView: SegementSlideContentView, didSelectAtIndex index: Int, animated: Bool) {
         waitTobeResetContentOffsetY.insert(index)
-        if switcherView.selectedIndex != index {
-            switcherView.selectSwitcher(at: index, animated: animated)
+        if switcherView.ssSelectedIndex != index {
+            switcherView.selectItem(at: index, animated: animated)
         }
         childKeyValueObservation?.invalidate()
         guard let childViewController = segementSlideContentView.dequeueReusableViewController(at: index) else { return }

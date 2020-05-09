@@ -1,19 +1,17 @@
 //
-//  BaseSegementSlideDefaultViewController.swift
+//  BaseTransparentSlideCustomViewController.swift
 //  Example
 //
-//  Created by Jiar on 2018/12/13.
-//  Copyright © 2018 Jiar. All rights reserved.
+//  Created by Jiar on 2020/5/9.
+//  Copyright © 2020 Jiar. All rights reserved.
 //
 
 import UIKit
 import SegementSlide
 
-class BaseSegementSlideDefaultViewController: SegementSlideDefaultViewController {
+class BaseTransparentSlideCustomViewController: TransparentSlideCustomViewController {
     
-    override var switcherConfig: SegementSlideDefaultSwitcherConfig {
-        return ConfigManager.shared.switcherConfig
-    }
+    private var selectedIndex: Int? = nil
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
         super.scrollViewDidScroll(scrollView, isParent: isParent)
@@ -62,9 +60,25 @@ class BaseSegementSlideDefaultViewController: SegementSlideDefaultViewController
         super.viewDidLoad()
         debugPrint("\(type(of: self)) - \(String(format: "%p", self)) - \(#function)")
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
+        if Bool.random() {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "reload", style: .plain, target: self, action: #selector(reloadAction))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
+        }
     }
     
+    @objc
+    private func reloadAction() {
+        selectedIndex = currentIndex
+        reloadData()
+        if let selectedIndex = selectedIndex {
+            selectItem(at: selectedIndex, animated: false)
+        } else {
+            selectItem(at: 1, animated: false)
+        }
+        selectedIndex = nil
+    }
+        
     @objc
     private func moreAction() {
         let viewController: UIViewController
@@ -87,5 +101,5 @@ class BaseSegementSlideDefaultViewController: SegementSlideDefaultViewController
         viewController.hidesBottomBarWhenPushed = Bool.random()
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
+
 }

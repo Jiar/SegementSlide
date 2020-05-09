@@ -1,17 +1,20 @@
 //
-//  SegementSlideDefaultSwitcherView+ex.swift
-//  SegementSlide
+//  JXSegmentedView+ex.swift
+//  Example
 //
-//  Created by Jiar on 2020/5/6.
+//  Created by Jiar on 2020/5/8.
+//  Copyright © 2020 Jiar. All rights reserved.
 //
 
 import UIKit
-
-private var dataSourceKey: Void?
-
-extension SegementSlideDefaultSwitcherView: SegementSlideSwitcherDelegate {
+import SegementSlide
+import JXSegmentedView
     
-    public weak var ssDataSource: SegementSlideSwitcherDataSource? {
+private var dataSourceKey: Void?
+    
+extension JXSegmentedView: SegementSlideSwitcherDelegate {
+    
+    public var ssDataSource: SegementSlideSwitcherDataSource? {
         get {
             let weakBox = objc_getAssociatedObject(self, &dataSourceKey) as? SegementSlideSwitcherDataSourceWeakBox
             return weakBox?.unbox
@@ -26,7 +29,11 @@ extension SegementSlideDefaultSwitcherView: SegementSlideSwitcherDelegate {
     }
     
     public var ssScrollView: UIScrollView {
-        return scrollView
+        return contentScrollView ?? collectionView
+    }
+
+    public func selectItem(at index: Int, animated: Bool) {
+        selectItemAt(index: index)
     }
     
 }

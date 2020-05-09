@@ -13,29 +13,24 @@ public protocol SegementSlideSwitcherDataSource: class {
 }
 
 public protocol SegementSlideSwitcherDelegate: UIView {
-    var dataSource: SegementSlideSwitcherDataSource? { get set }
-    var scrollView: UIScrollView { get }
-    var selectedIndex: Int? { get }
+    var ssDataSource: SegementSlideSwitcherDataSource? { get set }
+    var ssSelectedIndex: Int? { get }
+    var ssScrollView: UIScrollView { get }
     
     func reloadData()
-    func reloadBadges()
-    func selectSwitcher(at index: Int, animated: Bool)
+    func selectItem(at index: Int, animated: Bool)
 }
 
 internal final class SegementSlideSwitcherEmptyView: UIView, SegementSlideSwitcherDelegate {
-    weak var dataSource: SegementSlideSwitcherDataSource? = nil
-    var scrollView: UIScrollView = UIScrollView()
-    var selectedIndex: Int? = nil
+    weak var ssDataSource: SegementSlideSwitcherDataSource? = nil
+    var ssSelectedIndex: Int? = nil
+    var ssScrollView: UIScrollView = UIScrollView()
     
     func reloadData() {
         
     }
     
-    func reloadBadges() {
-        
-    }
-    
-    func selectSwitcher(at index: Int, animated: Bool) {
+    func selectItem(at index: Int, animated: Bool) {
         
     }
 }

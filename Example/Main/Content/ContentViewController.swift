@@ -56,7 +56,7 @@ class ContentViewController: BaseTableViewController, SegementSlideContentScroll
         if tableView.mj_footer.isRefreshing {
             tableView.mj_footer.endRefreshing()
         }
-        DispatchQueue.global().asyncAfter(deadline: .now()+Double.random(in: 0..<3)) {
+        DispatchQueue.global().asyncAfter(deadline: .now()+Double.random(in: 0..<2)) {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.languages.removeAll()
@@ -76,7 +76,7 @@ class ContentViewController: BaseTableViewController, SegementSlideContentScroll
             tableView.mj_footer.endRefreshing()
             return
         }
-        DispatchQueue.global().asyncAfter(deadline: .now()+Double.random(in: 0..<3)) {
+        DispatchQueue.global().asyncAfter(deadline: .now()+Double.random(in: 0..<2)) {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.languages.append(contentsOf: DataManager.shared.randomLanguages)

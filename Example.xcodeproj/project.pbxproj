@@ -16,6 +16,13 @@
 		804CC4DC21C1532F007EEBF8 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4DB21C1532F007EEBF8 /* ExploreViewController.swift */; };
 		804CC4DE21C15339007EEBF8 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804CC4DD21C15339007EEBF8 /* MineViewController.swift */; };
 		805C1D9921C7C86A00991D07 /* BaseTransparentSlideDefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C1D9821C7C86A00991D07 /* BaseTransparentSlideDefaultViewController.swift */; };
+		8064F19E24651BE800C6A17A /* InterestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064F19D24651BE800C6A17A /* InterestViewController.swift */; };
+		8064F1A024651F7B00C6A17A /* SegementSlideCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064F19F24651F7B00C6A17A /* SegementSlideCustomViewController.swift */; };
+		8064F1A5246530A600C6A17A /* JXSegmentedView+ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064F1A4246530A600C6A17A /* JXSegmentedView+ex.swift */; };
+		8064F1A92466527A00C6A17A /* BaseSegementSlideCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064F1A82466527A00C6A17A /* BaseSegementSlideCustomViewController.swift */; };
+		8064F1AB246658A100C6A17A /* TransparentSlideCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064F1AA246658A100C6A17A /* TransparentSlideCustomViewController.swift */; };
+		8064F1AD2466599300C6A17A /* BaseTransparentSlideCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064F1AC2466599300C6A17A /* BaseTransparentSlideCustomViewController.swift */; };
+		8064F1AF24665A0A00C6A17A /* LanguageCenterViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064F1AE24665A0A00C6A17A /* LanguageCenterViewController2.swift */; };
 		806518D221F309A00036FF5F /* ContentOptionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806518D121F309A00036FF5F /* ContentOptionalViewController.swift */; };
 		806518D621F30A1D0036FF5F /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806518D521F30A1D0036FF5F /* NoticeViewController.swift */; };
 		806518D821F317050036FF5F /* UINavigationController+Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806518D721F317050036FF5F /* UINavigationController+Swizzle.swift */; };
@@ -64,6 +71,13 @@
 		804CC4DB21C1532F007EEBF8 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		804CC4DD21C15339007EEBF8 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		805C1D9821C7C86A00991D07 /* BaseTransparentSlideDefaultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTransparentSlideDefaultViewController.swift; sourceTree = "<group>"; };
+		8064F19D24651BE800C6A17A /* InterestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestViewController.swift; sourceTree = "<group>"; };
+		8064F19F24651F7B00C6A17A /* SegementSlideCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegementSlideCustomViewController.swift; sourceTree = "<group>"; };
+		8064F1A4246530A600C6A17A /* JXSegmentedView+ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JXSegmentedView+ex.swift"; sourceTree = "<group>"; };
+		8064F1A82466527A00C6A17A /* BaseSegementSlideCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSegementSlideCustomViewController.swift; sourceTree = "<group>"; };
+		8064F1AA246658A100C6A17A /* TransparentSlideCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentSlideCustomViewController.swift; sourceTree = "<group>"; };
+		8064F1AC2466599300C6A17A /* BaseTransparentSlideCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTransparentSlideCustomViewController.swift; sourceTree = "<group>"; };
+		8064F1AE24665A0A00C6A17A /* LanguageCenterViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCenterViewController2.swift; sourceTree = "<group>"; };
 		806518D121F309A00036FF5F /* ContentOptionalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentOptionalViewController.swift; sourceTree = "<group>"; };
 		806518D521F30A1D0036FF5F /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
 		806518D721F317050036FF5F /* UINavigationController+Swizzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Swizzle.swift"; sourceTree = "<group>"; };
@@ -150,12 +164,31 @@
 				80D6BC6E23949C6000B0E2F8 /* Example.entitlements */,
 				806518D421F309F10036FF5F /* Main */,
 				80B6C3F221C20D76007C958F /* Base */,
+				8064F1A124651FD500C6A17A /* Custom */,
 				80B6C3FC21C29ED8007C958F /* Manager */,
 				807A36E021C35A03004675BC /* Config */,
 				80B6C3F721C29413007C958F /* Util */,
 				80B6C40121C2A458007C958F /* Resources */,
 			);
 			path = Example;
+			sourceTree = "<group>";
+		};
+		8064F19C24651BC700C6A17A /* Interest */ = {
+			isa = PBXGroup;
+			children = (
+				8064F19D24651BE800C6A17A /* InterestViewController.swift */,
+			);
+			path = Interest;
+			sourceTree = "<group>";
+		};
+		8064F1A124651FD500C6A17A /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				8064F19F24651F7B00C6A17A /* SegementSlideCustomViewController.swift */,
+				8064F1AA246658A100C6A17A /* TransparentSlideCustomViewController.swift */,
+				8064F1A4246530A600C6A17A /* JXSegmentedView+ex.swift */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 		806518D321F309E20036FF5F /* Notice */ = {
@@ -171,6 +204,7 @@
 			children = (
 				80B6C3E821C1FA16007C958F /* Home */,
 				80B6C3E921C1FA1B007C958F /* Explore */,
+				8064F19C24651BC700C6A17A /* Interest */,
 				80B6C3EA21C1FA27007C958F /* Mine */,
 				806518D321F309E20036FF5F /* Notice */,
 				8079920D221957BD00682690 /* Post */,
@@ -200,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				807A36E721C3B110004675BC /* LanguageCenterViewController.swift */,
+				8064F1AE24665A0A00C6A17A /* LanguageCenterViewController2.swift */,
 				807A36E921C3B314004675BC /* LanguageCenterHeaderView.swift */,
 				807A36EB21C3B31E004675BC /* LanguageCenterHeaderView.xib */,
 			);
@@ -257,6 +292,8 @@
 				802DF82C2225326D00533012 /* BaseTableViewController.swift */,
 				80B6C3FA21C295ED007C958F /* BaseSegementSlideDefaultViewController.swift */,
 				805C1D9821C7C86A00991D07 /* BaseTransparentSlideDefaultViewController.swift */,
+				8064F1A82466527A00C6A17A /* BaseSegementSlideCustomViewController.swift */,
+				8064F1AC2466599300C6A17A /* BaseTransparentSlideCustomViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -479,20 +516,27 @@
 				80B6C3ED21C1FAB5007C958F /* ContentViewController.swift in Sources */,
 				80F3D6B821D789D6005D649A /* BadgeType+Random.swift in Sources */,
 				8099833C2249306E00C36D4B /* ConfigManager.swift in Sources */,
+				8064F1AF24665A0A00C6A17A /* LanguageCenterViewController2.swift in Sources */,
 				805C1D9921C7C86A00991D07 /* BaseTransparentSlideDefaultViewController.swift in Sources */,
 				80B6C3FE21C29EEA007C958F /* DataManager.swift in Sources */,
+				8064F19E24651BE800C6A17A /* InterestViewController.swift in Sources */,
 				806518D821F317050036FF5F /* UINavigationController+Swizzle.swift in Sources */,
 				804CC4C821C14AC4007EEBF8 /* AppDelegate.swift in Sources */,
+				8064F1AD2466599300C6A17A /* BaseTransparentSlideCustomViewController.swift in Sources */,
 				8066CA9C236FD48D002D1E08 /* BaseNavigationController.swift in Sources */,
 				80B6C3F021C20052007C958F /* ContentViewCell.swift in Sources */,
 				802DF82D2225326D00533012 /* BaseTableViewController.swift in Sources */,
+				8064F1A5246530A600C6A17A /* JXSegmentedView+ex.swift in Sources */,
 				806518D621F30A1D0036FF5F /* NoticeViewController.swift in Sources */,
+				8064F1A024651F7B00C6A17A /* SegementSlideCustomViewController.swift in Sources */,
 				807A36E821C3B110004675BC /* LanguageCenterViewController.swift in Sources */,
 				807A36EA21C3B314004675BC /* LanguageCenterHeaderView.swift in Sources */,
 				804CC4DA21C1531D007EEBF8 /* HomeViewController.swift in Sources */,
 				80B6C3F921C2943E007C958F /* CALayer+Sketch.swift in Sources */,
 				807A36DF21C359D3004675BC /* AppManager.swift in Sources */,
+				8064F1A92466527A00C6A17A /* BaseSegementSlideCustomViewController.swift in Sources */,
 				804CC4DC21C1532F007EEBF8 /* ExploreViewController.swift in Sources */,
+				8064F1AB246658A100C6A17A /* TransparentSlideCustomViewController.swift in Sources */,
 				806518D221F309A00036FF5F /* ContentOptionalViewController.swift in Sources */,
 				80B6C3FB21C295ED007C958F /* BaseSegementSlideDefaultViewController.swift in Sources */,
 				804CC4DE21C15339007EEBF8 /* MineViewController.swift in Sources */,
@@ -655,8 +699,7 @@
 				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = D4MTBNMTU5;
+				DEVELOPMENT_TEAM = VDF77VYWWF;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -664,9 +707,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.2.4;
-				PRODUCT_BUNDLE_IDENTIFIER = me.jiar.Example;
+				PRODUCT_BUNDLE_IDENTIFIER = me.jiar.SegementSlide.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -680,8 +723,7 @@
 				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = D4MTBNMTU5;
+				DEVELOPMENT_TEAM = VDF77VYWWF;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -689,9 +731,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.2.4;
-				PRODUCT_BUNDLE_IDENTIFIER = me.jiar.Example;
+				PRODUCT_BUNDLE_IDENTIFIER = me.jiar.SegementSlide.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

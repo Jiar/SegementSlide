@@ -141,7 +141,7 @@ class HomeViewController: SegementSlideViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadData()
-        scrollToSlide(at: 0, animated: false)
+        selectItem(at: 0, animated: false)
     }
 
 }

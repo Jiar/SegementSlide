@@ -76,9 +76,9 @@ class BaseTransparentSlideDefaultViewController: TransparentSlideDefaultViewCont
         selectedIndex = currentIndex
         reloadData()
         if let selectedIndex = selectedIndex {
-            scrollToSlide(at: selectedIndex, animated: false)
+            selectItem(at: selectedIndex, animated: false)
         } else {
-            scrollToSlide(at: 1, animated: false)
+            selectItem(at: 1, animated: false)
         }
         selectedIndex = nil
     }
@@ -86,7 +86,7 @@ class BaseTransparentSlideDefaultViewController: TransparentSlideDefaultViewCont
     @objc
     private func moreAction() {
         let viewController: UIViewController
-        switch Int.random(in: 0..<8) {
+        switch Int.random(in: 0..<9) {
         case 0..<4:
             viewController = NoticeViewController(selectedIndex: Int.random(in: 0..<DataManager.shared.noticeLanguageTitles.count))
         case 4:
@@ -96,9 +96,11 @@ class BaseTransparentSlideDefaultViewController: TransparentSlideDefaultViewCont
         case 6:
             viewController = ExploreViewController()
         case 7:
+            viewController = InterestViewController()
+        case 8:
             viewController = MineViewController()
         default:
-            viewController = NoticeViewController(selectedIndex: Int.random(in: 0..<DataManager.shared.noticeLanguageTitles.count))
+            viewController = UIViewController()
         }
         viewController.hidesBottomBarWhenPushed = Bool.random()
         navigationController?.pushViewController(viewController, animated: true)

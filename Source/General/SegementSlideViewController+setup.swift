@@ -28,7 +28,7 @@ extension SegementSlideViewController {
         switcherView = segementSlideSwitcherView()
         contentView = SegementSlideContentView()
         var gestureRecognizers: [UIGestureRecognizer] = []
-        if let gestureRecognizersInScrollView = switcherView.scrollView.gestureRecognizers {
+        if let gestureRecognizersInScrollView = switcherView.ssScrollView.gestureRecognizers {
             gestureRecognizers.append(contentsOf: gestureRecognizersInScrollView)
         }
         if let gestureRecognizersInScrollView = contentView.scrollView.gestureRecognizers {
@@ -98,15 +98,6 @@ extension SegementSlideViewController {
             canParentViewScroll = true
             canChildViewScroll = true
         }
-    }
-    
-    internal func setupHeader() {
-        innerHeaderView = segementSlideHeaderView()
-    }
-    
-    @objc
-    internal func setupSwitcher() {
-
     }
     
     internal func layoutSegementSlideScrollView() {

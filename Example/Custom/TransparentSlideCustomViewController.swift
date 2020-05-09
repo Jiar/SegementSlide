@@ -1,0 +1,77 @@
+//
+//  TransparentSlideCustomViewController.swift
+//  Example
+//
+//  Created by Jiar on 2020/5/9.
+//  Copyright © 2020 Jiar. All rights reserved.
+//
+
+import UIKit
+import SegementSlide
+import JXSegmentedView
+
+open class TransparentSlideCustomViewController: TransparentSlideViewController {
+    
+    private let segmentedView = JXSegmentedView()
+    
+    private lazy var segmentedDataSource: JXSegmentedNumberDataSource = {
+        let dataSource = JXSegmentedNumberDataSource()
+        dataSource.titleSelectedColor = .white
+        dataSource.isTitleColorGradientEnabled = true
+        dataSource.isItemSpacingAverageEnabled = true
+        dataSource.isSelectedAnimable = true
+        dataSource.isTitleMaskEnabled = true
+        return dataSource
+    }()
+    
+    public override func segementSlideSwitcherView() -> SegementSlideSwitcherDelegate {
+        let indicator = JXSegmentedIndicatorBackgroundView()
+        indicator.indicatorColor = .purple
+        segmentedView.indicators = [indicator]
+        segmentedView.delegate = self
+        segmentedView.ssDataSource = self
+        return segmentedView
+    }
+    
+    open override func setupSwitcher() {
+        super.setupSwitcher()
+        segmentedDataSource.titles = titlesInSwitcher
+        segmentedDataSource.numbers = badgesInSwitcher
+        segmentedView.dataSource = segmentedDataSource
+    }
+    
+    open var switcherViewHeight: CGFloat {
+        return 44
+    }
+    
+    open var titlesInSwitcher: [String] {
+        return []
+    }
+    
+    open var badgesInSwitcher: [Int] {
+        return []
+    }
+    
+}
+
+extension TransparentSlideCustomViewController: SegementSlideSwitcherDataSource {
+    
+    public var height: CGFloat {
+        return switcherViewHeight
+    }
+    
+    public var titles: [String] {
+        return titlesInSwitcher
+    }
+    
+}
+
+extension TransparentSlideCustomViewController: JXSegmentedViewDelegate {
+    
+    public func segmentedView(_ segmentedView: JXSegmentedView, didSelectedItemAt index: Int) {
+        if contentView.selectedIndex != index {
+            contentView.selectItem(at: index, animated: true)
+        }
+    }
+    
+}

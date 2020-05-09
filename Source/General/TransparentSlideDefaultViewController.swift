@@ -13,11 +13,11 @@ open class TransparentSlideDefaultViewController: TransparentSlideViewController
     
     public override func segementSlideSwitcherView() -> SegementSlideSwitcherDelegate {
         defaultSwitcherView.delegate = self
-        defaultSwitcherView.dataSource = self
+        defaultSwitcherView.ssDataSource = self
         return defaultSwitcherView
     }
     
-    internal override func setupSwitcher() {
+    open override func setupSwitcher() {
         super.setupSwitcher()
         defaultSwitcherView.config = switcherConfig
     }
@@ -60,12 +60,12 @@ extension TransparentSlideDefaultViewController: SegementSlideSwitcherDataSource
 extension TransparentSlideDefaultViewController: SegementSlideDefaultSwitcherViewDelegate {
     
     public var titlesInSegementSlideSwitcherView: [String] {
-        return switcherView.dataSource?.titles ?? []
+        return switcherView.ssDataSource?.titles ?? []
     }
     
     public func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideDefaultSwitcherView, didSelectAtIndex index: Int, animated: Bool) {
         if contentView.selectedIndex != index {
-            contentView.scrollToSlide(at: index, animated: animated)
+            contentView.selectItem(at: index, animated: animated)
         }
     }
     

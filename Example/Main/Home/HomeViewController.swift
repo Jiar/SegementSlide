@@ -79,7 +79,7 @@ class HomeViewController: BaseSegementSlideDefaultViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadData()
-        scrollToSlide(at: 0, animated: false)
+        selectItem(at: 0, animated: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

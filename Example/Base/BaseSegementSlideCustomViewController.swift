@@ -1,19 +1,15 @@
 //
-//  BaseSegementSlideDefaultViewController.swift
+//  BaseSegementSlideCustomViewController.swift
 //  Example
 //
-//  Created by Jiar on 2018/12/13.
-//  Copyright © 2018 Jiar. All rights reserved.
+//  Created by Jiar on 2020/5/9.
+//  Copyright © 2020 Jiar. All rights reserved.
 //
 
 import UIKit
 import SegementSlide
 
-class BaseSegementSlideDefaultViewController: SegementSlideDefaultViewController {
-    
-    override var switcherConfig: SegementSlideDefaultSwitcherConfig {
-        return ConfigManager.shared.switcherConfig
-    }
+class BaseSegementSlideCustomViewController: SegementSlideCustomViewController {
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
         super.scrollViewDidScroll(scrollView, isParent: isParent)
@@ -62,7 +58,7 @@ class BaseSegementSlideDefaultViewController: SegementSlideDefaultViewController
         super.viewDidLoad()
         debugPrint("\(type(of: self)) - \(String(format: "%p", self)) - \(#function)")
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction)), UIBarButtonItem(title: "custom", style: .plain, target: self, action: #selector(customAction))]
     }
     
     @objc
@@ -86,6 +82,16 @@ class BaseSegementSlideDefaultViewController: SegementSlideDefaultViewController
         }
         viewController.hidesBottomBarWhenPushed = Bool.random()
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @objc
+    private func customAction() {
+        guard let language = DataManager.shared.allLanguages.randomElement() else { return }
+        if Bool.random() {
+            present(BaseNavigationController(rootViewController: LanguageCenterViewController2(id: language.id, isPresented: true)), animated: true, completion: nil)
+        } else {
+            navigationController?.pushViewController(LanguageCenterViewController2(id: language.id, isPresented: false), animated: true)
+        }
     }
     
 }

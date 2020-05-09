@@ -39,13 +39,13 @@ open class SegementSlideViewController: UIViewController {
         }
     }
     public var switcherHeight: CGFloat {
-        return switcherView.dataSource?.height ?? 44
+        return switcherView.ssDataSource?.height ?? 44
     }
     public var contentViewHeight: CGFloat {
         return view.bounds.height-topLayoutLength-switcherHeight
     }
     public var currentIndex: Int? {
-        return switcherView.selectedIndex
+        return switcherView.ssSelectedIndex
     }
     public var currentSegementSlideContentViewController: SegementSlideContentScrollViewDelegate? {
         guard let currentIndex = currentIndex else { return nil }
@@ -89,6 +89,18 @@ open class SegementSlideViewController: UIViewController {
         
     }
     
+    open func setupHeader() {
+        innerHeaderView = segementSlideHeaderView()
+    }
+    
+    open func setupSwitcher() {
+
+    }
+    
+    open func setupContent() {
+        waitTobeResetContentOffsetY.removeAll()
+    }
+    
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         layoutSegementSlideScrollView()
@@ -101,14 +113,14 @@ open class SegementSlideViewController: UIViewController {
     
     /// reload headerView, SwitcherView and ContentView
     ///
-    /// you should call `scrollToSlide(at index: Int, animated: Bool)` after call the method.
+    /// you should call `selectItem(at index: Int, animated: Bool)` after call the method.
     /// otherwise, none of them will be selected.
     /// However, if an item was previously selected, it will be reSelected.
     public func reloadData() {
         setupBounces()
         setupHeader()
         setupSwitcher()
-        waitTobeResetContentOffsetY.removeAll()
+        setupContent()
         contentView.reloadData()
         switcherView.reloadData()
         layoutSegementSlideScrollView()
@@ -129,13 +141,13 @@ open class SegementSlideViewController: UIViewController {
     
     /// reload ContentView
     public func reloadContent() {
-        waitTobeResetContentOffsetY.removeAll()
+        setupContent()
         contentView.reloadData()
     }
     
     /// select one item by index
-    public func scrollToSlide(at index: Int, animated: Bool) {
-        switcherView.selectSwitcher(at: index, animated: animated)
+    public func selectItem(at index: Int, animated: Bool) {
+        switcherView.selectItem(at: index, animated: animated)
     }
     
     /// reuse the `SegementSlideContentScrollViewDelegate`

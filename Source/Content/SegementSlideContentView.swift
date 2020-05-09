@@ -76,7 +76,7 @@ public class SegementSlideContentView: UIView {
     
     /// remove subViews
     ///
-    /// you should call `scrollToSlide(at index: Int, animated: Bool)` after call the method.
+    /// you should call `selectItem(at index: Int, animated: Bool)` after call the method.
     /// otherwise, none of them will be selected.
     /// However, if an item was previously selected, it will be reSelected.
     public func reloadData() {
@@ -86,7 +86,7 @@ public class SegementSlideContentView: UIView {
     }
     
     /// select one item by index
-    public func scrollToSlide(at index: Int, animated: Bool) {
+    public func selectItem(at index: Int, animated: Bool) {
         updateSelectedViewController(at: index, animated: animated)
     }
     

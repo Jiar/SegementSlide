@@ -84,7 +84,7 @@ class MineViewController: BaseTransparentSlideDefaultViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadData()
-        scrollToSlide(at: 1, animated: false)
+        selectItem(at: 1, animated: false)
     }
 
 }

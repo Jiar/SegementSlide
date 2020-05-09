@@ -144,7 +144,7 @@ public class SegementSlideDefaultSwitcherView: UIView {
     }
     
     /// select one item by index
-    public func selectSwitcher(at index: Int, animated: Bool) {
+    public func selectItem(at index: Int, animated: Bool) {
         updateSelectedButton(at: index, animated: animated)
     }
     
@@ -237,7 +237,7 @@ extension SegementSlideDefaultSwitcherView {
     
     @objc
     private func didClickTitleButton(_ button: UIButton) {
-        selectSwitcher(at: button.tag, animated: true)
+        selectItem(at: button.tag, animated: true)
     }
     
 }

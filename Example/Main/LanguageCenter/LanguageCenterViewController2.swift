@@ -1,9 +1,9 @@
 //
-//  LanguageCenterViewController.swift
+//  LanguageCenterViewController2.swift
 //  Example
 //
-//  Created by Jiar on 2018/12/14.
-//  Copyright © 2018 Jiar. All rights reserved.
+//  Created by Jiar on 2020/5/9.
+//  Copyright © 2020 Jiar. All rights reserved.
 //
 
 import UIKit
@@ -11,7 +11,7 @@ import SegementSlide
 import MBProgressHUD
 import MJRefresh
 
-class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
+class LanguageCenterViewController2: BaseTransparentSlideCustomViewController {
     
     private let id: Int
     private var badges: [Int: BadgeType] = [:]
@@ -60,12 +60,6 @@ class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
         return centerHeaderView
     }
     
-    override var switcherConfig: SegementSlideDefaultSwitcherConfig {
-        var config = super.switcherConfig
-        config.type = .tab
-        return config
-    }
-    
     override var titlesInSwitcher: [String] {
         guard let _ = language else {
             return []
@@ -73,14 +67,13 @@ class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
         return DataManager.shared.languageCenterTitles
     }
     
-    override func showBadgeInSwitcher(at index: Int) -> BadgeType {
-        if let badge = badges[index] {
-            return badge
-        } else {
-            let badge = BadgeType.random
-            badges[index] = badge
-            return badge
+    override var badgesInSwitcher: [Int] {
+        guard let _ = language else {
+            return []
         }
+        let count = DataManager.shared.languageCenterTitles.count
+        let badges = (0 ..< count).map({ _ in Int.random(in: 0..<10) })
+        return badges
     }
     
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
@@ -91,8 +84,7 @@ class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
         viewController.refreshHandler = { [weak self] in
             guard let self = self else { return }
             self.scrollView.mj_header.endRefreshing()
-            self.badges[index] = BadgeType.random
-            self.reloadBadgeInSwitcher()
+            self.reloadSwitcher()
         }
         return viewController
     }

@@ -44,7 +44,7 @@ class NoticeViewController: UIViewController {
         setupSwitcherView()
         setupContentView()
         reloadData()
-        scrollToSlide(at: selectedIndex, animated: false)
+        selectItem(at: selectedIndex, animated: false)
     }
     
     private func setupSwitcherView() {
@@ -91,8 +91,8 @@ class NoticeViewController: UIViewController {
         segementSlideSwitcherView.reloadData()
     }
     
-    public func scrollToSlide(at index: Int, animated: Bool) {
-        segementSlideSwitcherView.selectSwitcher(at: index, animated: animated)
+    public func selectItem(at index: Int, animated: Bool) {
+        segementSlideSwitcherView.selectItem(at: index, animated: animated)
     }
     
     @objc
@@ -130,7 +130,7 @@ extension NoticeViewController: SegementSlideDefaultSwitcherViewDelegate {
     
     public func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideDefaultSwitcherView, didSelectAtIndex index: Int, animated: Bool) {
         if segementSlideContentView.selectedIndex != index {
-            segementSlideContentView.scrollToSlide(at: index, animated: animated)
+            segementSlideContentView.selectItem(at: index, animated: animated)
         }
     }
     
@@ -164,7 +164,7 @@ extension NoticeViewController: SegementSlideContentDelegate {
     
     public func segementSlideContentView(_ segementSlideContentView: SegementSlideContentView, didSelectAtIndex index: Int, animated: Bool) {
         if segementSlideSwitcherView.selectedIndex != index {
-            segementSlideSwitcherView.selectSwitcher(at: index, animated: animated)
+            segementSlideSwitcherView.selectItem(at: index, animated: animated)
         }
     }
     
