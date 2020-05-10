@@ -24,6 +24,15 @@ extension JXSegmentedView: SegementSlideSwitcherDelegate {
         }
     }
     
+    public var ssDefaultSelectedIndex: Int? {
+        get {
+            return defaultSelectedIndex
+        }
+        set {
+            defaultSelectedIndex = newValue ?? 0
+        }
+    }
+    
     public var ssSelectedIndex: Int? {
         return selectedIndex
     }

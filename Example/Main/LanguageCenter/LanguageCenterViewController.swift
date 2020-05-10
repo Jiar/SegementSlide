@@ -137,8 +137,8 @@ class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
                     hud.hide(animated: true)
                     self.language = language
                     self.centerHeaderView.config(language, viewController: self)
+                    self.defaultSelectedIndex = 1
                     self.reloadData()
-                    self.selectItem(at: 1, animated: false)
                 } else {
                     hud.label.text = "Language not found!"
                     hud.hide(animated: true, afterDelay: 0.5)

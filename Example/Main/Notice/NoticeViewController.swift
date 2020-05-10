@@ -15,6 +15,16 @@ class NoticeViewController: UIViewController {
     private var segementSlideSwitcherView: SegementSlideDefaultSwitcherView!
     private var segementSlideContentView: SegementSlideContentView!
     
+    var defaultSelectedIndex: Int? {
+        set {
+            segementSlideSwitcherView.defaultSelectedIndex = newValue
+            segementSlideContentView.defaultSelectedIndex = newValue
+        }
+        get {
+            return segementSlideSwitcherView.defaultSelectedIndex
+        }
+    }
+    
     private var badges: [Int: BadgeType] = [:]
     private let selectedIndex: Int
     
@@ -43,8 +53,8 @@ class NoticeViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
         setupSwitcherView()
         setupContentView()
+        defaultSelectedIndex = selectedIndex
         reloadData()
-        selectItem(at: selectedIndex, animated: false)
     }
     
     private func setupSwitcherView() {

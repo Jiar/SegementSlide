@@ -78,8 +78,8 @@ class HomeViewController: BaseSegementSlideDefaultViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        defaultSelectedIndex = 0
         reloadData()
-        selectItem(at: 0, animated: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -11,8 +11,6 @@ import SegementSlide
 
 class BaseTransparentSlideCustomViewController: TransparentSlideCustomViewController {
     
-    private var selectedIndex: Int? = nil
-    
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
         super.scrollViewDidScroll(scrollView, isParent: isParent)
         guard isParent else { return }
@@ -69,14 +67,7 @@ class BaseTransparentSlideCustomViewController: TransparentSlideCustomViewContro
     
     @objc
     private func reloadAction() {
-        selectedIndex = currentIndex
         reloadData()
-        if let selectedIndex = selectedIndex {
-            selectItem(at: selectedIndex, animated: false)
-        } else {
-            selectItem(at: 1, animated: false)
-        }
-        selectedIndex = nil
     }
         
     @objc

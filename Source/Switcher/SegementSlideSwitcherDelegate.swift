@@ -14,6 +14,7 @@ public protocol SegementSlideSwitcherDataSource: class {
 
 public protocol SegementSlideSwitcherDelegate: UIView {
     var ssDataSource: SegementSlideSwitcherDataSource? { get set }
+    var ssDefaultSelectedIndex: Int? { get set }
     var ssSelectedIndex: Int? { get }
     var ssScrollView: UIScrollView { get }
     
@@ -23,6 +24,7 @@ public protocol SegementSlideSwitcherDelegate: UIView {
 
 internal final class SegementSlideSwitcherEmptyView: UIView, SegementSlideSwitcherDelegate {
     weak var ssDataSource: SegementSlideSwitcherDataSource? = nil
+    var ssDefaultSelectedIndex: Int? = nil
     var ssSelectedIndex: Int? = nil
     var ssScrollView: UIScrollView = UIScrollView()
     

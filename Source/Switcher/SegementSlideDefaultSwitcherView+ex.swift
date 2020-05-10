@@ -21,6 +21,15 @@ extension SegementSlideDefaultSwitcherView: SegementSlideSwitcherDelegate {
         }
     }
     
+    public var ssDefaultSelectedIndex: Int? {
+        get {
+            return defaultSelectedIndex
+        }
+        set {
+            defaultSelectedIndex = newValue
+        }
+    }
+    
     public var ssSelectedIndex: Int? {
         return selectedIndex
     }

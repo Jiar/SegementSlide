@@ -52,8 +52,8 @@ class InterestViewController: BaseSegementSlideCustomViewController {
         let refreshHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshAction))
         refreshHeader?.lastUpdatedTimeLabel.isHidden = true
         scrollView.mj_header = refreshHeader
+        defaultSelectedIndex = 0
         reloadData()
-        selectItem(at: 0, animated: false)
     }
     
     @objc

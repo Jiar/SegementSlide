@@ -52,6 +52,14 @@ open class SegementSlideViewController: UIViewController {
         return contentView.dequeueReusableViewController(at: currentIndex)
     }
     
+    /// you should call `reloadData()` after set this property.
+    open var defaultSelectedIndex: Int? {
+        didSet {
+            switcherView.ssDefaultSelectedIndex = defaultSelectedIndex
+            contentView.defaultSelectedIndex = defaultSelectedIndex
+        }
+    }
+    
     open var bouncesType: BouncesType {
         return .parent
     }
@@ -113,9 +121,9 @@ open class SegementSlideViewController: UIViewController {
     
     /// reload headerView, SwitcherView and ContentView
     ///
-    /// you should call `selectItem(at index: Int, animated: Bool)` after call the method.
-    /// otherwise, none of them will be selected.
-    /// However, if an item was previously selected, it will be reSelected.
+    /// you should set `defaultSelectedIndex` before call this method.
+    /// otherwise, no item will be selected.
+    /// however, if an item was previously selected, it will be reSelected.
     public func reloadData() {
         setupBounces()
         setupHeader()

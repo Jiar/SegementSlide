@@ -83,8 +83,8 @@ class MineViewController: BaseTransparentSlideDefaultViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        defaultSelectedIndex = 1
         reloadData()
-        selectItem(at: 1, animated: false)
     }
 
 }

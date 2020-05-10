@@ -57,8 +57,8 @@ class PostViewController: BaseSegementSlideDefaultViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        defaultSelectedIndex = selectedIndex
         reloadData()
-        selectItem(at: selectedIndex, animated: false)
     }
     
 }
