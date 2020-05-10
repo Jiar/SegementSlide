@@ -140,8 +140,8 @@ class HomeViewController: SegementSlideViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        defaultSelectedIndex = 0
         reloadData()
-        selectItem(at: 0, animated: false)
     }
 
 }
