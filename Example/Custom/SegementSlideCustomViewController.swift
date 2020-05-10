@@ -38,6 +38,7 @@ open class SegementSlideCustomViewController: SegementSlideViewController {
         segmentedDataSource.titles = titlesInSwitcher
         segmentedDataSource.numbers = badgesInSwitcher
         segmentedView.dataSource = segmentedDataSource
+        segmentedView.contentScrollView = contentView.scrollView
     }
     
     open var switcherViewHeight: CGFloat {

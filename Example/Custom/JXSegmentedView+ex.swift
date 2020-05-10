@@ -29,7 +29,7 @@ extension JXSegmentedView: SegementSlideSwitcherDelegate {
     }
     
     public var ssScrollView: UIScrollView {
-        return contentScrollView ?? collectionView
+        return collectionView
     }
 
     public func selectItem(at index: Int, animated: Bool) {
