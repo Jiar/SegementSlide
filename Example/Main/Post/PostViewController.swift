@@ -48,7 +48,9 @@ class PostViewController: BaseSegementSlideDefaultViewController {
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
         let viewController = ContentOptionalViewController()
         viewController.refreshHandler = { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             self.badges[index] = BadgeType.random
             self.reloadBadgeInSwitcher()
         }

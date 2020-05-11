@@ -17,7 +17,9 @@ class BaseTransparentSlideDefaultViewController: TransparentSlideDefaultViewCont
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
         super.scrollViewDidScroll(scrollView, isParent: isParent)
-        guard isParent else { return }
+        guard isParent else {
+            return
+        }
         updateNavigationBarStyle(scrollView)
     }
     

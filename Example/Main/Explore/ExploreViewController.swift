@@ -72,8 +72,12 @@ class ExploreViewController: BaseSegementSlideDefaultViewController {
     private func refreshAction() {
         DispatchQueue.global().asyncAfter(deadline: .now()+Double.random(in: 0..<2)) {
             DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                guard let currentIndex = self.currentIndex else { return }
+                guard let self = self else {
+                    return
+                }
+                guard let currentIndex = self.currentIndex else {
+                    return
+                }
                 self.badges[currentIndex] = BadgeType.random
                 self.reloadBadgeInSwitcher()
                 self.scrollView.mj_header.endRefreshing()

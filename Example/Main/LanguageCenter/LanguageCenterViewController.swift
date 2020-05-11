@@ -89,7 +89,9 @@ class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
         }
         let viewController = ContentViewController()
         viewController.refreshHandler = { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             self.scrollView.mj_header.endRefreshing()
             self.badges[index] = BadgeType.random
             self.reloadBadgeInSwitcher()
@@ -132,7 +134,9 @@ class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
         let hud = MBProgressHUD.showAdded(to: view, animated: true)
         DispatchQueue.global().asyncAfter(deadline: .now()+Double.random(in: 0..<2)) {
             DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+                guard let self = self else {
+                    return
+                }
                 if let language = DataManager.shared.language(by: self.id) {
                     hud.hide(animated: true)
                     self.language = language
@@ -163,7 +167,9 @@ class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
         super.scrollViewDidScroll(scrollView, isParent: isParent)
-        guard isParent else { return }
+        guard isParent else {
+            return
+        }
         centerHeaderView.setBgImageTopConstraint(scrollView.contentOffset.y)
     }
     

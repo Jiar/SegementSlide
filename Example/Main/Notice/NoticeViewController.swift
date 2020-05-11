@@ -40,7 +40,9 @@ class NoticeViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        guard segementSlideSwitcherView.superview != nil else { return }
+        guard segementSlideSwitcherView.superview != nil else {
+            return
+        }
         segementSlideSwitcherView.snp.remakeConstraints { make in
             make.center.height.equalToSuperview()
             make.width.equalTo(segementSlideSwitcherView.intrinsicContentSize.width)
@@ -165,7 +167,9 @@ extension NoticeViewController: SegementSlideContentDelegate {
     public func segementSlideContentScrollView(at index: Int) -> SegementSlideContentScrollViewDelegate? {
         let viewController = ContentOptionalViewController()
         viewController.refreshHandler = { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             self.badges[index] = BadgeType.random
             self.segementSlideSwitcherView.reloadBadges()
         }

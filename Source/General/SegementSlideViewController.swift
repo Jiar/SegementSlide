@@ -48,7 +48,9 @@ open class SegementSlideViewController: UIViewController {
         return switcherView.ssSelectedIndex
     }
     public var currentSegementSlideContentViewController: SegementSlideContentScrollViewDelegate? {
-        guard let currentIndex = currentIndex else { return nil }
+        guard let currentIndex = currentIndex else {
+            return nil
+        }
         return contentView.dequeueReusableViewController(at: currentIndex)
     }
     

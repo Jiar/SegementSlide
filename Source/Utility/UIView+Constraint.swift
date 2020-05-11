@@ -123,7 +123,9 @@ internal extension UIView {
 internal extension UIView {
     
     func constraintToSuperview() {
-        guard let superview = superview else { return }
+        guard let superview = superview else {
+            return
+        }
         translatesAutoresizingMaskIntoConstraints = false
         topConstraint = topAnchor.constraint(equalTo: superview.topAnchor)
         bottomConstraint = bottomAnchor.constraint(equalTo: superview.bottomAnchor)

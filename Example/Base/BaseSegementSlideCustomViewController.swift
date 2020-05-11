@@ -13,7 +13,9 @@ class BaseSegementSlideCustomViewController: SegementSlideCustomViewController {
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
         super.scrollViewDidScroll(scrollView, isParent: isParent)
-        guard isParent else { return }
+        guard isParent else {
+            return
+        }
         updateNavigationBarStyle(scrollView)
     }
     
@@ -86,7 +88,9 @@ class BaseSegementSlideCustomViewController: SegementSlideCustomViewController {
     
     @objc
     private func customAction() {
-        guard let language = DataManager.shared.allLanguages.randomElement() else { return }
+        guard let language = DataManager.shared.allLanguages.randomElement() else {
+            return
+        }
         if Bool.random() {
             present(BaseNavigationController(rootViewController: LanguageCenterViewController2(id: language.id, isPresented: true)), animated: true, completion: nil)
         } else {

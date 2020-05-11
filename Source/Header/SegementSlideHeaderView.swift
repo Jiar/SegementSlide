@@ -28,12 +28,16 @@ public class SegementSlideHeaderView: UIView {
     }
     
     internal func config(_ headerView: UIView?, contentView: SegementSlideContentView) {
-        guard headerView != lastHeaderView else { return }
+        guard headerView != lastHeaderView else {
+            return
+        }
         if let lastHeaderView = lastHeaderView {
             lastHeaderView.removeAllConstraints()
             lastHeaderView.removeFromSuperview()
         }
-        guard let headerView = headerView else { return }
+        guard let headerView = headerView else {
+            return
+        }
         self.contentView = contentView
         addSubview(headerView)
         headerView.constraintToSuperview()
@@ -46,8 +50,7 @@ public class SegementSlideHeaderView: UIView {
             return view
         }
         guard let selectedIndex = contentView.selectedIndex,
-            let delegate = contentView.dequeueReusableViewController(at: selectedIndex)
-            else {
+            let delegate = contentView.dequeueReusableViewController(at: selectedIndex) else {
             return view
         }
         if view is UIControl {

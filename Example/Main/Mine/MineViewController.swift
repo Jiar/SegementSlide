@@ -74,7 +74,9 @@ class MineViewController: BaseTransparentSlideDefaultViewController {
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
         let viewController = ContentViewController()
         viewController.refreshHandler = { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             self.badges[index] = BadgeType.random
             self.reloadBadgeInSwitcher()
         }

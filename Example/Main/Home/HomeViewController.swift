@@ -33,15 +33,25 @@ class HomeViewController: BaseSegementSlideDefaultViewController {
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
-        guard !isParent else { return }
-        guard let navigationController = navigationController else { return }
+        guard !isParent else {
+            return
+        }
+        guard let navigationController = navigationController else {
+            return
+        }
         let translationY = -scrollView.panGestureRecognizer.translation(in: scrollView).y
         if translationY > 0 {
-            guard !navigationController.isNavigationBarHidden else { return }
+            guard !navigationController.isNavigationBarHidden else {
+                return
+            }
             navigationController.setNavigationBarHidden(true, animated: true)
         } else {
-            guard !scrollView.isTracking else { return }
-            guard navigationController.isNavigationBarHidden else { return }
+            guard !scrollView.isTracking else {
+                return
+            }
+            guard navigationController.isNavigationBarHidden else {
+                return
+            }
             navigationController.setNavigationBarHidden(false, animated: true)
         }
     }
@@ -69,7 +79,9 @@ class HomeViewController: BaseSegementSlideDefaultViewController {
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
         let viewController = ContentViewController()
         viewController.refreshHandler = { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             self.badges[index] = BadgeType.random
             self.reloadBadgeInSwitcher()
         }

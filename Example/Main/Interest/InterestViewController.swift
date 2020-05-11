@@ -60,7 +60,9 @@ class InterestViewController: BaseSegementSlideCustomViewController {
     private func refreshAction() {
         DispatchQueue.global().asyncAfter(deadline: .now()+Double.random(in: 0..<2)) {
             DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+                guard let self = self else {
+                    return
+                }
                 self.reloadSwitcher()
                 self.scrollView.mj_header.endRefreshing()
             }

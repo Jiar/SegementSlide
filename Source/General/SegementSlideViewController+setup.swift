@@ -69,8 +69,12 @@ extension SegementSlideViewController {
     
     private func observeScrollViewContentOffset() {
         parentKeyValueObservation = scrollView.observe(\.contentOffset, options: [.initial, .new, .old], changeHandler: { [weak self] (scrollView, change) in
-            guard let self = self else { return }
-            guard change.newValue != change.oldValue else { return }
+            guard let self = self else {
+                return
+            }
+            guard change.newValue != change.oldValue else {
+                return
+            }
             self.parentScrollViewDidScroll(scrollView)
         })
     }

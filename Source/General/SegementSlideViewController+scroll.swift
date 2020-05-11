@@ -45,7 +45,9 @@ extension SegementSlideViewController {
                 scrollView.contentOffset.y = 0
                 canChildViewScroll = true
             } else {
-                guard let childScrollView = currentSegementSlideContentViewController?.scrollView else { return }
+                guard let childScrollView = currentSegementSlideContentViewController?.scrollView else {
+                    return
+                }
                 if childScrollView.contentOffset.y < 0 {
                     if childBouncesTranslationY > lastChildBouncesTranslationY {
                         scrollView.contentOffset.y = 0
