@@ -119,11 +119,11 @@ If you prefer not to use either of the aforementioned dependency managers, you c
 ```swift
 import SegementSlide
 
-class HomeViewController: SegementSlideViewController {
+class HomeViewController: SegementSlideDefaultViewController {
 
     ......
     
-    override var headerView: UIView? {
+    override func segementSlideHeaderView() -> UIView? {
         let headerView = UIView()
         let headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.heightAnchor.constraint(equalToConstant: view.bounds.height/4).isActive = true
