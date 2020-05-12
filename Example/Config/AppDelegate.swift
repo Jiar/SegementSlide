@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppManager.shared.setup()
         
         let window = UIWindow(frame: UIScreen.main.bounds)
+        if #available(iOS 13.0, *) {
+            window.overrideUserInterfaceStyle = .light
+        } 
         window.rootViewController = AppManager.shared.rootController
         window.backgroundColor = .white
         window.makeKeyAndVisible()
