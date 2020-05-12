@@ -63,7 +63,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'SegementSlide', '2.2.4'
+    pod 'SegementSlide', '3.0.0'
 end
 ```
 
@@ -89,7 +89,7 @@ To integrate SegementSlide into your Xcode project using Carthage
 1. specify it in your `Cartfile`:
 
 ```ogdl
-github "Jiar/SegementSlide" "2.2.4"
+github "Jiar/SegementSlide" "3.0.0"
 ```
 
 Run `carthage update` to build the framework.
