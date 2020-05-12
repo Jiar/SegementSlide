@@ -69,10 +69,8 @@ extension TransparentSlideCustomViewController: SegementSlideSwitcherDataSource 
 
 extension TransparentSlideCustomViewController: JXSegmentedViewDelegate {
     
-    public func segmentedView(_ segmentedView: JXSegmentedView, didSelectedItemAt index: Int) {
-        if contentView.selectedIndex != index {
-            contentView.selectItem(at: index, animated: true)
-        }
+    public func segmentedView(_ segmentedView: JXSegmentedView, didClickSelectedItemAt index: Int) {
+        contentView.selectItem(at: index, animated: true)
     }
     
 }
