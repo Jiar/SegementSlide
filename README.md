@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/Jiar/SegementSlide/blob/master/Logo/SegementSlide.png?raw=true">
+  <img src="https://github.com/Jiar/SegementSlide/blob/master/Images/Logo.png?raw=true">
 </p>
 
 <p align="center">
@@ -160,6 +160,12 @@ class ContentViewController: UITableViewController, SegementSlideContentScrollVi
 
 }
 ```
+
+## Structure
+
+<p align="center">
+  <img src="https://github.com/Jiar/SegementSlide/blob/master/Images/Structure.png?raw=true">
+</p>
 
 ## Author
 
