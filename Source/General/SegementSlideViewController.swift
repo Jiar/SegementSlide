@@ -164,6 +164,12 @@ open class SegementSlideViewController: UIViewController {
     public func dequeueReusableViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
         return contentView.dequeueReusableViewController(at: index)
     }
+
+    //ddd other gestures, such as the scroll view in the head.
+    //to solve the problem that the head can be dragged horizontally and vertically at the same time
+    public func addOtherGestureRecognizers(getsture: [UIGestureRecognizer]) {
+        scrollView.otherGestureRecognizers?.append(contentsOf: getsture)
+    }
     
     deinit {
         parentKeyValueObservation?.invalidate()
