@@ -90,7 +90,7 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
         let viewController = ContentViewController()
         viewController.refreshHandler = { [weak self] in
             guard let self = self else { return }
-            self.slideScrollView.mj_header.endRefreshing()
+            self.slideScrollView.mj_header?.endRefreshing()
             self.badges[index] = BadgeType.random
             self.reloadBadgeInSwitcher()
         }
@@ -105,7 +105,7 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
         } else {
             topLayoutLength = topLayoutGuide.length
         }
-        slideScrollView.mj_header.ignoredScrollViewContentInsetTop = -topLayoutLength
+        slideScrollView.mj_header?.ignoredScrollViewContentInsetTop = -topLayoutLength
     }
     
     @objc func backAction() {
@@ -117,9 +117,9 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
         if isPresented {
             navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "close")!, style: .plain, target: self, action: #selector(backAction))
         }
-        let refreshHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshAction))!
-        refreshHeader.lastUpdatedTimeLabel.isHidden = true
-        refreshHeader.arrowView.image = nil
+        let refreshHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshAction))
+        refreshHeader.lastUpdatedTimeLabel?.isHidden = true
+        refreshHeader.arrowView?.image = nil
         refreshHeader.labelLeftInset = 0
         refreshHeader.activityIndicatorViewStyle = .white
         refreshHeader.setTitle("", for: .idle)
@@ -148,7 +148,7 @@ class LanguageCenterViewController: BaseTransparentSlideViewController {
     
     @objc private func refreshAction() {
         guard let contentViewController = currentSegementSlideContentViewController as? ContentViewController else {
-            slideScrollView.mj_header.endRefreshing()
+            slideScrollView.mj_header?.endRefreshing()
             return
         }
         contentViewController.refresh()

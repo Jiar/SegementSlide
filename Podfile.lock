@@ -1,8 +1,8 @@
 PODS:
-  - MBProgressHUD (1.1.0)
-  - MJRefresh (3.2.0)
+  - MBProgressHUD (1.2.0)
+  - MJRefresh (3.5.0)
   - SegementSlide (2.2.3)
-  - SnapKit (5.0.0)
+  - SnapKit (5.0.1)
 
 DEPENDENCIES:
   - MBProgressHUD
@@ -11,7 +11,7 @@ DEPENDENCIES:
   - SnapKit
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - MBProgressHUD
     - MJRefresh
     - SnapKit
@@ -21,11 +21,11 @@ EXTERNAL SOURCES:
     :path: "./"
 
 SPEC CHECKSUMS:
-  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
   SegementSlide: 7a35da31eaa87fa0af42cc402395821a0c6835ae
-  SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
 PODFILE CHECKSUM: 5f238afc943014d26abc84d7385bd9a4e9a3228c
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3
