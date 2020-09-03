@@ -27,7 +27,6 @@
 		8031BF28250099AC0043F71B /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF15250099AC0043F71B /* UIView+Constraint.swift */; };
 		8031BF29250099AC0043F71B /* String+Bounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF16250099AC0043F71B /* String+Bounding.swift */; };
 		80A869C821E6387600A773CB /* SegementSlide_Dynamic_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A869C721E6387600A773CB /* SegementSlide_Dynamic_Tests.swift */; };
-		80A869CA21E6387600A773CB /* SegementSlide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A869A221E624E800A773CB /* SegementSlide.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,7 +99,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80A869CA21E6387600A773CB /* SegementSlide.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +518,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -539,6 +538,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -578,6 +578,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.jiar.SegementSlide;
 				PRODUCT_NAME = SegementSlide;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -611,6 +612,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.jiar.SegementSlide;
 				PRODUCT_NAME = SegementSlide;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
