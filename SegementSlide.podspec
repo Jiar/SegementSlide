@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.module_name = 'SegementSlide'
   s.requires_arc = true
-  s.swift_version = '5.1'
+  s.swift_version = '5.2.4'
 
   s.static_framework = true
   

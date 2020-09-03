@@ -1,7 +1,7 @@
 language: swift
 os: osx
-osx_image: xcode10.2
-env: SWIFT_SNAPSHOT=5.0.1
+osx_image: xcode11.7
+env: SWIFT_SNAPSHOT=5.2.4
 
 cache:
   directories:
@@ -19,7 +19,7 @@ env:
     - SCHEME=ExampleTests
 
 before_install:
-  - gem install cocoapods -v '1.7.2'
+  - gem install cocoapods -v '1.9.3'
   - pod repo update
   - pod install
 
