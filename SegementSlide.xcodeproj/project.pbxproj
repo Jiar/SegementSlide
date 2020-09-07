@@ -7,7 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		801C1219250610F00018BD64 /* SegementSlide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A869A221E624E800A773CB /* SegementSlide.framework */; };
+		801C121B250621510018BD64 /* SegementSlideSwitcherDataSourceWeakBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF00250099AC0043F71B /* SegementSlideSwitcherDataSourceWeakBox.swift */; };
+		801C121C250621520018BD64 /* SegementSlideSwitcherDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF01250099AC0043F71B /* SegementSlideSwitcherDelegate.swift */; };
+		801C121D250621520018BD64 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF02250099AC0043F71B /* BadgeView.swift */; };
+		801C121E250621520018BD64 /* SegementSlideDefaultSwitcherConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF03250099AC0043F71B /* SegementSlideDefaultSwitcherConfig.swift */; };
+		801C121F250621520018BD64 /* SegementSlideDefaultSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF04250099AC0043F71B /* SegementSlideDefaultSwitcherView.swift */; };
+		801C1220250621520018BD64 /* SegementSlideDefaultSwitcherView+ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF05250099AC0043F71B /* SegementSlideDefaultSwitcherView+ex.swift */; };
+		801C1221250621520018BD64 /* TransparentSlideDefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF07250099AC0043F71B /* TransparentSlideDefaultViewController.swift */; };
+		801C1222250621520018BD64 /* SegementSlideViewController+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF08250099AC0043F71B /* SegementSlideViewController+setup.swift */; };
+		801C1223250621520018BD64 /* SegementSlideViewController+scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF09250099AC0043F71B /* SegementSlideViewController+scroll.swift */; };
+		801C1224250621520018BD64 /* SegementSlideScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF0A250099AC0043F71B /* SegementSlideScrollView.swift */; };
+		801C1225250621520018BD64 /* SegementSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF0B250099AC0043F71B /* SegementSlideViewController.swift */; };
+		801C1226250621520018BD64 /* SegementSlideViewController+delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF0C250099AC0043F71B /* SegementSlideViewController+delegate.swift */; };
+		801C1227250621520018BD64 /* SegementSlideDefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF0D250099AC0043F71B /* SegementSlideDefaultViewController.swift */; };
+		801C1228250621520018BD64 /* TransparentSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF0E250099AC0043F71B /* TransparentSlideViewController.swift */; };
+		801C1229250621520018BD64 /* SegementSlideViewController+ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF0F250099AC0043F71B /* SegementSlideViewController+ex.swift */; };
+		801C122A250621520018BD64 /* SegementSlideContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF11250099AC0043F71B /* SegementSlideContentView.swift */; };
+		801C122B250621520018BD64 /* SegementSlideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF13250099AC0043F71B /* SegementSlideHeaderView.swift */; };
+		801C122C250621520018BD64 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF15250099AC0043F71B /* UIView+Constraint.swift */; };
+		801C122D250621520018BD64 /* String+Bounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF16250099AC0043F71B /* String+Bounding.swift */; };
+		801C122E250621B70018BD64 /* SegementSlide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A869A221E624E800A773CB /* SegementSlide.framework */; };
 		8031BF17250099AC0043F71B /* SegementSlideSwitcherDataSourceWeakBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF00250099AC0043F71B /* SegementSlideSwitcherDataSourceWeakBox.swift */; };
 		8031BF18250099AC0043F71B /* SegementSlideSwitcherDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF01250099AC0043F71B /* SegementSlideSwitcherDelegate.swift */; };
 		8031BF19250099AC0043F71B /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF02250099AC0043F71B /* BadgeView.swift */; };
@@ -29,16 +48,6 @@
 		8031BF29250099AC0043F71B /* String+Bounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF16250099AC0043F71B /* String+Bounding.swift */; };
 		80A869C821E6387600A773CB /* SegementSlide_Dynamic_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A869C721E6387600A773CB /* SegementSlide_Dynamic_Tests.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		80A869CB21E6387600A773CB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8066125221BA910000C05D7E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 80A869A121E624E800A773CB;
-			remoteInfo = "SegementSlide-Dynamic";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		8066125821BA910000C05D7E /* CopyFiles */ = {
@@ -100,7 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				801C1219250610F00018BD64 /* SegementSlide.framework in Frameworks */,
+				801C122E250621B70018BD64 /* SegementSlide.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,7 +287,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				80A869CC21E6387600A773CB /* PBXTargetDependency */,
 			);
 			name = "SegementSlide-Dynamic-Tests";
 			productName = "SegementSlide-Dynamic-Tests";
@@ -375,6 +383,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				801C121B250621510018BD64 /* SegementSlideSwitcherDataSourceWeakBox.swift in Sources */,
+				801C121C250621520018BD64 /* SegementSlideSwitcherDelegate.swift in Sources */,
+				801C121D250621520018BD64 /* BadgeView.swift in Sources */,
+				801C121E250621520018BD64 /* SegementSlideDefaultSwitcherConfig.swift in Sources */,
+				801C121F250621520018BD64 /* SegementSlideDefaultSwitcherView.swift in Sources */,
+				801C1220250621520018BD64 /* SegementSlideDefaultSwitcherView+ex.swift in Sources */,
+				801C1221250621520018BD64 /* TransparentSlideDefaultViewController.swift in Sources */,
+				801C1222250621520018BD64 /* SegementSlideViewController+setup.swift in Sources */,
+				801C1223250621520018BD64 /* SegementSlideViewController+scroll.swift in Sources */,
+				801C1224250621520018BD64 /* SegementSlideScrollView.swift in Sources */,
+				801C1225250621520018BD64 /* SegementSlideViewController.swift in Sources */,
+				801C1226250621520018BD64 /* SegementSlideViewController+delegate.swift in Sources */,
+				801C1227250621520018BD64 /* SegementSlideDefaultViewController.swift in Sources */,
+				801C1228250621520018BD64 /* TransparentSlideViewController.swift in Sources */,
+				801C1229250621520018BD64 /* SegementSlideViewController+ex.swift in Sources */,
+				801C122A250621520018BD64 /* SegementSlideContentView.swift in Sources */,
+				801C122B250621520018BD64 /* SegementSlideHeaderView.swift in Sources */,
+				801C122C250621520018BD64 /* UIView+Constraint.swift in Sources */,
+				801C122D250621520018BD64 /* String+Bounding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,14 +414,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		80A869CC21E6387600A773CB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 80A869A121E624E800A773CB /* SegementSlide-Dynamic */;
-			targetProxy = 80A869CB21E6387600A773CB /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		8066125F21BA910000C05D7E /* Debug */ = {
