@@ -12,10 +12,10 @@ extension SegementSlideViewController: UIScrollViewDelegate {
     
     public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
         guard let contentViewController = currentSegementSlideContentViewController,
-            let scrollView = contentViewController.scrollView else {
+            let childScrollView = contentViewController.scrollView else {
             return true
         }
-        scrollView.contentOffset.y = 0
+        childScrollView.contentOffset.y = 0
         return true
     }
     
@@ -43,10 +43,10 @@ extension SegementSlideViewController: SegementSlideContentDelegate {
         defer {
             didSelectContentViewController(at: index)
         }
-        guard let scrollView = childViewController.scrollView else {
+        guard let childScrollView = childViewController.scrollView else {
             return
         }
-        let keyValueObservation = scrollView.observe(\.contentOffset, options: [.new, .old], changeHandler: { [weak self] (scrollView, change) in
+        let keyValueObservation = childScrollView.observe(\.contentOffset, options: [.new, .old], changeHandler: { [weak self] (scrollView, change) in
             guard let self = self else {
                 return
             }

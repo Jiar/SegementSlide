@@ -191,11 +191,11 @@ extension SegementSlideViewController {
         let collection = waitTobeResetContentOffsetY
         for index in collection {
             guard index != currentIndex,
-                let scrollView = dequeueReusableViewController(at: index)?.scrollView else {
+                let childScrollView = dequeueReusableViewController(at: index)?.scrollView else {
                 continue
             }
             waitTobeResetContentOffsetY.remove(index)
-            scrollView.contentOffset.y = 0
+            childScrollView.contentOffset.y = 0
         }
     }
     
