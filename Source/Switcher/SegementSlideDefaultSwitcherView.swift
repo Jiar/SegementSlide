@@ -58,6 +58,7 @@ public class SegementSlideDefaultSwitcherView: UIView {
         scrollView.constraintToSuperview()
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
+        scrollView.scrollsToTop = false
         scrollView.backgroundColor = .clear
         backgroundColor = .white
     }

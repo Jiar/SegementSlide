@@ -64,6 +64,7 @@ extension SegementSlideViewController {
         scrollView.showsVerticalScrollIndicator = false
         scrollView.isPagingEnabled = false
         scrollView.isScrollEnabled = true
+        scrollView.scrollsToTop = true
         scrollView.delegate = self
     }
     
