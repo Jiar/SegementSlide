@@ -28,7 +28,7 @@ open class SegementSlideViewController: UIViewController {
     internal var canParentViewScroll: Bool = true
     internal var canChildViewScroll: Bool = false
     internal var lastChildBouncesTranslationY: CGFloat = 0
-    internal var waitTobeResetContentOffsetY: Set<Int> = Set()
+    internal var cachedChildViewControllerIndex: Set<Int> = Set()
     
     public var headerStickyHeight: CGFloat {
         let headerHeight = headerView.frame.height.rounded(.up)
@@ -108,7 +108,7 @@ open class SegementSlideViewController: UIViewController {
     }
     
     open func setupContent() {
-        waitTobeResetContentOffsetY.removeAll()
+        cachedChildViewControllerIndex.removeAll()
     }
     
     open override func viewDidLayoutSubviews() {

@@ -11,11 +11,8 @@ import UIKit
 extension SegementSlideViewController: UIScrollViewDelegate {
     
     public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        guard let contentViewController = currentSegementSlideContentViewController,
-            let childScrollView = contentViewController.scrollView else {
-            return true
-        }
-        childScrollView.contentOffset.y = 0
+        resetScrollViewStatus()
+        resetCurrentChildViewControllerContentOffsetY()
         return true
     }
     
@@ -32,7 +29,7 @@ extension SegementSlideViewController: SegementSlideContentDelegate {
     }
     
     public func segementSlideContentView(_ segementSlideContentView: SegementSlideContentView, didSelectAtIndex index: Int, animated: Bool) {
-        waitTobeResetContentOffsetY.insert(index)
+        cachedChildViewControllerIndex.insert(index)
         if switcherView.ssSelectedIndex != index {
             switcherView.selectItem(at: index, animated: animated)
         }

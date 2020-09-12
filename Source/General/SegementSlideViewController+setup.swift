@@ -93,18 +93,6 @@ extension SegementSlideViewController {
         childKeyValueObservation = nil
     }
     
-    internal func setupBounces() {
-        innerBouncesType = bouncesType
-        switch innerBouncesType {
-        case .parent:
-            canParentViewScroll = true
-            canChildViewScroll = false
-        case .child:
-            canParentViewScroll = true
-            canChildViewScroll = true
-        }
-    }
-    
     internal func layoutSegementSlideScrollView() {
         let topLayoutLength: CGFloat
         if edgesForExtendedLayout.contains(.top) {
@@ -185,17 +173,44 @@ extension SegementSlideViewController {
         }
     }
     
-    internal func resetChildViewControllerContentOffsetY() {
+    internal func setupBounces() {
+        innerBouncesType = bouncesType
+        resetScrollViewStatus()
+    }
+    
+    internal func resetScrollViewStatus() {
+        switch innerBouncesType {
+        case .parent:
+            canParentViewScroll = true
+            canChildViewScroll = false
+        case .child:
+            canParentViewScroll = true
+            canChildViewScroll = true
+        }
+    }
+    
+    internal func resetCurrentChildViewControllerContentOffsetY() {
+        guard let contentViewController = currentSegementSlideContentViewController,
+            let childScrollView = contentViewController.scrollView else {
+            return
+        }
+        childScrollView.contentOffset.y = 0
+    }
+    
+    internal func resetOtherCachedChildViewControllerContentOffsetY() {
         guard scrollView.contentOffset.y < headerStickyHeight else {
             return
         }
-        let collection = waitTobeResetContentOffsetY
+        guard cachedChildViewControllerIndex.count > 1 else {
+            return
+        }
+        let collection = cachedChildViewControllerIndex
         for index in collection {
             guard index != currentIndex,
                 let childScrollView = dequeueReusableViewController(at: index)?.scrollView else {
                 continue
             }
-            waitTobeResetContentOffsetY.remove(index)
+            cachedChildViewControllerIndex.remove(index)
             childScrollView.contentOffset.y = 0
         }
     }

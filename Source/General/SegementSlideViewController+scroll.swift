@@ -60,7 +60,7 @@ extension SegementSlideViewController {
                 }
             }
         }
-        resetChildViewControllerContentOffsetY()
+        resetOtherCachedChildViewControllerContentOffsetY()
     }
     
     internal func childScrollViewDidScroll(_ childScrollView: UIScrollView) {
