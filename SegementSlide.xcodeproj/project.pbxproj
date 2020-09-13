@@ -47,6 +47,8 @@
 		8031BF28250099AC0043F71B /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF15250099AC0043F71B /* UIView+Constraint.swift */; };
 		8031BF29250099AC0043F71B /* String+Bounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8031BF16250099AC0043F71B /* String+Bounding.swift */; };
 		80A869C821E6387600A773CB /* SegementSlide_Dynamic_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A869C721E6387600A773CB /* SegementSlide_Dynamic_Tests.swift */; };
+		80C66AF4250E7E200084692E /* UIScrollView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C66AF3250E7E200084692E /* UIScrollView+Scroll.swift */; };
+		80C66AF5250E7E430084692E /* UIScrollView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C66AF3250E7E200084692E /* UIScrollView+Scroll.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -88,6 +90,7 @@
 		80A869C521E6387500A773CB /* SegementSlide-Dynamic-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SegementSlide-Dynamic-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		80A869C721E6387600A773CB /* SegementSlide_Dynamic_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegementSlide_Dynamic_Tests.swift; sourceTree = "<group>"; };
 		80A869C921E6387600A773CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		80C66AF3250E7E200084692E /* UIScrollView+Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Scroll.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,8 +179,9 @@
 		8031BF14250099AC0043F71B /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				8031BF15250099AC0043F71B /* UIView+Constraint.swift */,
 				8031BF16250099AC0043F71B /* String+Bounding.swift */,
+				8031BF15250099AC0043F71B /* UIView+Constraint.swift */,
+				80C66AF3250E7E200084692E /* UIScrollView+Scroll.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -371,6 +375,7 @@
 				8031BF1B250099AC0043F71B /* SegementSlideDefaultSwitcherView.swift in Sources */,
 				8031BF23250099AC0043F71B /* SegementSlideDefaultViewController.swift in Sources */,
 				8031BF22250099AC0043F71B /* SegementSlideViewController+delegate.swift in Sources */,
+				80C66AF4250E7E200084692E /* UIScrollView+Scroll.swift in Sources */,
 				8031BF18250099AC0043F71B /* SegementSlideSwitcherDelegate.swift in Sources */,
 				8031BF21250099AC0043F71B /* SegementSlideViewController.swift in Sources */,
 				8031BF28250099AC0043F71B /* UIView+Constraint.swift in Sources */,
@@ -397,6 +402,7 @@
 				801C1226250621520018BD64 /* SegementSlideViewController+delegate.swift in Sources */,
 				801C1227250621520018BD64 /* SegementSlideDefaultViewController.swift in Sources */,
 				801C1228250621520018BD64 /* TransparentSlideViewController.swift in Sources */,
+				80C66AF5250E7E430084692E /* UIScrollView+Scroll.swift in Sources */,
 				801C1229250621520018BD64 /* SegementSlideViewController+ex.swift in Sources */,
 				801C122A250621520018BD64 /* SegementSlideContentView.swift in Sources */,
 				801C122B250621520018BD64 /* SegementSlideHeaderView.swift in Sources */,
@@ -592,7 +598,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = me.jiar.SegementSlide;
 				PRODUCT_NAME = SegementSlide;
 				SKIP_INSTALL = YES;
@@ -623,7 +629,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = me.jiar.SegementSlide;
 				PRODUCT_NAME = SegementSlide;
 				SKIP_INSTALL = YES;
