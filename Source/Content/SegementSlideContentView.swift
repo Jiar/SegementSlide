@@ -23,7 +23,7 @@ public protocol SegementSlideContentDelegate: class {
 }
 
 public class SegementSlideContentView: UIView {
-    internal static let willClearAllReusableViewControllersNotification: NSNotification.Name = NSNotification.Name(rawValue: "willClearAllReusableViewControllersNotification")
+    internal static let willCleanUpAllReusableViewControllersNotification: NSNotification.Name = NSNotification.Name(rawValue: "willCleanUpAllReusableViewControllersNotification")
     
     public private(set) var scrollView = UIScrollView()
     private var viewControllers: [Int: SegementSlideContentScrollViewDelegate] = [:]
@@ -81,7 +81,7 @@ public class SegementSlideContentView: UIView {
     /// otherwise, no item will be selected.
     /// however, if an item was previously selected, it will be reSelected.
     public func reloadData() {
-        clearAllReusableViewControllers()
+        cleanUpAllReusableViewControllers()
         updateScrollViewContentSize()
         reloadDataWithSelectedIndex()
     }
@@ -126,8 +126,8 @@ extension SegementSlideContentView: UIScrollViewDelegate {
 
 extension SegementSlideContentView {
     
-    private func clearAllReusableViewControllers() {
-        NotificationCenter.default.post(name: SegementSlideContentView.willClearAllReusableViewControllersNotification, object: viewController, userInfo: nil)
+    private func cleanUpAllReusableViewControllers() {
+        NotificationCenter.default.post(name: SegementSlideContentView.willCleanUpAllReusableViewControllersNotification, object: viewController, userInfo: nil)
         for (_, childViewController) in viewControllers {
             childViewController.view.removeAllConstraints()
             childViewController.view.removeFromSuperview()

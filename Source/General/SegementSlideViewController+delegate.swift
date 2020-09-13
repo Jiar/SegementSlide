@@ -33,7 +33,6 @@ extension SegementSlideViewController: SegementSlideContentDelegate {
         if switcherView.ssSelectedIndex != index {
             switcherView.selectItem(at: index, animated: animated)
         }
-        childKeyValueObservation?.invalidate()
         guard let childViewController = segementSlideContentView.dequeueReusableViewController(at: index) else {
             return
         }
@@ -43,6 +42,10 @@ extension SegementSlideViewController: SegementSlideContentDelegate {
         guard let childScrollView = childViewController.scrollView else {
             return
         }
+        let key = String(format: "%p", childScrollView)
+        guard !childKeyValueObservations.keys.contains(key) else {
+            return
+        }
         let keyValueObservation = childScrollView.observe(\.contentOffset, options: [.new, .old], changeHandler: { [weak self] (scrollView, change) in
             guard let self = self else {
                 return
@@ -50,9 +53,17 @@ extension SegementSlideViewController: SegementSlideContentDelegate {
             guard change.newValue != change.oldValue else {
                 return
             }
+            if let contentOffsetY = scrollView.forceFixedContentOffsetY {
+                scrollView.forceFixedContentOffsetY = nil
+                scrollView.contentOffset.y = contentOffsetY
+                return
+            }
+            guard index == self.currentIndex else {
+                return
+            }
             self.childScrollViewDidScroll(scrollView)
         })
-        childKeyValueObservation = keyValueObservation
+        childKeyValueObservations[key] = keyValueObservation
     }
     
 }

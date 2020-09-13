@@ -20,7 +20,7 @@ extension SegementSlideViewController {
         setupSegementSlideContentView()
         setupSegementSlideSwitcherView()
         observeScrollViewContentOffset()
-        observeWillClearAllReusableViewControllersNotification()
+        observeWillCleanUpAllReusableViewControllersNotification()
     }
     
     private func setupSegementSlideViews() {
@@ -80,17 +80,16 @@ extension SegementSlideViewController {
         })
     }
     
-    private func observeWillClearAllReusableViewControllersNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(willClearAllReusableViewControllers(_:)), name: SegementSlideContentView.willClearAllReusableViewControllersNotification, object: nil)
+    private func observeWillCleanUpAllReusableViewControllersNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(willCleanUpAllReusableViewControllers(_:)), name: SegementSlideContentView.willCleanUpAllReusableViewControllersNotification, object: nil)
     }
     
     @objc
-    private func willClearAllReusableViewControllers(_ notification: Notification) {
+    private func willCleanUpAllReusableViewControllers(_ notification: Notification) {
         guard let object = notification.object as? SegementSlideViewController, object === self else {
             return
         }
-        childKeyValueObservation?.invalidate()
-        childKeyValueObservation = nil
+        cleanUpChildKeyValueObservations()
     }
     
     internal func layoutSegementSlideScrollView() {
@@ -211,8 +210,15 @@ extension SegementSlideViewController {
                 continue
             }
             cachedChildViewControllerIndex.remove(index)
-            childScrollView.contentOffset.y = 0
+            childScrollView.forceStopScroll()
+            childScrollView.forceFixedContentOffsetY = 0
         }
+    }
+    
+    internal func cleanUpChildKeyValueObservations() {
+        let observations = childKeyValueObservations
+        observations.values.forEach({ $0.invalidate() })
+        childKeyValueObservations.removeAll()
     }
     
 }

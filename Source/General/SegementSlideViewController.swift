@@ -23,7 +23,7 @@ open class SegementSlideViewController: UIViewController {
     
     internal var safeAreaTopConstraint: NSLayoutConstraint?
     internal var parentKeyValueObservation: NSKeyValueObservation?
-    internal var childKeyValueObservation: NSKeyValueObservation?
+    internal var childKeyValueObservations: [String: NSKeyValueObservation] = [:]
     internal var innerBouncesType: BouncesType = .parent
     internal var canParentViewScroll: Bool = true
     internal var canChildViewScroll: Bool = false
@@ -167,8 +167,8 @@ open class SegementSlideViewController: UIViewController {
     
     deinit {
         parentKeyValueObservation?.invalidate()
-        childKeyValueObservation?.invalidate()
-        NotificationCenter.default.removeObserver(self, name: SegementSlideContentView.willClearAllReusableViewControllersNotification, object: nil)
+        cleanUpChildKeyValueObservations()
+        NotificationCenter.default.removeObserver(self, name: SegementSlideContentView.willCleanUpAllReusableViewControllersNotification, object: nil)
         #if DEBUG
         debugPrint("\(type(of: self)) deinit")
         #endif
