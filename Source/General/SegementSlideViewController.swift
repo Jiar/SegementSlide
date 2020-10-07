@@ -104,8 +104,11 @@ open class SegementSlideViewController: UIViewController {
     }
     
     open func setupHeader() {
-        headerView.enableHitTest = enableHeaderHitTest()
+        headerView?.enableHitTest = enableHeaderHitTest()
         innerHeaderView = segementSlideHeaderView()
+        if innerHeaderView == nil {
+            headerView?.heightAnchor.constraint(equalToConstant: 0.0).isActive = true
+        }
     }
     
     open func setupSwitcher() {
