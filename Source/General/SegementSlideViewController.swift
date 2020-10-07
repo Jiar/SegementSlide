@@ -99,7 +99,12 @@ open class SegementSlideViewController: UIViewController {
         
     }
     
+    open func enableHeaderHitTest() -> Bool {
+        return true
+    }
+    
     open func setupHeader() {
+        headerView.enableHitTest = enableHeaderHitTest()
         innerHeaderView = segementSlideHeaderView()
     }
     

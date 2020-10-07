@@ -33,6 +33,10 @@ class BaseSegementSlideDefaultViewController: SegementSlideDefaultViewController
         }
     }
     
+    override func enableHeaderHitTest() -> Bool {
+        true
+    }
+    
     private func generateFadeAnimation() -> CATransition {
         let fadeTextAnimation = CATransition()
         fadeTextAnimation.duration = 0.25

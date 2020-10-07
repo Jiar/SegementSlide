@@ -13,6 +13,8 @@ public class SegementSlideHeaderView: UIView {
     private weak var lastHeaderView: UIView?
     private weak var contentView: SegementSlideContentView?
     
+    var enableHitTest: Bool = true
+    
     internal override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -46,6 +48,9 @@ public class SegementSlideHeaderView: UIView {
     
     public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let view = super.hitTest(point, with: event)
+        if !enableHitTest {
+            return view
+        }
         guard let contentView = contentView else {
             return view
         }

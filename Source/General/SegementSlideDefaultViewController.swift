@@ -43,6 +43,9 @@ open class SegementSlideDefaultViewController: SegementSlideViewController {
         defaultSwitcherView.reloadBadges()
     }
     
+    open override func enableHeaderHitTest() -> Bool {
+        true
+    }
 }
 
 extension SegementSlideDefaultViewController: SegementSlideSwitcherDataSource {

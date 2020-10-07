@@ -59,6 +59,10 @@ class ExploreViewController: BaseSegementSlideDefaultViewController {
         return ContentViewController()
     }
     
+    override func enableHeaderHitTest() -> Bool {
+        false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let refreshHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshAction))
