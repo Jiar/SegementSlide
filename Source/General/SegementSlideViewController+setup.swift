@@ -24,54 +24,57 @@ extension SegementSlideViewController {
     }
     
     private func setupSegementSlideViews() {
-        segementSlideHeaderView = SegementSlideHeaderView()
-        segementSlideSwitcherView = SegementSlideSwitcherView()
-        segementSlideContentView = SegementSlideContentView()
+        headerView = SegementSlideHeaderView()
+        switcherView = segementSlideSwitcherView()
+        contentView = SegementSlideContentView()
         var gestureRecognizers: [UIGestureRecognizer] = []
-        if let gestureRecognizersInScrollView = segementSlideSwitcherView.gestureRecognizersInScrollView {
+        if let gestureRecognizersInScrollView = switcherView.ssScrollView.gestureRecognizers {
             gestureRecognizers.append(contentsOf: gestureRecognizersInScrollView)
         }
-        if let gestureRecognizersInScrollView = segementSlideContentView.gestureRecognizersInScrollView {
+        if let gestureRecognizersInScrollView = contentView.scrollView.gestureRecognizers {
             gestureRecognizers.append(contentsOf: gestureRecognizersInScrollView)
         }
-        segementSlideScrollView = SegementSlideScrollView(otherGestureRecognizers: gestureRecognizers)
+        scrollView = SegementSlideScrollView(otherGestureRecognizers: gestureRecognizers)
     }
     
     private func setupSegementSlideHeaderView() {
-        segementSlideScrollView.addSubview(segementSlideHeaderView)
+        scrollView.addSubview(headerView)
     }
     
     private func setupSegementSlideContentView() {
-        segementSlideContentView.delegate = self
-        segementSlideContentView.viewController = self
-        segementSlideScrollView.addSubview(segementSlideContentView)
+        contentView.delegate = self
+        contentView.viewController = self
+        scrollView.addSubview(contentView)
     }
     
-    private func setupSegementSlideSwitcherView() {
-        segementSlideSwitcherView.delegate = self
-        segementSlideScrollView.addSubview(segementSlideSwitcherView)
+    internal func setupSegementSlideSwitcherView() {
+        scrollView.addSubview(switcherView)
     }
     
     private func setupSegementSlideScrollView() {
-        view.addSubview(segementSlideScrollView)
-        segementSlideScrollView.constraintToSuperview()
+        view.addSubview(scrollView)
+        scrollView.constraintToSuperview()
         if #available(iOS 11.0, *) {
-            segementSlideScrollView.contentInsetAdjustmentBehavior = .never
+            scrollView.contentInsetAdjustmentBehavior = .never
         } else {
             automaticallyAdjustsScrollViewInsets = false
         }
-        segementSlideScrollView.backgroundColor = .white
-        segementSlideScrollView.showsHorizontalScrollIndicator = false
-        segementSlideScrollView.showsVerticalScrollIndicator = false
-        segementSlideScrollView.isPagingEnabled = false
-        segementSlideScrollView.isScrollEnabled = true
-        segementSlideScrollView.delegate = self
+        scrollView.backgroundColor = .white
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.isPagingEnabled = false
+        scrollView.isScrollEnabled = true
+        scrollView.delegate = self
     }
     
     private func observeScrollViewContentOffset() {
-        parentKeyValueObservation = segementSlideScrollView.observe(\.contentOffset, options: [.initial, .new, .old], changeHandler: { [weak self] (scrollView, change) in
-            guard let self = self else { return }
-            guard change.newValue != change.oldValue else { return }
+        parentKeyValueObservation = scrollView.observe(\.contentOffset, options: [.initial, .new, .old], changeHandler: { [weak self] (scrollView, change) in
+            guard let self = self else {
+                return
+            }
+            guard change.newValue != change.oldValue else {
+                return
+            }
             self.parentScrollViewDidScroll(scrollView)
         })
     }
@@ -80,7 +83,8 @@ extension SegementSlideViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(willClearAllReusableViewControllers(_:)), name: SegementSlideContentView.willClearAllReusableViewControllersNotification, object: nil)
     }
     
-    @objc private func willClearAllReusableViewControllers(_ notification: Notification) {
+    @objc
+    private func willClearAllReusableViewControllers(_ notification: Notification) {
         guard let object = notification.object as? SegementSlideViewController, object === self else {
             return
         }
@@ -100,14 +104,6 @@ extension SegementSlideViewController {
         }
     }
     
-    internal func setupHeader() {
-        innerHeaderView = headerView
-    }
-    
-    internal func setupSwitcher() {
-        segementSlideSwitcherView.config = switcherConfig
-    }
-    
     internal func layoutSegementSlideScrollView() {
         let topLayoutLength: CGFloat
         if edgesForExtendedLayout.contains(.top) {
@@ -116,83 +112,80 @@ extension SegementSlideViewController {
             topLayoutLength = self.topLayoutLength
         }
         
-        segementSlideHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        if segementSlideHeaderView.topConstraint == nil {
-            segementSlideHeaderView.topConstraint = segementSlideHeaderView.topAnchor.constraint(equalTo: segementSlideScrollView.topAnchor, constant: topLayoutLength)
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        if headerView.topConstraint == nil {
+            headerView.topConstraint = headerView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: topLayoutLength)
         } else {
-            if segementSlideHeaderView.topConstraint?.constant != topLayoutLength {
-                segementSlideHeaderView.topConstraint?.constant = topLayoutLength
+            if headerView.topConstraint?.constant != topLayoutLength {
+                headerView.topConstraint?.constant = topLayoutLength
             }
         }
-        if segementSlideHeaderView.leadingConstraint == nil {
-            segementSlideHeaderView.leadingConstraint = segementSlideHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        if headerView.leadingConstraint == nil {
+            headerView.leadingConstraint = headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         }
-        if segementSlideHeaderView.trailingConstraint == nil {
-            segementSlideHeaderView.trailingConstraint = segementSlideHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        if headerView.trailingConstraint == nil {
+            headerView.trailingConstraint = headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         }
-        segementSlideHeaderView.config(innerHeaderView, segementSlideContentView: segementSlideContentView)
+        headerView.config(innerHeaderView, contentView: contentView)
         
-        segementSlideSwitcherView.translatesAutoresizingMaskIntoConstraints = false
-        if segementSlideSwitcherView.topConstraint == nil {
-            let topConstraint = segementSlideSwitcherView.topAnchor.constraint(equalTo: segementSlideHeaderView.bottomAnchor)
+        switcherView.translatesAutoresizingMaskIntoConstraints = false
+        if switcherView.topConstraint == nil {
+            let topConstraint = switcherView.topAnchor.constraint(equalTo: headerView.bottomAnchor)
             topConstraint.priority = UILayoutPriority(rawValue: 999)
-            segementSlideSwitcherView.topConstraint = topConstraint
+            switcherView.topConstraint = topConstraint
         }
         if safeAreaTopConstraint == nil {
             safeAreaTopConstraint?.isActive = false
             if #available(iOS 11, *) {
-                safeAreaTopConstraint = segementSlideSwitcherView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor)
+                safeAreaTopConstraint = switcherView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor)
             } else {
-                safeAreaTopConstraint = segementSlideSwitcherView.topAnchor.constraint(greaterThanOrEqualTo: topLayoutGuide.bottomAnchor)
+                safeAreaTopConstraint = switcherView.topAnchor.constraint(greaterThanOrEqualTo: topLayoutGuide.bottomAnchor)
             }
             safeAreaTopConstraint?.isActive = true
         }
-        if segementSlideSwitcherView.leadingConstraint == nil {
-            segementSlideSwitcherView.leadingConstraint = segementSlideSwitcherView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        if switcherView.leadingConstraint == nil {
+            switcherView.leadingConstraint = switcherView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         }
-        if segementSlideSwitcherView.trailingConstraint == nil {
-            segementSlideSwitcherView.trailingConstraint = segementSlideSwitcherView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        if switcherView.trailingConstraint == nil {
+            switcherView.trailingConstraint = switcherView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         }
-        if segementSlideSwitcherView.heightConstraint == nil {
-            segementSlideSwitcherView.heightConstraint = segementSlideSwitcherView.heightAnchor.constraint(equalToConstant: switcherHeight)
+        if switcherView.heightConstraint == nil {
+            switcherView.heightConstraint = switcherView.heightAnchor.constraint(equalToConstant: switcherHeight)
         } else {
-            if segementSlideSwitcherView.heightConstraint?.constant != switcherHeight {
-                segementSlideSwitcherView.heightConstraint?.constant = switcherHeight
+            if switcherView.heightConstraint?.constant != switcherHeight {
+                switcherView.heightConstraint?.constant = switcherHeight
             }
         }
         
-        segementSlideContentView.translatesAutoresizingMaskIntoConstraints = false
-        if segementSlideContentView.topConstraint == nil {
-            segementSlideContentView.topConstraint = segementSlideContentView.topAnchor.constraint(equalTo: segementSlideSwitcherView.bottomAnchor)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        if contentView.topConstraint == nil {
+            contentView.topConstraint = contentView.topAnchor.constraint(equalTo: switcherView.bottomAnchor)
         }
-        if segementSlideContentView.leadingConstraint == nil {
-            segementSlideContentView.leadingConstraint = segementSlideContentView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        if contentView.leadingConstraint == nil {
+            contentView.leadingConstraint = contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         }
-        if segementSlideContentView.trailingConstraint == nil {
-            segementSlideContentView.trailingConstraint = segementSlideContentView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        if contentView.trailingConstraint == nil {
+            contentView.trailingConstraint = contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         }
-        if segementSlideContentView.bottomConstraint == nil {
-            segementSlideContentView.bottomConstraint = segementSlideContentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        if contentView.bottomConstraint == nil {
+            contentView.bottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         }
         
-        segementSlideHeaderView.layer.zPosition = -3
-        segementSlideContentView.layer.zPosition = -2
-        segementSlideSwitcherView.layer.zPosition = -1
+        headerView.layer.zPosition = -3
+        contentView.layer.zPosition = -2
+        switcherView.layer.zPosition = -1
         
-        segementSlideHeaderView.layoutIfNeeded()
+        headerView.layoutIfNeeded()
         
-        let innerHeaderHeight = segementSlideHeaderView.frame.height
-        let contentSize = CGSize(
-            width: view.bounds.width,
-            height: topLayoutLength + innerHeaderHeight + switcherHeight + contentViewHeight + 1
-        )
-        if segementSlideScrollView.contentSize != contentSize {
-            segementSlideScrollView.contentSize = contentSize
+        let innerHeaderHeight = headerView.frame.height
+        let contentSize = CGSize(width: view.bounds.width, height: topLayoutLength+innerHeaderHeight+switcherHeight+contentViewHeight+1)
+        if scrollView.contentSize != contentSize {
+            scrollView.contentSize = contentSize
         }
     }
     
     internal func resetChildViewControllerContentOffsetY() {
-        guard segementSlideScrollView.contentOffset.y < headerStickyHeight else {
+        guard scrollView.contentOffset.y < headerStickyHeight else {
             return
         }
         let collection = waitTobeResetContentOffsetY

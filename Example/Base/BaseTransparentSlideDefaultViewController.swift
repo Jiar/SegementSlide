@@ -1,23 +1,25 @@
 //
-//  ShadowSegementSlideViewController.swift
+//  BaseTransparentSlideDefaultViewController.swift
 //  Example
 //
-//  Created by Jiar on 2018/12/13.
+//  Created by Jiar on 2018/12/17.
 //  Copyright © 2018 Jiar. All rights reserved.
 //
 
 import UIKit
 import SegementSlide
 
-class BaseSegementSlideDefaultViewController: SegementSlideDefaultViewController {
-    
+class BaseTransparentSlideDefaultViewController: TransparentSlideDefaultViewController {
+
     override var switcherConfig: SegementSlideDefaultSwitcherConfig {
         return ConfigManager.shared.switcherConfig
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
         super.scrollViewDidScroll(scrollView, isParent: isParent)
-        guard isParent else { return }
+        guard isParent else {
+            return
+        }
         updateNavigationBarStyle(scrollView)
     }
     
@@ -62,13 +64,22 @@ class BaseSegementSlideDefaultViewController: SegementSlideDefaultViewController
         super.viewDidLoad()
         debugPrint("\(type(of: self)) - \(String(format: "%p", self)) - \(#function)")
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
+        if Bool.random() {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "reload", style: .plain, target: self, action: #selector(reloadAction))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
+        }
     }
     
     @objc
+    private func reloadAction() {
+        reloadData()
+    }
+        
+    @objc
     private func moreAction() {
         let viewController: UIViewController
-        switch Int.random(in: 0..<8) {
+        switch Int.random(in: 0..<9) {
         case 0..<4:
             viewController = NoticeViewController(selectedIndex: Int.random(in: 0..<DataManager.shared.noticeLanguageTitles.count))
         case 4:
@@ -78,12 +89,14 @@ class BaseSegementSlideDefaultViewController: SegementSlideDefaultViewController
         case 6:
             viewController = ExploreViewController()
         case 7:
+            viewController = InterestViewController()
+        case 8:
             viewController = MineViewController()
         default:
-            viewController = NoticeViewController(selectedIndex: Int.random(in: 0..<DataManager.shared.noticeLanguageTitles.count))
+            viewController = UIViewController()
         }
         viewController.hidesBottomBarWhenPushed = Bool.random()
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
+
 }

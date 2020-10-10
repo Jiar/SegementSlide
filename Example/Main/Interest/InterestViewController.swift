@@ -1,23 +1,21 @@
 //
-//  ExploreViewController.swift
+//  InterestViewController.swift
 //  Example
 //
-//  Created by Jiar on 2018/12/12.
-//  Copyright © 2018 Jiar. All rights reserved.
+//  Created by Jiar on 2020/5/8.
+//  Copyright © 2020 Jiar. All rights reserved.
 //
 
 import UIKit
 import SegementSlide
 import MJRefresh
 
-class ExploreViewController: BaseSegementSlideDefaultViewController {
-
-    private var badges: [Int: BadgeType] = [:]
+class InterestViewController: BaseSegementSlideCustomViewController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        title = "Explore"
-        tabBarItem = UITabBarItem(title: "Explore", image: UIImage(named: "tab_explore")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "tab_explore_sel")?.withRenderingMode(.alwaysOriginal))
+        title = "Interest"
+        tabBarItem = UITabBarItem(title: "Interest", image: UIImage(named: "tab_interest")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "tab_interest_sel")?.withRenderingMode(.alwaysOriginal))
         modalPresentationStyle = .fullScreen
     }
     
@@ -35,24 +33,14 @@ class ExploreViewController: BaseSegementSlideDefaultViewController {
         return headerView
     }
     
-    override var switcherConfig: SegementSlideDefaultSwitcherConfig {
-        var config = super.switcherConfig
-        config.type = .segement
-        return config
-    }
-    
     override var titlesInSwitcher: [String] {
-        return DataManager.shared.exploreLanguageTitles
+        return DataManager.shared.interestLanguageTitles
     }
     
-    override func showBadgeInSwitcher(at index: Int) -> BadgeType {
-        if let badge = badges[index] {
-            return badge
-        } else {
-            let badge = BadgeType.random
-            badges[index] = badge
-            return badge
-        }
+    override var badgesInSwitcher: [Int] {
+        let count = DataManager.shared.interestLanguageTitles.count
+        let badges = (0 ..< count).map({ _ in Int.random(in: 0..<10) })
+        return badges
     }
     
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
@@ -75,11 +63,7 @@ class ExploreViewController: BaseSegementSlideDefaultViewController {
                 guard let self = self else {
                     return
                 }
-                guard let currentIndex = self.currentIndex else {
-                    return
-                }
-                self.badges[currentIndex] = BadgeType.random
-                self.reloadBadgeInSwitcher()
+                self.reloadSwitcher()
                 self.scrollView.mj_header.endRefreshing()
             }
         }

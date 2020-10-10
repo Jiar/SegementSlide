@@ -30,7 +30,8 @@ internal extension UINavigationController {
         }
     }
     
-    @objc private func newPushViewController(_ viewController: UIViewController, animated: Bool) {
+    @objc
+    private func newPushViewController(_ viewController: UIViewController, animated: Bool) {
         guard viewControllers.count > 0 else {
             newPushViewController(viewController, animated: animated)
             return

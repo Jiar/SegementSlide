@@ -9,7 +9,7 @@
 import UIKit
 import SegementSlide
 
-class PostViewController: BaseSegementSlideViewController {
+class PostViewController: BaseSegementSlideDefaultViewController {
     
     private var badges: [Int: BadgeType] = [:]
     private let selectedIndex: Int
@@ -25,7 +25,7 @@ class PostViewController: BaseSegementSlideViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override var switcherConfig: SegementSlideSwitcherConfig {
+    override var switcherConfig: SegementSlideDefaultSwitcherConfig {
         var config = super.switcherConfig
         config.type = .tab
         return config
@@ -48,7 +48,9 @@ class PostViewController: BaseSegementSlideViewController {
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
         let viewController = ContentOptionalViewController()
         viewController.refreshHandler = { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             self.badges[index] = BadgeType.random
             self.reloadBadgeInSwitcher()
         }
@@ -57,8 +59,8 @@ class PostViewController: BaseSegementSlideViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        defaultSelectedIndex = selectedIndex
         reloadData()
-        scrollToSlide(at: selectedIndex, animated: false)
     }
     
 }

@@ -12,8 +12,18 @@ import SnapKit
 
 class NoticeViewController: UIViewController {
     
-    private var segementSlideSwitcherView: SegementSlideSwitcherView!
+    private var segementSlideSwitcherView: SegementSlideDefaultSwitcherView!
     private var segementSlideContentView: SegementSlideContentView!
+    
+    var defaultSelectedIndex: Int? {
+        set {
+            segementSlideSwitcherView.defaultSelectedIndex = newValue
+            segementSlideContentView.defaultSelectedIndex = newValue
+        }
+        get {
+            return segementSlideSwitcherView.defaultSelectedIndex
+        }
+    }
     
     private var badges: [Int: BadgeType] = [:]
     private let selectedIndex: Int
@@ -30,7 +40,9 @@ class NoticeViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        guard segementSlideSwitcherView.superview != nil else { return }
+        guard segementSlideSwitcherView.superview != nil else {
+            return
+        }
         segementSlideSwitcherView.snp.remakeConstraints { make in
             make.center.height.equalToSuperview()
             make.width.equalTo(segementSlideSwitcherView.intrinsicContentSize.width)
@@ -43,13 +55,13 @@ class NoticeViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "more", style: .plain, target: self, action: #selector(moreAction))
         setupSwitcherView()
         setupContentView()
+        defaultSelectedIndex = selectedIndex
         reloadData()
-        scrollToSlide(at: selectedIndex, animated: false)
     }
     
     private func setupSwitcherView() {
-        segementSlideSwitcherView = SegementSlideSwitcherView()
-        segementSlideSwitcherView.config = SegementSlideSwitcherConfig(type: .segement, horizontalMargin: 28)
+        segementSlideSwitcherView = SegementSlideDefaultSwitcherView()
+        segementSlideSwitcherView.config = SegementSlideDefaultSwitcherConfig(type: .segement, horizontalMargin: 28)
         segementSlideSwitcherView.delegate = self
         
         let size: CGSize
@@ -91,11 +103,12 @@ class NoticeViewController: UIViewController {
         segementSlideSwitcherView.reloadData()
     }
     
-    public func scrollToSlide(at index: Int, animated: Bool) {
-        segementSlideSwitcherView.selectSwitcher(at: index, animated: animated)
+    public func selectItem(at index: Int, animated: Bool) {
+        segementSlideSwitcherView.selectItem(at: index, animated: animated)
     }
     
-    @objc private func moreAction() {
+    @objc
+    private func moreAction() {
         let viewController: UIViewController
         switch Int.random(in: 0..<8) {
         case 0..<4:
@@ -121,19 +134,19 @@ class NoticeViewController: UIViewController {
     
 }
 
-extension NoticeViewController: SegementSlideSwitcherViewDelegate {
+extension NoticeViewController: SegementSlideDefaultSwitcherViewDelegate {
     
     public var titlesInSegementSlideSwitcherView: [String] {
         return DataManager.shared.noticeLanguageTitles
     }
     
-    public func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideSwitcherView, didSelectAtIndex index: Int, animated: Bool) {
+    public func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideDefaultSwitcherView, didSelectAtIndex index: Int, animated: Bool) {
         if segementSlideContentView.selectedIndex != index {
-            segementSlideContentView.scrollToSlide(at: index, animated: animated)
+            segementSlideContentView.selectItem(at: index, animated: animated)
         }
     }
     
-    public func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideSwitcherView, showBadgeAtIndex index: Int) -> BadgeType {
+    public func segementSwitcherView(_ segementSlideSwitcherView: SegementSlideDefaultSwitcherView, showBadgeAtIndex index: Int) -> BadgeType {
         if let badge = badges[index] {
             return badge
         } else {
@@ -154,7 +167,9 @@ extension NoticeViewController: SegementSlideContentDelegate {
     public func segementSlideContentScrollView(at index: Int) -> SegementSlideContentScrollViewDelegate? {
         let viewController = ContentOptionalViewController()
         viewController.refreshHandler = { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             self.badges[index] = BadgeType.random
             self.segementSlideSwitcherView.reloadBadges()
         }
@@ -163,7 +178,7 @@ extension NoticeViewController: SegementSlideContentDelegate {
     
     public func segementSlideContentView(_ segementSlideContentView: SegementSlideContentView, didSelectAtIndex index: Int, animated: Bool) {
         if segementSlideSwitcherView.selectedIndex != index {
-            segementSlideSwitcherView.selectSwitcher(at: index, animated: animated)
+            segementSlideSwitcherView.selectItem(at: index, animated: animated)
         }
     }
     

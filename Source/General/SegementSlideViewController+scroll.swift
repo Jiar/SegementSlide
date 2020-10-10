@@ -10,45 +10,47 @@ import UIKit
 
 extension SegementSlideViewController {
     
-    internal func parentScrollViewDidScroll(_ scrollView: UIScrollView) {
+    internal func parentScrollViewDidScroll(_ parentScrollView: UIScrollView) {
         defer {
-            scrollViewDidScroll(scrollView, isParent: true)
+            scrollViewDidScroll(parentScrollView, isParent: true)
         }
-        let parentContentOffsetY = segementSlideScrollView.contentOffset.y
+        let parentContentOffsetY = scrollView.contentOffset.y
         switch innerBouncesType {
         case .parent:
             if !canParentViewScroll {
-                segementSlideScrollView.contentOffset.y = headerStickyHeight
+                scrollView.contentOffset.y = headerStickyHeight
                 canChildViewScroll = true
                 return
             } else if parentContentOffsetY >= headerStickyHeight {
-                segementSlideScrollView.contentOffset.y = headerStickyHeight
+                scrollView.contentOffset.y = headerStickyHeight
                 canParentViewScroll = false
                 canChildViewScroll = true
                 return
             }
         case .child:
-            let childBouncesTranslationY = -scrollView.panGestureRecognizer.translation(in: scrollView).y.rounded(.up)
+            let childBouncesTranslationY = -parentScrollView.panGestureRecognizer.translation(in: parentScrollView).y.rounded(.up)
             defer {
                 lastChildBouncesTranslationY = childBouncesTranslationY
             }
             if !canParentViewScroll {
-                segementSlideScrollView.contentOffset.y = headerStickyHeight
+                scrollView.contentOffset.y = headerStickyHeight
                 canChildViewScroll = true
                 return
             } else if parentContentOffsetY >= headerStickyHeight {
-                segementSlideScrollView.contentOffset.y = headerStickyHeight
+                scrollView.contentOffset.y = headerStickyHeight
                 canParentViewScroll = false
                 canChildViewScroll = true
                 return
             } else if parentContentOffsetY <= 0 {
-                segementSlideScrollView.contentOffset.y = 0
+                scrollView.contentOffset.y = 0
                 canChildViewScroll = true
             } else {
-                guard let childScrollView = currentSegementSlideContentViewController?.scrollView else { return }
+                guard let childScrollView = currentSegementSlideContentViewController?.scrollView else {
+                    return
+                }
                 if childScrollView.contentOffset.y < 0 {
                     if childBouncesTranslationY > lastChildBouncesTranslationY {
-                        segementSlideScrollView.contentOffset.y = 0
+                        scrollView.contentOffset.y = 0
                         canChildViewScroll = true
                     } else {
                         canChildViewScroll = false
@@ -65,7 +67,7 @@ extension SegementSlideViewController {
         defer {
             scrollViewDidScroll(childScrollView, isParent: false)
         }
-        let parentContentOffsetY = segementSlideScrollView.contentOffset.y
+        let parentContentOffsetY = scrollView.contentOffset.y
         let childContentOffsetY = childScrollView.contentOffset.y
         switch innerBouncesType {
         case .parent:

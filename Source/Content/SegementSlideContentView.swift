@@ -8,7 +8,8 @@
 
 import UIKit
 
-@objc public protocol SegementSlideContentScrollViewDelegate where Self: UIViewController {
+@objc
+public protocol SegementSlideContentScrollViewDelegate where Self: UIViewController {
     /// must implement this variable, when use class `SegementSlideViewController` or it's subClass.
     /// you can ignore this variable, when you use `SegementSlideContentView` alone.
     @objc optional var scrollView: UIScrollView { get }
@@ -24,12 +25,11 @@ public protocol SegementSlideContentDelegate: class {
 public class SegementSlideContentView: UIView {
     internal static let willClearAllReusableViewControllersNotification: NSNotification.Name = NSNotification.Name(rawValue: "willClearAllReusableViewControllersNotification")
     
-    private let scrollView = UIScrollView()
+    public private(set) var scrollView = UIScrollView()
     private var viewControllers: [Int: SegementSlideContentScrollViewDelegate] = [:]
-    private var initSelectedIndex: Int?
-    internal var gestureRecognizersInScrollView: [UIGestureRecognizer]? {
-        return scrollView.gestureRecognizers
-    }
+    
+    /// you should call `reloadData()` after set this property.
+    open var defaultSelectedIndex: Int?
     
     public private(set) var selectedIndex: Int?
     public weak var delegate: SegementSlideContentDelegate?
@@ -72,23 +72,22 @@ public class SegementSlideContentView: UIView {
         super.layoutSubviews()
         updateScrollViewContentSize()
         layoutViewControllers()
-        recoverInitSelectedIndex()
         updateSelectedIndex()
     }
     
     /// remove subViews
     ///
-    /// you should call `scrollToSlide(at index: Int, animated: Bool)` after call the method.
-    /// otherwise, none of them will be selected.
-    /// However, if an item was previously selected, it will be reSelected.
+    /// you should set `defaultSelectedIndex` before call this method.
+    /// otherwise, no item will be selected.
+    /// however, if an item was previously selected, it will be reSelected.
     public func reloadData() {
         clearAllReusableViewControllers()
         updateScrollViewContentSize()
-        updateSelectedIndex()
+        reloadDataWithSelectedIndex()
     }
     
     /// select one item by index
-    public func scrollToSlide(at index: Int, animated: Bool) {
+    public func selectItem(at index: Int, animated: Bool) {
         updateSelectedViewController(at: index, animated: animated)
     }
     
@@ -116,7 +115,9 @@ extension SegementSlideContentView: UIScrollViewDelegate {
 
     private func scrollViewDidEndScroll(_ scrollView: UIScrollView) {
         let indexFloat = scrollView.contentOffset.x/scrollView.bounds.width
-        guard !indexFloat.isNaN, indexFloat.isFinite else { return }
+        guard !indexFloat.isNaN, indexFloat.isFinite else {
+            return
+        }
         let index = Int(indexFloat)
         updateSelectedViewController(at: index, animated: true)
     }
@@ -124,13 +125,6 @@ extension SegementSlideContentView: UIScrollViewDelegate {
 }
 
 extension SegementSlideContentView {
-    
-    private func updateScrollViewContentSize() {
-        guard let count = delegate?.segementSlideContentScrollViewCount else { return }
-        let contentSize = CGSize(width: CGFloat(count)*scrollView.bounds.width, height: scrollView.bounds.height)
-        guard scrollView.contentSize != contentSize else { return }
-        scrollView.contentSize = contentSize
-    }
     
     private func clearAllReusableViewControllers() {
         NotificationCenter.default.post(name: SegementSlideContentView.willClearAllReusableViewControllersNotification, object: viewController, userInfo: nil)
@@ -142,9 +136,22 @@ extension SegementSlideContentView {
         viewControllers.removeAll()
     }
     
+    private func updateScrollViewContentSize() {
+        guard let count = delegate?.segementSlideContentScrollViewCount else {
+            return
+        }
+        let contentSize = CGSize(width: CGFloat(count)*scrollView.bounds.width, height: scrollView.bounds.height)
+        guard scrollView.contentSize != contentSize else {
+            return
+        }
+        scrollView.contentSize = contentSize
+    }
+    
     private func layoutViewControllers() {
         for (index, childViewController) in viewControllers {
-            guard childViewController.view.superview != nil else { continue }
+            guard childViewController.view.superview != nil else {
+                continue
+            }
             let offsetX = CGFloat(index)*scrollView.bounds.width
             childViewController.view.widthConstraint?.constant = scrollView.bounds.width
             childViewController.view.heightConstraint?.constant = scrollView.bounds.height
@@ -152,15 +159,20 @@ extension SegementSlideContentView {
         }
     }
     
-    private func recoverInitSelectedIndex() {
-        guard let initSelectedIndex = initSelectedIndex else { return }
-        self.initSelectedIndex = nil
-        updateSelectedViewController(at: initSelectedIndex, animated: false)
+    private func reloadDataWithSelectedIndex() {
+        guard let index = selectedIndex else {
+            return
+        }
+        selectedIndex = nil
+        updateSelectedViewController(at: index, animated: false)
     }
     
     private func updateSelectedIndex() {
-        guard let selectedIndex = selectedIndex else { return }
-        updateSelectedViewController(at: selectedIndex, animated: false)
+        if let index = selectedIndex  {
+            updateSelectedViewController(at: index, animated: false)
+        } else if let index = defaultSelectedIndex {
+            updateSelectedViewController(at: index, animated: false)
+        }
     }
     
     private func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
@@ -175,29 +187,36 @@ extension SegementSlideContentView {
     
     private func updateSelectedViewController(at index: Int, animated: Bool) {
         guard scrollView.frame != .zero else {
-            initSelectedIndex = index
             return
+        }
+        guard index != selectedIndex else {
+            return
+        }
+        let count = delegate?.segementSlideContentScrollViewCount ?? 0
+        if let selectedIndex = selectedIndex {
+            guard selectedIndex >= 0, selectedIndex < count else {
+                return
+            }
         }
         guard let viewController = viewController,
-            let count = delegate?.segementSlideContentScrollViewCount,
-            count != 0, index >= 0, index < count else {
+            index >= 0, index < count else {
             return
         }
-        if index != selectedIndex, let lastIndex = selectedIndex, let lastChildViewController = segementSlideContentViewController(at: lastIndex) {
+        if let lastIndex = selectedIndex, let lastChildViewController = segementSlideContentViewController(at: lastIndex) {
             // last child viewController viewWillDisappear
             lastChildViewController.beginAppearanceTransition(false, animated: animated)
         }
-        guard let childViewController = segementSlideContentViewController(at: index) else { return }
+        guard let childViewController = segementSlideContentViewController(at: index) else {
+            return
+        }
         let isAdded = childViewController.view.superview != nil
         if !isAdded {
             // new child viewController viewDidLoad, viewWillAppear
             viewController.addChild(childViewController)
             scrollView.addSubview(childViewController.view)
         } else {
-            if index != selectedIndex {
-                // current child viewController viewWillAppear
-                childViewController.beginAppearanceTransition(true, animated: animated)
-            }
+            // current child viewController viewWillAppear
+            childViewController.beginAppearanceTransition(true, animated: animated)
         }
         let offsetX = CGFloat(index)*scrollView.bounds.width
         childViewController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -206,19 +225,16 @@ extension SegementSlideContentView {
         childViewController.view.heightConstraint = childViewController.view.heightAnchor.constraint(equalToConstant: scrollView.bounds.height)
         childViewController.view.leadingConstraint = childViewController.view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: offsetX)
         scrollView.setContentOffset(CGPoint(x: offsetX, y: scrollView.contentOffset.y), animated: animated)
-        if index != selectedIndex, let lastIndex = selectedIndex, let lastChildViewController = segementSlideContentViewController(at: lastIndex) {
+        if let lastIndex = selectedIndex, let lastChildViewController = segementSlideContentViewController(at: lastIndex) {
             // last child viewController viewDidDisappear
             lastChildViewController.endAppearanceTransition()
         }
         if !isAdded {
             ()
         } else {
-            if index != selectedIndex {
-                // current child viewController viewDidAppear
-                childViewController.endAppearanceTransition()
-            }
+            // current child viewController viewDidAppear
+            childViewController.endAppearanceTransition()
         }
-        guard index != selectedIndex else { return }
         selectedIndex = index
         delegate?.segementSlideContentView(self, didSelectAtIndex: index, animated: animated)
     }

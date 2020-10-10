@@ -1,9 +1,9 @@
 //
-//  LanguageCenterViewController.swift
+//  LanguageCenterViewController2.swift
 //  Example
 //
-//  Created by Jiar on 2018/12/14.
-//  Copyright © 2018 Jiar. All rights reserved.
+//  Created by Jiar on 2020/5/9.
+//  Copyright © 2020 Jiar. All rights reserved.
 //
 
 import UIKit
@@ -11,7 +11,7 @@ import SegementSlide
 import MBProgressHUD
 import MJRefresh
 
-class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
+class LanguageCenterViewController2: BaseTransparentSlideCustomViewController {
     
     private let id: Int
     private var badges: [Int: BadgeType] = [:]
@@ -60,12 +60,6 @@ class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
         return centerHeaderView
     }
     
-    override var switcherConfig: SegementSlideDefaultSwitcherConfig {
-        var config = super.switcherConfig
-        config.type = .tab
-        return config
-    }
-    
     override var titlesInSwitcher: [String] {
         guard let _ = language else {
             return []
@@ -73,14 +67,13 @@ class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
         return DataManager.shared.languageCenterTitles
     }
     
-    override func showBadgeInSwitcher(at index: Int) -> BadgeType {
-        if let badge = badges[index] {
-            return badge
-        } else {
-            let badge = BadgeType.random
-            badges[index] = badge
-            return badge
+    override var badgesInSwitcher: [Int] {
+        guard let _ = language else {
+            return []
         }
+        let count = DataManager.shared.languageCenterTitles.count
+        let badges = (0 ..< count).map({ _ in Int.random(in: 0..<10) })
+        return badges
     }
     
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
@@ -89,10 +82,11 @@ class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
         }
         let viewController = ContentViewController()
         viewController.refreshHandler = { [weak self] in
-            guard let self = self else { return }
-            self.slideScrollView.mj_header?.endRefreshing()
-            self.badges[index] = BadgeType.random
-            self.reloadBadgeInSwitcher()
+            guard let self = self else {
+                return
+            }
+            self.scrollView.mj_header.endRefreshing()
+            self.reloadSwitcher()
         }
         return viewController
     }
@@ -105,7 +99,7 @@ class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
         } else {
             topLayoutLength = topLayoutGuide.length
         }
-        slideScrollView.mj_header?.ignoredScrollViewContentInsetTop = -topLayoutLength
+        scrollView.mj_header.ignoredScrollViewContentInsetTop = -topLayoutLength
     }
     
     @objc
@@ -118,9 +112,9 @@ class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
         if isPresented {
             navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "close")!, style: .plain, target: self, action: #selector(backAction))
         }
-        let refreshHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshAction))
-        refreshHeader.lastUpdatedTimeLabel?.isHidden = true
-        refreshHeader.arrowView?.image = nil
+        let refreshHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshAction))!
+        refreshHeader.lastUpdatedTimeLabel.isHidden = true
+        refreshHeader.arrowView.image = nil
         refreshHeader.labelLeftInset = 0
         refreshHeader.activityIndicatorViewStyle = .white
         refreshHeader.setTitle("", for: .idle)
@@ -152,7 +146,7 @@ class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
     @objc
     private func refreshAction() {
         guard let contentViewController = currentSegementSlideContentViewController as? ContentViewController else {
-            slideScrollView.mj_header?.endRefreshing()
+            scrollView.mj_header.endRefreshing()
             return
         }
         contentViewController.refresh()

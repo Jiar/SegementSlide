@@ -9,6 +9,7 @@ def common_pods
 end
 
 target 'Example' do
+	pod 'JXSegmentedView'
     pod 'MJRefresh'
     pod 'SnapKit'
     pod 'MBProgressHUD'

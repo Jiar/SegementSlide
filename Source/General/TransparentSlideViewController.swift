@@ -35,7 +35,7 @@ open class TransparentSlideViewController: SegementSlideViewController {
     public var storedNavigationBarShadowImage: UIImage? = nil
     public var storedNavigationBarBackgroundImage: UIImage? = nil
     
-    open override var headerView: UIView {
+    open override func segementSlideHeaderView() -> UIView {
         #if DEBUG
         assert(false, "must override this variable")
         #endif
@@ -119,7 +119,9 @@ open class TransparentSlideViewController: SegementSlideViewController {
     }
     
     open override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
-        guard isParent else { return }
+        guard isParent else {
+            return
+        }
         guard parentScrollView != nil else {
             parentScrollView = scrollView
             return
@@ -129,10 +131,14 @@ open class TransparentSlideViewController: SegementSlideViewController {
     
     open func storeDefaultNavigationBarStyle() {
         storedNavigationController = navigationController
-        guard let navigationController = navigationController else { return }
+        guard let navigationController = navigationController else {
+            return
+        }
         guard storedNavigationBarIsTranslucent == nil, storedNavigationBarBarStyle == nil,
             storedNavigationBarBarTintColor == nil, storedNavigationBarTintColor == nil,
-            storedNavigationBarShadowImage == nil, storedNavigationBarBackgroundImage == nil else { return }
+            storedNavigationBarShadowImage == nil, storedNavigationBarBackgroundImage == nil else {
+            return
+        }
         storedNavigationBarIsTranslucent = navigationController.navigationBar.isTranslucent
         storedNavigationBarBarStyle = navigationController.navigationBar.barStyle
         storedNavigationBarBarTintColor = navigationController.navigationBar.barTintColor
@@ -142,7 +148,9 @@ open class TransparentSlideViewController: SegementSlideViewController {
     }
     
     open func recoverStoredNavigationBarStyle() {
-        guard let navigationController = navigationController else { return }
+        guard let navigationController = navigationController else {
+            return
+        }
         navigationController.navigationBar.isTranslucent = storedNavigationBarIsTranslucent ?? false
         navigationController.navigationBar.barStyle = storedNavigationBarBarStyle ?? .default
         navigationController.navigationBar.barTintColor = storedNavigationBarBarTintColor
@@ -152,7 +160,9 @@ open class TransparentSlideViewController: SegementSlideViewController {
     }
     
     public func reloadNavigationBarStyle() {
-        guard let parentScrollView = parentScrollView else { return }
+        guard let parentScrollView = parentScrollView else {
+            return
+        }
         hasDisplay = false
         hasEmbed = false
         updateNavigationBarStyle(parentScrollView)
@@ -163,10 +173,16 @@ open class TransparentSlideViewController: SegementSlideViewController {
 extension TransparentSlideViewController {
     
     private func updateNavigationBarStyle(_ scrollView: UIScrollView) {
-        guard hasViewWillAppeared else { return }
-        guard let navigationController = navigationController else { return }
+        guard hasViewWillAppeared else {
+            return
+        }
+        guard let navigationController = navigationController else {
+            return
+        }
         if scrollView.contentOffset.y >= headerStickyHeight {
-            guard !hasEmbed else { return }
+            guard !hasEmbed else {
+                return
+            }
             hasEmbed = true
             hasDisplay = false
             titleLabel.attributedText = attributedTexts.embed
@@ -177,7 +193,9 @@ extension TransparentSlideViewController {
             navigationController.navigationBar.barTintColor = barTintColors.embed
             navigationController.navigationBar.layer.add(generateFadeAnimation(), forKey: "reloadNavigationBar")
         } else {
-            guard !hasDisplay else { return }
+            guard !hasDisplay else {
+                return
+            }
             hasDisplay = true
             hasEmbed = false
             titleLabel.attributedText = attributedTexts.display

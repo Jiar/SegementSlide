@@ -1,5 +1,5 @@
 //
-//  SegementSlideSwitcherConfig.swift
+//  SegementSlideDefaultSwitcherConfig.swift
 //  SegementSlide
 //
 //  Created by Jiar on 2019/1/16.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-public struct SegementSlideSwitcherConfig {
+public struct SegementSlideDefaultSwitcherConfig {
     
-    public static let shared = SegementSlideSwitcherConfig()
+    public static let shared = SegementSlideDefaultSwitcherConfig()
     
     public var type: SwitcherType
     public var horizontalMargin: CGFloat

@@ -44,7 +44,15 @@ class DataManager {
         return allLanguageTitles
     }
     
+    var interestLanguageTitles: [String] {
+        return allLanguageTitles
+    }
+    
     var mineLanguageTitles: [String] {
+        return Array(allLanguageTitles[0..<3])
+    }
+    
+    var languageCenterTitles: [String] {
         return Array(allLanguageTitles[0..<3])
     }
     

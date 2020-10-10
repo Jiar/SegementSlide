@@ -9,7 +9,7 @@
 import UIKit
 import SegementSlide
 
-class HomeViewController: BaseSegementSlideViewController {
+class HomeViewController: BaseSegementSlideDefaultViewController {
     
     private var badges: [Int: BadgeType] = [:]
     
@@ -33,20 +33,30 @@ class HomeViewController: BaseSegementSlideViewController {
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView, isParent: Bool) {
-        guard !isParent else { return }
-        guard let navigationController = navigationController else { return }
+        guard !isParent else {
+            return
+        }
+        guard let navigationController = navigationController else {
+            return
+        }
         let translationY = -scrollView.panGestureRecognizer.translation(in: scrollView).y
         if translationY > 0 {
-            guard !navigationController.isNavigationBarHidden else { return }
+            guard !navigationController.isNavigationBarHidden else {
+                return
+            }
             navigationController.setNavigationBarHidden(true, animated: true)
         } else {
-            guard !scrollView.isTracking else { return }
-            guard navigationController.isNavigationBarHidden else { return }
+            guard !scrollView.isTracking else {
+                return
+            }
+            guard navigationController.isNavigationBarHidden else {
+                return
+            }
             navigationController.setNavigationBarHidden(false, animated: true)
         }
     }
     
-    override var switcherConfig: SegementSlideSwitcherConfig {
+    override var switcherConfig: SegementSlideDefaultSwitcherConfig {
         var config = super.switcherConfig
         config.type = .tab
         return config
@@ -69,7 +79,9 @@ class HomeViewController: BaseSegementSlideViewController {
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
         let viewController = ContentViewController()
         viewController.refreshHandler = { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             self.badges[index] = BadgeType.random
             self.reloadBadgeInSwitcher()
         }
@@ -78,8 +90,8 @@ class HomeViewController: BaseSegementSlideViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        defaultSelectedIndex = 0
         reloadData()
-        scrollToSlide(at: 0, animated: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

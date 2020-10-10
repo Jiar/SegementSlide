@@ -8,10 +8,10 @@
 
 import UIKit
 
-internal class SegementSlideHeaderView: UIView {
+public class SegementSlideHeaderView: UIView {
     
     private weak var lastHeaderView: UIView?
-    private weak var segementSlideContentView: SegementSlideContentView?
+    private weak var contentView: SegementSlideContentView?
     
     internal override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,27 +27,30 @@ internal class SegementSlideHeaderView: UIView {
         backgroundColor = .clear
     }
     
-    internal func config(_ headerView: UIView?, segementSlideContentView: SegementSlideContentView) {
-        guard headerView != lastHeaderView else { return }
+    internal func config(_ headerView: UIView?, contentView: SegementSlideContentView) {
+        guard headerView != lastHeaderView else {
+            return
+        }
         if let lastHeaderView = lastHeaderView {
             lastHeaderView.removeAllConstraints()
             lastHeaderView.removeFromSuperview()
         }
-        guard let headerView = headerView else { return }
-        self.segementSlideContentView = segementSlideContentView
+        guard let headerView = headerView else {
+            return
+        }
+        self.contentView = contentView
         addSubview(headerView)
         headerView.constraintToSuperview()
         lastHeaderView = headerView
     }
     
-    internal override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let view = super.hitTest(point, with: event)
-        guard let segementSlideContentView = segementSlideContentView else {
+        guard let contentView = contentView else {
             return view
         }
-        guard let selectedIndex = segementSlideContentView.selectedIndex,
-            let segementSlideContentScrollViewDelegate = segementSlideContentView.dequeueReusableViewController(at: selectedIndex)
-            else {
+        guard let selectedIndex = contentView.selectedIndex,
+            let delegate = contentView.dequeueReusableViewController(at: selectedIndex) else {
             return view
         }
         if view is UIControl {
@@ -56,7 +59,7 @@ internal class SegementSlideHeaderView: UIView {
         if !(view?.gestureRecognizers?.isEmpty ?? true) {
             return view
         }
-        return segementSlideContentScrollViewDelegate.scrollView
+        return delegate.scrollView
     }
     
 }
