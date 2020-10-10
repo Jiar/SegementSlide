@@ -50,7 +50,7 @@ class InterestViewController: BaseSegementSlideCustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let refreshHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshAction))
-        refreshHeader?.lastUpdatedTimeLabel.isHidden = true
+        refreshHeader.lastUpdatedTimeLabel?.isHidden = true
         scrollView.mj_header = refreshHeader
         defaultSelectedIndex = 0
         reloadData()
@@ -64,7 +64,7 @@ class InterestViewController: BaseSegementSlideCustomViewController {
                     return
                 }
                 self.reloadSwitcher()
-                self.scrollView.mj_header.endRefreshing()
+                self.scrollView.mj_header?.endRefreshing()
             }
         }
     }

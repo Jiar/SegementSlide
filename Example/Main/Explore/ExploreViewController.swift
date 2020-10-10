@@ -62,7 +62,7 @@ class ExploreViewController: BaseSegementSlideDefaultViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let refreshHeader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshAction))
-        refreshHeader?.lastUpdatedTimeLabel.isHidden = true
+        refreshHeader.lastUpdatedTimeLabel?.isHidden = true
         scrollView.mj_header = refreshHeader
         defaultSelectedIndex = 0
         reloadData()
@@ -80,7 +80,7 @@ class ExploreViewController: BaseSegementSlideDefaultViewController {
                 }
                 self.badges[currentIndex] = BadgeType.random
                 self.reloadBadgeInSwitcher()
-                self.scrollView.mj_header.endRefreshing()
+                self.scrollView.mj_header?.endRefreshing()
             }
         }
     }

@@ -90,7 +90,7 @@ class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
         let viewController = ContentViewController()
         viewController.refreshHandler = { [weak self] in
             guard let self = self else { return }
-            self.slideScrollView.mj_header?.endRefreshing()
+            self.scrollView.mj_header?.endRefreshing()
             self.badges[index] = BadgeType.random
             self.reloadBadgeInSwitcher()
         }
@@ -105,7 +105,7 @@ class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
         } else {
             topLayoutLength = topLayoutGuide.length
         }
-        slideScrollView.mj_header?.ignoredScrollViewContentInsetTop = -topLayoutLength
+        scrollView.mj_header?.ignoredScrollViewContentInsetTop = -topLayoutLength
     }
     
     @objc
@@ -152,7 +152,7 @@ class LanguageCenterViewController: BaseTransparentSlideDefaultViewController {
     @objc
     private func refreshAction() {
         guard let contentViewController = currentSegementSlideContentViewController as? ContentViewController else {
-            slideScrollView.mj_header?.endRefreshing()
+            scrollView.mj_header?.endRefreshing()
             return
         }
         contentViewController.refresh()
