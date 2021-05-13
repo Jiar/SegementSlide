@@ -220,8 +220,6 @@ extension SegementSlideViewController {
       scrollViewDidScroll(parentScrollView, isParent: true)
     }
     parentKeyValueObservation?.invalidate()
-    resetCurrentChildViewControllerContentOffsetY()
-    resetOtherCachedChildViewControllerContentOffsetY()
     scrollView.contentOffset.y = 0
     DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
       self.observeScrollViewContentOffset()
