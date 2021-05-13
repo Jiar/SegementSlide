@@ -223,7 +223,7 @@ extension SegementSlideViewController {
     resetCurrentChildViewControllerContentOffsetY()
     resetOtherCachedChildViewControllerContentOffsetY()
     scrollView.contentOffset.y = 0
-    DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
       self.observeScrollViewContentOffset()
     }
   }
