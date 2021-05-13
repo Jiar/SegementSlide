@@ -214,6 +214,19 @@ extension SegementSlideViewController {
             childScrollView.forceFixedContentOffsetY = 0
         }
     }
+  
+  internal func resetCurrentParentViewControllerContentOffsetY(_ parentScrollView: UIScrollView) {
+    defer {
+      scrollViewDidScroll(parentScrollView, isParent: true)
+    }
+    parentKeyValueObservation?.invalidate()
+    resetCurrentChildViewControllerContentOffsetY()
+    resetOtherCachedChildViewControllerContentOffsetY()
+    scrollView.contentOffset.y = 0
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+      self.observeScrollViewContentOffset()
+    }
+  }
     
     internal func cleanUpChildKeyValueObservations() {
         let observations = childKeyValueObservations
